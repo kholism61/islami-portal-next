@@ -82,7 +82,7 @@ export default function OfflineClient() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <div key={item.slug} className="rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm">
-              <Link href={`/article/${encodeURIComponent(item.slug)}`} className="block">
+              <Link href={`/offline/read/${encodeURIComponent(item.slug)}`} className="block">
                 <h2 className="text-base font-bold text-zinc-900 hover:underline">{item.title}</h2>
               </Link>
               {item.category ? <p className="mt-1 text-xs font-semibold text-zinc-500">{item.category}</p> : null}
@@ -92,7 +92,7 @@ export default function OfflineClient() {
 
               <div className="mt-4 flex flex-wrap gap-2">
                 <Link
-                  href={`/article/${encodeURIComponent(item.slug)}`}
+                  href={`/offline/read/${encodeURIComponent(item.slug)}`}
                   className="rounded-full bg-zinc-900 px-4 py-2 text-xs font-bold text-white hover:bg-zinc-800"
                 >
                   Baca
