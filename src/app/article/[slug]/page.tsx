@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
+import ArticleActions from "@/components/core/ArticleActions";
 import { getArticle } from "@/lib/articles";
 
 type PageProps = {
@@ -105,16 +106,12 @@ export default async function ArticlePage({ params }: PageProps) {
           </div>
         ) : null}
 
+        <ArticleActions article={article} />
+
         <article className="markdown rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm sm:p-10">
           <ReactMarkdown>{article.content}</ReactMarkdown>
         </article>
       </main>
-
-      <footer className="border-t bg-white">
-        <div className="mx-auto w-full max-w-3xl px-4 py-6 text-xs text-zinc-500">
-          © {new Date().getFullYear()} Portal Literasi Islam
-        </div>
-      </footer>
     </div>
   );
 }

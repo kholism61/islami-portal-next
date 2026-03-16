@@ -6,6 +6,10 @@ const links = [
   { href: "/faq", label: "FAQ" },
   { href: "/donasi", label: "Donasi" },
   { href: "/articles", label: "Artikel" },
+  { href: "/zakat", label: "Zakat" },
+  { href: "/bookmark", label: "Bookmark" },
+  { href: "/offline", label: "Offline" },
+  { href: "/signin", label: "Sign In" },
 ];
 
 export default function SiteNavbar() {
