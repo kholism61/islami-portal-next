@@ -1,0 +1,403 @@
+/* ===============================
+   GLOBAL
+================================ */
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f4f7f9;
+  color: #222;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.fiqh-table-section,
+.content-section {
+  flex: 1;
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+.page-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(135deg, #134e4a, #0f766e);
+  color: white;
+}
+
+.page-header h1 {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.page-header p {
+  opacity: 0.9;
+}
+
+/* ===============================
+   CONTENT SECTION
+================================ */
+
+.content-section {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.content-section h2 {
+  margin-top: 40px;
+  color: #0f766e;
+}
+
+.content-section p,
+.content-section li {
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ===============================
+   TABLE
+================================ */
+
+.fiqh-table-section {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.fiqh-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.fiqh-table thead {
+  background: linear-gradient(135deg, #134e4a, #0f766e);
+  color: white;
+}
+
+.fiqh-table th {
+  padding: 14px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.fiqh-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.fiqh-table tbody tr:nth-child(even) {
+  background: #f8fbfc;
+}
+
+.fiqh-table tbody tr:hover {
+  background: #e6f7f5;
+  transition: 0.2s;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+
+.simple-footer {
+  text-align: center;
+  padding: 25px;
+  background: linear-gradient(135deg, #0e3b3d, #0c2f30);
+  color: #d8ffff;
+  font-size: 13px;
+  margin-top: 80px;
+}
+
+/* ===============================
+   STICKY NAVBAR
+================================ */
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  
+  background: rgba(15, 32, 39, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  padding: 15px 40px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+/* Container */
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo a {
+  color: #00ffcc;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+  position: relative;
+}
+
+/* Hover underline modern */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #00ffcc;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #00ffcc;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.table-title {
+text-align: center;
+margin-bottom: 30px;
+font-size: 22px;
+font-weight: 600;
+color: #0f2027;
+}
+
+.table-wrapper {
+overflow-x: auto;
+}
+
+.fiqh-table {
+width: 100%;
+min-width: 1000px;
+border-collapse: collapse;
+background: white;
+box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.fiqh-table th {
+background: linear-gradient(90deg,#0f2027,#203a43);
+color: white;
+padding: 12px;
+font-size: 14px;
+}
+
+.fiqh-table td {
+padding: 12px;
+border-bottom: 1px solid #eee;
+font-size: 13px;
+vertical-align: top;
+}
+
+.fiqh-table tbody tr:hover {
+background: #f4f7f9;
+}
+
+.content-section {
+max-width: 900px;
+margin: 60px auto;
+padding: 40px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.content-section h2 {
+margin-bottom: 25px;
+font-size: 24px;
+color: #0f2027;
+}
+
+.content-section h3 {
+margin-top: 30px;
+margin-bottom: 10px;
+font-size: 18px;
+color: #203a43;
+}
+
+.content-section p {
+font-size: 14px;
+line-height: 1.7;
+color: #444;
+}
+
+.content-section ul,
+.content-section ol {
+margin-left: 20px;
+margin-top: 10px;
+}
+
+.content-section li {
+margin-bottom: 6px;
+font-size: 14px;
+}
+
+
+@media (max-width: 768px) {
+
+  .nav-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+}
+
+
+/* =====================================
+   MOBILE ONLY – CLEAN TABLE MODE
+===================================== */
+
+@media (max-width: 768px) {
+
+  /* Section jangan jadi card */
+  .fiqh-table-section {
+    margin: 20px 0;
+    padding: 0;
+  }
+
+  /* Wrapper jangan ada background / shadow */
+  .table-wrapper {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 15px 20px 15px;
+    overflow-x: auto;
+  }
+
+}
+
+/* =====================================
+   MOBILE – ROUNDED TABLE CORNER
+===================================== */
+
+@media (max-width: 768px) {
+
+  .fiqh-table {
+    min-width: 900px;
+    border-radius: 20px;   /* ← ini bikin lebih lonjong */
+    overflow: hidden;      /* wajib supaya radius kepotong rapi */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  }
+
+  /* Biar header ikut melengkung */
+  .fiqh-table thead tr:first-child th:first-child {
+    border-top-left-radius: 20px;
+  }
+
+  .fiqh-table thead tr:first-child th:last-child {
+    border-top-right-radius: 20px;
+  }
+
+}
+
+/* =====================================
+   MOBILE – METODOLOGI SPACING FIX
+===================================== */
+
+@media (max-width: 768px) {
+
+  .content-section {
+    margin: 30px 15px;   /* ← kasih jarak kiri kanan */
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+}
+.lang-switch-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e6ffff;
+}
+
+.lang-switch-label {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.lang-switch-select {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 10px;
+  padding: 6px 8px;
+  width: 68px;
+  font-size: 12px;
+}
+
+.lang-switch-select option {
+  color: #111;
+}
+
+.i18n-summary-card {
+  margin-top: 26px;
+  background: #f8fffd;
+  border: 1px solid #d6efea;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.i18n-summary-card h3 {
+  margin-bottom: 10px;
+  color: #0f766e;
+}
+
+.i18n-summary-card p,
+.i18n-summary-card li {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+html[dir="rtl"] .i18n-summary-card {
+  text-align: right;
+}

@@ -25,28 +25,41 @@ function setBookmarks(next: string[]) {
   localStorage.setItem("bookmarks", JSON.stringify(Array.from(new Set(next))));
 }
 
-function getOffline(): Record<string, any> {
-  return safeParse<Record<string, any>>(localStorage.getItem("offlineArticles"), {});
+type OfflinePayload = Record<string, unknown>;
+
+function getOffline(): Record<string, OfflinePayload> {
+  return safeParse<Record<string, OfflinePayload>>(localStorage.getItem("offlineArticles"), {});
 }
 
-function setOffline(next: Record<string, any>) {
+function setOffline(next: Record<string, OfflinePayload>) {
   localStorage.setItem("offlineArticles", JSON.stringify(next));
 }
 
 export default function ArticleActions({ article }: Props) {
-  const [mounted, setMounted] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [offlineSaved, setOfflineSaved] = useState(false);
+  const [saved, setSaved] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return getBookmarks().includes(article.slug);
+  });
+  const [offlineSaved, setOfflineSaved] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const offlineMap = getOffline();
+    return Boolean(offlineMap[article.slug]);
+  });
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
-    setMounted(true);
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === "bookmarks") {
+        setSaved(getBookmarks().includes(article.slug));
+      }
+      if (event.key === "offlineArticles") {
+        const offlineMap = getOffline();
+        setOfflineSaved(Boolean(offlineMap[article.slug]));
+      }
+    };
 
-    const currentBookmarks = getBookmarks();
-    setSaved(currentBookmarks.includes(article.slug));
-
-    const offlineMap = getOffline();
-    setOfflineSaved(Boolean(offlineMap[article.slug]));
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, [article.slug]);
 
   useEffect(() => {
@@ -67,10 +80,6 @@ export default function ArticleActions({ article }: Props) {
       content: article.content,
     };
   }, [article]);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <div className="mt-6 grid gap-3 sm:grid-cols-2">

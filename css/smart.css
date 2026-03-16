@@ -1,0 +1,225 @@
+﻿body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #ecf3ff;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(125, 211, 252, 0.22), transparent 30%),
+    radial-gradient(circle at 84% 14%, rgba(34, 211, 238, 0.18), transparent 34%),
+    linear-gradient(160deg, #081b36 0%, #0a2d56 44%, #0f3f78 72%, #0a2d56 100%);
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(7, 19, 38, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nav-container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  color: #eaf2ff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.nav-menu a {
+  color: #d9e9ff;
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.nav-menu a:hover {
+  color: #fef08a;
+}
+
+.lang-switch {
+  margin-left: auto;
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.lang-switch button {
+  border: none;
+  background: transparent;
+  color: #dbeafe;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.lang-switch button.active {
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  color: #081527;
+}
+
+.hero {
+  text-align: center;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 76px 20px 34px;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-family: "Playfair Display", "Times New Roman", serif;
+  background: linear-gradient(96deg, #ffffff 0%, #dbeafe 45%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  margin: 0 auto;
+  max-width: 760px;
+  line-height: 1.75;
+  color: rgba(233, 243, 255, 0.94);
+}
+
+.fiqh-tools {
+  padding: 22px 20px 52px;
+}
+
+.fiqh-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.fiqh-card {
+  text-decoration: none;
+  color: #eef5ff;
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(8, 24, 46, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 14px 28px rgba(5, 12, 26, 0.35);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.fiqh-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(125, 211, 252, 0.58);
+}
+
+.icon {
+  font-size: 1.4rem;
+  display: inline-flex;
+  margin-bottom: 8px;
+}
+
+.fiqh-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.06rem;
+}
+
+.fiqh-card p {
+  margin: 0;
+  font-size: 0.93rem;
+  color: rgba(221, 233, 250, 0.9);
+  line-height: 1.65;
+}
+
+.pre-footer {
+  background: rgba(7, 18, 35, 0.58);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 44px 20px;
+}
+
+.pf-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.pf-grid h3 {
+  margin: 0 0 8px;
+  color: #9bd7ff;
+}
+
+.pf-grid p,
+.pf-grid li {
+  margin: 0;
+  line-height: 1.7;
+  color: rgba(227, 238, 252, 0.92);
+}
+
+.pf-grid ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.footer {
+  text-align: center;
+  padding: 18px 20px 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #dceafe;
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.footer p {
+  margin: 0;
+  color: rgba(220, 234, 255, 0.88);
+}
+
+body.rtl-ui {
+  direction: rtl;
+}
+
+body.rtl-ui .lang-switch {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+@media (max-width: 840px) {
+  .nav-container {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .lang-switch {
+    margin-left: 0;
+  }
+}

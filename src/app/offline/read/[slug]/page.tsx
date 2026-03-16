@@ -28,12 +28,23 @@ type OfflinePayload = {
 
 export default function OfflineReadPage({ params }: { params: { slug: string } }) {
   const slug = decodeURIComponent(params.slug || "");
-  const [payload, setPayload] = useState<OfflinePayload | null>(null);
+  const [map, setMap] = useState<Record<string, OfflinePayload>>(() => {
+    if (typeof window === "undefined") return {};
+    return safeParse<Record<string, OfflinePayload>>(localStorage.getItem("offlineArticles"), {});
+  });
 
   useEffect(() => {
-    const map = safeParse<Record<string, OfflinePayload>>(localStorage.getItem("offlineArticles"), {});
-    setPayload(map?.[slug] || null);
-  }, [slug]);
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === "offlineArticles") {
+        setMap(safeParse<Record<string, OfflinePayload>>(event.newValue, {}));
+      }
+    };
+
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  const payload = map?.[slug] || null;
 
   const title = payload?.judul || payload?.title || slug;
   const category = payload?.kategori || payload?.category || "";

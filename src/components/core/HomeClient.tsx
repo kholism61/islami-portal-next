@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import type { ArticleSummary } from "@/lib/articles";
 
@@ -43,196 +42,231 @@ export default function HomeClient({ articles }: { articles: ArticleSummary[] })
     });
   }, [articles, query]);
 
+  useEffect(() => {
+    document.body.classList.add("home-page");
+    return () => {
+      document.body.classList.remove("home-page");
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen text-zinc-900">
-      <section className="mx-auto w-full max-w-5xl px-4 pt-8">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          <Link
-            href="/about"
-            className="flex items-center gap-3 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm hover:bg-zinc-50"
-          >
-            <span className="text-xl" aria-hidden>
-              ℹ️
-            </span>
+    <div>
+      <section className="quick-menu">
+        <div className="quick-menu-inner">
+          <Link href="/about" className="quick-card">
+            <span className="icon">ℹ️</span>
             <div>
-              <p className="text-sm font-extrabold">Tentang</p>
-              <p className="text-xs text-zinc-600">Profil & visi portal</p>
+              <strong>Tentang</strong>
+              <small>Profil & visi portal</small>
             </div>
           </Link>
 
-          <Link
-            href="/faq"
-            className="flex items-center gap-3 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm hover:bg-zinc-50"
-          >
-            <span className="text-xl" aria-hidden>
-              ❓
-            </span>
+          <Link href="/faq" className="quick-card">
+            <span className="icon">❓</span>
             <div>
-              <p className="text-sm font-extrabold">FAQ</p>
-              <p className="text-xs text-zinc-600">Pertanyaan umum</p>
+              <strong>FAQ</strong>
+              <small>Pertanyaan umum</small>
             </div>
           </Link>
 
-          <Link
-            href="/donasi"
-            className="flex items-center gap-3 rounded-3xl border border-amber-200 bg-amber-50 p-4 shadow-sm hover:bg-amber-100"
-          >
-            <span className="text-xl" aria-hidden>
-              🤝
-            </span>
+          <Link href="/donasi" className="quick-card highlight">
+            <span className="icon">🤝</span>
             <div>
-              <p className="text-sm font-extrabold text-amber-950">Donasi</p>
-              <p className="text-xs text-amber-900/80">Dukung dakwah ilmiah</p>
+              <strong>Donasi</strong>
+              <small>Dukung dakwah ilmiah</small>
             </div>
           </Link>
 
-          <Link
-            href="/offline"
-            className="flex items-center gap-3 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm hover:bg-zinc-50"
-          >
-            <span className="text-xl" aria-hidden>
-              📥
-            </span>
+          <Link href="/offline" className="quick-card">
+            <span className="icon">📥</span>
             <div>
-              <p className="text-sm font-extrabold">Offline</p>
-              <p className="text-xs text-zinc-600">Tersimpan: {offlineCount}</p>
+              <strong>Offline</strong>
+              <small>Tersimpan: {offlineCount}</small>
             </div>
           </Link>
 
-          <Link
-            href="/zakat"
-            className="flex items-center gap-3 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm hover:bg-zinc-50"
-          >
-            <span className="text-xl" aria-hidden>
-              🧮
-            </span>
+          <Link href="/zakat" className="quick-card ramadhan-card">
+            <span className="icon">🧮</span>
             <div>
-              <p className="text-sm font-extrabold">Zakat</p>
-              <p className="text-xs text-zinc-600">Kalkulator zakat</p>
+              <strong>Kalkulator Zakat</strong>
+              <small>Hitung zakat</small>
             </div>
           </Link>
         </div>
       </section>
 
-      <section className="relative mt-8 overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 text-white">
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url(/assets/images/kaligrafi.png)", backgroundSize: "900px", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} />
-        <div className="relative mx-auto grid w-full max-w-5xl items-center gap-8 px-4 py-14 sm:grid-cols-2 sm:py-20">
-          <div>
-            <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Portal Literasi Islam
-            </h1>
-            <p className="mt-4 text-sm leading-7 text-white/80">
-              Ruang kajian Islam yang membahas fiqh, hadis, dan pemikiran keislaman dalam konteks modern secara ilmiah dan
-              mendalam.
+      <header className="navbar">
+        <button id="menuBtn" className="menu-btn">
+          &#9776;
+        </button>
+        <h1 className="logo">Portal Literasi Islam</h1>
+        <button id="themeToggle" className="theme-toggle">
+          🌙
+        </button>
+        <span id="offline-indicator" className="offline-indicator">
+          🌐 Online
+        </span>
+
+        <div className="lang-dropdown" id="langDropdown">
+          <button id="langBtn" className="lang-btn">
+            🌐
+          </button>
+          <div className="lang-menu">
+            <button type="button">🇮🇩 Indonesia</button>
+            <button type="button">🇬🇧 English</button>
+            <button type="button">🇸🇦 العربية</button>
+          </div>
+        </div>
+
+        <Link href="/bookmark" className="nav-bookmark-icon">
+          🔖 <span className="bookmark-count">0</span>
+        </Link>
+      </header>
+
+      <section className="hero">
+        <div className="hero-overlay" />
+        <div className="hero-content">
+          <h1 className="hero-title">Portal Literasi Islam</h1>
+          <p id="hero-subtitle" className="hero-text">
+            Ruang kajian Islam yang membahas fiqh, hadis, dan pemikiran keislaman dalam konteks zaman modern secara ilmiah
+            dan mendalam.
+          </p>
+          <p className="hero-tagline hero-text">
+            Portal kajian Islam berbasis literatur, analisis ilmiah, dan refleksi pemikiran kontemporer
+          </p>
+
+          <div className="hero-buttons hero-cta">
+            <a href="#articles-container" className="btn-primary">
+              📚 Mulai Membaca
+            </a>
+            <a href="#featured-article" className="btn-secondary">
+              ⭐ Artikel Pilihan
+            </a>
+          </div>
+
+          <div className="hero-buttons hero-auth-buttons" id="authActionBar">
+            <Link href="/signin" className="btn-secondary auth-entry-btn" id="signInBtn">
+              Sign In
+            </Link>
+            <Link href="/signup" className="btn-secondary auth-entry-btn" id="signUpBtn">
+              Sign Up
+            </Link>
+            <button type="button" className="btn-primary auth-exit-btn" id="logoutBtn" style={{ display: "none" }}>
+              Log Out
+            </button>
+          </div>
+
+          <div className="hero-featured-mini">
+            <span id="hero-featured-label">⭐ Artikel Pilihan:</span>
+            <a href="#" id="hero-featured-title">
+              Memuat...
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-stats">
+        <div className="stat-card">
+          <div className="stat-icon">📥</div>
+          <div className="stat-info">
+            <span id="stat-offline">{offlineCount}</span>
+            <small>Artikel Offline</small>
+          </div>
+        </div>
+      </section>
+
+      <main className="content">
+        <section className="welcome">
+          <h2 className="welcome-title">
+            Selamat Datang di <span>Portal Literasi Islam</span>
+          </h2>
+
+          <p className="welcome-desc">
+            Portal Literasi Islam merupakan ruang kajian Islam yang menyajikan pembahasan fiqh, hadis, pemikiran Islam,
+            serta isu-isu kontemporer dengan pendekatan <strong>ilmiah, berimbang, dan bertanggung jawab</strong>.
+          </p>
+
+          <div className="welcome-topics">
+            <span>ilmu syariah</span>
+            <span>Hadis</span>
+            <span>Pemikiran Islam</span>
+            <span>Islam & Negara</span>
+          </div>
+
+          <div className="welcome-search">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Cari artikel berdasarkan judul"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+        </section>
+
+        <section className="articles" id="articles">
+          <div className="section-header">
+            <h2>Artikel Terbaru</h2>
+            <p className="section-subtitle">
+              Kumpulan artikel terbaru seputar fiqh, hadis, pemikiran Islam, dan isu kontemporer.
             </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#articles"
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-extrabold text-blue-950 hover:bg-white/90"
-              >
-                📚 Mulai Membaca
-              </a>
-              <Link
-                href="/articles"
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-extrabold text-white hover:bg-white/15"
-              >
-                ⭐ Semua Artikel
-              </Link>
-            </div>
           </div>
 
-          <div className="hidden sm:block">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl">
-              <p className="text-xs font-bold text-white/70">Pencarian cepat</p>
-              <label className="mt-3 grid gap-2">
-                <span className="text-xs font-bold text-white/70">Cari artikel</span>
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Cari judul / ringkasan / kategori"
-                  className="w-full rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-semibold text-white placeholder:text-white/50"
+          <div id="articles-container">
+            {filtered.length === 0 ? (
+              <p id="empty-state" style={{ textAlign: "center", color: "#666", marginTop: 40 }}>
+                ❌ Artikel tidak ditemukan
+              </p>
+            ) : null}
+
+            {filtered.map((article) => (
+              <article
+                key={`${article.lang}:${article.slug}`}
+                className="card"
+                data-category={(article.category || "").toLowerCase()}
+              >
+                <span className={`lang-badge flag-${article.lang}`}></span>
+                <img
+                  src={article.thumbnail || "/assets/images/default.jpg"}
+                  className="thumb"
+                  alt={article.title}
                 />
-              </label>
-              <p className="mt-3 text-xs text-white/60">Hasil: {filtered.length} artikel</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="mx-auto w-full max-w-5xl px-4 py-10">
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div className="rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-bold text-zinc-600">Artikel Offline</p>
-            <p className="mt-2 text-2xl font-extrabold text-zinc-900">{offlineCount}</p>
-          </div>
-          <div className="rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-bold text-zinc-600">Total Artikel (markdown)</p>
-            <p className="mt-2 text-2xl font-extrabold text-zinc-900">{articles.length}</p>
-          </div>
-          <div className="rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-bold text-zinc-600">Bookmark</p>
-            <Link href="/bookmark" className="mt-2 inline-flex text-sm font-extrabold text-blue-700 hover:underline">
-              Lihat bookmark →
-            </Link>
-          </div>
-        </div>
+                <div className="card-top">
+                  <span className="category">{article.category || ""}</span>
+                  <button className="card-bookmark" data-id={article.slug} type="button">
+                    &#9734;
+                  </button>
+                </div>
 
-        <div id="articles" className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-xl font-extrabold tracking-tight text-zinc-900">Artikel Terbaru</h2>
-            <p className="mt-1 text-sm text-zinc-600">Diambil dari markdown, ditampilkan dengan Next.js.</p>
+                <h3>{article.title.length > 40 ? `${article.title.slice(0, 40)}...` : article.title}</h3>
+                <p>{(article.excerpt || "").slice(0, 85)}...</p>
+
+                <div className="card-footer">
+                  <Link className="read-more" href={`/article/${encodeURIComponent(article.slug)}`}>
+                    Baca Selengkapnya
+                  </Link>
+                  <span className="card-date">{article.createdAt || ""}</span>
+                </div>
+              </article>
+            ))}
           </div>
+        </section>
+      </main>
 
-          <div className="w-full max-w-md">
-            <label className="grid gap-2">
-              <span className="text-xs font-bold text-zinc-700">Cari artikel</span>
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Cari judul / ringkasan / kategori"
-                className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold"
-              />
-            </label>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((article) => (
-            <Link
-              key={`${article.lang}:${article.slug}`}
-              href={`/article/${encodeURIComponent(article.slug)}`}
-              className="group rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="text-base font-bold leading-snug group-hover:underline">{article.title}</h3>
-                {article.createdAt ? (
-                  <span className="shrink-0 rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-600">
-                    {article.createdAt}
-                  </span>
-                ) : null}
-              </div>
-
-              {article.excerpt ? (
-                <p className="mt-2 line-clamp-4 text-sm leading-6 text-zinc-600">{article.excerpt}</p>
-              ) : (
-                <p className="mt-2 text-sm leading-6 text-zinc-500">Buka untuk membaca.</p>
-              )}
-
-              <div className="mt-4 flex items-center justify-between text-xs font-semibold text-zinc-500">
-                <span>{article.category || ""}</span>
-                <span className="text-zinc-700">Baca</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {filtered.length === 0 ? (
-          <div className="mt-8 rounded-3xl border border-zinc-200 bg-white p-8 text-center text-sm text-zinc-600">
-            Artikel tidak ditemukan.
-          </div>
-        ) : null}
-      </section>
+      <aside id="sidebar" className="sidebar">
+        <ul className="sidebar-menu">
+          <li className="single-item">
+            <a href="#" data-filter="all" className="sidebar-link">
+              <span className="icon">📚</span>
+              <span className="text">Semua Artikel</span>
+              <span className="badge" data-count="all">
+                0
+              </span>
+            </a>
+          </li>
+        </ul>
+      </aside>
     </div>
   );
 }

@@ -11,6 +11,16 @@ type OfflineRecord = {
   excerpt?: string;
 };
 
+type OfflinePayload = {
+  judul?: unknown;
+  title?: unknown;
+  kategori?: unknown;
+  category?: unknown;
+  thumbnail?: unknown;
+  ringkasan?: unknown;
+  excerpt?: unknown;
+};
+
 function safeParse<T>(value: string | null, fallback: T): T {
   try {
     if (!value) return fallback;
@@ -21,14 +31,15 @@ function safeParse<T>(value: string | null, fallback: T): T {
 }
 
 export default function OfflineClient() {
-  const [map, setMap] = useState<Record<string, any>>({});
+  const [map, setMap] = useState<Record<string, OfflinePayload>>(() => {
+    if (typeof window === "undefined") return {};
+    return safeParse<Record<string, OfflinePayload>>(localStorage.getItem("offlineArticles"), {});
+  });
 
   useEffect(() => {
-    setMap(safeParse<Record<string, any>>(localStorage.getItem("offlineArticles"), {}));
-
     const onStorage = (event: StorageEvent) => {
       if (event.key === "offlineArticles") {
-        setMap(safeParse<Record<string, any>>(event.newValue, {}));
+        setMap(safeParse<Record<string, OfflinePayload>>(event.newValue, {}));
       }
     };
 
@@ -40,12 +51,19 @@ export default function OfflineClient() {
     return Object.keys(map)
       .map((slug) => {
         const raw = map[slug] || {};
+        const titleRaw = raw.judul ?? raw.title;
+        const categoryRaw = raw.kategori ?? raw.category;
+        const excerptRaw = raw.ringkasan ?? raw.excerpt;
+        const title = typeof titleRaw === "string" ? titleRaw : slug;
+        const category = typeof categoryRaw === "string" ? categoryRaw : "";
+        const excerpt = typeof excerptRaw === "string" ? excerptRaw : "";
+        const thumbnail = typeof raw.thumbnail === "string" ? raw.thumbnail : "";
         return {
           slug,
-          title: raw.judul || raw.title || slug,
-          category: raw.kategori || raw.category || "",
-          thumbnail: raw.thumbnail || "",
-          excerpt: raw.ringkasan || raw.excerpt || "",
+          title,
+          category,
+          thumbnail,
+          excerpt,
         } satisfies OfflineRecord;
       })
       .filter((item) => item.slug);

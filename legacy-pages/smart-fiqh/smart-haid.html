@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Fiqh Haid | Portal Literasi Islam</title>
+  <link rel="stylesheet" href="./smart-engine.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo" id="logoText">Islami Portal</a>
+      <ul class="nav-menu">
+        <li><a href="../index.html" id="navHome">Beranda</a></li>
+        <li><a href="../smart.html" id="navSmart">Smart Fiqh</a></li>
+        <li><a href="../tools/mawaris.html" id="navMawaris">Hitung Mawaris</a></li>
+        <li><a href="../zakat.html" id="navZakat">Kalkulator Zakat</a></li>
+      </ul>
+      <div class="lang-switch" aria-label="Language">
+        <button type="button" data-lang="id" class="active">ID</button>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="ar">AR</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero hero-full">
+    <div class="hero-shell">
+      <span class="hero-badge" id="noteBadge">Panduan Ringkas</span>
+      <h1 id="heroTitle">Smart Fiqh Haid</h1>
+      <p id="heroDesc">Analisis fiqh haid, istihadhah, dan nifas dengan alur Ya/Tidak yang lebih dalam, ringkas, dan mudah dipahami untuk keputusan ibadah harian.</p>
+    </div>
+  </section>
+
+  <section class="fiqh-insight">
+    <div class="fiqh-insight-grid">
+      <article class="fiqh-insight-card">
+        <div class="insight-badge" id="noteBadgeSecondary">Panduan Ringkas</div>
+        <h3 id="fiqhNoteTitle">Penjelasan Fiqh Tambahan</h3>
+        <p id="fiqhNoteBody">Modul ini memberi keputusan ringkas berbasis urutan pertanyaan. Untuk kasus yang panjang, darah terputus-putus, adat yang berubah total, atau kondisi medis yang rumit, tetap rujuk ustadzah, mufti, atau tenaga medis terpercaya.</p>
+      </article>
+      <article class="fiqh-insight-card">
+        <div class="insight-badge" id="methodBadge">Metode Sistem</div>
+        <h3 id="smartMethodTitle">Metode Smart Analyzer</h3>
+        <p id="smartMethodBody">Alur dibangun dengan tiga tahap agar keputusan lebih stabil, terukur, dan mudah ditelusuri alasannya.</p>
+        <ul class="smart-method-list">
+          <li id="smartMethodPoint1">1) Tashawwur: identifikasi apakah darah berkaitan dengan nifas, haid baru, atau istihadhah.</li>
+          <li id="smartMethodPoint2">2) Takyif Fiqhi: cek batas 15 hari, adat haid, masa suci, dan kemungkinan tamyiz.</li>
+          <li id="smartMethodPoint3">3) Tanzil: keluarkan status hukum, implikasi ibadah, dan rujukan ringkas yang relevan.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <main class="engine-wrapper">
+    <section class="engine-card">
+      <div class="engine-head">
+        <h2 id="engineTitle">AI Fiqh Analyzer: Haid</h2>
+        <span class="step-text" id="stepText">Langkah 1/1</span>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="question-box" id="questionBox">
+        <p class="question-title" id="questionText"></p>
+        <div class="answer-actions">
+          <button type="button" class="btn-answer btn-yes" id="yesBtn">Ya</button>
+          <button type="button" class="btn-answer btn-no" id="noBtn">Tidak</button>
+        </div>
+      </div>
+
+      <div class="result-box" id="resultBox">
+        <h3 id="resultTitle">Hasil Hukum</h3>
+        <p class="result-line"><strong id="labelStatus">Status:</strong> <span id="resultStatus"></span></p>
+        <p class="result-line"><strong id="labelObligation">Kewajiban:</strong> <span id="resultObligation"></span></p>
+        <p class="result-line"><strong id="labelExplanation">Penjelasan:</strong> <span id="resultExplanation"></span></p>
+        <p class="result-line"><strong id="labelReference">Landasan:</strong> <span id="resultReference"></span></p>
+
+        <div class="result-arabic-line" id="fiqhEvidenceWrap">
+          <p class="result-line"><strong id="aiEvidenceLabel">Ibarah Fiqh</strong></p>
+          <span class="arabic-ibarah" id="resultIbarah"></span>
+        </div>
+
+        <div class="ai-panel">
+          <div class="ai-panel-head">
+            <h4 id="aiPanelTitle">AI Insight Modern</h4>
+            <span class="ai-chip">AI</span>
+          </div>
+          <div class="ai-grid">
+            <div class="ai-card">
+              <strong id="aiSummaryLabel">Ringkasan</strong>
+              <p id="aiSummary"></p>
+            </div>
+            <div class="ai-card">
+              <strong id="aiReasoningLabel">Analisis</strong>
+              <p id="aiReasoning"></p>
+            </div>
+            <div class="ai-card">
+              <strong id="aiRiskLabel">Catatan Risiko</strong>
+              <p id="aiRisk"></p>
+            </div>
+            <div class="ai-card">
+              <strong id="aiAdviceLabel">Saran Praktis</strong>
+              <p id="aiAdvice"></p>
+            </div>
+          </div>
+          <div class="ai-source-box">
+            <strong id="aiSourceLabel">Dalil Ringkas</strong>
+            <p id="resultEvidence"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reset-wrap">
+        <button type="button" class="btn-reset" id="resetBtn">Mulai Ulang</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="smart-footer">
+    <p id="smartFooterCopy">© 2026 Portal Literasi Islam - Smart Fiqh Haid</p>
+  </footer>
+
+  <script src="./smart-data-haid.js"></script>
+  <script src="./smart-fiqh-engine.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/access-guard.js"></script>
+</body>
+</html>

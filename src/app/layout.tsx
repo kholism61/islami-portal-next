@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import LegacyHomeStyle from "@/components/core/LegacyHomeStyle";
 import ServiceWorkerRegister from "@/components/core/ServiceWorkerRegister";
-import SiteFooter from "@/components/SiteFooter";
-import SiteNavbar from "@/components/SiteNavbar";
+import SiteChrome from "@/components/core/SiteChrome";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,9 +41,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-zinc-50 antialiased`}
       >
         <ServiceWorkerRegister />
-        <SiteNavbar />
-        {children}
-        <SiteFooter />
+        <LegacyHomeStyle />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

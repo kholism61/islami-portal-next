@@ -12,7 +12,33 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "css/**",
+    "js/**",
+    "tool/**",
+    "tools/**",
+    "smart-fiqh/**",
+    "sw.js",
+    "public/legacy/**",
   ]),
+
+  {
+    files: [
+      "src/components/core/LegacyHomeStyle.tsx",
+    ],
+    rules: {
+      "@next/next/no-page-custom-font": "off",
+      "@next/next/no-css-tags": "off",
+    },
+  },
+  {
+    files: [
+      "src/components/core/HomeClient.tsx",
+      "src/components/DonationActions.tsx",
+    ],
+    rules: {
+      "@next/next/no-img-element": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;

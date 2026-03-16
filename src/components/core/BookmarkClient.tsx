@@ -11,6 +11,16 @@ type BookmarkItem = {
   excerpt?: string;
 };
 
+type OfflinePayload = {
+  judul?: unknown;
+  title?: unknown;
+  kategori?: unknown;
+  category?: unknown;
+  thumbnail?: unknown;
+  ringkasan?: unknown;
+  excerpt?: unknown;
+};
+
 function safeParse<T>(value: string | null, fallback: T): T {
   try {
     if (!value) return fallback;
@@ -21,19 +31,22 @@ function safeParse<T>(value: string | null, fallback: T): T {
 }
 
 export default function BookmarkClient() {
-  const [slugs, setSlugs] = useState<string[]>([]);
-  const [offlineMap, setOfflineMap] = useState<Record<string, any>>({});
+  const [slugs, setSlugs] = useState<string[]>(() => {
+    if (typeof window === "undefined") return [];
+    return safeParse<string[]>(localStorage.getItem("bookmarks"), []);
+  });
+  const [offlineMap, setOfflineMap] = useState<Record<string, OfflinePayload>>(() => {
+    if (typeof window === "undefined") return {};
+    return safeParse<Record<string, OfflinePayload>>(localStorage.getItem("offlineArticles"), {});
+  });
 
   useEffect(() => {
-    setSlugs(safeParse<string[]>(localStorage.getItem("bookmarks"), []));
-    setOfflineMap(safeParse<Record<string, any>>(localStorage.getItem("offlineArticles"), {}));
-
     const onStorage = (event: StorageEvent) => {
       if (event.key === "bookmarks") {
         setSlugs(safeParse<string[]>(event.newValue, []));
       }
       if (event.key === "offlineArticles") {
-        setOfflineMap(safeParse<Record<string, any>>(event.newValue, {}));
+        setOfflineMap(safeParse<Record<string, OfflinePayload>>(event.newValue, {}));
       }
     };
 
@@ -45,10 +58,13 @@ export default function BookmarkClient() {
     return slugs
       .map((slug) => {
         const offline = offlineMap[slug] || null;
-        const title = offline?.judul || offline?.title || slug;
-        const category = offline?.kategori || offline?.category || "";
-        const excerpt = offline?.ringkasan || offline?.excerpt || "";
-        const thumbnail = offline?.thumbnail || "";
+        const titleRaw = offline?.judul ?? offline?.title;
+        const categoryRaw = offline?.kategori ?? offline?.category;
+        const excerptRaw = offline?.ringkasan ?? offline?.excerpt;
+        const title = typeof titleRaw === "string" ? titleRaw : slug;
+        const category = typeof categoryRaw === "string" ? categoryRaw : "";
+        const excerpt = typeof excerptRaw === "string" ? excerptRaw : "";
+        const thumbnail = typeof offline?.thumbnail === "string" ? offline.thumbnail : "";
         return { slug, title, category, excerpt, thumbnail } satisfies BookmarkItem;
       })
       .filter((item) => item.slug);

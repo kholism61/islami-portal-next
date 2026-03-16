@@ -12,6 +12,22 @@ import {
 
 type TabKey = "maal" | "penghasilan" | "fitrah";
 
+const maalNumberKeys = [
+  "cash",
+  "savings",
+  "gold",
+  "receivable",
+  "debt",
+  "sukuk",
+  "reksadana",
+  "crypto",
+  "sewaIncome",
+  "sewaExpense",
+] as const;
+
+type MaalNumberKey = (typeof maalNumberKeys)[number];
+type IncomeMethod = "haul" | "monthly";
+
 function numberValue(value: string) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : 0;
@@ -41,7 +57,7 @@ export default function ZakatCalculator() {
   const [income, setIncome] = useState({
     salary: 0,
     expenses: 0,
-    method: "haul" as "haul" | "monthly",
+    method: "haul" as IncomeMethod,
     haul: false,
   });
 
@@ -142,8 +158,7 @@ export default function ZakatCalculator() {
       {tab === "maal" ? (
         <div className="mt-8 grid gap-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            {["cash", "savings", "gold", "receivable", "debt", "sukuk", "reksadana", "crypto", "sewaIncome", "sewaExpense"]
-              .map((key) => {
+            {maalNumberKeys.map((key) => {
                 const labelMap: Record<string, string> = {
                   cash: "Uang tunai",
                   savings: "Tabungan",
@@ -162,7 +177,7 @@ export default function ZakatCalculator() {
                     <span className="text-xs font-bold text-zinc-700">{labelMap[key]}</span>
                     <input
                       type="number"
-                      value={(maal as any)[key]}
+                      value={maal[key as MaalNumberKey]}
                       onChange={(e) =>
                         setMaal((prev) => ({
                           ...prev,
@@ -258,7 +273,7 @@ export default function ZakatCalculator() {
               <span className="text-xs font-bold text-zinc-700">Metode</span>
               <select
                 value={income.method}
-                onChange={(e) => setIncome((prev) => ({ ...prev, method: e.target.value as any }))}
+                onChange={(e) => setIncome((prev) => ({ ...prev, method: e.target.value as IncomeMethod }))}
                 className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold"
               >
                 <option value="haul">Tahunan (haul)</option>
