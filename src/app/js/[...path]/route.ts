@@ -18,7 +18,7 @@ function safeJoin(root: string, parts: string[]) {
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const resolved = await params;
   const parts = Array.isArray(resolved.path) ? resolved.path : [resolved.path];
-  const filePath = safeJoin(path.join(process.cwd(), "js"), parts);
+  const filePath = safeJoin(path.join(process.cwd(), "public", "js"), parts);
   if (!filePath) return new Response("Not found", { status: 404 });
   if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) return new Response("Not found", { status: 404 });
 
