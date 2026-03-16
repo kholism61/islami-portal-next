@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import ServiceWorkerRegister from "@/components/core/ServiceWorkerRegister";
 import SiteFooter from "@/components/SiteFooter";
 import SiteNavbar from "@/components/SiteNavbar";
 
@@ -18,6 +19,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Portal Literasi Islam",
   description: "Portal kajian Islam berbasis literatur ilmiah.",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/assets/icons/icon-192.png",
+    apple: "/assets/icons/icon-192.png"
+  }
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0b2c5f"
 };
 
 export default function RootLayout({
@@ -30,6 +40,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-zinc-50 antialiased`}
       >
+        <ServiceWorkerRegister />
         <SiteNavbar />
         {children}
         <SiteFooter />
