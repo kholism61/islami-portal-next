@@ -4538,7 +4538,7 @@ header .lang-badge {
 
 /* animasi centang */
 #download-category.downloaded::after {
-  content: "?";
+  content: "✓";
   margin-left: 8px;
   animation: pop 0.4s ease;
 }
