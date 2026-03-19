@@ -548,19 +548,6 @@ const categoryMeta = {
     "الدراسات الشرعية"
   ],
 },
-  maqasid: {
-    labels: { id: "Maqasid Syariah", en: "Maqasid al-Sharia", ar: "مقاصد الشريعة" },
-    icon: "🧭",
-    aliases: [
-      "maqasid",
-      "maqasid syariah",
-      "maqashid",
-      "maqashid syariah",
-      "maqasid al-sharia",
-      "maqasid al sharia",
-      "مقاصد الشريعة",
-    ],
-  },
   hadis: {
     labels: { id: "Hadis", en: "Hadith", ar: "الحديث" },
     icon: "📜",
@@ -1642,6 +1629,9 @@ function applyArticleFilter(filter, triggerElement = null) {
     .trim()
     .toLowerCase();
 
+  const activeFilterSlug = normalizeSlugKey(activeFilter);
+  const activeFilterCompact = activeFilterSlug.replace(/\-/g, "");
+
   document
     .querySelectorAll(".sidebar-link, .submenu a, .category-card")
     .forEach((el) => el.classList.remove("active"));
@@ -1661,6 +1651,10 @@ function applyArticleFilter(filter, triggerElement = null) {
     const isFeatured = card.dataset.featured === "true";
     const isPopular = card.dataset.popular === "true";
 
+    const categoryCompact = (category || "").replace(/\-/g, "");
+    const subcategoryCompact = (subcategory || "").replace(/\-/g, "");
+    const tagCompact = (tag || "").replace(/\-/g, "");
+
     let show = false;
 
     if (activeFilter === "all") {
@@ -1672,6 +1666,12 @@ function applyArticleFilter(filter, triggerElement = null) {
       category === activeFilter ||
       subcategory === activeFilter ||
       tag === activeFilter
+    ) {
+      show = true;
+    } else if (
+      categoryCompact === activeFilterCompact ||
+      subcategoryCompact === activeFilterCompact ||
+      tagCompact === activeFilterCompact
     ) {
       show = true;
     }
@@ -2642,9 +2642,14 @@ function updateSidebarBadges() {
     const sub = stableMeta.subcategoryKey || null;
     const tag = stableMeta.tagKey || null;
 
+    const compactSub = sub ? String(sub).replace(/\-/g, "") : null;
+    const compactTag = tag ? String(tag).replace(/\-/g, "") : null;
+
     if (cat) categoryCount[cat] = (categoryCount[cat] || 0) + 1;
     if (sub) subcategoryCount[sub] = (subcategoryCount[sub] || 0) + 1;
+    if (compactSub) subcategoryCount[compactSub] = (subcategoryCount[compactSub] || 0) + 1;
     if (tag) tagCount[tag] = (tagCount[tag] || 0) + 1;
+    if (compactTag) tagCount[compactTag] = (tagCount[compactTag] || 0) + 1;
   });
 
   const total = sourceIds.length;
