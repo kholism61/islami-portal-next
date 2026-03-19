@@ -2,18 +2,14 @@
    GLOBAL STYLE
 ================================ */
 
-* {
+.mawaris-page * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: "Poppins", "Segoe UI", sans-serif;
 }
 
-html, body {
-  height: 100%;
-}
-
-body {
+.mawaris-page {
   margin: 0;
   min-height: 100vh;
   background: linear-gradient(
@@ -30,7 +26,7 @@ body {
    CONTAINER
 ================================ */
 
-.mawaris-container {
+.mawaris-page .mawaris-container {
   width: 100%;
   max-width: 600px;
   margin: 80px auto 40px auto;
@@ -39,7 +35,7 @@ body {
    TITLE
 ================================ */
 
-.mawaris-container h1 {
+.mawaris-page .mawaris-container h1 {
   text-align: center;
   color: white;
   margin-bottom: 25px;
@@ -51,7 +47,7 @@ body {
    CARD BOX
 ================================ */
 
-.form-box {
+.mawaris-page .form-box {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   padding: 30px;
@@ -67,7 +63,7 @@ body {
    LABEL
 ================================ */
 
-.form-box label {
+.mawaris-page .form-box label {
   display: block;
   margin-top: 18px;
   font-size: 14px;
@@ -78,8 +74,8 @@ body {
    INPUT
 ================================ */
 
-.form-box input[type="number"],
-.form-box input[type="text"] {
+.mawaris-page .form-box input[type="number"],
+.mawaris-page .form-box input[type="text"] {
   width: 100%;
   margin-top: 6px;
   padding: 10px 12px;
@@ -92,12 +88,12 @@ body {
   transition: 0.3s;
 }
 
-.form-box input[type="number"]:focus {
+.mawaris-page .form-box input[type="number"]:focus {
   background: rgba(255,255,255,0.25);
   transform: scale(1.02);
 }
 
-.form-box input[type="checkbox"] {
+.mawaris-page .form-box input[type="checkbox"] {
   margin-top: 10px;
   transform: scale(1.2);
 }
@@ -106,7 +102,7 @@ body {
    BUTTON
 ================================ */
 
-.form-box button {
+.mawaris-page .form-box button {
   width: 100%;
   margin-top: 25px;
   padding: 12px;
@@ -121,7 +117,7 @@ body {
   box-shadow: 0 8px 20px rgba(221, 36, 118, 0.4);
 }
 
-.form-box button:hover {
+.mawaris-page .form-box button:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(221, 36, 118, 0.6);
 }
@@ -130,7 +126,7 @@ body {
    RESULT CARD
 ================================ */
 
-#hasil {
+.mawaris-page #hasil {
   background: white;
   padding: 25px;
   border-radius: 18px;
@@ -138,19 +134,19 @@ body {
   animation: fadeIn 0.4s ease-in-out;
 }
 
-#hasil h3 {
+.mawaris-page #hasil h3 {
   margin-bottom: 15px;
   font-size: 18px;
   color: #2c5364;
 }
 
-#hasil p {
+.mawaris-page #hasil p {
   padding: 8px 0;
   font-size: 14px;
   border-bottom: 1px solid #eee;
 }
 
-#hasil p:last-child {
+.mawaris-page #hasil p:last-child {
   border-bottom: none;
 }
 
@@ -168,16 +164,16 @@ body {
 ================================ */
 
 @media (max-width: 600px) {
-  .mawaris-container {
+  .mawaris-page .mawaris-container {
     max-width: 100%;
   }
 
-  .form-box {
+  .mawaris-page .form-box {
     padding: 22px;
   }
 }
 
-.section-title {
+.mawaris-page .section-title {
   margin-top: 25px;
   margin-bottom: 15px;
   font-size: 18px;
@@ -187,7 +183,7 @@ body {
   padding-top: 15px;
 }
 
-.section-sub {
+.mawaris-page .section-sub {
   display: block;
   font-size: 13px;
   font-weight: 400;
@@ -195,7 +191,7 @@ body {
   margin-top: 3px;
 }
 
-#mazhab {
+.mawaris-page #mazhab {
   padding: 8px 14px;
   border-radius: 12px;
   border: none;
@@ -206,12 +202,12 @@ body {
   transition: 0.3s ease;
 }
 
-#mazhab:focus {
+.mawaris-page #mazhab:focus {
   outline: none;
   box-shadow: 0 0 0 2px #ff6a00;
 }
 
-.form-box button {
+.mawaris-page .form-box button {
   background: linear-gradient(90deg, #ff512f, #dd2476);
   border: none;
   padding: 14px;
@@ -224,16 +220,16 @@ body {
   box-shadow: 0 8px 20px rgba(255, 81, 47, 0.4);
 }
 
-.form-box button:hover {
+.mawaris-page .form-box button:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 25px rgba(255, 81, 47, 0.6);
 }
 
-.form-box button:active {
+.mawaris-page .form-box button:active {
   transform: scale(0.98);
 }
 
-.mawaris-container > button {
+.mawaris-page .mawaris-container > button {
   margin-top: 20px;
   padding: 10px 22px;
   border-radius: 25px;
@@ -246,13 +242,13 @@ body {
   box-shadow: 0 6px 18px rgba(56, 239, 125, 0.4);
 }
 
-.mawaris-container > button:hover {
+.mawaris-page .mawaris-container > button:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(56, 239, 125, 0.6);
 }
 
 /* MODE SELECT */
-#mode {
+.mawaris-page #mode {
   display: block;
   margin: 15px auto 25px;
   padding: 10px 18px;
@@ -268,25 +264,25 @@ body {
 }
 
 /* Hover */
-#mode:hover {
+.mawaris-page #mode:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(0,0,0,0.5);
 }
 
 /* Focus */
-#mode:focus {
+.mawaris-page #mode:focus {
   outline: none;
   box-shadow: 0 0 0 2px #ff6a00;
 }
 
 /* Dropdown option style (browser support terbatas) */
-#mode option {
+.mawaris-page #mode option {
   background: #1b2d38;
   color: #ffffff;
 }
 
 /* WRAPPER FLEX ATAS */
-.top-bar {
+.mawaris-page .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -294,12 +290,12 @@ body {
 }
 
 /* Biar tombol PDF gak full width */
-.top-bar button {
+.mawaris-page .top-bar button {
   width: auto;
   padding: 10px 20px;
 }
 
-select {
+.mawaris-page select {
   width: 100%;
   padding: 10px 14px;
   border-radius: 8px;
@@ -311,11 +307,11 @@ select {
   appearance: none;
 }
 
-select:focus {
+.mawaris-page select:focus {
   box-shadow: 0 0 0 2px #2ecc71;
 }
 
-.navbar {
+.mawaris-page .navbar {
   background: linear-gradient(90deg,#0f2027,#203a43,#2c5364);
   padding: 15px 40px;
   color: white;
@@ -324,25 +320,59 @@ select:focus {
   z-index: 1000;
 }
 
-.nav-container {
+.mawaris-page .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.nav-links {
+.mawaris-page .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.mawaris-page .logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.mawaris-page .logo-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
+}
+
+.mawaris-page .logo-text {
+  display: inline-block;
+}
+
+.mawaris-page .nav-links {
   display: flex;
   list-style: none;
   gap: 25px;
 }
 
-.nav-links a {
+.mawaris-page .nav-links a {
   color: white;
   text-decoration: none;
   font-weight: 500;
 }
 
-.nav-links a:hover {
+.mawaris-page .nav-links a:hover {
   color: #00ffcc;
 }
 
@@ -350,7 +380,7 @@ select:focus {
    PREFOOTER MODERN
 ================================ */
 
-.prefooter {
+.mawaris-page .prefooter {
   background: linear-gradient(135deg, #0f3d3e, #145a5c);
   padding: 50px 30px;
   color: #eafafa;
@@ -358,7 +388,7 @@ select:focus {
   overflow: hidden;
 }
 
-.prefooter::before {
+.mawaris-page .prefooter::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -366,7 +396,7 @@ select:focus {
   pointer-events: none;
 }
 
-.prefooter-container {
+.mawaris-page .prefooter-container {
   max-width: 1100px;
   margin: auto;
   display: grid;
@@ -376,14 +406,14 @@ select:focus {
   z-index: 1;
 }
 
-.prefooter-col h4 {
+.mawaris-page .prefooter-col h4 {
   color: #00ffcc;
   margin-bottom: 12px;
   font-size: 16px;
   letter-spacing: 0.5px;
 }
 
-.prefooter-col p {
+.mawaris-page .prefooter-col p {
   font-size: 14px;
   line-height: 1.7;
   opacity: 0.9;
@@ -393,7 +423,7 @@ select:focus {
    FOOTER BAWAH FINAL
 ================================ */
 
-.footer-bottom {
+.mawaris-page .footer-bottom {
   background: linear-gradient(135deg, #0e3b3d, #0c2f30);
   padding: 25px 20px;
   text-align: center;
@@ -403,7 +433,7 @@ select:focus {
 }
 
 /* Link container */
-.footer-links {
+.mawaris-page .footer-links {
   margin-bottom: 12px;
   display: flex;
   justify-content: center;
@@ -412,7 +442,7 @@ select:focus {
 }
 
 /* Link style */
-.footer-links a {
+.mawaris-page .footer-links a {
   color: #aefefe;
   text-decoration: none;
   font-size: 13px;
@@ -421,7 +451,7 @@ select:focus {
 }
 
 /* Hover modern underline */
-.footer-links a::after {
+.mawaris-page .footer-links a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -432,11 +462,11 @@ select:focus {
   transition: 0.3s;
 }
 
-.footer-links a:hover {
+.mawaris-page .footer-links a:hover {
   color: #00ffcc;
 }
 
-.footer-links a:hover::after {
+.mawaris-page .footer-links a:hover::after {
   width: 100%;
 }
 
@@ -446,37 +476,37 @@ select:focus {
 
 @media (max-width: 768px) {
 
-  .mawaris-container {
+  .mawaris-page .mawaris-container {
     max-width: 100%;
     padding: 0 15px;
   }
 
-  .form-box {
+  .mawaris-page .form-box {
     padding: 20px;
     border-radius: 14px;
   }
 
-  .form-box label {
+  .mawaris-page .form-box label {
     font-size: 13px;
   }
 
-  .form-box input,
-  .form-box select {
+  .mawaris-page .form-box input,
+  .mawaris-page .form-box select {
     font-size: 13px;
     padding: 9px;
   }
 
-  .form-box button {
+  .mawaris-page .form-box button {
     font-size: 14px;
     padding: 12px;
   }
 
-  #hasil {
+  .mawaris-page #hasil {
     padding: 18px;
     font-size: 13px;
   }
 
-  #hasil h3 {
+  .mawaris-page #hasil h3 {
     font-size: 16px;
   }
 }
@@ -487,21 +517,22 @@ select:focus {
 
 @media (max-width: 768px) {
 
-  .nav-container {
+  .mawaris-page .nav-container {
     flex-direction: column;
     align-items: center;
     padding: 15px 10px;
     gap: 10px;
   }
 
-  .logo {
+  .mawaris-page .logo {
     width: 100%;
+    justify-content: center;
     text-align: center;
     font-size: 18px;
     font-weight: 600;
   }
 
-  .nav-links {
+  .mawaris-page .nav-links {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -509,25 +540,25 @@ select:focus {
     gap: 12px;
   }
 
-  .nav-links a {
+  .mawaris-page .nav-links a {
     font-size: 13px;
   }
 
 }
 
-.lang-switch-wrap {
+.mawaris-page .lang-switch-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
   color: #e9ffff;
 }
 
-.lang-switch-label {
+.mawaris-page .lang-switch-label {
   font-size: 12px;
   opacity: 0.9;
 }
 
-.lang-switch-select {
+.mawaris-page .lang-switch-select {
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
@@ -537,11 +568,11 @@ select:focus {
   width: 68px;
 }
 
-.lang-switch-select option {
+.mawaris-page .lang-switch-select option {
   color: #111;
 }
 
-.i18n-helper-card {
+.mawaris-page .i18n-helper-card {
   margin-top: 20px;
   margin-bottom: 14px;
   background: rgba(255, 255, 255, 0.1);
@@ -551,25 +582,73 @@ select:focus {
   color: #ffffff;
 }
 
-.i18n-helper-card h3 {
+.mawaris-page .i18n-helper-card h3 {
   margin-bottom: 10px;
   font-size: 15px;
 }
 
-.i18n-helper-card ul {
+.mawaris-page .i18n-helper-card ul {
   margin-left: 18px;
 }
 
-.i18n-helper-card li {
+.mawaris-page .i18n-helper-card li {
   margin-bottom: 7px;
   line-height: 1.55;
   font-size: 13px;
 }
 
-.footer-copy-text {
+.mawaris-page .footer-copy-text {
   margin-top: 6px;
 }
 
-html[dir="rtl"] .i18n-helper-card {
+html[dir="rtl"] .mawaris-page .i18n-helper-card {
   text-align: right;
+}
+
+.mawaris-page .scroll-to-top {
+  position: fixed;
+  left: 18px;
+  bottom: 26px;
+  width: 42px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.25),
+    0 3px 8px rgba(239, 68, 68, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: all 0.28s ease;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.mawaris-page .scroll-to-top svg {
+  width: 16px;
+  height: 16px;
+}
+
+.mawaris-page .scroll-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mawaris-page .scroll-to-top:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.3),
+    0 6px 14px rgba(239, 68, 68, 0.45);
+}
+
+.mawaris-page .scroll-to-top:active {
+  transform: scale(0.95);
 }

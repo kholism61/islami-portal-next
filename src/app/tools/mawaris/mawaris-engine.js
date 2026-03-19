@@ -5,10 +5,12 @@
 // ================================
 // CORE CALCULATION
 // ================================
-window.onerror = function(message, source, lineno, colno, error) {
-  console.error("GLOBAL ERROR:", message);
-  alert("Terjadi kesalahan sistem. Silakan refresh.");
-};
+if (typeof window !== "undefined") {
+  window.onerror = function(message) {
+    console.error("GLOBAL ERROR:", message);
+    alert("Terjadi kesalahan sistem. Silakan refresh.");
+  };
+}
 
 function distributeAshabah(residue, config) {
 
@@ -1390,7 +1392,14 @@ return {
 // ================================
 function hitungMawaris() {
 
-  const btn = document.querySelector("button");
+  const btn =
+    document.getElementById("hitungMawarisBtn") ||
+    document.querySelector(".form-box button");
+
+  if (!btn) {
+    return;
+  }
+
   btn.disabled = true;
   btn.innerText = "Menghitung...";
 
@@ -1401,7 +1410,7 @@ function hitungMawaris() {
 
 try {
   totalValue = totalInput ? BigInt(totalInput) : 0n;
-} catch (e) {
+} catch {
   alert("Input total harus angka tanpa simbol.");
   btn.disabled = false;
   btn.innerText = "Hitung";
@@ -1665,7 +1674,7 @@ for (let ahli in resultData.fractionDetail) {
 }
 
 if (resultData.awl) {
-  output += `<p><strong>Asal Masalah:</strong> ${resultData.asalBeforeAwl} → ${resultData.asalMasalah}</p>`;
+  output += `<p><strong>Asal Masalah:</strong> ${resultData.asalBeforeAwl} -> ${resultData.asalMasalah}</p>`;
 } else {
   output += `<p><strong>Asal Masalah:</strong> ${resultData.asalMasalah}</p>`;
 }
@@ -1713,22 +1722,21 @@ setTimeout(() => {
 
 }
 
-function showError(msg) {
-  document.getElementById("errorBox").innerText = msg;
-}
-
-function clearError() {
-  document.getElementById("errorBox").innerText = "";
-}
-
-document.querySelectorAll("input[type='number']")
-.forEach(input => {
-  input.addEventListener("input", () => {
-    if (parseInt(input.value) < 0) {
-      input.value = 0;
+function bindNonNegativeInputs() {
+  document.querySelectorAll("input[type='number']")
+  .forEach(input => {
+    if (input.dataset.mawarisBound === "1") {
+      return;
     }
+
+    input.dataset.mawarisBound = "1";
+    input.addEventListener("input", () => {
+      if (parseInt(input.value) < 0) {
+        input.value = 0;
+      }
+    });
   });
-});
+}
 
 function exportPDF() {
 
@@ -1738,8 +1746,6 @@ function exportPDF() {
     alert("Klik Hitung dulu sebelum download.");
     return;
   }
-
-  const { jsPDF } = window.jspdf || {};
 
   if (!window.jspdf) {
     alert("Library jsPDF tidak ditemukan.");
@@ -1758,22 +1764,6 @@ function exportPDF() {
   doc.save("Hasil_Mawaris.pdf");
 }
 
-function compareMazhab(data) {
-
-  const syafii = calculateMawaris({
-    ...data,
-    mazhab: "syafii"
-  });
-
-  const hanafi = calculateMawaris({
-    ...data,
-    mazhab: "hanafi"
-  });
-
-  console.log("Syafii:", syafii);
-  console.log("Hanafi:", hanafi);
-}
-
 function compareDzawil() {
 
   const totalInput = document.getElementById("totalHarta").value;
@@ -1782,7 +1772,7 @@ function compareDzawil() {
 
   try {
     totalValue = totalInput ? BigInt(totalInput) : 0n;
-  } catch (e) {
+  } catch {
     alert("Input total harus angka.");
     return;
   }
@@ -1897,14 +1887,14 @@ function buildFiqhExplanation(data, resultData) {
 
   let explain = [];
 
-  explain.push("1️⃣ Identifikasi Ahli Waris:");
+  explain.push("1. Identifikasi Ahli Waris:");
 
   const heirs = Object.keys(resultData.shares);
   explain.push("Terdapat: " + heirs.join(", ") + ".");
 
   explain.push(" ");
 
-  explain.push("2️⃣ Penetapan Furudh:");
+  explain.push("2. Penetapan Furudh:");
 
   if (data.husband) {
     explain.push("Suami termasuk ahli waris furudh.");
@@ -1917,7 +1907,7 @@ function buildFiqhExplanation(data, resultData) {
 
   explain.push(" ");
 
-  explain.push("3️⃣ Pemeriksaan Sisa Harta:");
+  explain.push("3. Pemeriksaan Sisa Harta:");
 
   if (resultData.radd) {
     explain.push("Terjadi Radd karena masih ada sisa harta.");
@@ -1929,7 +1919,7 @@ function buildFiqhExplanation(data, resultData) {
 
   explain.push(" ");
 
-  explain.push("4️⃣ Dzawil Arham:");
+  explain.push("4. Dzawil Arham:");
 
   if (
     data.daughterOfFullSister > 0 &&
@@ -1954,7 +1944,7 @@ function buildFiqhExplanation(data, resultData) {
 
   explain.push(" ");
 
-  explain.push("5️⃣ Kesimpulan:");
+  explain.push("5. Kesimpulan:");
 
   for (let ahli in resultData.shares) {
     explain.push(
@@ -1999,20 +1989,45 @@ function updateCompareButtonState() {
   }
 }
 
-[
-  "daughterOfFullSister",
-  "daughterOfPaternalSister",
-  "daughterOfMaternalSister",
-  "auntFull",
-  "auntPaternal",
-  "auntMaternal",
-  "uncleMaternal"
-].forEach(id => {
+function bindCompareFieldListeners() {
+  [
+    "daughterOfFullSister",
+    "daughterOfPaternalSister",
+    "daughterOfMaternalSister",
+    "auntFull",
+    "auntPaternal",
+    "auntMaternal",
+    "uncleMaternal"
+  ].forEach(id => {
 
-  const el = document.getElementById(id);
+    const el = document.getElementById(id);
 
-  if (el) {
-    el.addEventListener("input", updateCompareButtonState);
-  }
+    if (el && el.dataset.compareBound !== "1") {
+      el.dataset.compareBound = "1";
+      el.addEventListener("input", updateCompareButtonState);
+    }
 
-});
+  });
+}
+
+function initMawarisPage() {
+  bindNonNegativeInputs();
+  bindCompareFieldListeners();
+  updateCompareButtonState();
+}
+
+if (typeof window !== "undefined") {
+  window.calculateMawaris = calculateMawaris;
+  window.compareDzawil = compareDzawil;
+  window.exportPDF = exportPDF;
+  window.hitungMawaris = hitungMawaris;
+  window.initMawarisPage = initMawarisPage;
+}
+
+export {
+  calculateMawaris,
+  compareDzawil,
+  exportPDF,
+  hitungMawaris,
+  initMawarisPage
+};

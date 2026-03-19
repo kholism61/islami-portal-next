@@ -1,7 +1,24 @@
 ﻿(() => {
   const LANGS = ["id", "en", "ar"];
-  const rawPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
-  const page = rawPage.endsWith(".html") ? rawPage : (rawPage ? `${rawPage}.html` : rawPage);
+  function getCurrentRouteInfo() {
+    const pathname = window.location.pathname.toLowerCase();
+    const rawPage = (pathname.split("/").filter(Boolean).pop() || "").toLowerCase();
+
+    if (pathname.endsWith("/tools/mawaris") || rawPage === "mawaris") {
+      return { pathname, rawPage, pageKey: "mawaris" };
+    }
+    if (pathname.endsWith("/tabel-fiqh") || rawPage === "tabel-fiqh") {
+      return { pathname, rawPage, pageKey: "tabel-fiqh" };
+    }
+    if (pathname.endsWith("/metodologi") || rawPage === "metodologi") {
+      return { pathname, rawPage, pageKey: "metodologi" };
+    }
+    return { pathname, rawPage, pageKey: rawPage.replace(/\.html$/, "") };
+  }
+
+  function getCurrentPageKey() {
+    return getCurrentRouteInfo().pageKey;
+  }
 
   const MAWARIS_FORM_MAP = {
     en: {
@@ -178,10 +195,23 @@
       "Perbandingan Qarabah vs Tanzil": "Qarabah vs Tanzil Comparison",
       "Ahli Waris": "Heir",
       "Selisih": "Difference",
+      "Kasus khusus Akdariyyah.": "Special Akdariyyah case.",
+      "Asal masalah normal (tidak terjadi 'Awl atau Radd).": "Normal asal masalah (no 'Awl or Radd occurred).",
+      "Terjadi Radd (ada sisa harta yang dikembalikan).": "Radd occurred (remaining estate was returned).",
+      "Terjadi 'Awl (asal masalah bertambah karena total bagian melebihi harta).": "'Awl occurred (asal masalah increased because total shares exceeded the estate).",
+      "1. Identifikasi Ahli Waris:": "1. Heir Identification:",
+      "2. Penetapan Furudh:": "2. Fixed Share Allocation:",
+      "3. Pemeriksaan Sisa Harta:": "3. Residue Review:",
+      "4. Dzawil Arham:": "4. Dhawu al-Arham:",
+      "5. Kesimpulan:": "5. Conclusion:",
       "Terdapat: ": "There are: ",
+      "Suami termasuk ahli waris furudh.": "The husband is among the fixed-share heirs.",
+      "Karena ada anak, suami mendapat 1/4.": "Because there is a child, the husband receives 1/4.",
+      "Karena tidak ada anak, suami mendapat 1/2.": "Because there is no child, the husband receives 1/2.",
       "Terjadi Radd karena masih ada sisa harta.": "Radd occurred because there is remaining estate.",
       "Terjadi 'Awl karena bagian melebihi harta.": "'Awl occurred because assigned shares exceed the estate.",
       "Sisa harta diberikan sesuai urutan ahli waris.": "Remaining estate is allocated by heir priority.",
+      "Anak Saudari Kandung termasuk dzawil arham derajat pertama.": "The daughter of a full sister belongs to the first degree of dhawu al-arham.",
       "Dengan metode Qarabah (Jumhur), derajat terdekat menerima seluruh sisa.": "With Qarabah (majority), the nearest degree receives the full residue.",
       "Dengan metode Tanzil, ia diposisikan sebagai Saudari Kandung.": "With Tanzil, the heir is positioned as a full sister."
     },
@@ -215,10 +245,23 @@
       "Perbandingan Qarabah vs Tanzil": "مقارنة القرابة والتنزيل",
       "Ahli Waris": "الوارث",
       "Selisih": "الفارق",
+      "Kasus khusus Akdariyyah.": "حالة الأكدرية الخاصة.",
+      "Asal masalah normal (tidak terjadi 'Awl atau Radd).": "أصل المسألة عادي ولم يقع عول ولا رد.",
+      "Terjadi Radd (ada sisa harta yang dikembalikan).": "وقع الرد لوجود فائض أُعيد إلى الورثة.",
+      "Terjadi 'Awl (asal masalah bertambah karena total bagian melebihi harta).": "وقع العول فزاد أصل المسألة لأن مجموع الأنصبة تجاوز التركة.",
+      "1. Identifikasi Ahli Waris:": "1. تحديد الورثة:",
+      "2. Penetapan Furudh:": "2. تقرير الفروض:",
+      "3. Pemeriksaan Sisa Harta:": "3. مراجعة الباقي من التركة:",
+      "4. Dzawil Arham:": "4. ذوو الأرحام:",
+      "5. Kesimpulan:": "5. الخلاصة:",
       "Terdapat: ": "الموجود: ",
+      "Suami termasuk ahli waris furudh.": "الزوج من أصحاب الفروض.",
+      "Karena ada anak, suami mendapat 1/4.": "لوجود ولد، يأخذ الزوج الربع.",
+      "Karena tidak ada anak, suami mendapat 1/2.": "عند عدم وجود ولد، يأخذ الزوج النصف.",
       "Terjadi Radd karena masih ada sisa harta.": "حدث الرد لوجود فائض من التركة.",
       "Terjadi 'Awl karena bagian melebihi harta.": "حدث العول لأن الأنصبة تجاوزت التركة.",
       "Sisa harta diberikan sesuai urutan ahli waris.": "يُعطى الباقي بحسب ترتيب الورثة.",
+      "Anak Saudari Kandung termasuk dzawil arham derajat pertama.": "بنت الأخت الشقيقة من ذوي الأرحام في الدرجة الأولى.",
       "Dengan metode Qarabah (Jumhur), derajat terdekat menerima seluruh sisa.": "بطريقة القرابة (قول الجمهور) تستحق الدرجة الأقرب كامل الباقي.",
       "Dengan metode Tanzil, ia diposisikan sebagai Saudari Kandung.": "بطريقة التنزيل تُنزَّل منزلة الأخت الشقيقة."
     }
@@ -335,7 +378,7 @@
       en: {
         "Metodologi Perhitungan Mawaris": "Mawaris Calculation Methodology",
         "1. Landasan Mazhab": "1. Madhhab Basis",
-        "Perhitungan dalam sistem ini menggunakan pendekatan Jumhur serta beberapa Mazhab(Syafi’i dan Hanafi). Rujukan utama berasal dari:": "This system uses the Jumhur approach with selected madhhab references (Shafi'i and Hanafi). Main references include:",
+        "Perhitungan dalam sistem ini menggunakan pendekatan Jumhur serta beberapa mazhab (Syafi'i dan Hanafi). Rujukan utama berasal dari:": "This system uses the Jumhur approach with selected madhhab references (Shafi'i and Hanafi). Main references include:",
         "Al-Fiqh al-Manhaji": "Al-Fiqh al-Manhaji",
         "Syarh Rohabiyyah": "Sharh al-Rahabiyyah",
         "Al Masalik Az Zahabiyah": "Al-Masalik al-Dhahabiyyah",
@@ -348,15 +391,15 @@
         "Pembagian kepada ahli waris": "Distribution to heirs",
         "3. Identifikasi Ahli Waris": "3. Heir Identification",
         "Sistem mengidentifikasi ahli waris yang berhak berdasarkan struktur:": "The system identifies eligible heirs based on lineage structure:",
-        "Furu’ (anak, cucu)": "Furu' (children, grandchildren)",
+        "Furu' (anak, cucu)": "Furu' (children, grandchildren)",
         "Ushul (ayah, ibu, kakek, nenek)": "Ushul (father, mother, grandfather, grandmother)",
         "Hawasyi (saudara, paman, dll)": "Hawasyi (siblings, uncles, etc.)",
         "4. Penentuan Ashabul Furudh": "4. Determining Ashabul Furudh",
         "Bagian tetap (fardh) diberikan terlebih dahulu kepada: Suami, Istri, Ayah, Ibu, Anak Perempuan, Cucu Perempuan, Saudara Perempuan (sekandung/sebapak/seibu).": "Fixed shares (fardh) are prioritized for: Husband, Wife, Father, Mother, Daughter, Granddaughter, and Sisters (full/paternal/maternal).",
         "5. Perhitungan Asal Masalah": "5. Calculating Asal Masalah",
         "Asal masalah ditentukan dari penyebut pecahan terbesar untuk menyamakan seluruh bagian ahli waris.": "Asal masalah is set from the common denominator to align all heir fractions.",
-        "6. ‘Awl (Penyesuaian Proporsional)": "6. 'Awl (Proportional Adjustment)",
-        "Jika total bagian melebihi 1 (100%), maka dilakukan ‘awl, yaitu menaikkan asal masalah dan menyesuaikan seluruh bagian secara proporsional.": "If total shares exceed 1 (100%), 'awl is applied by scaling the denominator and adjusting all shares proportionally.",
+        "6. 'Awl (Penyesuaian Proporsional)": "6. 'Awl (Proportional Adjustment)",
+        "Jika total bagian melebihi 1 (100%), maka dilakukan 'awl, yaitu menaikkan asal masalah dan menyesuaikan seluruh bagian secara proporsional.": "If total shares exceed 1 (100%), 'awl is applied by scaling the denominator and adjusting all shares proportionally.",
         "7. Radd (Pengembalian Sisa)": "7. Radd (Return of Residue)",
         "Jika terdapat sisa harta dan tidak ada ashabah, maka sisa dikembalikan kepada ahli waris ashhabul furudh kecuali suami dan istri.": "If residue remains and no ashabah exists, the remainder is returned to ashhabul furudh heirs except husband and wife.",
         "8. Ashabah": "8. Ashabah",
@@ -376,7 +419,7 @@
       ar: {
         "Metodologi Perhitungan Mawaris": "منهجية حساب المواريث",
         "1. Landasan Mazhab": "1. الأساس المذهبي",
-        "Perhitungan dalam sistem ini menggunakan pendekatan Jumhur serta beberapa Mazhab(Syafi’i dan Hanafi). Rujukan utama berasal dari:": "يعتمد هذا النظام على منهج الجمهور مع الاستفادة من المذهبين الشافعي والحنفي، ومن أبرز المراجع:",
+        "Perhitungan dalam sistem ini menggunakan pendekatan Jumhur serta beberapa mazhab (Syafi'i dan Hanafi). Rujukan utama berasal dari:": "يعتمد هذا النظام على منهج الجمهور مع الاستفادة من المذهبين الشافعي والحنفي، ومن أبرز المراجع:",
         "Al-Fiqh al-Manhaji": "الفقه المنهجي",
         "Syarh Rohabiyyah": "شرح الرحبية",
         "Al Masalik Az Zahabiyah": "المسالك الذهبية",
@@ -389,15 +432,15 @@
         "Pembagian kepada ahli waris": "توزيع الباقي على الورثة",
         "3. Identifikasi Ahli Waris": "3. تحديد الورثة",
         "Sistem mengidentifikasi ahli waris yang berhak berdasarkan struktur:": "يحدّد النظام الورثة المستحقين وفق بنية القرابة:",
-        "Furu’ (anak, cucu)": "الفروع (الأبناء وأبناء الأبناء)",
+        "Furu' (anak, cucu)": "الفروع (الأبناء وأبناء الأبناء)",
         "Ushul (ayah, ibu, kakek, nenek)": "الأصول (الأب، الأم، الجد، الجدة)",
         "Hawasyi (saudara, paman, dll)": "الحواشي (الإخوة، الأعمام، وغيرهم)",
         "4. Penentuan Ashabul Furudh": "4. تحديد أصحاب الفروض",
         "Bagian tetap (fardh) diberikan terlebih dahulu kepada: Suami, Istri, Ayah, Ibu, Anak Perempuan, Cucu Perempuan, Saudara Perempuan (sekandung/sebapak/seibu).": "تُقدَّم الأنصبة المقدّرة أولًا لأصحاب الفروض: الزوج، الزوجة، الأب، الأم، البنت، بنت الابن، والأخوات (الشقيقة/لأب/لأم).",
         "5. Perhitungan Asal Masalah": "5. حساب أصل المسألة",
         "Asal masalah ditentukan dari penyebut pecahan terbesar untuk menyamakan seluruh bagian ahli waris.": "يُحدَّد أصل المسألة من المقام المشترك لتوحيد أنصبة جميع الورثة.",
-        "6. ‘Awl (Penyesuaian Proporsional)": "6. العول (التعديل النسبي)",
-        "Jika total bagian melebihi 1 (100%), maka dilakukan ‘awl, yaitu menaikkan asal masalah dan menyesuaikan seluruh bagian secara proporsional.": "إذا تجاوز مجموع الأنصبة 100% يُعمل بالعول، برفع أصل المسألة وتعديل الأنصبة بنسبة متناسبة.",
+        "6. 'Awl (Penyesuaian Proporsional)": "6. العول (التعديل النسبي)",
+        "Jika total bagian melebihi 1 (100%), maka dilakukan 'awl, yaitu menaikkan asal masalah dan menyesuaikan seluruh bagian secara proporsional.": "إذا تجاوز مجموع الأنصبة 100% يُعمل بالعول، برفع أصل المسألة وتعديل الأنصبة بنسبة متناسبة.",
         "7. Radd (Pengembalian Sisa)": "7. الرد (إرجاع الفائض)",
         "Jika terdapat sisa harta dan tidak ada ashabah, maka sisa dikembalikan kepada ahli waris ashhabul furudh kecuali suami dan istri.": "إذا بقي فائض ولم يوجد عصبة، يُرد الباقي على أصحاب الفروض عدا الزوج والزوجة.",
         "8. Ashabah": "8. العصبة",
@@ -431,6 +474,7 @@
         nav: ["Beranda", "Tabel Fiqh", "Metodologi", "Tentang", "Kontak"],
         h1: "⚖️ Kalkulator Mawaris (Jumhur)",
         mode: ["Mode Sederhana", "Mode Akademik"],
+        calculate: "Hitung",
         compare: "Bandingkan Qarabah vs Tanzil",
         pdf: "Download PDF",
         mazhabOptions: ["Syafi'i", "Hanafi"],
@@ -445,7 +489,7 @@
         prefooterTitle: ["Portal Literasi Islam", "Referensi Fiqh", "Catatan"],
         prefooterBody: [
           "Kalkulator Mawaris berbasis Jumhur dan Mazhab (Syafi'i dan Hanafi)",
-          "الفقه المنهجي<br>شرح الرحبية<br>المسالك الذهبية<br>فتح القريب",
+          "Al-Fiqh al-Manhaji<br>Syarh Rohabiyyah<br>Al Masalik Az Zahabiyah<br>Fath al-Qarib",
           "Hasil perhitungan bersifat edukatif. Disarankan verifikasi dengan ahli waris atau ulama."
         ],
         footer: ["Tentang", "FAQ", "Kontak", "Privacy Policy", "Disclaimer"],
@@ -478,6 +522,7 @@
         nav: ["Home", "Fiqh Table", "Methodology", "About", "Contact"],
         h1: "⚖️ Mawaris Calculator (Jumhur)",
         mode: ["Simple Mode", "Academic Mode"],
+        calculate: "Calculate",
         compare: "Compare Qarabah vs Tanzil",
         pdf: "Download PDF",
         mazhabOptions: ["Shafi'i", "Hanafi"],
@@ -525,6 +570,7 @@
         nav: ["الرئيسية", "جدول الفقه", "المنهجية", "من نحن", "اتصل بنا"],
         h1: "⚖️ حاسبة المواريث (قول الجمهور)",
         mode: ["الوضع المبسط", "الوضع الأكاديمي"],
+        calculate: "احسب",
         compare: "مقارنة القرابة والتنزيل",
         pdf: "تنزيل PDF",
         mazhabOptions: ["الشافعي", "الحنفي"],
@@ -632,23 +678,30 @@
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach((node) => {
-      const original = node.textContent;
+      if (node.__mwOriginalText == null) {
+        node.__mwOriginalText = node.textContent;
+      }
+
+      const original = node.__mwOriginalText;
       const trimmed = original.trim();
       if (!trimmed) return;
       const normalized = trimmed.replace(/\s+/g, " ");
-      const translated = map[trimmed] || map[normalized];
-      if (!translated) return;
+      const translated = map[trimmed] || map[normalized] || trimmed;
       node.textContent = original.replace(trimmed, translated);
     });
   }
 
   function installAlertTranslator(lang) {
-    if (page !== "mawaris.html") return;
-    const map = RUNTIME_MAP[lang] || {};
-
     if (!window.__mwAlertOriginal) {
       window.__mwAlertOriginal = window.alert.bind(window);
     }
+
+    if (getCurrentPageKey() !== "mawaris") {
+      window.alert = window.__mwAlertOriginal;
+      return;
+    }
+
+    const map = RUNTIME_MAP[lang] || {};
 
     window.alert = (message) => {
       const msg = String(message ?? "");
@@ -659,7 +712,7 @@
 
   function translateCalcButton(lang) {
     const map = RUNTIME_MAP[lang] || {};
-    const btn = document.querySelector(".form-box button[onclick='hitungMawaris()']");
+    const btn = document.getElementById("hitungMawarisBtn");
     if (!btn) return;
 
     const fromId = map["Hitung"] ? "Hitung" : null;
@@ -668,15 +721,17 @@
     if (fromId && btn.textContent.trim() === "Hitung") btn.textContent = map["Hitung"];
     if (fromCalc && btn.textContent.trim() === "Menghitung...") btn.textContent = map["Menghitung..."];
 
-    if (!btn.__mwObserver) {
-      const observer = new MutationObserver(() => {
-        const v = btn.textContent.trim();
-        if (v === "Hitung" && map["Hitung"]) btn.textContent = map["Hitung"];
-        if (v === "Menghitung..." && map["Menghitung..."]) btn.textContent = map["Menghitung..."];
-      });
-      observer.observe(btn, { childList: true, characterData: true, subtree: true });
-      btn.__mwObserver = observer;
+    if (btn.__mwObserver) {
+      btn.__mwObserver.disconnect();
     }
+
+    const observer = new MutationObserver(() => {
+      const v = btn.textContent.trim();
+      if (v === "Hitung" && map["Hitung"]) btn.textContent = map["Hitung"];
+      if (v === "Menghitung..." && map["Menghitung..."]) btn.textContent = map["Menghitung..."];
+    });
+    observer.observe(btn, { childList: true, characterData: true, subtree: true });
+    btn.__mwObserver = observer;
   }
 
   function translateResultArea(lang) {
@@ -690,16 +745,35 @@
       if (hasil.__mwBusy) return;
       hasil.__mwBusy = true;
 
-      const base = hasil.innerHTML || "";
-      let next = replaceMap(base, phraseMap);
-      next = replaceMap(next, heirMap);
+      const current = hasil.innerHTML || "";
+      if (current && current !== hasil.__mwLastTranslated) {
+        hasil.__mwBaseSource = current;
+      }
 
-      if (next !== base) {
+      const base = hasil.__mwBaseSource || current;
+      let next = base;
+
+      if (lang !== "id") {
+        next = replaceMap(next, phraseMap);
+        next = replaceMap(next, heirMap);
+      }
+
+      if (next !== current) {
         hasil.innerHTML = next;
       }
 
-      if (window.mawarisChart && window.mawarisChart.data?.labels && Object.keys(heirMap).length) {
-        window.mawarisChart.data.labels = window.mawarisChart.data.labels.map((label) => heirMap[label] || label);
+      hasil.__mwLastTranslated = next;
+
+      if (window.mawarisChart && window.mawarisChart.data?.labels) {
+        if (!window.mawarisChart.__mwBaseLabels) {
+          window.mawarisChart.__mwBaseLabels = [...window.mawarisChart.data.labels];
+        }
+
+        window.mawarisChart.data.labels =
+          lang === "id"
+            ? [...window.mawarisChart.__mwBaseLabels]
+            : window.mawarisChart.__mwBaseLabels.map((label) => heirMap[label] || label);
+
         window.mawarisChart.update();
       }
 
@@ -718,7 +792,6 @@
   }
 
   function applyMawarisFormTranslations(lang) {
-    if (lang === "id") return;
     const map = MAWARIS_FORM_MAP[lang] || {};
 
     const formBox = document.querySelector(".form-box");
@@ -728,24 +801,40 @@
     if (sections[0]) {
       const node = sections[0].childNodes[0];
       if (node && node.nodeType === Node.TEXT_NODE) {
-        node.textContent = map["Ahli Waris Lanjutan"] || node.textContent;
+        if (node.__mwOriginalText == null) {
+          node.__mwOriginalText = node.textContent;
+        }
+        node.textContent = map["Ahli Waris Lanjutan"] || node.__mwOriginalText;
       }
-      text(sections[0].querySelector(".section-sub"), map["(Aktif jika struktur utama kosong)"] || "");
+      const sub = sections[0].querySelector(".section-sub");
+      if (sub && sub.dataset.mwOriginalText == null) {
+        sub.dataset.mwOriginalText = sub.textContent;
+      }
+      text(sub, map["(Aktif jika struktur utama kosong)"] || sub?.dataset.mwOriginalText || "");
     }
     if (sections[1]) {
-      sections[1].textContent = map["Dzawil Arham"] || sections[1].textContent;
+      if (sections[1].dataset.mwOriginalText == null) {
+        sections[1].dataset.mwOriginalText = sections[1].textContent;
+      }
+      sections[1].textContent = map["Dzawil Arham"] || sections[1].dataset.mwOriginalText;
     }
   }
 
   function applyMawaris(pack, lang) {
     document.title = pack.title;
-    text(document.querySelector(".navbar .logo"), pack.logo);
+    text(document.querySelector(".navbar .logo-text"), pack.logo);
     texts(document.querySelectorAll(".nav-links a"), pack.nav);
     text(document.querySelector(".mawaris-container h1"), pack.h1);
     texts(document.querySelectorAll("#mode option"), pack.mode);
+    const calculateBtn = document.getElementById("hitungMawarisBtn");
+    if (calculateBtn) {
+      calculateBtn.textContent = calculateBtn.disabled
+        ? (RUNTIME_MAP[lang] || {})["Menghitung..."] || "Menghitung..."
+        : pack.calculate;
+    }
 
     text(document.getElementById("compareBtn"), pack.compare);
-    text(document.querySelector(".mawaris-container > button[onclick='exportPDF()']"), pack.pdf);
+    text(document.getElementById("exportMawarisPdfBtn"), pack.pdf);
     texts(document.querySelectorAll("#mazhab option"), pack.mazhabOptions);
     texts(document.querySelectorAll("#dzawilMethod option"), pack.dzawilOptions);
 
@@ -829,7 +918,7 @@
 
   function applyFiqh(pack, lang) {
     document.title = pack.title;
-    text(document.querySelector(".logo a"), pack.logo);
+    text(document.querySelector(".logo-text"), pack.logo);
     texts(document.querySelectorAll(".nav-links a"), pack.nav);
     text(document.querySelector(".page-header h1"), pack.h1);
     text(document.querySelector(".page-header p"), pack.sub);
@@ -841,7 +930,7 @@
 
   function applyMetodologi(pack, lang) {
     document.title = pack.title;
-    text(document.querySelector(".logo a"), pack.logo);
+    text(document.querySelector(".logo-text"), pack.logo);
     texts(document.querySelectorAll(".nav-links a"), pack.nav);
     text(document.querySelector(".page-header h1"), pack.h1);
     text(document.querySelector(".page-header p"), pack.sub);
@@ -849,18 +938,119 @@
     applyMetodologiContentTranslations(lang);
   }
 
+  function isPageReady() {
+    const pageKey = getCurrentPageKey();
+    if (pageKey === "mawaris") return !!document.querySelector(".mawaris-container");
+    if (pageKey === "tabel-fiqh") return !!document.querySelector(".fiqh-table-section");
+    if (pageKey === "metodologi") return !!document.querySelector(".content-section");
+    return true;
+  }
+
   function apply(lang = getLang()) {
+    if (!isPageReady()) return false;
+
+    const pageKey = getCurrentPageKey();
     const dict = UI_DATA[lang] || UI_DATA.id;
     setDirection(lang);
     ensureSwitcher(lang, dict.switchLabel);
+    initScrollToTopButton();
 
-    if (page === "mawaris.html") applyMawaris(dict.mawaris, lang);
-    if (page === "tabel-fiqh.html") applyFiqh(dict.fiqh, lang);
-    if (page === "metodologi.html") applyMetodologi(dict.metodologi, lang);
+    if (pageKey === "mawaris") applyMawaris(dict.mawaris, lang);
+    if (pageKey === "tabel-fiqh") applyFiqh(dict.fiqh, lang);
+    if (pageKey === "metodologi") applyMetodologi(dict.metodologi, lang);
+    return true;
   }
 
-  document.addEventListener("DOMContentLoaded", () => apply(getLang()));
+  function applyWhenReady(attempt = 0) {
+    const applied = apply(getLang());
+    if (applied || attempt >= 12) return;
+
+    window.setTimeout(() => {
+      applyWhenReady(attempt + 1);
+    }, 150);
+  }
+
+  function notifyRouteChange() {
+    window.dispatchEvent(new Event("mw:routechange"));
+  }
+
+  function installNavigationHooks() {
+    if (window.__mwI18nNavHooksInstalled) return;
+    window.__mwI18nNavHooksInstalled = true;
+
+    const wrapHistoryMethod = (methodName) => {
+      const original = window.history[methodName];
+      if (typeof original !== "function") return;
+
+      window.history[methodName] = function (...args) {
+        const result = original.apply(this, args);
+        window.setTimeout(notifyRouteChange, 0);
+        return result;
+      };
+    };
+
+    wrapHistoryMethod("pushState");
+    wrapHistoryMethod("replaceState");
+
+    window.addEventListener("popstate", () => {
+      window.setTimeout(notifyRouteChange, 0);
+    });
+    window.addEventListener("mw:routechange", () => applyWhenReady());
+  }
+
+  function initScrollToTopButton() {
+    const scrollBtn = document.getElementById("scrollToTopBtn");
+    if (!scrollBtn) return;
+
+    if (window.__mwScrollToTopState?.handleScroll) {
+      window.removeEventListener("scroll", window.__mwScrollToTopState.handleScroll);
+    }
+
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY;
+
+      if (currentScrollY > 320 && isScrollingDown) {
+        scrollBtn.classList.add("show");
+      } else if (currentScrollY < 220 || currentScrollY < lastScrollY) {
+        scrollBtn.classList.remove("show");
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.__mwScrollToTopState = {
+      button: scrollBtn,
+      handleScroll
+    };
+
+    if (scrollBtn.dataset.boundScrollTop !== "true") {
+      scrollBtn.dataset.boundScrollTop = "true";
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+    }
+
+    handleScroll();
+  }
+
+  installNavigationHooks();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => applyWhenReady());
+  } else {
+    applyWhenReady();
+  }
+
+  window.addEventListener("load", () => applyWhenReady());
   window.addEventListener("storage", (e) => {
-    if (e.key === "siteLang") apply(getLang());
+    if (e.key === "siteLang") applyWhenReady();
   });
+  window.addEventListener("mw:routechange", () => initScrollToTopButton());
+  initScrollToTopButton();
 })();
