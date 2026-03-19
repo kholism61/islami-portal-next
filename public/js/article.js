@@ -548,6 +548,19 @@ const categoryMeta = {
     "الدراسات الشرعية"
   ],
 },
+  maqasid: {
+    labels: { id: "Maqasid Syariah", en: "Maqasid al-Sharia", ar: "مقاصد الشريعة" },
+    icon: "🧭",
+    aliases: [
+      "maqasid",
+      "maqasid syariah",
+      "maqashid",
+      "maqashid syariah",
+      "maqasid al-sharia",
+      "maqasid al sharia",
+      "مقاصد الشريعة",
+    ],
+  },
   hadis: {
     labels: { id: "Hadis", en: "Hadith", ar: "الحديث" },
     icon: "📜",
