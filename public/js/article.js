@@ -632,6 +632,24 @@ function getCanonicalCategoryKey(category = "") {
   return Object.entries(categoryMeta).find(([, meta]) => meta.aliases.includes(token))?.[0] || null;
 }
 
+function getCanonicalSubcategoryKey(categoryKey, subcategory = "") {
+  const token = normalizeCategoryLabel(subcategory);
+  if (!token) return null;
+
+  if (categoryKey === "hadis") {
+    if (token.includes("mustolah")) return "hadis-mustolah";
+    if (token.includes("ulumul") || token.includes("ulum")) return "hadis-ulumul";
+    if (token.includes("syamail") || token.includes("syama")) return "syamail";
+  }
+
+  if (categoryKey === "pemikiran") {
+    if (token.includes("klasik") || token.includes("classic")) return "pemikiran-klasik";
+    if (token.includes("modern")) return "pemikiran-modern";
+  }
+
+  return null;
+}
+
 function getStableArticleMeta(id, rawArticle = null, viewArticle = null) {
   const baseStore = loadStoreForLang("id");
   const baseArticle = (id && baseStore[id]) || rawArticle || viewArticle || null;
@@ -639,9 +657,14 @@ function getStableArticleMeta(id, rawArticle = null, viewArticle = null) {
   const subcategorySource = baseArticle?.subkategori || rawArticle?.subkategori || viewArticle?.subkategori || "";
   const tagSource = baseArticle?.tag || rawArticle?.tag || viewArticle?.tag || "";
 
+  const categoryKey = getCanonicalCategoryKey(categorySource)
+    || normalizeSlugKey(categorySource)
+    || normalizeCategoryLabel(categorySource);
+
   return {
-    categoryKey: getCanonicalCategoryKey(categorySource) || normalizeSlugKey(categorySource) || normalizeCategoryLabel(categorySource),
-    subcategoryKey: normalizeSlugKey(subcategorySource),
+    categoryKey,
+    subcategoryKey: getCanonicalSubcategoryKey(categoryKey, subcategorySource)
+      || normalizeSlugKey(subcategorySource),
     tagKey: normalizeSlugKey(tagSource),
     rawCategory: categorySource,
     rawSubcategory: subcategorySource,
@@ -1645,9 +1668,6 @@ function applyArticleFilter(filter, triggerElement = null) {
     featuredSection.style.display =
       activeFilter === "all" && hasHomeFeaturedArticles() ? "block" : "none";
   }
-
-  sidebar?.classList.remove("active");
-  overlay?.classList.remove("active");
 }
 
 // TOGGLE SUBMENU
@@ -3757,46 +3777,68 @@ if (downloadBtn) {
   downloadBtn.addEventListener("click", () => {
     const currentFilter = activeFilter || "all";
 
-    let articles = Object.entries(articleStore);
+    const sourceIds = getAllArticleKeys(false);
+    let ids = sourceIds;
 
     if (currentFilter !== "all") {
-      articles = articles.filter(
-        ([id, data]) => data.kategori === currentFilter
-      );
+      ids = sourceIds.filter((id) => {
+        const raw = getArticleRawById(id);
+        const view = getArticleView(id);
+        const meta = getStableArticleMeta(id, raw, view);
+        return (
+          meta.categoryKey === currentFilter ||
+          meta.subcategoryKey === currentFilter ||
+          meta.tagKey === currentFilter
+        );
+      });
     }
 
-    const total = articles.length;
+    const total = ids.length;
     let done = 0;
 
-    const offline =
-      safeJsonParse("offlineArticles", {});
-
+    const offline = safeJsonParse("offlineArticles", {});
     progressBox.style.display = "flex";
 
-    articles.forEach(([id, data], index) => {
-      setTimeout(() => {
-        offline[id] = data;
+    if (total === 0) {
+      progressFill.style.width = "0%";
+      progressText.textContent = "0%";
+      return;
+    }
+
+    const chunkSize = 40;
+    function pump(startIndex) {
+      const endIndex = Math.min(startIndex + chunkSize, total);
+
+      for (let i = startIndex; i < endIndex; i++) {
+        const id = ids[i];
+        const raw = getArticleRawById(id) || articleStore[id];
+        if (raw) offline[id] = raw;
         done++;
+      }
 
-        const percent = Math.round((done / total) * 100);
-        progressFill.style.width = percent + "%";
-        progressText.textContent = percent + "%";
+      const percent = Math.round((done / total) * 100);
+      progressFill.style.width = percent + "%";
+      progressText.textContent = percent + "%";
 
-        if (done === total) {
-          localStorage.setItem(
-            "offlineArticles",
-            JSON.stringify(offline)
-          );
+      if (done >= total) {
+        localStorage.setItem(
+          "offlineArticles",
+          JSON.stringify(offline)
+        );
 
-          downloadBtn.classList.add("downloaded");
-          downloadBtn.textContent = uiText("download_done");
+        downloadBtn.classList.add("downloaded");
+        downloadBtn.textContent = uiText("download_done");
 
-          updateOfflineCount();
-          updateHomeStats();        //  TAMBAHAN INI
-          renderOfflineHome();      //  supaya section offline update
-        }
-      }, index * 120); // animasi bertahap
-    });
+        updateOfflineCount();
+        updateHomeStats();        //  TAMBAHAN INI
+        renderOfflineHome();      //  supaya section offline update
+        return;
+      }
+
+      window.setTimeout(() => pump(endIndex), 0);
+    }
+
+    pump(0);
   });
 }
 
