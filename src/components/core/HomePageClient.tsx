@@ -466,16 +466,9 @@ export default function HomePageClient() {
                 <h3>Kaffarah &amp; Fidyah</h3>
               </a>
 
-              <a href="/smart" className="tool-card smart-fiqh-card">
-                <span className="icon">🧠</span>
-
-                <div className="smart-content">
-                  <h3>Smart Fiqh</h3>
-                  <p>
-                    Panduan fiqh interaktif untuk membantu memahami hukum ibadah
-                    secara cepat.
-                  </p>
-                </div>
+              <a href="/smart" className="tool-card">
+                <span className="icon">{"\u{1F9E0}"}</span>
+                <h3>Smart Fiqh</h3>
               </a>
             </div>
           </section>

@@ -7484,98 +7484,6 @@ border-radius:4px;
 box-shadow:0 0 8px rgba(251,191,36,0.6);
 }
 
-/* SMART FIQH CARD */
-
-.smart-fiqh-card{
-display:flex;
-align-items:center;
-gap:20px;
-padding:24px 26px;
-background:
-linear-gradient(135deg, rgba(15,23,42,0.96) 0%, rgba(14,116,144,0.88) 52%, rgba(245,158,11,0.82) 100%);
-border:1px solid rgba(255,255,255,0.14);
-box-shadow:
-0 18px 42px rgba(15,23,42,0.28),
-inset 0 1px 0 rgba(255,255,255,0.12);
-isolation:isolate;
-}
-
-.smart-fiqh-card::before{
-content:"";
-position:absolute;
-top:-70px;
-left:-40px;
-width:220px;
-height:220px;
-background:radial-gradient(circle, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 72%);
-opacity:0.95;
-transform:none;
-transition:transform .45s ease, opacity .45s ease;
-}
-
-.smart-fiqh-card::after{
-content:"";
-position:absolute;
-right:-60px;
-bottom:-90px;
-width:220px;
-height:220px;
-background:radial-gradient(circle, rgba(251,191,36,0.32) 0%, rgba(251,191,36,0) 74%);
-pointer-events:none;
-}
-
-.smart-fiqh-card > *{
-position:relative;
-z-index:1;
-}
-
-.smart-fiqh-card .icon{
-display:grid;
-place-items:center;
-flex-shrink:0;
-width:58px;
-height:58px;
-font-size:30px;
-background:linear-gradient(145deg, #fde68a 0%, #f59e0b 100%);
-color:#111827;
-border-radius:16px;
-box-shadow:
-0 12px 24px rgba(245,158,11,0.32),
-inset 0 1px 0 rgba(255,255,255,0.45);
-}
-
-.smart-content{
-display:flex;
-flex-direction:column;
-gap:7px;
-}
-
-.smart-content h3{
-margin:0;
-font-size:20px;
-letter-spacing:0.01em;
-color:#fffaf0;
-}
-
-.smart-content p{
-margin:0;
-font-size:14px;
-color:rgba(255,250,240,0.88);
-line-height:1.55;
-}
-
-.smart-fiqh-card:hover{
-transform:translateY(-6px);
-box-shadow:
-0 24px 50px rgba(15,23,42,0.36),
-inset 0 1px 0 rgba(255,255,255,0.16);
-}
-
-.smart-fiqh-card:hover::before{
-transform:translate3d(18px, 10px, 0);
-opacity:1;
-}
-
 
 .hero-auth-buttons {
   margin-top: 14px;
@@ -7636,7 +7544,6 @@ body.rtl-ui .hadith-controls {
 
 body.rtl-ui .quick-card,
 body.rtl-ui .tool-card,
-body.rtl-ui .smart-fiqh-card,
 body.rtl-ui .hero-featured-mini,
 body.rtl-ui .widget-card,
 body.rtl-ui .zakat-card,
