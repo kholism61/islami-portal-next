@@ -2110,6 +2110,12 @@ function renderHomeFeaturedArticles() {
   if (!isHomePage || typeof articleStore === "undefined") return;
 
   const featuredSection = document.getElementById("featured-article");
+  try {
+    const existing = document.getElementById("featured-link");
+    if (existing && !existing.getAttribute("data-featured-label")) {
+      existing.setAttribute("data-featured-label", uiText("featured_articles"));
+    }
+  } catch {}
   const heroFeaturedTitle = document.getElementById("hero-featured-title");
   const heroSubtitle = document.getElementById("hero-subtitle");
   const articleKeys = getSortedGlobalArticleKeysByDate(false);
@@ -2148,9 +2154,13 @@ function renderHomeFeaturedArticles() {
 
     const link = document.createElement("a");
     link.href = buildArticleHref(id, data.judul || id);
-    link.className = "featured-card fade";
+    link.className = "featured-card";
+    try {
+      link.setAttribute("data-featured-label", uiText("featured_articles"));
+    } catch {}
 
     const img = document.createElement("img");
+    img.className = "featured-thumb";
     img.src = data.thumbnail || "assets/images/default.jpg";
     img.alt = data.judul || "";
 
