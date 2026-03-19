@@ -529,14 +529,78 @@ async function getGeoPosition() {
   }
 
   const options = {
-    enableHighAccuracy: true,
-    timeout: 12000,
-    maximumAge: 5 * 60 * 1000,
+    enableHighAccuracy: false,
+    timeout: 5000,
+    maximumAge: 30 * 60 * 1000,
   };
 
   return new Promise((resolve, reject) =>
     navigator.geolocation.getCurrentPosition(resolve, reject, options)
   );
+}
+
+async function fetchPrayerTimesFor(lat, lon) {
+  const res = await fetch(
+    `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=11`
+  );
+  const data = await res.json();
+  const t = data?.data?.timings;
+  if (!t) throw new Error("PRAYER_TIMINGS_INVALID");
+  return { data, t };
+}
+
+function applyPrayerTimesFromApi(data, t) {
+  const hijriEl = document.getElementById("hijri-date");
+  if (hijriEl) {
+    const hijri = data.data.date.hijri;
+    latestHijri = hijri;
+
+    if (hijri.month.en === "Ramadan") {
+      const day = parseInt(hijri.day, 10);
+      const ramadhanInfo = document.getElementById("ramadhan-day");
+
+      if (ramadhanInfo) {
+        ramadhanInfo.textContent = prayerText("ramadan_day", { day });
+      }
+    }
+  }
+
+  renderHijriInfo();
+
+  const fajrValue = t.Fajr ? t.Fajr.slice(0, 5) : "";
+  let imsakValue = t.Imsak ? t.Imsak.slice(0, 5) : "";
+  if (!imsakValue && fajrValue) {
+    const [fh, fm] = fajrValue.split(":").map(Number);
+    if (!Number.isNaN(fh) && !Number.isNaN(fm)) {
+      let imsakMin = fh * 60 + fm - 10;
+      if (imsakMin < 0) imsakMin += 24 * 60;
+      const ih = Math.floor(imsakMin / 60);
+      const im = imsakMin % 60;
+      imsakValue = `${String(ih).padStart(2, "0")}:${String(im).padStart(2, "0")}`;
+    }
+  }
+
+  prayerTimes = {
+    imsak: imsakValue,
+    fajr: t.Fajr.slice(0, 5),
+    dhuhr: t.Dhuhr.slice(0, 5),
+    asr: t.Asr.slice(0, 5),
+    maghrib: t.Maghrib.slice(0, 5),
+    isha: t.Isha.slice(0, 5),
+  };
+
+  Object.entries(prayerTimes).forEach(([name, time]) => {
+    const el = document.getElementById(`time-${name}`);
+    if (el) el.textContent = time;
+  });
+
+  const cityEl = document.getElementById("prayer-city");
+  if (cityEl) {
+    lastPrayerCity = data.data.meta.timezone.replace("_", " ");
+    renderPrayerCity();
+  }
+
+  updatePrayerUI();
 }
 
 function setPrayerCityFallback(reason = "") {
@@ -554,7 +618,21 @@ function setPrayerCityFallback(reason = "") {
 }
 
 async function loadPrayerTimes() {
+  let renderedFromCache = false;
   try {
+    const cachedLat = Number(localStorage.getItem("prayerLastLat"));
+    const cachedLon = Number(localStorage.getItem("prayerLastLon"));
+
+    if (Number.isFinite(cachedLat) && Number.isFinite(cachedLon)) {
+      try {
+        const cached = await fetchPrayerTimesFor(cachedLat, cachedLon);
+        applyPrayerTimesFromApi(cached.data, cached.t);
+        renderedFromCache = true;
+      } catch {
+        // ignore cache fetch errors
+      }
+    }
+
     const pos = await getGeoPosition();
     const lat = pos.coords.latitude;
     const lon = pos.coords.longitude;
@@ -562,65 +640,13 @@ async function loadPrayerTimes() {
     localStorage.setItem("prayerLastLat", String(lat));
     localStorage.setItem("prayerLastLon", String(lon));
 
-    const res = await fetch(
-      `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=11`
-    );
-    const data = await res.json();
-    const t = data.data.timings;
-    // HIJRI DATE
-const hijriEl = document.getElementById("hijri-date");
-if (hijriEl) {
-  const hijri = data.data.date.hijri;
-  latestHijri = hijri;
-
-  if (hijri.month.en === "Ramadan") {
-    const day = parseInt(hijri.day, 10);
-    const ramadhanInfo = document.getElementById("ramadhan-day");
-
-    if (ramadhanInfo) {
-      ramadhanInfo.textContent = prayerText("ramadan_day", { day });
-    }
-  }
-}
-renderHijriInfo();
-    const fajrValue = t.Fajr ? t.Fajr.slice(0, 5) : "";
-    let imsakValue = t.Imsak ? t.Imsak.slice(0, 5) : "";
-    if (!imsakValue && fajrValue) {
-      const [fh, fm] = fajrValue.split(":").map(Number);
-      if (!Number.isNaN(fh) && !Number.isNaN(fm)) {
-        let imsakMin = fh * 60 + fm - 10;
-        if (imsakMin < 0) imsakMin += 24 * 60;
-        const ih = Math.floor(imsakMin / 60);
-        const im = imsakMin % 60;
-        imsakValue = `${String(ih).padStart(2, "0")}:${String(im).padStart(2, "0")}`;
-      }
-    }
-
-    prayerTimes = {
-      imsak:   imsakValue,
-      fajr:    t.Fajr.slice(0,5),
-      dhuhr:   t.Dhuhr.slice(0,5),
-      asr:     t.Asr.slice(0,5),
-      maghrib: t.Maghrib.slice(0,5),
-      isha:    t.Isha.slice(0,5)
-    };
-
-    Object.entries(prayerTimes).forEach(([name, time]) => {
-      const el = document.getElementById(`time-${name}`);
-      if (el) el.textContent = time;
-    });
-
-    const cityEl = document.getElementById("prayer-city");
-if (cityEl) {
-  lastPrayerCity = data.data.meta.timezone.replace("_", " ");
-  renderPrayerCity();
-}
-
-    updatePrayerUI();
-
+    const fresh = await fetchPrayerTimesFor(lat, lon);
+    applyPrayerTimesFromApi(fresh.data, fresh.t);
   } catch (err) {
-    setPrayerCityFallback(err?.message || "");
-    loadFallbackPrayerTimes();
+    if (!renderedFromCache) {
+      setPrayerCityFallback(err?.message || "");
+      loadFallbackPrayerTimes();
+    }
   }
 }
 
