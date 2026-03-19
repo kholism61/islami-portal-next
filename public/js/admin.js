@@ -12,7 +12,11 @@ function setupScrollToTopButton() {
   const scrollBtn = document.getElementById("scrollToTopBtn");
   if (!scrollBtn) return false;
 
-  if (scrollBtn.dataset.scrollTopBound === "true") return true;
+  if (scrollBtn.dataset.scrollTopBound === "true") {
+    const refresh = scrollBtn.__scrollTopRefresh;
+    if (typeof refresh === "function") refresh();
+    return true;
+  }
   scrollBtn.dataset.scrollTopBound = "true";
 
   function setVisible(isVisible) {
@@ -32,25 +36,99 @@ function setupScrollToTopButton() {
   }
 
   function getScrollTop() {
-    const el = document.scrollingElement || document.documentElement;
-    const value = Number(el?.scrollTop || 0);
-    return Number.isFinite(value) ? value : 0;
+    const values = [
+      window.pageYOffset,
+      window.scrollY,
+      document.scrollingElement?.scrollTop,
+      document.documentElement?.scrollTop,
+      document.body?.scrollTop
+    ];
+
+    return values.reduce((max, value) => {
+      const safeValue = Number(value || 0);
+      return Number.isFinite(safeValue) ? Math.max(max, safeValue) : max;
+    }, 0);
+  }
+
+  function getViewportHeight() {
+    const values = [
+      window.innerHeight,
+      document.documentElement?.clientHeight,
+      document.body?.clientHeight
+    ];
+
+    return values.reduce((max, value) => {
+      const safeValue = Number(value || 0);
+      return Number.isFinite(safeValue) ? Math.max(max, safeValue) : max;
+    }, 0);
+  }
+
+  function getDocumentHeight() {
+    const values = [
+      document.scrollingElement?.scrollHeight,
+      document.documentElement?.scrollHeight,
+      document.body?.scrollHeight,
+      document.documentElement?.offsetHeight,
+      document.body?.offsetHeight
+    ];
+
+    return values.reduce((max, value) => {
+      const safeValue = Number(value || 0);
+      return Number.isFinite(safeValue) ? Math.max(max, safeValue) : max;
+    }, 0);
+  }
+
+  function getThresholds() {
+    const viewportHeight = getViewportHeight();
+    const documentHeight = getDocumentHeight();
+    const maxScrollable = Math.max(documentHeight - viewportHeight, 0);
+    const showAt = Math.max(96, Math.min(220, Math.round(viewportHeight * 0.24)));
+    const hideAt = Math.max(40, showAt - 72);
+
+    return {
+      maxScrollable,
+      showAt,
+      hideAt
+    };
   }
 
   function handleScroll() {
     const currentScrollY = getScrollTop();
-    if (currentScrollY > 320) setVisible(true);
-    if (currentScrollY < 220) setVisible(false);
+    const { maxScrollable, showAt, hideAt } = getThresholds();
+
+    if (maxScrollable <= 80) {
+      setVisible(false);
+      return;
+    }
+
+    if (currentScrollY >= showAt) {
+      setVisible(true);
+      return;
+    }
+
+    if (currentScrollY <= hideAt) {
+      setVisible(false);
+    }
   }
 
   function scrollToTop() {
-    const el = document.scrollingElement || document.documentElement;
-    try {
-      if (el && typeof el.scrollTo === "function") {
-        el.scrollTo({ top: 0, behavior: "smooth" });
-        return;
+    const targets = [
+      document.scrollingElement,
+      document.documentElement,
+      document.body
+    ].filter(Boolean);
+
+    for (const target of targets) {
+      try {
+        if (typeof target.scrollTo === "function") {
+          target.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          target.scrollTop = 0;
+        }
+      } catch {
+        target.scrollTop = 0;
       }
-    } catch {}
+    }
 
     try {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -59,21 +137,27 @@ function setupScrollToTopButton() {
     }
   }
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  document.addEventListener("scroll", handleScroll, { passive: true, capture: true });
-  window.addEventListener("touchmove", handleScroll, { passive: true });
-  window.addEventListener("orientationchange", handleScroll, { passive: true });
+  const refreshVisibility = () => {
+    window.requestAnimationFrame(handleScroll);
+  };
+
+  scrollBtn.__scrollTopRefresh = refreshVisibility;
+
+  window.addEventListener("scroll", refreshVisibility, { passive: true });
+  document.addEventListener("scroll", refreshVisibility, { passive: true, capture: true });
+  window.addEventListener("touchmove", refreshVisibility, { passive: true });
+  window.addEventListener("resize", refreshVisibility, { passive: true });
+  window.addEventListener("orientationchange", refreshVisibility, { passive: true });
 
   scrollBtn.addEventListener("click", scrollToTop);
   scrollBtn.addEventListener("touchend", scrollToTop, { passive: true });
 
-  setVisible(getScrollTop() > 320);
-  handleScroll();
+  refreshVisibility();
 
   let ticks = 0;
   const interval = window.setInterval(() => {
     ticks += 1;
-    handleScroll();
+    refreshVisibility();
     if (ticks >= 25) window.clearInterval(interval);
   }, 400);
 

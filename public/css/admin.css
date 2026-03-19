@@ -22,8 +22,8 @@ body.dark {
 .scroll-to-top{
   position: fixed;
 
-  left: 18px;
-  bottom: 26px;
+  left: calc(18px + env(safe-area-inset-left, 0px));
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
 
   width: 42px;
   height: 36px;
@@ -36,6 +36,8 @@ body.dark {
   justify-content: center;
 
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
   background: linear-gradient(135deg,#ef4444,#dc2626);
 
@@ -51,7 +53,7 @@ body.dark {
   transform: translateY(14px);
   transition: all 0.28s ease;
 
-  z-index: 999;
+  z-index: 10001;
   pointer-events: none;
 }
 
