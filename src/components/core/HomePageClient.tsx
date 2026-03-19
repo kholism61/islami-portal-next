@@ -108,7 +108,7 @@ export default function HomePageClient() {
 
           <div className="nav-logo-badge" aria-hidden="true">
             <img
-              src="/favicon.ico"
+              src="/assets/images/logo.png"
               alt=""
               className="nav-logo-img"
               loading="eager"

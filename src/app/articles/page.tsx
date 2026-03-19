@@ -5,7 +5,7 @@ export const metadata = {
   description: "Portal artikel Islam ilmiah dan akademik.",
   authors: [{ name: "Muhammad Nurcholis" }],
   icons: {
-    icon: "/favicon.ico",
+    icon: "/assets/images/logo.png",
   },
   alternates: {
     canonical: "https://islami-portal-next.vercel.app/article",
@@ -85,7 +85,7 @@ export default function ArticlePage() {
 
         <div className="nav-logo-badge" aria-hidden="true">
           <img
-            src="/favicon.ico"
+            src="/assets/images/logo.png"
             alt=""
             className="nav-logo-img"
             loading="eager"

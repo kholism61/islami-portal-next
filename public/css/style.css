@@ -125,12 +125,14 @@ body::before {
 
 .logo {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.01em;
   color: #f8fbff; /* fallback */
-  background: linear-gradient(100deg, #ffffff 0%, #dbeafe 46%, #7dd3fc 100%);
+  background: linear-gradient(96deg, #ffffff 0%, #dbeafe 28%, #7dd3fc 58%, #86efac 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 8px 22px rgba(8, 47, 73, 0.28);
 }
 
 .theme-toggle {
@@ -578,31 +580,31 @@ body.dark #overlay {
 }
 
 .nav-logo-badge {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(14, 165, 233, 0.2));
+  border: 1px solid rgba(186, 230, 253, 0.3);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   flex: 0 0 auto;
 }
 
 body.dark .nav-logo-badge {
-  background: rgba(2, 6, 23, 0.45);
-  border-color: rgba(148, 163, 184, 0.24);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.82), rgba(14, 165, 233, 0.18));
+  border-color: rgba(125, 211, 252, 0.2);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(148, 163, 184, 0.14);
 }
 
 .nav-logo-img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.24));
 }
 
 /* =====================
@@ -7841,8 +7843,12 @@ body.home-page .welcome-title span {
 /* kontras nama/brand di home agar tetap terbaca di semua bahasa */
 body.home-page .logo {
   color: #f8fbff;
-  font-weight: 700;
-  text-shadow: 0 6px 16px rgba(6, 26, 64, 0.35);
+  font-weight: 800;
+  background: linear-gradient(96deg, #ffffff 0%, #dbeafe 32%, #7dd3fc 64%, #86efac 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 8px 20px rgba(6, 26, 64, 0.26);
 }
 
 body.home-page .author-name {
@@ -7986,7 +7992,11 @@ body.home-page.dark #categories-title-text {
 
 body.home-page.dark .logo {
   color: #eaf4ff;
-  text-shadow: 0 6px 16px rgba(8, 47, 73, 0.45);
+  background: linear-gradient(96deg, #f8fafc 0%, #dbeafe 36%, #7dd3fc 66%, #86efac 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 8px 22px rgba(8, 47, 73, 0.36);
 }
 
 body.home-page.dark .author-name {
