@@ -3,11 +3,144 @@
 import Link from "next/link";
 import Script from "next/script";
 
+import "./kaffarah-sumpah.css";
+
+import { useEffect, useMemo, useState } from "react";
+
 export default function KalkulatorKaffarahSumpahPage() {
+  const [jumlah, setJumlah] = useState<number>(0);
+  const [harga, setHarga] = useState<number>(0);
+
+  useEffect(() => {
+    document.body.classList.add("tool-kaffarah-sumpah");
+    document.body.classList.add("kfi-scope");
+    const ensureI18n = () => {
+      if ((window as any).__kfiMaybeApply) return;
+      if (document.getElementById("kfi-i18n-script")) return;
+      const script = document.createElement("script");
+      script.id = "kfi-i18n-script";
+      script.src = "/js/kaffarah-fidyah-i18n.js";
+      script.async = true;
+      script.onload = () => (window as any).__kfiMaybeApply?.();
+      document.body.appendChild(script);
+    };
+
+    ensureI18n();
+    (window as any).__kfiMaybeApply?.();
+    setTimeout(() => {
+      ensureI18n();
+      (window as any).__kfiMaybeApply?.();
+    }, 0);
+    setTimeout(() => {
+      ensureI18n();
+      (window as any).__kfiMaybeApply?.();
+    }, 100);
+    setTimeout(() => {
+      ensureI18n();
+      (window as any).__kfiMaybeApply?.();
+    }, 500);
+    setTimeout(() => {
+      ensureI18n();
+      (window as any).__kfiMaybeApply?.();
+    }, 1200);
+    return () => {
+      document.body.classList.remove("tool-kaffarah-sumpah");
+      document.body.classList.remove("kfi-scope");
+    };
+  }, []);
+
+  const computed = useMemo(() => {
+    if (!jumlah || jumlah <= 0) {
+      return {
+        orangMiskin: 0,
+        total: 0,
+        hasil: "Hasil perhitungan akan muncul di sini.",
+        analisis: "Analisis akan muncul setelah perhitungan."
+      };
+    }
+
+    const orangMiskin = jumlah * 10;
+    const total = orangMiskin * (harga || 0);
+    const formatRupiah = (angka: number) =>
+      "Rp " + Number(angka || 0).toLocaleString("id-ID");
+
+    const hasil = `
+Total Kaffarah
+
+${jumlah} sumpah
+
+10 orang miskin × ${jumlah}
+
+= ${orangMiskin} orang miskin
+
+Estimasi biaya
+
+${orangMiskin} × ${formatRupiah(harga)}
+
+= ${formatRupiah(total)}
+
+Alternatif kaffarah
+
+Puasa 3 hari
+`;
+
+    const analisis = `
+Orang ini melanggar sumpah sebanyak ${jumlah} kali.
+
+Menurut fiqh:
+
+1. Memberi makan 10 orang miskin
+2. Memberi pakaian 10 orang miskin
+3. Memerdekakan budak
+
+Jika tidak mampu:
+
+Puasa 3 hari.
+
+Dalil:
+
+لَا يُؤَاخِذُكُمُ اللَّهُ بِاللَّغْوِ فِي أَيْمَانِكُمْ
+وَلَٰكِنْ يُؤَاخِذُكُمْ بِمَا عَقَّدتُّمُ الْأَيْمَانَ
+
+(QS Al-Maidah: 89)
+`;
+
+    return {
+      orangMiskin,
+      total,
+      hasil,
+      analisis
+    };
+  }, [jumlah, harga]);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(computed.hasil);
+      alert("Hasil berhasil disalin");
+    } catch {
+      alert("Hasil berhasil disalin");
+    }
+  };
+
+  const handleShare = () => {
+    const url = "https://wa.me/?text=" + encodeURIComponent(computed.hasil);
+    window.open(url, "_blank");
+  };
+
+  const handleReset = () => {
+    setJumlah(0);
+    setHarga(0);
+  };
+
+  const handleHitung = () => {
+    if (!jumlah || jumlah <= 0) {
+      alert("Masukkan jumlah sumpah.");
+      return;
+    }
+  };
+
   return (
     <>
-      <link rel="stylesheet" href="/tool/kaffarah-sumpah.css" />
-
       <header className="navbar">
         <div className="nav-container">
           <div className="logo">Portal Literasi Islam</div>
@@ -52,6 +185,11 @@ export default function KalkulatorKaffarahSumpahPage() {
               type="number"
               id="jumlahSumpah"
               placeholder="contoh: 2"
+              value={jumlah ? String(jumlah) : ""}
+              onChange={(e) => {
+                const next = parseInt(e.target.value, 10);
+                setJumlah(Number.isFinite(next) ? next : 0);
+              }}
             />
           </div>
 
@@ -61,34 +199,39 @@ export default function KalkulatorKaffarahSumpahPage() {
               type="number"
               id="hargaSumpah"
               placeholder="contoh: 15000"
+              value={harga ? String(harga) : ""}
+              onChange={(e) => {
+                const next = parseInt(e.target.value, 10);
+                setHarga(Number.isFinite(next) ? next : 0);
+              }}
             />
           </div>
 
           <div className="harga-preset">
             <button
               className="harga-btn"
-              onClick={() => (window as any).setHargaSumpah?.(10000)}
+              onClick={() => setHarga(10000)}
             >
               10k
             </button>
 
             <button
               className="harga-btn"
-              onClick={() => (window as any).setHargaSumpah?.(15000)}
+              onClick={() => setHarga(15000)}
             >
               15k
             </button>
 
             <button
               className="harga-btn"
-              onClick={() => (window as any).setHargaSumpah?.(20000)}
+              onClick={() => setHarga(20000)}
             >
               20k
             </button>
 
             <button
               className="harga-btn"
-              onClick={() => (window as any).setHargaSumpah?.(25000)}
+              onClick={() => setHarga(25000)}
             >
               25k
             </button>
@@ -96,7 +239,8 @@ export default function KalkulatorKaffarahSumpahPage() {
 
           <button
             className="btn-hitung"
-            onClick={() => (window as any).hitungSumpah?.()}
+            type="button"
+            onClick={handleHitung}
           >
             Hitung Kaffarah
           </button>
@@ -104,37 +248,37 @@ export default function KalkulatorKaffarahSumpahPage() {
           <div className="stats">
             <div className="stat-box">
               <p>Sumpah</p>
-              <h2 id="statSumpah">0</h2>
+              <h2 id="statSumpah">{jumlah}</h2>
             </div>
 
             <div className="stat-box">
               <p>Orang Miskin</p>
-              <h2 id="statMiskin">0</h2>
+              <h2 id="statMiskin">{computed.orangMiskin}</h2>
             </div>
           </div>
 
           <div className="hasil-box" id="hasilSumpah">
-            Hasil perhitungan akan muncul di sini.
+            {computed.hasil}
           </div>
 
           <div className="analisis-box">
             <h2>Analisis Fiqh</h2>
 
             <div id="analisisSumpah">
-              Analisis akan muncul setelah perhitungan.
+              {computed.analisis}
             </div>
           </div>
 
           <div className="actions">
-            <button onClick={() => (window as any).copyHasil?.()}>
+            <button type="button" onClick={handleCopy}>
               Salin Hasil
             </button>
 
-            <button onClick={() => (window as any).shareWA?.()}>
+            <button type="button" onClick={handleShare}>
               Bagikan WhatsApp
             </button>
 
-            <button onClick={() => (window as any).resetSumpah?.()}>
+            <button type="button" onClick={handleReset}>
               Reset
             </button>
           </div>
@@ -148,7 +292,7 @@ export default function KalkulatorKaffarahSumpahPage() {
 
             <p>
               Portal edukasi Islam yang menyediakan artikel, kalkulator fiqh,
-              dan panduan ibadah berbasis Al-Qur&apos;an dan Sunnah.
+              dan panduan ibadah berbasis Al-Qur'an dan Sunnah.
             </p>
           </div>
 
@@ -169,14 +313,10 @@ export default function KalkulatorKaffarahSumpahPage() {
           </div>
         </div>
 
-        <div className="footer-bottom">© 2026 Portal Literasi Islam</div>
+        <div className="footer-bottom"> 2026 Portal Literasi Islam</div>
       </footer>
 
-      <Script src="/tool/kaffarah-sumpah.js" strategy="afterInteractive" />
-      <Script
-        src="/js/kaffarah-fidyah-i18n.js"
-        strategy="afterInteractive"
-      />
+      <Script src="/js/kaffarah-fidyah-i18n.js" strategy="afterInteractive" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
       <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>

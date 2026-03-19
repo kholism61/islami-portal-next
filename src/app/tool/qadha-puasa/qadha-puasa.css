@@ -1,6 +1,6 @@
 /* GLOBAL */
 
-body{
+body.tool-qadha-puasa{
 
 font-family:Arial, sans-serif;
 
@@ -10,11 +10,13 @@ background:linear-gradient(135deg,#081b2e,#0e2a44,#153a5b);
 
 color:white;
 
+overflow-x:hidden;
+
 }
 
 /* NAVBAR */
 
-.navbar{
+body.tool-qadha-puasa .navbar{
 
 position:sticky;
 
@@ -32,7 +34,7 @@ z-index:1000;
 
 }
 
-.nav-container{
+body.tool-qadha-puasa .nav-container{
 
 max-width:1200px;
 
@@ -48,7 +50,7 @@ padding:15px 20px;
 
 }
 
-.logo{
+body.tool-qadha-puasa .logo{
 
 font-size:20px;
 
@@ -62,7 +64,7 @@ text-decoration:none;
 
 /* NAV MENU */
 
-.nav-menu{
+body.tool-qadha-puasa .nav-menu{
 
 display:flex;
 
@@ -76,7 +78,7 @@ padding:0;
 
 }
 
-.nav-menu a{
+body.tool-qadha-puasa .nav-menu a{
 
 text-decoration:none;
 
@@ -90,7 +92,7 @@ transition:0.2s;
 
 }
 
-.nav-menu a:hover{
+body.tool-qadha-puasa .nav-menu a:hover{
 
 color:#4cc9ff;
 
@@ -100,7 +102,7 @@ opacity:1;
 
 /* HERO */
 
-.hero{
+body.tool-qadha-puasa .hero{
 
 text-align:center;
 
@@ -110,7 +112,7 @@ background:linear-gradient(135deg,#0b1f35,#1b3b5c,#274e73);
 
 }
 
-.hero h1{
+body.tool-qadha-puasa .hero h1{
 
 font-size:40px;
 
@@ -118,7 +120,7 @@ margin-bottom:10px;
 
 }
 
-.hero p{
+body.tool-qadha-puasa .hero p{
 
 max-width:600px;
 
@@ -128,7 +130,7 @@ opacity:0.8;
 
 }
 
-.hero-line{
+body.tool-qadha-puasa .hero-line{
 
 width:80px;
 
@@ -144,7 +146,7 @@ border-radius:10px;
 
 /* CONTAINER */
 
-.container{
+body.tool-qadha-puasa .container{
 
 max-width:900px;
 
@@ -156,7 +158,7 @@ padding:20px;
 
 /* CALCULATOR CARD */
 
-.calc-card{
+body.tool-qadha-puasa .calc-card{
 
 background:rgba(255,255,255,0.05);
 
@@ -178,7 +180,7 @@ margin-bottom:25px;
 
 }
 
-.calc-card input{
+body.tool-qadha-puasa .calc-card input{
 
 padding:12px;
 
@@ -190,7 +192,7 @@ outline:none;
 
 }
 
-.calc-card button{
+body.tool-qadha-puasa .calc-card button{
 
 padding:12px;
 
@@ -210,7 +212,7 @@ transition:0.2s;
 
 }
 
-.calc-card button:hover{
+body.tool-qadha-puasa .calc-card button:hover{
 
 transform:translateY(-2px);
 
@@ -220,7 +222,7 @@ box-shadow:0 6px 20px rgba(80,160,255,0.5);
 
 /* RESULT */
 
-.result-grid{
+body.tool-qadha-puasa .result-grid{
 
 display:grid;
 
@@ -232,7 +234,7 @@ margin-bottom:30px;
 
 }
 
-.result-card{
+body.tool-qadha-puasa .result-card{
 
 background:rgba(255,255,255,0.05);
 
@@ -244,7 +246,7 @@ text-align:center;
 
 }
 
-.result-card span{
+body.tool-qadha-puasa .result-card span{
 
 font-size:14px;
 
@@ -252,7 +254,7 @@ opacity:0.7;
 
 }
 
-.result-card h3{
+body.tool-qadha-puasa .result-card h3{
 
 font-size:30px;
 
@@ -264,7 +266,7 @@ color:#4cc9ff;
 
 /* INFO */
 
-.info-box{
+body.tool-qadha-puasa .info-box{
 
 background:rgba(255,255,255,0.04);
 
@@ -276,7 +278,7 @@ line-height:1.6;
 
 }
 
-blockquote{
+body.tool-qadha-puasa blockquote{
 
 margin-top:15px;
 
@@ -290,7 +292,7 @@ opacity:0.9;
 
 /* PRE FOOTER */
 
-.pre-footer{
+body.tool-qadha-puasa .pre-footer{
 
 margin-top:60px;
 
@@ -300,7 +302,7 @@ background:linear-gradient(135deg,#0a1f34,#0f2e4c);
 
 }
 
-.pre-footer-grid{
+body.tool-qadha-puasa .pre-footer-grid{
 
 max-width:1100px;
 
@@ -314,7 +316,7 @@ gap:40px;
 
 }
 
-.pf-box h3{
+body.tool-qadha-puasa .pf-box h3{
 
 color:#4cc9ff;
 
@@ -322,31 +324,53 @@ margin-bottom:10px;
 
 }
 
-.pf-box ul{
+body.tool-qadha-puasa .pf-box ul{
 
-padding-left:18px;
+list-style:none;
+
+padding-left:0;
+
+margin:0;
+
+}
+
+body.tool-qadha-puasa .pf-box li{
+
+margin:8px 0;
 
 }
 
 /* FOOTER */
 
-.footer{
+body.tool-qadha-puasa .footer{
 
 padding:20px;
 
 border-top:1px solid rgba(255,255,255,0.1);
 
-display:flex;
+width:100%;
 
-justify-content:center;
+background:rgba(8,25,44,0.35);
+
+}
+
+body.tool-qadha-puasa .footer-links{
+
+display:flex;
 
 gap:20px;
 
 flex-wrap:wrap;
 
+justify-content:center;
+
+align-items:center;
+
+color:#4cc9ff;
+
 }
 
-.footer a{
+body.tool-qadha-puasa .footer a{
 
 color:white;
 
@@ -358,13 +382,13 @@ opacity:0.8;
 
 }
 
-.footer a:hover{
+body.tool-qadha-puasa .footer a:hover{
 
 color:#4cc9ff;
 
 }
 
-.footer-bottom{
+body.tool-qadha-puasa .footer-bottom{
 
 text-align:center;
 
@@ -380,7 +404,7 @@ opacity:0.7;
 
 @media(max-width:700px){
 
-.nav-menu{
+body.tool-qadha-puasa .nav-menu{
 
 gap:12px;
 
@@ -390,7 +414,7 @@ flex-wrap:wrap;
 
 }
 
-.hero h1{
+body.tool-qadha-puasa .hero h1{
 
 font-size:28px;
 

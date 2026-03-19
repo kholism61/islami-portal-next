@@ -1,13 +1,13 @@
 /* RESET */
 
-*{
+body.tool-fidyah *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:system-ui,-apple-system,Segoe UI,Roboto;
 }
 
-body{
+body.tool-fidyah{
 
 background:#0e1a2b;
 color:white;
@@ -19,7 +19,7 @@ line-height:1.6;
 
 /* NAVBAR */
 
-.navbar{
+body.tool-fidyah .navbar{
 
 position:sticky;
 top:0;
@@ -34,7 +34,7 @@ z-index:1000;
 
 }
 
-.nav-container{
+body.tool-fidyah .nav-container{
 
 max-width:1200px;
 margin:auto;
@@ -47,7 +47,7 @@ padding:12px 20px;
 
 }
 
-.logo{
+body.tool-fidyah .logo{
 
 font-weight:600;
 font-size:18px;
@@ -57,7 +57,7 @@ color:white;
 
 }
 
-.nav-menu{
+body.tool-fidyah .nav-menu{
 
 list-style:none;
 
@@ -67,7 +67,7 @@ gap:22px;
 
 }
 
-.nav-menu a{
+body.tool-fidyah .nav-menu a{
 
 text-decoration:none;
 
@@ -81,7 +81,7 @@ transition:.2s;
 
 }
 
-.nav-menu a:hover{
+body.tool-fidyah .nav-menu a:hover{
 
 color:#6dd5ff;
 
@@ -93,7 +93,7 @@ opacity:1;
 
 /* HEADER */
 
-.page-header{
+body.tool-fidyah .page-header{
 
 text-align:center;
 
@@ -101,7 +101,7 @@ padding:60px 20px 40px;
 
 }
 
-.page-header h1{
+body.tool-fidyah .page-header h1{
 
 font-size:32px;
 
@@ -109,7 +109,7 @@ margin-bottom:10px;
 
 }
 
-.page-header p{
+body.tool-fidyah .page-header p{
 
 opacity:0.75;
 
@@ -119,7 +119,7 @@ opacity:0.75;
 
 /* SECTION */
 
-.fidyah-section{
+body.tool-fidyah .fidyah-section{
 
 display:flex;
 
@@ -133,7 +133,7 @@ padding:20px;
 
 /* CARD */
 
-.fidyah-card{
+body.tool-fidyah .fidyah-card{
 
 width:420px;
 
@@ -151,7 +151,7 @@ box-shadow:0 10px 30px rgba(0,0,0,0.4);
 
 }
 
-.fidyah-card h2{
+body.tool-fidyah .fidyah-card h2{
 
 margin-bottom:20px;
 
@@ -163,13 +163,13 @@ text-align:center;
 
 /* FORM */
 
-.form-group{
+body.tool-fidyah .form-group{
 
 margin-bottom:18px;
 
 }
 
-.form-group label{
+body.tool-fidyah .form-group label{
 
 display:block;
 
@@ -181,7 +181,7 @@ opacity:0.9;
 
 }
 
-input,select{
+body.tool-fidyah input, body.tool-fidyah select{
 
 width:100%;
 
@@ -201,7 +201,7 @@ color:white;
 
 /* BUTTON */
 
-.btn-reset{
+body.tool-fidyah .btn-reset{
 
 margin-top:10px;
 
@@ -229,7 +229,7 @@ transition:.2s;
 
 }
 
-.btn-reset:hover{
+body.tool-fidyah .btn-reset:hover{
 
 transform:translateY(-2px);
 
@@ -241,7 +241,7 @@ box-shadow:0 6px 20px rgba(70,150,255,0.5);
 
 /* RESULT */
 
-.hasil-box{
+body.tool-fidyah .hasil-box{
 
 margin-top:20px;
 
@@ -261,7 +261,7 @@ opacity:0.9;
 
 /* PRE FOOTER */
 
-.pre-footer{
+body.tool-fidyah .pre-footer{
 
 margin-top:80px;
 
@@ -280,7 +280,7 @@ border-top:1px solid rgba(255,255,255,0.08);
 
 }
 
-.pre-footer h2{
+body.tool-fidyah .pre-footer h2{
 
 font-size:28px;
 
@@ -288,7 +288,7 @@ margin-bottom:10px;
 
 }
 
-.pre-footer p{
+body.tool-fidyah .pre-footer p{
 
 max-width:650px;
 
@@ -304,7 +304,7 @@ margin-bottom:30px;
 
 /* BUTTON TOOLS */
 
-.tools-shortcut{
+body.tool-fidyah .tools-shortcut{
 
 display:flex;
 
@@ -316,7 +316,7 @@ flex-wrap:wrap;
 
 }
 
-.tool-btn{
+body.tool-fidyah .tool-btn{
 
 padding:10px 20px;
 
@@ -338,7 +338,7 @@ transition:.25s;
 
 }
 
-.tool-btn:hover{
+body.tool-fidyah .tool-btn:hover{
 
 transform:translateY(-2px);
 
@@ -350,7 +350,7 @@ box-shadow:0 6px 20px rgba(70,150,255,0.5);
 
 /* FOOTER */
 
-.footer{
+body.tool-fidyah .footer{
 
 text-align:center;
 
@@ -360,7 +360,7 @@ margin-top:0;
 
 }
 
-.footer-links{
+body.tool-fidyah .footer-links{
 
 display:flex;
 
@@ -374,7 +374,7 @@ margin-bottom:10px;
 
 }
 
-.footer-links a{
+body.tool-fidyah .footer-links a{
 
 color:white;
 
@@ -386,13 +386,13 @@ opacity:0.8;
 
 }
 
-.footer-links a:hover{
+body.tool-fidyah .footer-links a:hover{
 
 color:#6dd5ff;
 
 }
 
-.hasil-box{
+body.tool-fidyah .hasil-box{
 
 margin-top:20px;
 
@@ -418,7 +418,7 @@ transform:translateY(0);
 
 }
 
-.hero-fidyah{
+body.tool-fidyah .hero-fidyah{
 
 padding:80px 20px 50px;
 
@@ -429,14 +429,14 @@ radial-gradient(circle at top, rgba(0,170,255,0.25), transparent 70%);
 
 }
 
-.hero-content{
+body.tool-fidyah .hero-content{
 
 max-width:700px;
 margin:auto;
 
 }
 
-.hero-fidyah h1{
+body.tool-fidyah .hero-fidyah h1{
 
 font-size:38px;
 
@@ -448,7 +448,7 @@ margin-bottom:15px;
 
 }
 
-.hero-fidyah p{
+body.tool-fidyah .hero-fidyah p{
 
 font-size:16px;
 
@@ -458,7 +458,7 @@ line-height:1.6;
 
 }
 
-.hero-fidyah::after{
+body.tool-fidyah .hero-fidyah::after{
 
 content:"";
 
@@ -480,7 +480,7 @@ background:linear-gradient(
 
 }
 
-.fiqh-box{
+body.tool-fidyah .fiqh-box{
 
 margin-top:20px;
 
@@ -500,7 +500,7 @@ line-height:1.6;
 
 }
 
-.harga-preset{
+body.tool-fidyah .harga-preset{
 
 display:flex;
 
@@ -510,7 +510,7 @@ margin-top:10px;
 
 }
 
-.harga-preset button{
+body.tool-fidyah .harga-preset button{
 
 padding:6px 14px;
 
@@ -526,13 +526,13 @@ cursor:pointer;
 
 }
 
-.harga-preset button:hover{
+body.tool-fidyah .harga-preset button:hover{
 
 background:#00c6ff;
 
 }
 
-.analisis-fiqh{
+body.tool-fidyah .analisis-fiqh{
 
 margin-top:25px;
 
@@ -552,7 +552,7 @@ color:#d6ecff;
 
 }
 
-.analisis-fiqh h3{
+body.tool-fidyah .analisis-fiqh h3{
 
 margin-bottom:10px;
 
@@ -562,7 +562,7 @@ font-size:18px;
 
 }
 
-#analisisFidyah{
+body.tool-fidyah #analisisFidyah{
 
 font-size:14px;
 
@@ -572,7 +572,7 @@ line-height:1.7;
 
 @media (max-width:768px){
 
-.nav-container{
+body.tool-fidyah .nav-container{
 display:flex;
 flex-direction:column;
 align-items:flex-start;
@@ -580,12 +580,12 @@ gap:10px;
 padding:10px 16px;
 }
 
-.logo{
+body.tool-fidyah .logo{
 font-size:18px;
 line-height:1.2;
 }
 
-nav{
+body.tool-fidyah nav{
 display:flex;
 overflow-x:auto;
 gap:14px;
@@ -593,12 +593,12 @@ width:100%;
 padding-bottom:4px;
 }
 
-nav a{
+body.tool-fidyah nav a{
 font-size:14px;
 white-space:nowrap;
 }
 
-nav::-webkit-scrollbar{
+body.tool-fidyah nav::-webkit-scrollbar{
 display:none;
 }
 

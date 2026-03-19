@@ -1,4 +1,4 @@
-body{
+body.tool-kaffarah-jima{
 
 font-family:Arial;
 
@@ -11,7 +11,7 @@ margin:0;
 }
 
 
-.navbar{
+body.tool-kaffarah-jima .navbar{
 
 position:sticky;
 
@@ -32,7 +32,7 @@ box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
 
-.nav-container{
+body.tool-kaffarah-jima .nav-container{
 
 display:flex;
 
@@ -47,7 +47,7 @@ margin:auto;
 }
 
 
-.logo{
+body.tool-kaffarah-jima .logo{
 font-size:20px;
 font-weight:700;
 text-decoration:none;
@@ -63,7 +63,7 @@ color:transparent;
 display:inline-block;
 }
 
-.nav-menu{
+body.tool-kaffarah-jima .nav-menu{
 
 display:flex;
 
@@ -74,7 +74,7 @@ list-style:none;
 }
 
 
-.nav-menu a{
+body.tool-kaffarah-jima .nav-menu a{
 
 color:#d6eaff;
 
@@ -87,13 +87,13 @@ transition:0.3s;
 }
 
 
-.nav-menu a:hover{
+body.tool-kaffarah-jima .nav-menu a:hover{
 
 color:#4facfe;
 
 }
 
-.hero{
+body.tool-kaffarah-jima .hero{
 
 text-align:center;
 
@@ -108,7 +108,7 @@ transparent
 }
 
 
-.hero h1{
+body.tool-kaffarah-jima .hero h1{
 
 font-size:36px;
 
@@ -117,14 +117,14 @@ margin-bottom:10px;
 }
 
 
-.hero p{
+body.tool-kaffarah-jima .hero p{
 
 color:#cfe7ff;
 
 }
 
 
-.kaffarah-section{
+body.tool-kaffarah-jima .kaffarah-section{
 
 display:flex;
 
@@ -135,7 +135,7 @@ padding:40px;
 }
 
 
-.kaffarah-card{
+body.tool-kaffarah-jima .kaffarah-card{
 
 width:500px;
 
@@ -148,14 +148,14 @@ border-radius:16px;
 }
 
 
-.form-group{
+body.tool-kaffarah-jima .form-group{
 
 margin-bottom:20px;
 
 }
 
 
-input{
+body.tool-kaffarah-jima input{
 
 width:100%;
 
@@ -172,7 +172,7 @@ color:white;
 }
 
 
-.harga-preset{
+body.tool-kaffarah-jima .harga-preset{
 
 display:flex;
 
@@ -183,7 +183,7 @@ margin-bottom:20px;
 }
 
 
-.harga-preset button{
+body.tool-kaffarah-jima .harga-preset button{
 
 padding:6px 14px;
 
@@ -200,14 +200,14 @@ cursor:pointer;
 }
 
 
-.harga-preset button:hover{
+body.tool-kaffarah-jima .harga-preset button:hover{
 
 background:#00c6ff;
 
 }
 
 
-.btn-hitung{
+body.tool-kaffarah-jima .btn-hitung{
 
 width:100%;
 
@@ -232,14 +232,14 @@ cursor:pointer;
 }
 
 
-.stat-box{
+body.tool-kaffarah-jima .stat-box{
 
 margin-top:20px;
 
 }
 
 
-.hasil-box{
+body.tool-kaffarah-jima .hasil-box{
 
 margin-top:20px;
 
@@ -252,7 +252,7 @@ background:#0e2a4a;
 }
 
 
-.analisis-box{
+body.tool-kaffarah-jima .analisis-box{
 
 margin-top:25px;
 
@@ -270,7 +270,7 @@ border-left:4px solid #00d4ff;
 
 }
 
-.footer{
+body.tool-kaffarah-jima .footer{
 
 margin-top:60px;
 
@@ -289,7 +289,7 @@ border-top:1px solid rgba(255,255,255,0.08);
 }
 
 
-.footer-links{
+body.tool-kaffarah-jima .footer-links{
 
 display:flex;
 
@@ -302,7 +302,7 @@ margin-bottom:10px;
 }
 
 
-.footer-links a{
+body.tool-kaffarah-jima .footer-links a{
 
 color:#cfe7ff;
 
@@ -313,14 +313,14 @@ font-size:14px;
 }
 
 
-.footer-links a:hover{
+body.tool-kaffarah-jima .footer-links a:hover{
 
 color:#4facfe;
 
 }
 
 
-.footer p{
+body.tool-kaffarah-jima .footer p{
 
 font-size:13px;
 
@@ -328,16 +328,16 @@ color:#a9c7e8;
 
 }
 
-.btn-reset{
+body.tool-kaffarah-jima .btn-reset{
 background:#00cfe8;
 color:#002b33;
 }
 
-.btn-reset:hover{
+body.tool-kaffarah-jima .btn-reset:hover{
 background:#00b3c9;
 }
 
-.stats-container{
+body.tool-kaffarah-jima .stats-container{
 
 display:flex;
 
@@ -347,7 +347,7 @@ margin:20px 0;
 
 }
 
-.stat-card{
+body.tool-kaffarah-jima .stat-card{
 
 flex:1;
 
@@ -361,7 +361,7 @@ text-align:center;
 
 }
 
-.stat-card span{
+body.tool-kaffarah-jima .stat-card span{
 
 font-size:13px;
 
@@ -369,7 +369,7 @@ color:#9ecbff;
 
 }
 
-.stat-card h3{
+body.tool-kaffarah-jima .stat-card h3{
 
 font-size:24px;
 
@@ -377,14 +377,14 @@ margin-top:5px;
 
 }
 
-.harga-btn.active{
+body.tool-kaffarah-jima .harga-btn.active{
 background:#00e0ff;
 color:#001018;
 font-weight:600;
 box-shadow:0 0 10px rgba(0,224,255,.5);
 }
 
-.harga-btn{
+body.tool-kaffarah-jima .harga-btn{
 padding:8px 14px;
 border-radius:10px;
 background:#2a3c4f;
@@ -394,17 +394,17 @@ cursor:pointer;
 transition:.2s;
 }
 
-.harga-btn:hover{
+body.tool-kaffarah-jima .harga-btn:hover{
 background:#3c556f;
 }
 
-.harga-btn.active{
+body.tool-kaffarah-jima .harga-btn.active{
 background:#00e0ff;
 color:#001018;
 box-shadow:0 0 8px rgba(0,224,255,.6);
 }
 
-.action-buttons{
+body.tool-kaffarah-jima .action-buttons{
 display:flex;
 justify-content:center;
 gap:12px;
@@ -412,7 +412,7 @@ margin-top:25px;
 flex-wrap:wrap;
 }
 
-.action-buttons button{
+body.tool-kaffarah-jima .action-buttons button{
 padding:10px 16px;
 border-radius:10px;
 border:none;
@@ -421,27 +421,27 @@ cursor:pointer;
 transition:0.25s;
 }
 
-.btn-copy{
+body.tool-kaffarah-jima .btn-copy{
 background:#2a3c4f;
 color:#fff;
 }
 
-.btn-copy:hover{
+body.tool-kaffarah-jima .btn-copy:hover{
 background:#3e556f;
 }
 
-.btn-wa{
+body.tool-kaffarah-jima .btn-wa{
 background:#25D366;
 color:#fff;
 }
 
-.btn-wa:hover{
+body.tool-kaffarah-jima .btn-wa:hover{
 background:#1ebe5d;
 }
 
 @media (max-width:768px){
 
-.nav-container{
+body.tool-kaffarah-jima .nav-container{
 
 flex-direction:column;
 
@@ -453,7 +453,7 @@ text-align:center;
 
 }
 
-nav{
+body.tool-kaffarah-jima nav{
 
 display:flex;
 
@@ -467,7 +467,7 @@ margin-top:8px;
 
 }
 
-nav a{
+body.tool-kaffarah-jima nav a{
 
 font-size:14px;
 

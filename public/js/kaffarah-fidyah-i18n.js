@@ -1,35 +1,39 @@
 ﻿(() => {
-  const TARGET_PAGES = new Set([
-    "kaffarah.html",
-    "kaffarah-jima.html",
-    "kaffarah-sumpah.html",
-    "fidyah.html",
-    "qadha-puasa.html"
+  const TARGET_ROUTES = new Set([
+    "/kaffarah",
+    "/tool/kaffarah-jima",
+    "/tool/kaffarah-sumpah",
+    "/tool/fidyah",
+    "/tool/qadha-puasa"
   ]);
 
-  const rawPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
-  const page = rawPage.endsWith(".html") ? rawPage : (rawPage ? `${rawPage}.html` : rawPage);
-  if (!TARGET_PAGES.has(page)) return;
+  function getPathname() {
+    return (window.location.pathname || "").toLowerCase().replace(/\/+$/, "") || "/";
+  }
+
+  function isTargetRoute(path) {
+    return TARGET_ROUTES.has(path);
+  }
 
   const LANGS = ["id", "en", "ar"];
   const PAGE_TITLES = {
-    "kaffarah.html": {
+    "/kaffarah": {
       en: "Kaffarah & Fidyah | Islamic Literacy Portal",
       ar: "الكفارة والفدية | بوابة الثقافة الإسلامية"
     },
-    "kaffarah-jima.html": {
+    "/tool/kaffarah-jima": {
       en: "Kaffarah for Ramadan Intercourse | Islamic Literacy Portal",
       ar: "كفارة الجماع في رمضان | بوابة الثقافة الإسلامية"
     },
-    "kaffarah-sumpah.html": {
+    "/tool/kaffarah-sumpah": {
       en: "Kaffarah for Oath | Islamic Literacy Portal",
       ar: "كفارة اليمين | بوابة الثقافة الإسلامية"
     },
-    "fidyah.html": {
+    "/tool/fidyah": {
       en: "Fidyah Calculator | Islamic Literacy Portal",
       ar: "حاسبة الفدية | بوابة الثقافة الإسلامية"
     },
-    "qadha-puasa.html": {
+    "/tool/qadha-puasa": {
       en: "Qadha Fasting Calculator | Islamic Literacy Portal",
       ar: "حاسبة قضاء الصيام | بوابة الثقافة الإسلامية"
     }
@@ -213,10 +217,16 @@
       "Hari Qadha": "Qadha Days",
       "Estimasi selesai (hari)": "Estimated completion (days)",
       "Penjelasan Fiqh": "Fiqh Explanation",
-      "Qadha puasa wajib bagi orang yang meninggalkan puasa Ramadhan karena uzur syar'i seperti sakit atau safar.": "Qadha fasting is obligatory for those who miss Ramadan fast due to valid excuses like sickness or travel.",
+      "Qadha puasa wajib bagi orang yang meninggalkan puasa Ramadhan karena uzur syar'i seperti sakit atau safar.": "Making up (qadha) fasting is obligatory for those who miss Ramadan fasts due to a valid excuse such as illness or travel.",
+      "Jika seseorang tidak berpuasa karena uzur yang dibenarkan, maka ia mengganti (qadha) sejumlah hari yang ditinggalkan pada hari lain setelah Ramadhan.": "If someone does not fast due to a valid excuse, they must make up (qadha) the missed days on other days after Ramadan.",
+      "Qadha berbeda dengan fidyah. Qadha adalah mengganti puasa, sedangkan fidyah adalah memberi makan orang miskin. Dalam sebagian kasus, seseorang bisa wajib qadha saja, atau qadha dan fidyah (misalnya menunda qadha tanpa uzur hingga masuk Ramadhan berikutnya menurut sebagian pendapat dalam mazhab Syafi'i).": "Qadha is different from fidyah. Qadha is making up the fast, while fidyah is feeding the poor. In some cases, a person may be required to do qadha only, or both qadha and fidyah (for example, delaying qadha without a valid excuse until the next Ramadan according to some views in the Shafi'i school).",
+      "Disarankan untuk menyegerakan qadha sebelum datang Ramadhan berikutnya, agar lebih aman dari khilaf dan lebih menjaga kewajiban.": "It is recommended to complete qadha before the next Ramadan arrives, to be safer from differences of opinion and to better fulfill the obligation.",
+      "Niat qadha dilakukan di malam hari sebelum terbit fajar, sebagaimana puasa wajib pada umumnya.": "The intention (niyyah) for qadha should be made at night before dawn, as with obligatory fasting in general.",
       "Allah berfirman:": "Allah says:",
       "\"Barang siapa sakit atau dalam perjalanan, maka wajib mengganti pada hari yang lain.\"": "\"Whoever is sick or on a journey, then make it up on other days.\"",
       "(QS Al-Baqarah: 184)": "(Qur'an Al-Baqarah: 184)",
+      "(QS Al-Mujadilah: 4)": "(Qur'an Al-Mujadilah: 4)",
+      "(QS Al-Maidah: 89)": "(Qur'an Al-Ma'idah: 89)",
       "Website ini menyediakan kalkulator fiqh wanita,": "This website provides women's fiqh calculators,",
       "mawaris, dan berbagai alat bantu fiqh berbasis": "mawaris, and various fiqh tools based on",
       "mazhab Syafi'i.": "the Shafi'i school.",
@@ -403,9 +413,15 @@
       "Estimasi selesai (hari)": "المدة التقديرية للانتهاء (أيام)",
       "Penjelasan Fiqh": "الشرح الفقهي",
       "Qadha puasa wajib bagi orang yang meninggalkan puasa Ramadhan karena uzur syar'i seperti sakit atau safar.": "قضاء الصيام واجب لمن ترك صيام رمضان لعذر شرعي كالمرض أو السفر.",
+      "Jika seseorang tidak berpuasa karena uzur yang dibenarkan, maka ia mengganti (qadha) sejumlah hari yang ditinggalkan pada hari lain setelah Ramadhan.": "إذا أفطر الإنسان لعذرٍ معتبرٍ شرعاً فعليه أن يقضي عدد الأيام التي تركها في أيامٍ أخرى بعد رمضان.",
+      "Qadha berbeda dengan fidyah. Qadha adalah mengganti puasa, sedangkan fidyah adalah memberi makan orang miskin. Dalam sebagian kasus, seseorang bisa wajib qadha saja, atau qadha dan fidyah (misalnya menunda qadha tanpa uzur hingga masuk Ramadhan berikutnya menurut sebagian pendapat dalam mazhab Syafi'i).": "القضاء يختلف عن الفدية؛ فالقضاء هو صيام بدل الأيام الفائتة، وأما الفدية فهي إطعام المسكين. وفي بعض الحالات قد يجب القضاء فقط، أو القضاء مع الفدية (مثل تأخير القضاء بلا عذر حتى يدخل رمضان التالي عند بعض الأقوال في المذهب الشافعي).",
+      "Disarankan untuk menyegerakan qadha sebelum datang Ramadhan berikutnya, agar lebih aman dari khilaf dan lebih menjaga kewajiban.": "يستحب المبادرة بقضاء الصيام قبل دخول رمضان التالي خروجاً من الخلاف وحفظاً للواجب.",
+      "Niat qadha dilakukan di malam hari sebelum terbit fajar, sebagaimana puasa wajib pada umumnya.": "نية قضاء الصيام تكون ليلاً قبل طلوع الفجر كما هو الحال في الصيام الواجب عموماً.",
       "Allah berfirman:": "قال الله تعالى:",
       "\"Barang siapa sakit atau dalam perjalanan, maka wajib mengganti pada hari yang lain.\"": "\"فمن كان منكم مريضًا أو على سفر فعدة من أيام أخر\"",
       "(QS Al-Baqarah: 184)": "(سورة البقرة: 184)",
+      "(QS Al-Mujadilah: 4)": "(سورة المجادلة: 4)",
+      "(QS Al-Maidah: 89)": "(سورة المائدة: 89)",
       "Website ini menyediakan kalkulator fiqh wanita,": "يوفر هذا الموقع حاسبات فقه المرأة،",
       "mawaris, dan berbagai alat bantu fiqh berbasis": "والمواريث، وأدوات فقهية متنوعة مبنية على",
       "mazhab Syafi'i.": "المذهب الشافعي.",
@@ -444,32 +460,37 @@
     const style = document.createElement("style");
     style.id = "kaffarah-lang-style";
     style.textContent = `
-      .kfi-lang-switch {
+      body.kfi-scope .kfi-lang-switch {
         margin-left: auto;
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        font-size: 12px;
+        gap: 8px;
         margin-top: 2px;
         margin-bottom: 2px;
       }
-      .kfi-lang-switch select {
-        border: 1px solid rgba(255,255,255,.35);
-        background: rgba(255,255,255,.12);
+      body.kfi-scope .kfi-lang-switch button {
+        border: none;
+        background: rgba(255,255,255,.1);
         color: inherit;
         border-radius: 999px;
-        padding: 4px 10px;
+        padding: 6px 10px;
         font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
       }
-      body.rtl-ui .kfi-lang-switch {
+      body.kfi-scope .kfi-lang-switch button.active {
+        background: linear-gradient(135deg, #22d3ee, #3b82f6);
+        color: #081527;
+      }
+      body.kfi-scope.rtl-ui .kfi-lang-switch {
         margin-left: 0;
         margin-right: auto;
       }
-      .navbar {
+      body.kfi-scope .navbar {
         padding-top: 10px !important;
         padding-bottom: 10px !important;
       }
-      .navbar .nav-container {
+      body.kfi-scope .navbar .nav-container {
         width: 100%;
         box-sizing: border-box;
         padding-left: 18px !important;
@@ -478,36 +499,36 @@
         align-items: center;
         gap: 16px;
       }
-      .navbar .logo {
+      body.kfi-scope .navbar .logo {
         display: inline-flex;
         align-items: center;
         margin-right: 12px;
       }
-      body.rtl-ui .navbar .logo {
+      body.kfi-scope.rtl-ui .navbar .logo {
         margin-right: 0;
         margin-left: 12px;
       }
-      .navbar .nav-menu,
-      .navbar nav {
+      body.kfi-scope .navbar .nav-menu,
+      body.kfi-scope .navbar nav {
         display: flex;
         align-items: center;
         gap: 14px;
         flex-wrap: wrap;
       }
-      body.rtl-ui .nav-menu,
-      body.rtl-ui nav {
+      body.kfi-scope.rtl-ui .nav-menu,
+      body.kfi-scope.rtl-ui nav {
         direction: rtl;
       }
-      body.rtl-ui .nav-menu a,
-      body.rtl-ui nav a {
+      body.kfi-scope.rtl-ui .nav-menu a,
+      body.kfi-scope.rtl-ui nav a {
         margin-left: 0 !important;
         margin-right: 0 !important;
       }
-      body.rtl-ui .hasil-box,
-      body.rtl-ui .analisis-box,
-      body.rtl-ui .fiqh-box,
-      body.rtl-ui .info-box,
-      body.rtl-ui blockquote {
+      body.kfi-scope.rtl-ui .hasil-box,
+      body.kfi-scope.rtl-ui .analisis-box,
+      body.kfi-scope.rtl-ui .fiqh-box,
+      body.kfi-scope.rtl-ui .info-box,
+      body.kfi-scope.rtl-ui blockquote {
         text-align: right;
       }
     `;
@@ -539,23 +560,36 @@
       wrap.className = "kfi-lang-switch";
       wrap.innerHTML = `
         <label for="kfi-lang-select" id="kfi-lang-label"></label>
-        <select id="kfi-lang-select">
-          <option value="id">ID</option>
-          <option value="en">EN</option>
-          <option value="ar">AR</option>
-        </select>
+        <div id="kfi-lang-buttons" aria-label="Language">
+          <button type="button" data-lang="id">ID</button>
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="ar">AR</button>
+        </div>
       `;
       container.appendChild(wrap);
-      wrap.querySelector("#kfi-lang-select")?.addEventListener("change", (e) => {
-        localStorage.setItem("siteLang", e.target.value);
-        location.reload();
+      wrap.querySelectorAll("button[data-lang]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          try {
+            localStorage.setItem("siteLang", btn.getAttribute("data-lang") || "id");
+          } catch {}
+
+          try {
+            maybeApply();
+          } catch {}
+        });
       });
+    } else {
+      const existingParent = wrap.parentElement;
+      if (existingParent !== container) container.appendChild(wrap);
     }
 
     const label = wrap.querySelector("#kfi-lang-label");
     if (label) label.textContent = LABELS[lang] || LABELS.id;
-    const select = wrap.querySelector("#kfi-lang-select");
-    if (select) select.value = lang;
+
+    wrap.querySelectorAll("button[data-lang]").forEach((btn) => {
+      const btnLang = btn.getAttribute("data-lang") || "id";
+      btn.classList.toggle("active", btnLang === lang);
+    });
   }
 
   function replaceText(str, lang) {
@@ -672,12 +706,12 @@
     });
   }
 
-  function apply(lang) {
+  function apply(lang, path) {
     setDirection(lang);
     ensureStyle();
     ensureSwitcher(lang);
 
-    const nextTitle = PAGE_TITLES[page]?.[lang];
+    const nextTitle = PAGE_TITLES[path]?.[lang];
     if (nextTitle && lang !== "id") {
       document.title = nextTitle;
     }
@@ -691,5 +725,58 @@
     patchShareFunctions(lang);
   }
 
-  document.addEventListener("DOMContentLoaded", () => apply(getLang()));
+  function maybeApply() {
+    const path = getPathname();
+    if (!isTargetRoute(path)) return;
+    apply(getLang(), path);
+  }
+
+  window.__kfiMaybeApply = maybeApply;
+
+  function installRouteListener() {
+    if (window.__kfiRouteListenerInstalled) return;
+    window.__kfiRouteListenerInstalled = true;
+
+    const fire = () => {
+      const run = () => {
+        try {
+          maybeApply();
+        } catch {}
+      };
+
+      try {
+        requestAnimationFrame(() => requestAnimationFrame(run));
+      } catch {
+        run();
+      }
+
+      setTimeout(run, 50);
+      setTimeout(run, 250);
+      setTimeout(run, 600);
+    };
+
+    window.addEventListener("popstate", fire);
+
+    const origPushState = history.pushState;
+    history.pushState = function (...args) {
+      const ret = origPushState.apply(this, args);
+      fire();
+      return ret;
+    };
+
+    const origReplaceState = history.replaceState;
+    history.replaceState = function (...args) {
+      const ret = origReplaceState.apply(this, args);
+      fire();
+      return ret;
+    };
+  }
+
+  installRouteListener();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => maybeApply());
+  } else {
+    maybeApply();
+  }
 })();

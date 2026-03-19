@@ -1,4 +1,7 @@
+import Link from "next/link";
 import Script from "next/script";
+
+import KfiScope from "@/components/kaffarah/KfiScope";
 
 export const metadata = {
   title: "Kaffarah & Fidyah",
@@ -7,39 +10,40 @@ export const metadata = {
 export default function KaffarahPage() {
   return (
     <>
+      <KfiScope />
       <link rel="stylesheet" href="/css/kaffarah.css" />
 
       <nav className="navbar">
         <div className="nav-container">
-          <a href="index.html" className="logo">
+          <Link href="/" className="logo">
             Portal Literasi Islam
-          </a>
+          </Link>
 
           <ul className="nav-menu">
             <li>
-              <a href="index.html">Beranda</a>
+              <Link href="/">Beranda</Link>
             </li>
 
             <li>
-              <a href="tools/mawaris.html">Hitung Mawaris</a>
+              <Link href="/tools/mawaris">Hitung Mawaris</Link>
             </li>
 
             <li>
-              <a href="haid.html">Kalkulator Haid</a>
+              <Link href="/haid">Kalkulator Haid</Link>
             </li>
 
             <li>
-              <a href="nifas.html">Kalkulator Nifas</a>
+              <Link href="/nifas">Kalkulator Nifas</Link>
             </li>
 
             <li>
-              <a href="suci.html">Masa Suci</a>
+              <Link href="/suci">Masa Suci</Link>
             </li>
 
             <li>
-              <a href="tools/kaffarah.html" className="active">
+              <Link href="/kaffarah" className="active">
                 Kaffarah &amp; Fidyah
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -54,22 +58,22 @@ export default function KaffarahPage() {
         </p>
 
         <div className="tool-grid">
-          <a href="tool/kaffarah-jima.html" className="tool-card">
+          <Link href="/tool/kaffarah-jima" className="tool-card">
             <h3>⚖️ Kaffarah Jima Ramadhan</h3>
             <p>Pelanggaran hubungan suami istri di siang Ramadan</p>
-          </a>
+          </Link>
 
-          <a href="tool/kaffarah-sumpah.html" className="tool-card">
+          <Link href="/tool/kaffarah-sumpah" className="tool-card">
             <h3>📜 Kaffarah Sumpah</h3>
             <p>Kaffarah bagi orang yang melanggar sumpah</p>
-          </a>
+          </Link>
 
-          <a href="tool/fidyah.html" className="tool-card">
+          <Link href="/tool/fidyah" className="tool-card">
             <h3>🍽️ Fidyah Puasa</h3>
             <p>Hitung fidyah bagi orang yang tidak mampu puasa</p>
-          </a>
+          </Link>
 
-          <a href="tool/qadha-puasa.html" className="tool-card">
+          <Link href="/tool/qadha-puasa" className="tool-card">
             <div className="tool-card-head">
               <span className="icon" aria-hidden="true">
                 🗓️
@@ -78,7 +82,7 @@ export default function KaffarahPage() {
             </div>
 
             <p>Hitung jumlah hari puasa Ramadhan yang harus diganti.</p>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -91,24 +95,24 @@ export default function KaffarahPage() {
         </p>
 
         <div className="pre-footer-buttons">
-          <a href="zakat.html">Kalkulator Zakat</a>
+          <Link href="/zakat">Kalkulator Zakat</Link>
 
-          <a href="tools/mawaris.html">Kalkulator Mawaris</a>
+          <Link href="/tools/mawaris">Kalkulator Mawaris</Link>
 
-          <a href="haid.html">Fiqh Wanita</a>
+          <Link href="/haid">Fiqh Wanita</Link>
         </div>
       </section>
 
       <footer className="footer">
         <div className="footer-bottom">
           <div className="footer-links">
-            <a href="faq.html">FAQ</a>
-            <a href="kontak.html">Kontak</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="disclaimer.html">Disclaimer</a>
+            <Link href="/faq">FAQ</Link>
+            <Link href="/kontak">Kontak</Link>
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/disclaimer">Disclaimer</Link>
           </div>
 
-          <p>© 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.</p>
+          <p> 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.</p>
         </div>
       </footer>
 
