@@ -713,7 +713,7 @@
     window.__kfiObserver = observer;
   }
 
-  function patchShareFunctions(lang) {
+  function patchShareFunctions() {
     ["shareWhatsApp", "shareWA", "shareWhatsapp"].forEach((fnName) => {
       const fn = window[fnName];
       if (typeof fn !== "function" || fn.__kfiWrapped) return;
@@ -728,7 +728,7 @@
                 const prefix = url.slice(0, idx + 5);
                 const encoded = url.slice(idx + 5);
                 const decoded = decodeURIComponent(encoded);
-                const translated = replaceText(decoded, lang);
+                const translated = replaceText(decoded, getLang());
                 url = prefix + encodeURIComponent(translated);
               }
             }
@@ -753,34 +753,39 @@
     ensureStyle();
     ensureSwitcher(lang);
 
-    const nextTitle = PAGE_TITLES[path]?.[lang];
-    if (nextTitle && lang !== "id") {
-      document.title = nextTitle;
+    if (!window.__kfiOriginalTitle) {
+      window.__kfiOriginalTitle = document.title;
     }
 
+    try {
+      if (window.__kfiObserver) window.__kfiObserver.disconnect();
+    } catch {}
+    window.__kfiObserver = null;
+
+    try {
+      restoreAlert();
+    } catch {}
+
+    try {
+      restoreTextNodes(document.body);
+      restorePlaceholders(document.body);
+    } catch {}
+
+    const nextTitle = PAGE_TITLES[path]?.[lang];
     if (lang === "id") {
-      try {
-        if (window.__kfiObserver) window.__kfiObserver.disconnect();
-      } catch {}
-      window.__kfiObserver = null;
-
-      try {
-        restoreAlert();
-      } catch {}
-
-      try {
-        restoreTextNodes(document.body);
-        restorePlaceholders(document.body);
-      } catch {}
-
+      document.title = window.__kfiOriginalTitle || document.title;
       return;
+    }
+
+    if (nextTitle) {
+      document.title = nextTitle;
     }
 
     translateTextNodes(document.body, lang);
     translatePlaceholders(document.body, lang);
     installAlertTranslator(lang);
     installObserver(lang);
-    patchShareFunctions(lang);
+    patchShareFunctions();
   }
 
   function maybeApply() {
