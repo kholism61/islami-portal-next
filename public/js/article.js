@@ -2596,7 +2596,11 @@ if (categoryGrid) {
     const mainTitle = document.getElementById("main-title");
     if (mainTitle) mainTitle.textContent = uiText("title_default");
 
-    renderArticlesByCategory(filter);
+    applyArticleFilter(filter, card);
+
+    document
+      .getElementById("articles-container")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
