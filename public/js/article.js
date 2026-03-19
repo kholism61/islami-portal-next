@@ -3851,11 +3851,44 @@ function initDownloadCategoryButtonWithRetry(attemptsLeft = 80) {
     const offline = safeJsonParse("offlineArticles", {});
     if (progressBox) progressBox.style.display = "flex";
 
+    let targetPercent = 0;
+    let visualPercent = 0;
+    let completed = false;
+    let rafId = 0;
+
+    function paintProgress(value) {
+      if (progressFill) progressFill.style.width = value + "%";
+      if (progressText) progressText.textContent = Math.round(value) + "%";
+    }
+
+    function animateProgress() {
+      const delta = targetPercent - visualPercent;
+      if (Math.abs(delta) < 0.2) {
+        visualPercent = targetPercent;
+      } else {
+        visualPercent += delta * 0.22;
+      }
+
+      paintProgress(visualPercent);
+
+      if (!completed || visualPercent < 100) {
+        rafId = window.requestAnimationFrame(animateProgress);
+      }
+    }
+
     if (total === 0) {
-      if (progressFill) progressFill.style.width = "0%";
-      if (progressText) progressText.textContent = "0%";
+      targetPercent = 0;
+      visualPercent = 0;
+      paintProgress(0);
       return;
     }
+
+    if (rafId) window.cancelAnimationFrame(rafId);
+    targetPercent = 0;
+    visualPercent = 0;
+    completed = false;
+    paintProgress(0);
+    rafId = window.requestAnimationFrame(animateProgress);
 
     const chunkSize = 40;
     function pump(startIndex) {
@@ -3868,15 +3901,16 @@ function initDownloadCategoryButtonWithRetry(attemptsLeft = 80) {
         done++;
       }
 
-      const percent = Math.round((done / total) * 100);
-      if (progressFill) progressFill.style.width = percent + "%";
-      if (progressText) progressText.textContent = percent + "%";
+      targetPercent = Math.round((done / total) * 100);
 
       if (done >= total) {
         localStorage.setItem(
           "offlineArticles",
           JSON.stringify(offline)
         );
+
+        completed = true;
+        targetPercent = 100;
 
         downloadBtn.classList.add("downloaded");
         downloadBtn.textContent = uiText("download_done");
