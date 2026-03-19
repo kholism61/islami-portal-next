@@ -1,53 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import Script from "next/script";
+
+import KfiScope from "@/components/kaffarah/KfiScope";
 
 import "./kaffarah-sumpah.css";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function KalkulatorKaffarahSumpahPage() {
   const [jumlah, setJumlah] = useState<number>(0);
   const [harga, setHarga] = useState<number>(0);
-
-  useEffect(() => {
-    document.body.classList.add("tool-kaffarah-sumpah");
-    document.body.classList.add("kfi-scope");
-    const ensureI18n = () => {
-      if ((window as any).__kfiMaybeApply) return;
-      if (document.getElementById("kfi-i18n-script")) return;
-      const script = document.createElement("script");
-      script.id = "kfi-i18n-script";
-      script.src = "/js/kaffarah-fidyah-i18n.js";
-      script.async = true;
-      script.onload = () => (window as any).__kfiMaybeApply?.();
-      document.body.appendChild(script);
-    };
-
-    ensureI18n();
-    (window as any).__kfiMaybeApply?.();
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 0);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 100);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 500);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 1200);
-    return () => {
-      document.body.classList.remove("tool-kaffarah-sumpah");
-      document.body.classList.remove("kfi-scope");
-    };
-  }, []);
 
   const computed = useMemo(() => {
     if (!jumlah || jumlah <= 0) {
@@ -141,9 +104,23 @@ Dalil:
 
   return (
     <>
+      <KfiScope bodyClass="tool-kaffarah-sumpah" />
+      <link rel="preload" as="style" href="/css/kaffarah-shared.css" />
+      <link rel="stylesheet" href="/css/kaffarah-shared.css" />
       <header className="navbar">
         <div className="nav-container">
-          <div className="logo">Portal Literasi Islam</div>
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <img
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                loading="eager"
+                decoding="async"
+              />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
+          </Link>
 
           <nav>
             <Link href="/">Beranda</Link>
@@ -313,12 +290,8 @@ Dalil:
           </div>
         </div>
 
-        <div className="footer-bottom"> 2026 Portal Literasi Islam</div>
+        <div className="footer-bottom">&copy; 2026 Portal Literasi Islam</div>
       </footer>
-
-      <Script src="/js/kaffarah-fidyah-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }

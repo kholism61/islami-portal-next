@@ -1,54 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import Script from "next/script";
+
+import KfiScope from "@/components/kaffarah/KfiScope";
 
 import "./fidyah.css";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function KalkulatorFidyahPage() {
   const [hari, setHari] = useState<number>(0);
   const [harga, setHarga] = useState<number>(0);
   const [metode, setMetode] = useState<"uang" | "beras">("uang");
-
-  useEffect(() => {
-    document.body.classList.add("tool-fidyah");
-    document.body.classList.add("kfi-scope");
-    const ensureI18n = () => {
-      if ((window as any).__kfiMaybeApply) return;
-      if (document.getElementById("kfi-i18n-script")) return;
-      const script = document.createElement("script");
-      script.id = "kfi-i18n-script";
-      script.src = "/js/kaffarah-fidyah-i18n.js";
-      script.async = true;
-      script.onload = () => (window as any).__kfiMaybeApply?.();
-      document.body.appendChild(script);
-    };
-
-    ensureI18n();
-    (window as any).__kfiMaybeApply?.();
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 0);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 100);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 500);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 1200);
-    return () => {
-      document.body.classList.remove("tool-fidyah");
-      document.body.classList.remove("kfi-scope");
-    };
-  }, []);
 
   const computed = useMemo(() => {
     if (!hari || hari <= 0) {
@@ -140,10 +103,22 @@ ${formatRupiah(total)}.
 
   return (
     <>
+      <KfiScope bodyClass="tool-fidyah" />
+      <link rel="preload" as="style" href="/css/kaffarah-shared.css" />
+      <link rel="stylesheet" href="/css/kaffarah-shared.css" />
       <nav className="navbar">
         <div className="nav-container">
-          <Link href="/" className="logo">
-            Portal Literasi Islam
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <img
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                loading="eager"
+                decoding="async"
+              />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
           </Link>
 
           <ul className="nav-menu">
@@ -164,7 +139,7 @@ ${formatRupiah(total)}.
 
       <section className="hero-fidyah">
         <div className="hero-content">
-          <h1>🔴 Kalkulator Fidyah Puasa</h1>
+          <h1>Kalkulator Fidyah Puasa</h1>
 
           <p>
             Hitung kewajiban fidyah secara praktis sesuai fiqh. Masukkan jumlah
@@ -315,12 +290,8 @@ ${formatRupiah(total)}.
           <Link href="/disclaimer">Disclaimer</Link>
         </div>
 
-        <p> 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.</p>
+        <p>&copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.</p>
       </footer>
-
-      <Script src="/js/kaffarah-fidyah-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }

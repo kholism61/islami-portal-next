@@ -468,18 +468,23 @@
         margin-top: 2px;
         margin-bottom: 2px;
       }
-      body.kfi-scope .kfi-lang-switch button {
-        border: none;
-        background: rgba(255,255,255,.1);
+      body.kfi-scope .kfi-lang-switch label {
+        font-size: 12px;
+        font-weight: 700;
+        opacity: .85;
+      }
+      body.kfi-scope .kfi-lang-switch select {
+        border: 1px solid rgba(255,255,255,.18);
+        background: rgba(255,255,255,.08);
         color: inherit;
-        border-radius: 999px;
+        border-radius: 10px;
         padding: 6px 10px;
         font-size: 12px;
         font-weight: 700;
+        outline: none;
         cursor: pointer;
       }
-      body.kfi-scope .kfi-lang-switch button.active {
-        background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      body.kfi-scope .kfi-lang-switch select option {
         color: #081527;
       }
       body.kfi-scope.rtl-ui .kfi-lang-switch {
@@ -560,24 +565,27 @@
       wrap.className = "kfi-lang-switch";
       wrap.innerHTML = `
         <label for="kfi-lang-select" id="kfi-lang-label"></label>
-        <div id="kfi-lang-buttons" aria-label="Language">
-          <button type="button" data-lang="id">ID</button>
-          <button type="button" data-lang="en">EN</button>
-          <button type="button" data-lang="ar">AR</button>
-        </div>
+        <select id="kfi-lang-select" aria-label="Language">
+          <option value="id">ID</option>
+          <option value="en">EN</option>
+          <option value="ar">AR</option>
+        </select>
       `;
       container.appendChild(wrap);
-      wrap.querySelectorAll("button[data-lang]").forEach((btn) => {
-        btn.addEventListener("click", () => {
+
+      const select = wrap.querySelector("#kfi-lang-select");
+      if (select) {
+        select.addEventListener("change", (e) => {
+          const next = e?.target?.value || "id";
           try {
-            localStorage.setItem("siteLang", btn.getAttribute("data-lang") || "id");
+            localStorage.setItem("siteLang", String(next));
           } catch {}
 
           try {
             maybeApply();
           } catch {}
         });
-      });
+      }
     } else {
       const existingParent = wrap.parentElement;
       if (existingParent !== container) container.appendChild(wrap);
@@ -586,10 +594,8 @@
     const label = wrap.querySelector("#kfi-lang-label");
     if (label) label.textContent = LABELS[lang] || LABELS.id;
 
-    wrap.querySelectorAll("button[data-lang]").forEach((btn) => {
-      const btnLang = btn.getAttribute("data-lang") || "id";
-      btn.classList.toggle("active", btnLang === lang);
-    });
+    const select = wrap.querySelector("#kfi-lang-select");
+    if (select) select.value = lang;
   }
 
   function replaceText(str, lang) {
@@ -609,8 +615,20 @@
     root.querySelectorAll("[placeholder]").forEach((el) => {
       const before = el.getAttribute("placeholder");
       if (!before) return;
+
+      if (!el.hasAttribute("data-kfi-orig-placeholder")) {
+        el.setAttribute("data-kfi-orig-placeholder", before);
+      }
+
       const after = replaceText(before, lang);
       if (after !== before) el.setAttribute("placeholder", after);
+    });
+  }
+
+  function restorePlaceholders(root) {
+    root.querySelectorAll("[data-kfi-orig-placeholder]").forEach((el) => {
+      const orig = el.getAttribute("data-kfi-orig-placeholder");
+      if (orig != null) el.setAttribute("placeholder", orig);
     });
   }
 
@@ -624,7 +642,22 @@
       if (parent === "SCRIPT" || parent === "STYLE" || parent === "NOSCRIPT") return;
       const before = node.textContent;
       const after = replaceText(before, lang);
-      if (after !== before) node.textContent = after;
+      if (after !== before) {
+        if (node.__kfiOrigText == null) node.__kfiOrigText = before;
+        node.textContent = after;
+      }
+    });
+  }
+
+  function restoreTextNodes(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach((node) => {
+      const parent = node.parentElement?.tagName;
+      if (parent === "SCRIPT" || parent === "STYLE" || parent === "NOSCRIPT") return;
+      if (node.__kfiOrigText != null) node.textContent = node.__kfiOrigText;
     });
   }
 
@@ -633,6 +666,12 @@
       window.__kfiAlertOriginal = window.alert.bind(window);
     }
     window.alert = (msg) => window.__kfiAlertOriginal(replaceText(String(msg ?? ""), lang));
+  }
+
+  function restoreAlert() {
+    if (window.__kfiAlertOriginal) {
+      window.alert = window.__kfiAlertOriginal;
+    }
   }
 
   function installObserver(lang) {
@@ -651,7 +690,10 @@
           } else if (node.nodeType === Node.TEXT_NODE) {
             const before = node.textContent || "";
             const after = replaceText(before, lang);
-            if (after !== before) node.textContent = after;
+            if (after !== before) {
+              if (node.__kfiOrigText == null) node.__kfiOrigText = before;
+              node.textContent = after;
+            }
           }
         });
 
@@ -716,7 +758,23 @@
       document.title = nextTitle;
     }
 
-    if (lang === "id") return;
+    if (lang === "id") {
+      try {
+        if (window.__kfiObserver) window.__kfiObserver.disconnect();
+      } catch {}
+      window.__kfiObserver = null;
+
+      try {
+        restoreAlert();
+      } catch {}
+
+      try {
+        restoreTextNodes(document.body);
+        restorePlaceholders(document.body);
+      } catch {}
+
+      return;
+    }
 
     translateTextNodes(document.body, lang);
     translatePlaceholders(document.body, lang);
@@ -744,18 +802,18 @@
         } catch {}
       };
 
+      run();
+      setTimeout(run, 0);
+      setTimeout(run, 60);
+      setTimeout(run, 180);
+
       try {
         requestAnimationFrame(() => requestAnimationFrame(run));
-      } catch {
-        run();
-      }
-
-      setTimeout(run, 50);
-      setTimeout(run, 250);
-      setTimeout(run, 600);
+      } catch {}
     };
 
     window.addEventListener("popstate", fire);
+    window.addEventListener("kfi:route-ready", fire);
 
     const origPushState = history.pushState;
     history.pushState = function (...args) {

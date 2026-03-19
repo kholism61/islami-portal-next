@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Script from "next/script";
 
 import KfiScope from "@/components/kaffarah/KfiScope";
 
@@ -11,12 +10,24 @@ export default function KaffarahPage() {
   return (
     <>
       <KfiScope />
+      <link rel="preload" as="style" href="/css/kaffarah.css" />
       <link rel="stylesheet" href="/css/kaffarah.css" />
+      <link rel="preload" as="style" href="/css/kaffarah-shared.css" />
+      <link rel="stylesheet" href="/css/kaffarah-shared.css" />
 
       <nav className="navbar">
         <div className="nav-container">
-          <Link href="/" className="logo">
-            Portal Literasi Islam
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <img
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                loading="eager"
+                decoding="async"
+              />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
           </Link>
 
           <ul className="nav-menu">
@@ -50,7 +61,7 @@ export default function KaffarahPage() {
       </nav>
 
       <div className="container">
-        <h1 className="title">🧾 Kaffarah &amp; Fidyah</h1>
+        <h1 className="title">Kaffarah &amp; Fidyah</h1>
 
         <p className="desc">
           Gunakan kalkulator ini untuk menghitung kewajiban kaffarah dan fidyah
@@ -59,25 +70,23 @@ export default function KaffarahPage() {
 
         <div className="tool-grid">
           <Link href="/tool/kaffarah-jima" className="tool-card">
-            <h3>⚖️ Kaffarah Jima Ramadhan</h3>
+            <h3>Kaffarah Jima Ramadhan</h3>
             <p>Pelanggaran hubungan suami istri di siang Ramadan</p>
           </Link>
 
           <Link href="/tool/kaffarah-sumpah" className="tool-card">
-            <h3>📜 Kaffarah Sumpah</h3>
+            <h3>Kaffarah Sumpah</h3>
             <p>Kaffarah bagi orang yang melanggar sumpah</p>
           </Link>
 
           <Link href="/tool/fidyah" className="tool-card">
-            <h3>🍽️ Fidyah Puasa</h3>
+            <h3>Fidyah Puasa</h3>
             <p>Hitung fidyah bagi orang yang tidak mampu puasa</p>
           </Link>
 
           <Link href="/tool/qadha-puasa" className="tool-card">
             <div className="tool-card-head">
-              <span className="icon" aria-hidden="true">
-                🗓️
-              </span>
+              <span className="icon" aria-hidden="true">Q</span>
               <h3>Qadha Puasa</h3>
             </div>
 
@@ -112,13 +121,9 @@ export default function KaffarahPage() {
             <Link href="/disclaimer">Disclaimer</Link>
           </div>
 
-          <p> 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.</p>
+          <p>&copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.</p>
         </div>
       </footer>
-
-      <Script src="/js/kaffarah-fidyah-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }

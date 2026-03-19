@@ -1,54 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import Script from "next/script";
+
+import KfiScope from "@/components/kaffarah/KfiScope";
 
 import "./kaffarah-jima.css";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function KalkulatorKaffarahJimaPage() {
   const [jumlah, setJumlah] = useState<number>(0);
   const [harga, setHarga] = useState<number>(0);
-
-  useEffect(() => {
-    document.body.classList.add("tool-kaffarah-jima");
-    document.body.classList.add("kfi-scope");
-
-    const ensureI18n = () => {
-      if ((window as any).__kfiMaybeApply) return;
-      if (document.getElementById("kfi-i18n-script")) return;
-      const script = document.createElement("script");
-      script.id = "kfi-i18n-script";
-      script.src = "/js/kaffarah-fidyah-i18n.js";
-      script.async = true;
-      script.onload = () => (window as any).__kfiMaybeApply?.();
-      document.body.appendChild(script);
-    };
-
-    ensureI18n();
-    (window as any).__kfiMaybeApply?.();
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 0);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 100);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 500);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 1200);
-    return () => {
-      document.body.classList.remove("tool-kaffarah-jima");
-      document.body.classList.remove("kfi-scope");
-    };
-  }, []);
 
   const computed = useMemo(() => {
     if (!jumlah || jumlah <= 0) {
@@ -173,10 +135,22 @@ memiliki kaffarah tersendiri.
 
   return (
     <>
+      <KfiScope bodyClass="tool-kaffarah-jima" />
+      <link rel="preload" as="style" href="/css/kaffarah-shared.css" />
+      <link rel="stylesheet" href="/css/kaffarah-shared.css" />
       <nav className="navbar">
         <div className="nav-container">
-          <Link href="/" className="logo">
-            Portal Literasi Islam
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <img
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                loading="eager"
+                decoding="async"
+              />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
           </Link>
 
           <ul className="nav-menu">
@@ -197,7 +171,7 @@ memiliki kaffarah tersendiri.
       </nav>
 
       <section className="hero">
-        <h1>🔥 Kaffarah Jima Ramadhan</h1>
+        <h1>Kaffarah Jima Ramadhan</h1>
 
         <p>
           Simulasi kewajiban kaffarah bagi orang yang melakukan hubungan suami
@@ -261,14 +235,9 @@ memiliki kaffarah tersendiri.
             Hitung Kaffarah
           </button>
 
-          <div className="stat-box">
-            <p>
-              Total Pelanggaran <strong id="totalPelanggaran">{jumlah}</strong>
-            </p>
-            <p>
-              Total Orang Miskin <strong id="totalMiskin">{computed.orangMiskin}</strong>
-            </p>
-          </div>
+          <h3 className="summary-title">
+            Total Orang Miskin <span id="totalMiskin">{computed.orangMiskin}</span>
+          </h3>
 
           <div className="stats-container">
             <div className="stat-card">
@@ -283,14 +252,14 @@ memiliki kaffarah tersendiri.
           </div>
 
           <div id="hasilKaffarah" className="hasil-box">
-            {computed.hasil}
+            <pre className="pre-text">{computed.hasil}</pre>
           </div>
 
           <div className="analisis-box">
             <h3>Analisis Fiqh</h3>
 
             <div id="analisisKaffarah">
-              {computed.analisis}
+              <pre className="pre-text">{computed.analisis}</pre>
             </div>
           </div>
         </div>
@@ -319,12 +288,8 @@ memiliki kaffarah tersendiri.
           <Link href="/disclaimer">Disclaimer</Link>
         </div>
 
-        <p> 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.</p>
+        <p>&copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.</p>
       </footer>
-
-      <Script src="/js/kaffarah-fidyah-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }

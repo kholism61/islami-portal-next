@@ -1,52 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import Script from "next/script";
+
+import KfiScope from "@/components/kaffarah/KfiScope";
 
 import "./qadha-puasa.css";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function KalkulatorQadhaPuasaPage() {
   const [hari, setHari] = useState<number>(0);
-
-  useEffect(() => {
-    document.body.classList.add("tool-qadha-puasa");
-    document.body.classList.add("kfi-scope");
-    const ensureI18n = () => {
-      if ((window as any).__kfiMaybeApply) return;
-      if (document.getElementById("kfi-i18n-script")) return;
-      const script = document.createElement("script");
-      script.id = "kfi-i18n-script";
-      script.src = "/js/kaffarah-fidyah-i18n.js";
-      script.async = true;
-      script.onload = () => (window as any).__kfiMaybeApply?.();
-      document.body.appendChild(script);
-    };
-
-    ensureI18n();
-    (window as any).__kfiMaybeApply?.();
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 0);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 100);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 500);
-    setTimeout(() => {
-      ensureI18n();
-      (window as any).__kfiMaybeApply?.();
-    }, 1200);
-    return () => {
-      document.body.classList.remove("tool-qadha-puasa");
-      document.body.classList.remove("kfi-scope");
-    };
-  }, []);
 
   const computed = useMemo(() => {
     const safeHari = Number.isFinite(hari) ? hari : 0;
@@ -89,10 +52,22 @@ export default function KalkulatorQadhaPuasaPage() {
 
   return (
     <>
+      <KfiScope bodyClass="tool-qadha-puasa" />
+      <link rel="preload" as="style" href="/css/kaffarah-shared.css" />
+      <link rel="stylesheet" href="/css/kaffarah-shared.css" />
       <nav className="navbar">
         <div className="nav-container">
-          <Link href="/" className="logo">
-            Portal Literasi Islam
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <img
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                loading="eager"
+                decoding="async"
+              />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
           </Link>
 
           <ul className="nav-menu">
@@ -125,7 +100,7 @@ export default function KalkulatorQadhaPuasaPage() {
 
       <section className="hero">
         <div className="hero-content">
-          <h1>📅 Kalkulator Qadha Puasa</h1>
+          <h1>Kalkulator Qadha Puasa</h1>
 
           <p>
             Hitung jumlah hari puasa Ramadhan yang harus diganti (qadha) dengan
@@ -188,48 +163,60 @@ export default function KalkulatorQadhaPuasaPage() {
             </div>
           </div>
 
-          <div className="info-box">
-            <h3>Penjelasan Fiqh</h3>
+          <section className="guide-section">
+            <div className="guide-header">
+              <span className="guide-badge">PANDUAN PRAKTIS</span>
 
-            <p>
-              Qadha puasa wajib bagi orang yang meninggalkan puasa Ramadhan
-              karena uzur syar'i seperti sakit atau safar.
-            </p>
+              <h3>Panduan Singkat Qadha Puasa</h3>
 
-            <p>
-              Jika seseorang tidak berpuasa karena uzur yang dibenarkan, maka ia
-              mengganti (qadha) sejumlah hari yang ditinggalkan pada hari lain
-              setelah Ramadhan.
-            </p>
+              <p>
+                Penjelasan ini membantu memahami kapan qadha dilakukan, kapan
+                sebaiknya segera ditunaikan, dan hal penting yang perlu
+                diperhatikan.
+              </p>
+            </div>
 
-            <p>
-              Qadha berbeda dengan fidyah. Qadha adalah mengganti puasa, sedangkan
-              fidyah adalah memberi makan orang miskin. Dalam sebagian kasus,
-              seseorang bisa wajib qadha saja, atau qadha dan fidyah (misalnya
-              menunda qadha tanpa uzur hingga masuk Ramadhan berikutnya menurut
-              sebagian pendapat dalam mazhab Syafi'i).
-            </p>
+            <div className="guide-grid">
+              <div className="guide-card">
+                <h4>Kapan wajib qadha?</h4>
+                <p>
+                  Qadha diwajibkan bagi muslim yang meninggalkan puasa Ramadhan
+                  karena uzur seperti sakit, safar, haid, nifas, atau sebab syar'i
+                  lain yang mewajibkan pengganti di hari berbeda.
+                </p>
+              </div>
 
-            <p>
-              Disarankan untuk menyegerakan qadha sebelum datang Ramadhan
-              berikutnya, agar lebih aman dari khilaf dan lebih menjaga kewajiban.
-            </p>
+              <div className="guide-card">
+                <h4>Kapan sebaiknya ditunaikan?</h4>
+                <p>
+                  Qadha sebaiknya segera ditunaikan setelah uzur selesai agar
+                  tanggungan ibadah cepat lunas dan tidak menumpuk sampai Ramadhan
+                  berikutnya.
+                </p>
+              </div>
 
-            <p>
-              Niat qadha dilakukan di malam hari sebelum terbit fajar, sebagaimana
-              puasa wajib pada umumnya.
-            </p>
+              <div className="guide-card">
+                <h4>Catatan penting</h4>
+                <p>
+                  Bila qadha ditunda tanpa uzur hingga masuk Ramadhan berikutnya,
+                  sebagian ulama mewajibkan qadha disertai fidyah. Untuk kasus
+                  khusus, tetap rujuk kepada ustaz atau guru fiqh terpercaya.
+                </p>
+              </div>
+            </div>
 
-            <p>Allah berfirman:</p>
+            <div className="guide-footer">
+              <p>Allah berfirman:</p>
 
-            <blockquote>
-              &quot;Barang siapa sakit atau dalam perjalanan, maka wajib
-              mengganti pada hari yang lain.&quot;
-              <br />
-              <br />
-              (QS Al-Baqarah: 184)
-            </blockquote>
-          </div>
+              <blockquote>
+                &quot;Barang siapa sakit atau dalam perjalanan, maka wajib mengganti
+                pada hari yang lain.&quot;
+                <br />
+                <br />
+                (QS Al-Baqarah: 184)
+              </blockquote>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -278,13 +265,9 @@ export default function KalkulatorQadhaPuasaPage() {
         </div>
 
         <div className="footer-bottom">
-          <p> 2026 Portal Literasi Islam — Seluruh hak cipta dilindungi.</p>
+          <p>&copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.</p>
         </div>
       </footer>
-
-      <Script src="/js/kaffarah-fidyah-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }
