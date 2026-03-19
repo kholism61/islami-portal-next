@@ -1,25 +1,38 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import Script from "next/script";
 
-export const metadata = {
+import "../fiqh-pages.css";
+
+export const metadata: Metadata = {
   title: "Metodologi Perhitungan Mawaris",
 };
 
 export default function MetodologiPage() {
   return (
-    <>
-      <link rel="stylesheet" href="/css/metodologi.css" />
-
+    <div className="fiqh-page">
       <nav className="top-nav">
         <div className="nav-container">
-          <div className="logo">
-            <a href="index.html">Portal Literasi Islam</a>
-          </div>
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <Image
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                width={26}
+                height={26}
+                loading="eager"
+              />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
+          </Link>
 
           <div className="nav-links">
-            <a href="index.html">Beranda</a>
-            <a href="tools/mawaris.html">Hitung Mawaris</a>
-            <a href="tabel-fiqh.html">Tabel Fiqh</a>
-            <a href="metodologi.html">Metodologi</a>
+            <Link href="/">Beranda</Link>
+            <Link href="/tools/mawaris">Hitung Mawaris</Link>
+            <Link href="/tabel-fiqh">Tabel Fiqh</Link>
+            <Link href="/metodologi">Metodologi</Link>
           </div>
         </div>
       </nav>
@@ -35,7 +48,7 @@ export default function MetodologiPage() {
         <h3>1. Landasan Mazhab</h3>
         <p>
           Perhitungan dalam sistem ini menggunakan pendekatan Jumhur serta
-          beberapa Mazhab(Syafi’i dan Hanafi). Rujukan utama berasal dari:
+          beberapa mazhab (Syafi&apos;i dan Hanafi). Rujukan utama berasal dari:
         </p>
         <ul>
           <li>Al-Fiqh al-Manhaji</li>
@@ -46,7 +59,8 @@ export default function MetodologiPage() {
 
         <h3>2. Urutan Pembagian Harta</h3>
         <p>
-          Sebelum pembagian kepada ahli waris, harta dibagi dalam urutan berikut:
+          Sebelum pembagian kepada ahli waris, harta dibagi dalam urutan
+          berikut:
         </p>
         <ol>
           <li>Biaya pemakaman</li>
@@ -56,9 +70,11 @@ export default function MetodologiPage() {
         </ol>
 
         <h3>3. Identifikasi Ahli Waris</h3>
-        <p>Sistem mengidentifikasi ahli waris yang berhak berdasarkan struktur:</p>
+        <p>
+          Sistem mengidentifikasi ahli waris yang berhak berdasarkan struktur:
+        </p>
         <ul>
-          <li>Furu’ (anak, cucu)</li>
+          <li>Furu&apos; (anak, cucu)</li>
           <li>Ushul (ayah, ibu, kakek, nenek)</li>
           <li>Hawasyi (saudara, paman, dll)</li>
         </ul>
@@ -76,9 +92,9 @@ export default function MetodologiPage() {
           menyamakan seluruh bagian ahli waris.
         </p>
 
-        <h3>6. ‘Awl (Penyesuaian Proporsional)</h3>
+        <h3>6. &apos;Awl (Penyesuaian Proporsional)</h3>
         <p>
-          Jika total bagian melebihi 1 (100%), maka dilakukan ‘awl, yaitu
+          Jika total bagian melebihi 1 (100%), maka dilakukan &apos;awl, yaitu
           menaikkan asal masalah dan menyesuaikan seluruh bagian secara
           proporsional.
         </p>
@@ -124,12 +140,35 @@ export default function MetodologiPage() {
       </section>
 
       <footer className="simple-footer">
-        © 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
+        &copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.
       </footer>
+
+      <button
+        id="scrollToTopBtn"
+        className="scroll-to-top"
+        aria-label="Kembali ke atas"
+        type="button"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 19V5"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M6 11L12 5L18 11"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
 
       <Script src="/js/mawaris-pages-i18n.js" strategy="afterInteractive" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
       <Script src="/js/access-guard.js" strategy="afterInteractive" />
-    </>
+    </div>
   );
 }

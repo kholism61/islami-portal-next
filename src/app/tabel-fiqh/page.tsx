@@ -1,22 +1,32 @@
-import Head from "next/head";
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 
+import "../fiqh-pages.css";
+
+export const metadata: Metadata = {
+  title: "Tabel Fiqh Mawaris",
+};
+
 export default function TabelFiqhPage() {
   return (
-    <>
-      <Head>
-        <meta charSet="UTF-8" />
-        <title>Tabel Fiqh Mawaris</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/css/metodologi.css" />
-      </Head>
-
+    <div className="fiqh-page">
       <nav className="top-nav">
         <div className="nav-container">
-          <div className="logo">
-            <Link href="/">Portal Literasi Islam</Link>
-          </div>
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <Image
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                width={26}
+                height={26}
+                loading="eager"
+              />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
+          </Link>
 
           <div className="nav-links">
             <Link href="/">Beranda</Link>
@@ -49,7 +59,6 @@ export default function TabelFiqhPage() {
             </thead>
 
             <tbody>
-              {/* ANAK PEREMPUAN */}
               <tr>
                 <td rowSpan={3}>Anak Perempuan</td>
                 <td>1</td>
@@ -69,7 +78,6 @@ export default function TabelFiqhPage() {
                 </td>
               </tr>
 
-              {/* CUCU PEREMPUAN */}
               <tr>
                 <td rowSpan={5}>Cucu Perempuan dari Anak Laki-laki</td>
                 <td>1</td>
@@ -100,7 +108,6 @@ export default function TabelFiqhPage() {
                 <td>Terhalang oleh anak laki-laki</td>
               </tr>
 
-              {/* SAUDARA PEREMPUAN SEKANDUNG */}
               <tr>
                 <td rowSpan={5}>Saudara Perempuan Sekandung</td>
                 <td>1</td>
@@ -128,7 +135,6 @@ export default function TabelFiqhPage() {
                 <td>Terhalang oleh anak laki-laki atau ayah</td>
               </tr>
 
-              {/* SAUDARA PEREMPUAN SEBAPAK */}
               <tr>
                 <td rowSpan={7}>Saudara Perempuan Sebapak</td>
                 <td>1</td>
@@ -138,13 +144,11 @@ export default function TabelFiqhPage() {
                   sekandung
                 </td>
               </tr>
-
               <tr>
                 <td>2</td>
                 <td>2/3</td>
                 <td>Dua orang atau lebih, tidak ada penghalang</td>
               </tr>
-
               <tr>
                 <td>3</td>
                 <td>1/6</td>
@@ -152,19 +156,16 @@ export default function TabelFiqhPage() {
                   Bersama satu saudara perempuan sekandung (penyempurna 2/3)
                 </td>
               </tr>
-
               <tr>
                 <td>4</td>
                 <td>Ashabah</td>
                 <td>Bersama saudara laki-laki sebapak</td>
               </tr>
-
               <tr>
                 <td>5</td>
                 <td>Ashabah ma&apos;al ghair</td>
                 <td>Bersama anak perempuan atau cucu perempuan</td>
               </tr>
-
               <tr>
                 <td>6</td>
                 <td>Mahjub</td>
@@ -173,7 +174,6 @@ export default function TabelFiqhPage() {
                   sekandung
                 </td>
               </tr>
-
               <tr>
                 <td>7</td>
                 <td>Mahjub</td>
@@ -183,20 +183,17 @@ export default function TabelFiqhPage() {
                 </td>
               </tr>
 
-              {/* SAUDARA SEIBU */}
               <tr>
                 <td rowSpan={3}>Saudara Laki-laki / Perempuan Seibu</td>
                 <td>1</td>
                 <td>1/6</td>
                 <td>Sendirian, tidak ada anak atau ayah</td>
               </tr>
-
               <tr>
                 <td>2</td>
                 <td>1/3</td>
                 <td>Dua orang atau lebih, tidak ada anak atau ayah</td>
               </tr>
-
               <tr>
                 <td>3</td>
                 <td>Mahjub</td>
@@ -205,7 +202,6 @@ export default function TabelFiqhPage() {
                 </td>
               </tr>
 
-              {/* IBU */}
               <tr>
                 <td rowSpan={3}>Ibu</td>
                 <td>1</td>
@@ -223,7 +219,6 @@ export default function TabelFiqhPage() {
                 <td>Kasus Gharawain (bersama ayah &amp; suami/istri)</td>
               </tr>
 
-              {/* AYAH */}
               <tr>
                 <td rowSpan={3}>Ayah</td>
                 <td>1</td>
@@ -241,7 +236,6 @@ export default function TabelFiqhPage() {
                 <td>Tidak ada anak</td>
               </tr>
 
-              {/* SUAMI */}
               <tr>
                 <td rowSpan={2}>Suami</td>
                 <td>1</td>
@@ -254,7 +248,6 @@ export default function TabelFiqhPage() {
                 <td>Ada anak</td>
               </tr>
 
-              {/* ISTRI */}
               <tr>
                 <td rowSpan={2}>Istri</td>
                 <td>1</td>
@@ -267,7 +260,6 @@ export default function TabelFiqhPage() {
                 <td>Ada anak</td>
               </tr>
 
-              {/* KAKEK */}
               <tr>
                 <td rowSpan={3}>Kakek</td>
                 <td>1</td>
@@ -290,12 +282,35 @@ export default function TabelFiqhPage() {
       </section>
 
       <footer className="simple-footer">
-        © 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
+        &copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.
       </footer>
+
+      <button
+        id="scrollToTopBtn"
+        className="scroll-to-top"
+        aria-label="Kembali ke atas"
+        type="button"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 19V5"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M6 11L12 5L18 11"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
 
       <Script src="/js/mawaris-pages-i18n.js" strategy="afterInteractive" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
       <Script src="/js/access-guard.js" strategy="afterInteractive" />
-    </>
+    </div>
   );
 }
