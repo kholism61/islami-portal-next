@@ -526,13 +526,13 @@ tamyiz = "Ciri istihadhah";
 document.getElementById("bloodStatus")
 .innerText = tamyiz;
 
-window.onload = function(){
+window.addEventListener("load", function(){
   const data = localStorage.getItem("haid_last");
   if(data){
     const parsed = JSON.parse(data);
     console.log("Riwayat terakhir:", parsed);
   }
-}
+});
 
 function renderCalendar(start, haid, istihadhah){
 
