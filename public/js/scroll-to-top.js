@@ -6,19 +6,18 @@
     if (scrollBtn.dataset.scrollTopBound === "true") return;
     scrollBtn.dataset.scrollTopBound = "true";
 
-    let lastScrollY = window.scrollY;
-
     function handleScroll() {
-      const currentScrollY = window.scrollY;
-      const isScrollingDown = currentScrollY > lastScrollY;
+      const currentScrollY =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
 
-      if (currentScrollY > 320 && isScrollingDown) {
+      if (currentScrollY > 320) {
         scrollBtn.classList.add("show");
-      } else if (currentScrollY < 220 || currentScrollY < lastScrollY) {
+      } else if (currentScrollY < 220) {
         scrollBtn.classList.remove("show");
       }
-
-      lastScrollY = currentScrollY;
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
