@@ -520,7 +520,7 @@
         const normalized = normalizeBrandText(el.textContent);
         if (!BRAND_LABELS.has(normalized)) return;
 
-        const iconSrc = new URL("favicon.ico", document.baseURI).toString();
+        const iconSrc = "/favicon.ico";
 
         el.dataset.portalBrandDone = "1";
         el.classList.add("portal-nav-brand");

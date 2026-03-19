@@ -2,6 +2,13 @@
    GLOBAL STYLE
 ================================ */
 
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
 .mawaris-page * {
   box-sizing: border-box;
   margin: 0;
@@ -397,8 +404,9 @@
 }
 
 .mawaris-page .prefooter-container {
-  max-width: 1100px;
-  margin: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 40px;
@@ -478,7 +486,7 @@
 
   .mawaris-page .mawaris-container {
     max-width: 100%;
-    padding: 0;
+    padding: 0 15px;
   }
 
   .mawaris-page .form-box {
@@ -510,10 +518,6 @@
     font-size: 16px;
   }
 
-  .mawaris-page .form-box,
-  .mawaris-page #hasil {
-    border-radius: 0;
-  }
 }
 
 /* =====================================

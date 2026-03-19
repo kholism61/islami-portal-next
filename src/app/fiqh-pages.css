@@ -76,6 +76,18 @@
 }
 
 @media (max-width: 768px) {
+  .fiqh-page .top-nav {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .fiqh-page .nav-container {
+    max-width: none;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
   .fiqh-page .page-header {
     padding-left: 0;
     padding-right: 0;
