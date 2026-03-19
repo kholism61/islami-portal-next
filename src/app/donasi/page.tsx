@@ -82,22 +82,23 @@ export default function DonasiPage() {
             <div className="donation-box">
               <h3>💳 Informasi Donasi</h3>
 
-              <div className="donation-info">
-                <strong>Transfer Bank</strong>
-                <p>Bank Mandiri</p>
+              <div className="donation-info donation-bank-info">
+                <strong className="donation-bank-label">Transfer Bank</strong>
+                <p className="donation-bank-name">Bank Mandiri</p>
 
                 <div className="copy-row">
                   <span id="bank-number">1830006850027</span>
                   <button className="copy-btn" data-copy="bank-number">
-                    📋 Salin
+                    <span className="copy-btn-icon">{"\u{1F4CB}"}</span>
+                    <span className="copy-btn-text">Salin</span>
                   </button>
                 </div>
 
-                <p>a.n. MUHAMMAD NURCHOLIS</p>
+                <p className="donation-account-name">a.n. MUHAMMAD NURCHOLIS</p>
               </div>
 
               <button className="qris-toggle" type="button">
-                <span>📱 Donasi via QRIS</span>
+                <span className="qris-label">{"\u{1F4F1} "}Donasi via QRIS</span>
                 <span className="qris-icon">+</span>
               </button>
 
@@ -105,6 +106,7 @@ export default function DonasiPage() {
                 <img
                   src="/assets/images/qris.png"
                   alt="QRIS Donasi Portal Literasi Islam"
+                  className="qris-image"
                 />
                 <p className="qris-text">
                   Scan QRIS menggunakan e-wallet atau mobile banking Anda.
@@ -141,16 +143,18 @@ export default function DonasiPage() {
                 rel="noreferrer"
                 className="paypal-btn"
               >
-                🌍 Donasi Internasional via PayPal
+                <span className="paypal-btn-icon">{"\u{1F30D}"}</span>
+                <span className="paypal-btn-text">Donasi Internasional via PayPal</span>
               </a>
 
               <p className="donation-note">
-                🔒 Secure payment powered by PayPal
+                <span className="donation-note-icon">{"\u{1F512}"}</span>
+                <span className="donation-note-text">Secure payment powered by PayPal</span>
               </p>
 
-              <div className="donation-info">
-                <strong>Kontak Konfirmasi</strong>
-                <p>Email: nurcholism51@gmail.com</p>
+              <div className="donation-info donation-confirm-info">
+                <strong className="donation-confirm-label">Kontak Konfirmasi</strong>
+                <p className="donation-confirm-email">Email: nurcholism51@gmail.com</p>
               </div>
             </div>
           </div>

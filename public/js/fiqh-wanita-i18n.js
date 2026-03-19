@@ -866,6 +866,131 @@
     return LANGS.includes(saved) ? saved : "id";
   }
 
+  const HAID_LANG_RELOAD_STATE_KEY = "fiqh-haid-lang-reload-state";
+  let activeLang = getLang();
+
+  function shouldReloadForLanguageChange(pageKey = getCurrentPageKey()) {
+    return pageKey === "haid";
+  }
+
+  function persistHaidReloadState(nextLang) {
+    if (!shouldReloadForLanguageChange()) return;
+
+    const state = {
+      lang: nextLang,
+      values: {
+        prevEnd: document.getElementById("prevEnd")?.value || "",
+        start: document.getElementById("start")?.value || "",
+        end: document.getElementById("end")?.value || "",
+        type: document.getElementById("type")?.value || "mubtadiah",
+        mumayyiz: !!document.getElementById("mumayyiz")?.checked,
+        strongDays: document.getElementById("strongDays")?.value || "",
+        habit: document.getElementById("habit")?.value || "",
+        bloodColor: document.getElementById("bloodColor")?.value || "dark"
+      },
+      shouldRecalculate: Boolean(document.getElementById("hasil")?.textContent?.trim())
+    };
+
+    try {
+      sessionStorage.setItem(HAID_LANG_RELOAD_STATE_KEY, JSON.stringify(state));
+    } catch {}
+  }
+
+  function restoreHaidReloadState(attempt = 0) {
+    if (!shouldReloadForLanguageChange()) return;
+
+    let raw = null;
+    try {
+      raw = sessionStorage.getItem(HAID_LANG_RELOAD_STATE_KEY);
+    } catch {}
+    if (!raw) return;
+
+    let state = null;
+    try {
+      state = JSON.parse(raw);
+    } catch {
+      state = null;
+    }
+
+    if (!state || (state.lang && state.lang !== getLang())) {
+      try {
+        sessionStorage.removeItem(HAID_LANG_RELOAD_STATE_KEY);
+      } catch {}
+      return;
+    }
+
+    const startInput = document.getElementById("start");
+    const endInput = document.getElementById("end");
+    const typeSelect = document.getElementById("type");
+    const mumayyizInput = document.getElementById("mumayyiz");
+    const tamyizBox = document.getElementById("tamyizBox");
+    const strongDaysInput = document.getElementById("strongDays");
+    const habitInput = document.getElementById("habit");
+    const bloodColorSelect = document.getElementById("bloodColor");
+
+    if (!startInput || !endInput || !typeSelect || !mumayyizInput || !strongDaysInput || !habitInput || !bloodColorSelect) {
+      if (attempt >= 20) return;
+      window.setTimeout(() => restoreHaidReloadState(attempt + 1), 150);
+      return;
+    }
+
+    const values = state.values || {};
+    const prevEndInput = document.getElementById("prevEnd");
+    if (prevEndInput) prevEndInput.value = values.prevEnd || "";
+    startInput.value = values.start || "";
+    endInput.value = values.end || "";
+    typeSelect.value = values.type || "mubtadiah";
+    mumayyizInput.checked = Boolean(values.mumayyiz);
+    if (tamyizBox) {
+      tamyizBox.style.display = mumayyizInput.checked ? "block" : "none";
+    }
+    strongDaysInput.value = values.strongDays || "";
+    habitInput.value = values.habit || "";
+    bloodColorSelect.value = values.bloodColor || "dark";
+
+    if (!state.shouldRecalculate) {
+      try {
+        sessionStorage.removeItem(HAID_LANG_RELOAD_STATE_KEY);
+      } catch {}
+      return;
+    }
+
+    if (typeof window.hitung !== "function") {
+      if (attempt >= 20) return;
+      window.setTimeout(() => restoreHaidReloadState(attempt + 1), 150);
+      return;
+    }
+
+    try {
+      sessionStorage.removeItem(HAID_LANG_RELOAD_STATE_KEY);
+    } catch {}
+
+    window.requestAnimationFrame(() => {
+      try {
+        window.hitung();
+      } catch {}
+    });
+  }
+
+  function applyLanguageChange(nextLang) {
+    const currentPage = getCurrentPageKey();
+    if (!LANGS.includes(nextLang) || nextLang === activeLang) {
+      apply(nextLang);
+      return;
+    }
+
+    localStorage.setItem("siteLang", nextLang);
+
+    if (shouldReloadForLanguageChange(currentPage)) {
+      persistHaidReloadState(nextLang);
+      window.location.reload();
+      return;
+    }
+
+    apply(nextLang);
+  }
+
+
   function setDirection(lang) {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
@@ -1037,8 +1162,7 @@
       navbar.appendChild(wrap);
       wrap.querySelector("#fiqh-lang-select")?.addEventListener("change", (e) => {
         const nextLang = e.target.value;
-        localStorage.setItem("siteLang", nextLang);
-        apply(nextLang);
+        applyLanguageChange(nextLang);
       });
     }
     const label = wrap.querySelector("#fiqh-lang-label");
@@ -1299,6 +1423,7 @@
     const currentPage = getCurrentPageKey();
     if (!TARGET_PAGES.has(currentPage) || !isPageReady()) return false;
 
+    activeLang = lang;
     setDirection(lang);
     ensureStyle();
     ensureSwitcher(lang);
@@ -1319,6 +1444,7 @@
     });
     installAlertTranslator(lang);
     installObserver(lang);
+    restoreHaidReloadState();
     return true;
   }
 
@@ -1375,7 +1501,23 @@
 
   window.addEventListener("load", () => applyWhenReady());
   window.addEventListener("storage", (e) => {
-    if (e.key === "siteLang") applyWhenReady();
+    if (e.key !== "siteLang") return;
+    const nextLang = getLang();
+    if (shouldReloadForLanguageChange() && nextLang !== activeLang) {
+      persistHaidReloadState(nextLang);
+      window.location.reload();
+      return;
+    }
+    applyWhenReady();
+  });
+  window.addEventListener("portal-language-change", () => {
+    const nextLang = getLang();
+    if (shouldReloadForLanguageChange() && nextLang !== activeLang) {
+      persistHaidReloadState(nextLang);
+      window.location.reload();
+      return;
+    }
+    applyWhenReady();
   });
   window.addEventListener("fiqh:routechange", () => initScrollToTopButton());
 })();

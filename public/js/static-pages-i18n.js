@@ -123,12 +123,16 @@
         hi: ["📘 Pengembangan Kajian Ilmiah", "🛠️ Infrastruktur Website", "💻 Edukasi Digital Islam"],
         box: "Informasi Donasi",
         bank: "Transfer Bank",
+        bankName: "Bank Mandiri",
+        accountName: "a.n. MUHAMMAD NURCHOLIS",
         copy: "Salin",
         qris: "Donasi via QRIS",
+        qrisAlt: "QRIS Donasi Portal Literasi Islam",
         qrisText: "Scan QRIS menggunakan e-wallet atau mobile banking Anda.",
         paypal: "Donasi Internasional via PayPal",
         secure: "Secure payment powered by PayPal",
-        confirm: "Kontak Konfirmasi"
+        confirm: "Kontak Konfirmasi",
+        confirmEmail: "Email: nurcholism51@gmail.com"
       },
       en: {
         tag: "Digital Da'wah Support",
@@ -137,28 +141,38 @@
         hi: ["📘 Scholarly Content Development", "🛠️ Website Infrastructure", "💻 Islamic Digital Education"],
         box: "Donation Information",
         bank: "Bank Transfer",
+        bankName: "Bank Mandiri",
+        accountName: "Account Name: MUHAMMAD NURCHOLIS",
         copy: "Copy",
         qris: "Donate via QRIS",
+        qrisAlt: "QRIS donation for the Islamic Literacy Portal",
         qrisText: "Scan QRIS with your e-wallet or mobile banking app.",
         paypal: "International Donation via PayPal",
         secure: "Secure payment powered by PayPal",
-        confirm: "Confirmation Contact"
+        confirm: "Confirmation Contact",
+        confirmEmail: "Email: nurcholism51@gmail.com"
       },
       ar: {
-        tag: "دعم الدعوة الرقمية",
-        hero: "معًا نبني <br><span>ثقافة إسلامية عالية الجودة</span>",
-        body: "يساعد دعمكم بوابة الثقافة الإسلامية على تقديم دراسات علمية وتعليم رقمي مجاني للمجتمع.",
-        hi: ["📘 تطوير المحتوى العلمي", "🛠️ البنية التقنية للموقع", "💻 التعليم الرقمي الإسلامي"],
-        box: "معلومات التبرع",
-        bank: "تحويل بنكي",
-        copy: "نسخ",
-        qris: "التبرع عبر QRIS",
-        qrisText: "امسح رمز QRIS باستخدام المحفظة الإلكترونية أو تطبيق البنك.",
-        paypal: "تبرع دولي عبر PayPal",
-        secure: "دفع آمن عبر PayPal",
-        confirm: "جهة تأكيد التبرع"
+        tag: "\u062f\u0639\u0645 \u0627\u0644\u062f\u0639\u0648\u0629 \u0627\u0644\u0631\u0642\u0645\u064a\u0629",
+        hero: "\u0645\u0639\u064b\u0627 \u0646\u0628\u0646\u064a <br><span>\u062b\u0642\u0627\u0641\u0629 \u0625\u0633\u0644\u0627\u0645\u064a\u0629 \u0639\u0627\u0644\u064a\u0629 \u0627\u0644\u062c\u0648\u062f\u0629</span>",
+        body: "\u064a\u0633\u0627\u0639\u062f \u062f\u0639\u0645\u0643\u0645 \u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u062b\u0642\u0627\u0641\u0629 \u0627\u0644\u0625\u0633\u0644\u0627\u0645\u064a\u0629 \u0639\u0644\u0649 \u062a\u0642\u062f\u064a\u0645 \u062f\u0631\u0627\u0633\u0627\u062a \u0639\u0644\u0645\u064a\u0629 \u0648\u062a\u0639\u0644\u064a\u0645 \u0631\u0642\u0645\u064a \u0645\u062c\u0627\u0646\u064a \u0644\u0644\u0645\u062c\u062a\u0645\u0639.",
+        hi: ["\ud83d\udcd8 \u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0627\u0644\u0639\u0644\u0645\u064a", "\ud83d\udee0\ufe0f \u0627\u0644\u0628\u0646\u064a\u0629 \u0627\u0644\u062a\u0642\u0646\u064a\u0629 \u0644\u0644\u0645\u0648\u0642\u0639", "\ud83d\udcbb \u0627\u0644\u062a\u0639\u0644\u064a\u0645 \u0627\u0644\u0631\u0642\u0645\u064a \u0627\u0644\u0625\u0633\u0644\u0627\u0645\u064a"],
+        box: "\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u062a\u0628\u0631\u0639",
+        bank: "\u062a\u062d\u0648\u064a\u0644 \u0628\u0646\u0643\u064a",
+        bankName: "\u0628\u0646\u0643 \u0645\u0627\u0646\u062f\u064a\u0631\u064a",
+        accountName: "\u0627\u0633\u0645 \u0627\u0644\u062d\u0633\u0627\u0628: \u0645\u062d\u0645\u062f \u0646\u0648\u0631 \u062e\u0627\u0644\u0635",
+        copy: "\u0646\u0633\u062e",
+        qris: "\u0627\u0644\u062a\u0628\u0631\u0639 \u0639\u0628\u0631 \u0643\u064a\u0648 \u0622\u0631 \u0622\u064a \u0625\u0633",
+        qrisAlt: "\u0631\u0645\u0632 \u0643\u064a\u0648 \u0622\u0631 \u0622\u064a \u0625\u0633 \u0644\u0644\u062a\u0628\u0631\u0639 \u0644\u0628\u0648\u0627\u0628\u0629 \u0627\u0644\u062b\u0642\u0627\u0641\u0629 \u0627\u0644\u0625\u0633\u0644\u0627\u0645\u064a\u0629",
+        qrisText: "\u0627\u0645\u0633\u062d \u0643\u0648\u062f \u0643\u064a\u0648 \u0622\u0631 \u0622\u064a \u0625\u0633 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0645\u062d\u0641\u0638\u0629 \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a\u0629 \u0623\u0648 \u062a\u0637\u0628\u064a\u0642 \u0627\u0644\u0628\u0646\u0643.",
+        paypal: "\u0627\u0644\u062a\u0628\u0631\u0639 \u0627\u0644\u062f\u0648\u0644\u064a \u0639\u0628\u0631 \u0628\u0627\u064a \u0628\u0627\u0644",
+        secure: "\u062f\u0641\u0639 \u0622\u0645\u0646 \u0639\u0628\u0631 \u0628\u0627\u064a \u0628\u0627\u0644",
+        confirm: "\u062c\u0647\u0629 \u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062a\u0628\u0631\u0639",
+        confirmEmail: "\u0627\u0644\u0628\u0631\u064a\u062f \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a: nurcholism51@gmail.com"
       }
     },
+
+
 
     about: {
       id: {
@@ -516,13 +530,18 @@ ul2: [
     text(".donation-hero p", p.body);
     texts(".donation-highlights .highlight", p.hi);
     text(".donation-box h3", p.box);
-    text(".donation-info strong", p.bank);
-    text(".copy-btn", p.copy);
-    text(".qris-toggle span:first-child", p.qris);
+    text(".donation-bank-label", p.bank);
+    text(".donation-bank-name", p.bankName);
+    text(".donation-account-name", p.accountName);
+    text(".copy-btn-text", p.copy);
+    text(".qris-label", p.qris);
+    const qrisImage = document.querySelector(".qris-image");
+    if (qrisImage && p.qrisAlt) qrisImage.setAttribute("alt", p.qrisAlt);
     text(".qris-text", p.qrisText);
-    text(".paypal-btn", p.paypal);
-    text(".donation-note", p.secure);
-    text(".donation-info:last-of-type strong", p.confirm);
+    text(".paypal-btn-text", p.paypal);
+    text(".donation-note-text", p.secure);
+    text(".donation-confirm-label", p.confirm);
+    text(".donation-confirm-email", p.confirmEmail);
   }
 
   function applyAbout(lang) {
