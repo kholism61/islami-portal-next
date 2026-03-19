@@ -6,17 +6,34 @@
     if (scrollBtn.dataset.scrollTopBound === "true") return;
     scrollBtn.dataset.scrollTopBound = "true";
 
-    function handleScroll() {
-      const currentScrollY =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0;
-
-      if (currentScrollY > 320) {
+    function setVisible(isVisible) {
+      if (isVisible) {
         scrollBtn.classList.add("show");
-      } else if (currentScrollY < 220) {
+        scrollBtn.style.opacity = "1";
+        scrollBtn.style.visibility = "visible";
+        scrollBtn.style.transform = "translateY(0)";
+        scrollBtn.style.pointerEvents = "auto";
+      } else {
         scrollBtn.classList.remove("show");
+        scrollBtn.style.opacity = "0";
+        scrollBtn.style.visibility = "hidden";
+        scrollBtn.style.transform = "translateY(14px)";
+        scrollBtn.style.pointerEvents = "none";
+      }
+    }
+
+    function getScrollTop() {
+      const el = document.scrollingElement || document.documentElement;
+      const value = Number(el?.scrollTop || 0);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function handleScroll() {
+      const currentScrollY = getScrollTop();
+      if (currentScrollY > 320) {
+        setVisible(true);
+      } else if (currentScrollY < 220) {
+        setVisible(false);
       }
     }
 
@@ -36,14 +53,26 @@
       { once: true }
     );
 
-    scrollBtn.addEventListener("click", () => {
+    function scrollToTop() {
+      const el = document.scrollingElement || document.documentElement;
+      try {
+        if (el && typeof el.scrollTo === "function") {
+          el.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+      } catch {}
+
       try {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } catch {
         window.scrollTo(0, 0);
       }
-    });
+    }
 
+    scrollBtn.addEventListener("click", scrollToTop);
+    scrollBtn.addEventListener("touchend", scrollToTop, { passive: true });
+
+    setVisible(getScrollTop() > 320);
     handleScroll();
   }
 

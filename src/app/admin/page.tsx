@@ -185,7 +185,7 @@ export default function AdminPage() {
       <Script src="/js/admin.js?v=20260318a" strategy="afterInteractive" />
       <Script src="/js/auth.js?v=20260318a" strategy="afterInteractive" />
       <Script src="/js/access-guard.js?v=20260318a" strategy="afterInteractive" />
-      <Script src="/js/scroll-to-top.js?v=20260319c" strategy="afterInteractive" />
+      <Script src="/js/scroll-to-top.js?v=20260319d" strategy="afterInteractive" />
     </>
   );
 }
