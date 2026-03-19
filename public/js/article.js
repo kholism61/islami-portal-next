@@ -3797,27 +3797,50 @@ function renderOfflineHome() {
 // ===============================
 // DOWNLOAD SEMUA ARTIKEL KATEGORI
 // ===============================
-const downloadBtn = document.getElementById("download-category");
-const progressBox = document.getElementById("download-progress");
-const progressFill = document.getElementById("progress-fill");
-const progressText = document.getElementById("progress-text");
+function initDownloadCategoryButtonWithRetry(attemptsLeft = 80) {
+  const downloadBtn = document.getElementById("download-category");
+  if (!downloadBtn) {
+    if ((attemptsLeft || 0) <= 0) return;
+    window.setTimeout(() => initDownloadCategoryButtonWithRetry((attemptsLeft || 0) - 1), 60);
+    return;
+  }
 
-if (downloadBtn) {
+  if (downloadBtn.dataset.bound === "true") return;
+  downloadBtn.dataset.bound = "true";
+
   downloadBtn.addEventListener("click", () => {
-    const currentFilter = activeFilter || "all";
+    const progressBox = document.getElementById("download-progress");
+    const progressFill = document.getElementById("progress-fill");
+    const progressText = document.getElementById("progress-text");
+
+    const currentFilter = (activeFilter || "all").trim().toLowerCase();
+    const filterSlug = normalizeSlugKey(currentFilter);
+    const filterCompact = filterSlug.replace(/\-/g, "");
 
     const sourceIds = getAllArticleKeys(false);
     let ids = sourceIds;
 
-    if (currentFilter !== "all") {
+    if (filterSlug !== "all") {
       ids = sourceIds.filter((id) => {
         const raw = getArticleRawById(id);
         const view = getArticleView(id);
         const meta = getStableArticleMeta(id, raw, view);
+
+        const cat = meta.categoryKey || "";
+        const sub = meta.subcategoryKey || "";
+        const tag = meta.tagKey || "";
+
+        const catCompact = String(cat).replace(/\-/g, "");
+        const subCompact = String(sub).replace(/\-/g, "");
+        const tagCompact = String(tag).replace(/\-/g, "");
+
         return (
-          meta.categoryKey === currentFilter ||
-          meta.subcategoryKey === currentFilter ||
-          meta.tagKey === currentFilter
+          cat === filterSlug ||
+          sub === filterSlug ||
+          tag === filterSlug ||
+          catCompact === filterCompact ||
+          subCompact === filterCompact ||
+          tagCompact === filterCompact
         );
       });
     }
@@ -3826,11 +3849,11 @@ if (downloadBtn) {
     let done = 0;
 
     const offline = safeJsonParse("offlineArticles", {});
-    progressBox.style.display = "flex";
+    if (progressBox) progressBox.style.display = "flex";
 
     if (total === 0) {
-      progressFill.style.width = "0%";
-      progressText.textContent = "0%";
+      if (progressFill) progressFill.style.width = "0%";
+      if (progressText) progressText.textContent = "0%";
       return;
     }
 
@@ -3846,8 +3869,8 @@ if (downloadBtn) {
       }
 
       const percent = Math.round((done / total) * 100);
-      progressFill.style.width = percent + "%";
-      progressText.textContent = percent + "%";
+      if (progressFill) progressFill.style.width = percent + "%";
+      if (progressText) progressText.textContent = percent + "%";
 
       if (done >= total) {
         localStorage.setItem(
@@ -3870,6 +3893,10 @@ if (downloadBtn) {
     pump(0);
   });
 }
+
+onDomReady(() => {
+  initDownloadCategoryButtonWithRetry();
+});
 
 function updateOnlineStatus() {
   const el = document.getElementById("offline-indicator");
