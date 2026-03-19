@@ -1737,7 +1737,7 @@ body.dark .article-translate button.active {
   content: "";
   position: absolute;
   top: 0;
-  left: -40%;
+  left: -60%;
   width: 40%;
   height: 100%;
   background: linear-gradient(
@@ -1747,11 +1747,24 @@ body.dark .article-translate button.active {
     transparent
   );
   transform: skewX(-20deg);
-  transition: 0.6s;
+  animation: featuredShimmer 3.2s ease-in-out infinite;
+  will-change: left;
 }
 
 .featured-card:hover::before {
   left: 120%;
+}
+
+@keyframes featuredShimmer {
+  0% {
+    left: -60%;
+  }
+  55% {
+    left: 140%;
+  }
+  100% {
+    left: 140%;
+  }
 }
 
 #articles-container {
