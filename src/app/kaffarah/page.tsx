@@ -86,7 +86,6 @@ export default function KaffarahPage() {
 
           <Link href="/tool/qadha-puasa" className="tool-card">
             <div className="tool-card-head">
-              <span className="icon" aria-hidden="true">Q</span>
               <h3>Qadha Puasa</h3>
             </div>
 
