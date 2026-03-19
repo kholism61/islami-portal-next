@@ -22,6 +22,16 @@ function t(key) {
 }
 
 (function () {
+  function syncQrisState(toggle, card, icon, isOpen) {
+    card.classList.toggle("qris-open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+
+    if (icon) {
+      icon.textContent = isOpen ? "-" : "+";
+      icon.setAttribute("aria-hidden", "true");
+    }
+  }
+
   function copyToClipboard(text) {
     if (!text) return Promise.resolve(false);
 
@@ -59,10 +69,11 @@ function t(key) {
     if (toggle.dataset.qrisBound === "true") return;
     toggle.dataset.qrisBound = "true";
 
+    syncQrisState(toggle, card, icon, card.classList.contains("qris-open"));
+
     toggle.addEventListener("click", () => {
-      const isOpen = card.classList.toggle("qris-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-      if (icon) icon.setAttribute("aria-hidden", "true");
+      const isOpen = !card.classList.contains("qris-open");
+      syncQrisState(toggle, card, icon, isOpen);
     });
   }
 
