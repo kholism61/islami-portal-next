@@ -106,15 +106,14 @@ export default function HomePageClient() {
             &#9776;
           </button>
 
-          <div className="nav-logo-badge" aria-hidden="true">
-            <img
-              src="/assets/images/logo.png"
-              alt=""
-              className="nav-logo-img"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
+          <img
+            src="/favicon.ico"
+            alt=""
+            className="nav-logo-img"
+            loading="eager"
+            decoding="async"
+            aria-hidden="true"
+          />
           <h1 className="logo">Portal Literasi Islam</h1>
           <button id="themeToggle" className="theme-toggle" type="button">
             🌙
