@@ -1643,7 +1643,7 @@ function applyArticleFilter(filter, triggerElement = null) {
 
   if (featuredSection) {
     featuredSection.style.display =
-      activeFilter === "all" && hasFeaturedArticles ? "block" : "none";
+      activeFilter === "all" && hasHomeFeaturedArticles() ? "block" : "none";
   }
 
   sidebar?.classList.remove("active");
@@ -1761,6 +1761,7 @@ function waitForHomeStoreAndRender(attemptsLeft = 60) {
     return;
   }
 
+  articlesContainer.style.visibility = "hidden";
   articlesContainer.innerHTML = ""; // hapus skeleton SAJA SEKALI
 
   //  urutkan artikel (terbaru dulu)
@@ -1946,6 +1947,248 @@ function bindCardBookmarkClicks() {
   createCards(displayKeys);
   cards = document.querySelectorAll(".card");
   bindCardBookmarkClicks();
+  finalizeHomeArticleSections();
+  articlesContainer.style.visibility = "";
+}
+
+function hasHomeFeaturedArticles() {
+  if (!isHomePage || typeof articleStore === "undefined") return false;
+  return getSortedGlobalArticleKeysByDate().length > 0;
+}
+
+function applyHomeLatestArticlesLayout() {
+  if (!isHomePage) return;
+
+  cards = document.querySelectorAll("#articles-container .card");
+
+  let shown = 0;
+  cards.forEach((card) => {
+    const isFeatured = card.dataset.featured === "true";
+    const isPopular = card.dataset.popular === "true";
+
+    if (!isFeatured && !isPopular && shown < 3) {
+      card.style.display = "block";
+      shown++;
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+
+function renderHomePopularArticles() {
+  if (!isHomePage || typeof articleStore === "undefined") return;
+
+  const popularContainer = document.getElementById("popular-container");
+  if (!popularContainer) return;
+
+  popularContainer.innerHTML = "";
+  const popularSection = popularContainer.closest(".popular-section");
+  const popularKeys = getSortedGlobalArticleKeysByDate();
+  const sourceKeys = popularKeys.filter((id) => {
+    const raw = getArticleRawById(id) || articleStore[id];
+    return isFlagEnabled(raw?.popular);
+  }).slice(0, 3);
+
+  if (sourceKeys.length === 0) {
+    if (popularSection) popularSection.style.display = "none";
+    return;
+  }
+
+  if (popularSection) popularSection.style.display = "";
+
+  sourceKeys.forEach((id) => {
+    const article = getArticleRawById(id) || articleStore[id];
+    const articleView = getArticleView(id) || article;
+    const stableMeta = getStableArticleMeta(id, article, articleView);
+
+    if (!article || !articleView || !isFlagEnabled(article.popular)) return;
+
+    const card = document.createElement("article");
+    card.className = "card";
+    card.classList.add("is-popular");
+
+    const langBadge = document.createElement("span");
+    langBadge.className = `lang-badge flag-${articleView.locale || articleView.bahasa || "id"}`;
+
+    const img = document.createElement("img");
+    img.className = "thumb";
+    img.src = articleView.thumbnail || article.thumbnail || "assets/images/default.jpg";
+    img.alt = articleView.judul || "";
+
+    const categoryTop = document.createElement("div");
+    categoryTop.className = "card-top";
+
+    const categorySpan = document.createElement("span");
+    categorySpan.className = "category";
+    categorySpan.textContent = getLocalizedCategory(
+      stableMeta.rawCategory || article.kategori || articleView.kategori,
+      getSiteLang()
+    );
+
+    categoryTop.appendChild(categorySpan);
+
+    const titleEl = document.createElement("h3");
+    const titleText = articleView.judul || "";
+    titleEl.textContent = titleText.length > 40 ? titleText.slice(0, 40) + "..." : titleText;
+
+    const previewEl = document.createElement("p");
+    previewEl.textContent = `${getPreviewText(articleView).slice(0, 85)}...`;
+
+    const readMore = document.createElement("a");
+    readMore.className = "read-more";
+    readMore.href = buildArticleHref(id, titleText);
+    readMore.textContent = uiText("read_more");
+
+    const tanggal = formatArticleDate(article, getSiteLang(), true);
+    const dateEl = document.createElement("span");
+    dateEl.className = "card-date";
+    dateEl.textContent = tanggal;
+
+    const footer = document.createElement("div");
+    footer.className = "card-footer";
+    footer.appendChild(readMore);
+    footer.appendChild(dateEl);
+
+    card.appendChild(langBadge);
+    card.appendChild(img);
+    if (getSiteLang() !== "ar") {
+      const popularBadge = document.createElement("span");
+      popularBadge.className = "badge-popular";
+      popularBadge.textContent = uiText("popular_badge");
+      card.appendChild(popularBadge);
+    }
+    card.appendChild(categoryTop);
+    card.appendChild(titleEl);
+    card.appendChild(previewEl);
+    card.appendChild(footer);
+
+    popularContainer.appendChild(card);
+  });
+}
+
+function renderHomeFeaturedArticles() {
+  if (!isHomePage || typeof articleStore === "undefined") return;
+
+  const featuredSection = document.getElementById("featured-article");
+  const heroFeaturedTitle = document.getElementById("hero-featured-title");
+  const heroSubtitle = document.getElementById("hero-subtitle");
+  const articleKeys = getSortedGlobalArticleKeysByDate(false);
+
+  if (window.__portalHomeFeaturedTimer) {
+    clearInterval(window.__portalHomeFeaturedTimer);
+    window.__portalHomeFeaturedTimer = null;
+  }
+
+  if (!featuredSection || articleKeys.length === 0) {
+    return;
+  }
+
+  const featuredKeys = articleKeys.filter((key) => {
+    const raw = getArticleRawById(key) || getOfflineArticleById(key) || articleStore[key];
+    return isFlagEnabled(raw?.featured);
+  });
+  const rotationKeys = (featuredKeys.length ? featuredKeys : articleKeys).slice(0, 6);
+
+  if (!rotationKeys.length) {
+    featuredSection.style.display = "none";
+    if (heroFeaturedTitle) heroFeaturedTitle.textContent = "";
+    if (heroSubtitle) heroSubtitle.textContent = "";
+    return;
+  }
+
+  let currentFeaturedIndex = 0;
+
+  function renderFeatured(index) {
+    const id = rotationKeys[index % rotationKeys.length];
+    const data = getArticleView(id) || getOfflineArticleById(id) || articleStore[id];
+    if (!data) return;
+
+    const preview = getPreviewText(data);
+    featuredSection.innerHTML = "";
+
+    const link = document.createElement("a");
+    link.href = buildArticleHref(id, data.judul || id);
+    link.className = "featured-card fade";
+
+    const img = document.createElement("img");
+    img.src = data.thumbnail || "assets/images/default.jpg";
+    img.alt = data.judul || "";
+
+    const content = document.createElement("div");
+    content.className = "featured-content";
+
+    const category = document.createElement("span");
+    category.className = "category";
+    category.textContent = getLocalizedCategory(data.kategori || "", getSiteLang());
+
+    const title = document.createElement("h2");
+    title.textContent = data.judul || "";
+
+    const desc = document.createElement("p");
+    desc.textContent = `${preview.slice(0, 160)}...`;
+
+    content.appendChild(category);
+    content.appendChild(title);
+    content.appendChild(desc);
+
+    link.appendChild(img);
+    link.appendChild(content);
+
+    featuredSection.appendChild(link);
+    featuredSection.style.display = "block";
+
+    if (heroFeaturedTitle) {
+      heroFeaturedTitle.textContent = data.judul || "";
+      heroFeaturedTitle.href = buildArticleHref(id, data.judul || id);
+    }
+
+    if (heroSubtitle) {
+      heroSubtitle.textContent = preview ? `${preview.slice(0, 120)}...` : "";
+    }
+  }
+
+  function startAutoRotate() {
+    if (rotationKeys.length <= 1) return;
+    if (window.__portalHomeFeaturedTimer) {
+      clearInterval(window.__portalHomeFeaturedTimer);
+    }
+
+    window.__portalHomeFeaturedTimer = window.setInterval(() => {
+      currentFeaturedIndex = (currentFeaturedIndex + 1) % rotationKeys.length;
+      renderFeatured(currentFeaturedIndex);
+    }, 6000);
+  }
+
+  function stopAutoRotate() {
+    if (window.__portalHomeFeaturedTimer) {
+      clearInterval(window.__portalHomeFeaturedTimer);
+      window.__portalHomeFeaturedTimer = null;
+    }
+  }
+
+  renderFeatured(currentFeaturedIndex);
+  startAutoRotate();
+  featuredSection.onmouseenter = stopAutoRotate;
+  featuredSection.onmouseleave = startAutoRotate;
+}
+
+function finalizeHomeArticleSections() {
+  if (!isHomePage) return;
+
+  applyHomeLatestArticlesLayout();
+  renderHomePopularArticles();
+  renderHomeFeaturedArticles();
+  updateSidebarBadges();
+
+  try {
+    renderHomeCategoryGrid();
+  } catch {}
+
+  const urlFilter = new URLSearchParams(window.location.search).get("filter");
+  if (urlFilter) {
+    const sidebarLink = document.querySelector(`[data-filter="${urlFilter}"]`);
+    sidebarLink?.click();
+  }
 }
 
 waitForHomeStoreAndRender();
@@ -2330,122 +2573,6 @@ if (categoryGrid) {
   });
 }
 
-//  KHUSUS HOME: tampilkan 3 NON-FEATURED
-if (isHomePage) {
-  let shown = 0;
-  cards.forEach(card => {
-    const isFeatured = card.dataset.featured === "true";
-    const isPopular = card.dataset.popular === "true";
-    if (!isFeatured && !isPopular && shown < 3) {
-      card.style.display = "block";
-      shown++;
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
-
-// =====================
-// ARTIKEL POPULER (HOME)  TAMBAHAN AMAN
-// =====================
-const popularContainer = document.getElementById("popular-container");
-
-if (isHomePage && popularContainer && typeof articleStore !== "undefined") {
-
-  popularContainer.innerHTML = "";
-  const popularSection = popularContainer.closest(".popular-section");
-
-  const popularKeys = getSortedGlobalArticleKeysByDate();
-
-  let popularShown = 0;
-
-  const explicitPopular = popularKeys.filter((id) => {
-    const raw = getArticleRawById(id) || articleStore[id];
-    return isFlagEnabled(raw?.popular);
-  });
-  const sourceKeys = explicitPopular.slice(0, 3);
-
-  if (sourceKeys.length === 0) {
-    popularContainer.innerHTML = "";
-    if (popularSection) popularSection.style.display = "none";
-  } else {
-    if (popularSection) popularSection.style.display = "";
-
-    sourceKeys.forEach(id => {
-      const article = getArticleRawById(id) || articleStore[id];
-      const articleView = getArticleView(id) || article;
-      const stableMeta = getStableArticleMeta(id, article, articleView);
-
-      if (!article || !isFlagEnabled(article.popular)) return;
-      if (!articleView) return;
-
-      if (popularShown < 3) {
-        const card = document.createElement("article");
-        card.className = "card";
-        card.classList.add("is-popular");
-
-        const langBadge = document.createElement("span");
-        langBadge.className = `lang-badge flag-${articleView.locale || articleView.bahasa || "id"}`;
-
-        const img = document.createElement("img");
-        img.className = "thumb";
-        img.src = articleView.thumbnail || article.thumbnail || "assets/images/default.jpg";
-        img.alt = articleView.judul || "";
-
-        const categoryTop = document.createElement("div");
-        categoryTop.className = "card-top";
-
-        const categorySpan = document.createElement("span");
-        categorySpan.className = "category";
-        categorySpan.textContent = getLocalizedCategory(
-          stableMeta.rawCategory || article.kategori || articleView.kategori,
-          getSiteLang()
-        );
-
-        categoryTop.appendChild(categorySpan);
-
-        const titleEl = document.createElement("h3");
-        const titleText = articleView.judul || "";
-        titleEl.textContent = titleText.length > 40 ? titleText.slice(0, 40) + "..." : titleText;
-
-        const previewEl = document.createElement("p");
-        previewEl.textContent = `${getPreviewText(articleView).slice(0, 85)}...`;
-
-        const readMore = document.createElement("a");
-        readMore.className = "read-more";
-        readMore.href = buildArticleHref(id, titleText);
-        readMore.textContent = uiText("read_more");
-
-        const tanggal = formatArticleDate(article, getSiteLang(), true);
-        const dateEl = document.createElement("span");
-        dateEl.className = "card-date";
-        dateEl.textContent = tanggal;
-
-        const footer = document.createElement("div");
-        footer.className = "card-footer";
-        footer.appendChild(readMore);
-        footer.appendChild(dateEl);
-
-        card.appendChild(langBadge);
-        card.appendChild(img);
-        if (getSiteLang() !== "ar") {
-          const popularBadge = document.createElement("span");
-          popularBadge.className = "badge-popular";
-          popularBadge.textContent = uiText("popular_badge");
-          card.appendChild(popularBadge);
-        }
-        card.appendChild(categoryTop);
-        card.appendChild(titleEl);
-        card.appendChild(previewEl);
-        card.appendChild(footer);
-
-        popularContainer.appendChild(card);
-        popularShown++;
-      }
-    });
-  }
-}
-
 updateSidebarBadges();
 const params = new URLSearchParams(window.location.search);
 const urlFilter = params.get("filter");
@@ -2502,7 +2629,6 @@ function updateSidebarBadges() {
 ===================== */
 
 const featuredSection = document.getElementById("featured-article");
-const hasFeaturedArticles = getSortedGlobalArticleKeysByDate().length > 0;
 
 const filterLinks = isHomePage
   ? document.querySelectorAll("[data-filter]")
@@ -2548,119 +2674,6 @@ filterLinks.forEach(link => {
     const articleKeys = isHomePage
       ? getSortedGlobalArticleKeysByDate(false)
       : getSortedGlobalArticleKeysByDate(true);
-
-
-
-/* =====================
-   FEATURED ARTICLE (HOME)FINAL STABLE
-===================== */
-
-if (isHomePage && typeof articleStore !== "undefined") {
-
-  const featuredSection = document.getElementById("featured-article");
-  const heroFeaturedTitle = document.getElementById("hero-featured-title");
-  const heroSubtitle = document.getElementById("hero-subtitle");
-
-  if (!featuredSection || articleKeys.length === 0) {
-
-    // skip featured
-
-  } else {
-
-    let currentFeaturedIndex = 0;
-    let featuredTimer = null;
-
-    const featuredKeys = articleKeys.filter((key) => {
-      const raw = getArticleRawById(key) || getOfflineArticleById(key);
-      return isFlagEnabled(raw?.featured);
-    });
-    const rotationKeys = (featuredKeys.length ? featuredKeys : articleKeys).slice(0, 6);
-
-    if (!rotationKeys.length) {
-      featuredSection.style.display = "none";
-      if (heroFeaturedTitle) heroFeaturedTitle.textContent = "";
-      if (heroSubtitle) heroSubtitle.textContent = "";
-    }
-
-    function renderFeatured(index) {
-      if (!rotationKeys.length) return;
-      const id = rotationKeys[index % rotationKeys.length];
-      const data = getArticleView(id) || getOfflineArticleById(id);
-      if (!data) return;
-      const preview = getPreviewText(data);
-      const slug = slugify(data.judul);
-
-      featuredSection.innerHTML = "";
-
-      const link = document.createElement("a");
-      link.href = buildArticleHref(id, data.judul || id);
-      link.className = "featured-card fade";
-      link.dataset.featuredLabel = `⭐ ${uiText("featured_articles")}`;
-
-      const img = document.createElement("img");
-      img.src = data.thumbnail || "assets/images/default.jpg";
-      img.alt = data.judul || "";
-
-      const content = document.createElement("div");
-      content.className = "featured-content";
-
-      const category = document.createElement("span");
-      category.className = "category";
-      category.textContent = getLocalizedCategory(data.kategori || "", getSiteLang());
-
-      const title = document.createElement("h2");
-      title.textContent = data.judul || "";
-
-      const desc = document.createElement("p");
-      desc.textContent = `${preview.slice(0, 160)}...`;
-
-      content.appendChild(category);
-      content.appendChild(title);
-      content.appendChild(desc);
-
-      link.appendChild(img);
-      link.appendChild(content);
-
-      featuredSection.appendChild(link);
-
-      featuredSection.style.display = "block";
-
-      if (heroFeaturedTitle) {
-        heroFeaturedTitle.textContent = data.judul;
-        heroFeaturedTitle.href = buildArticleHref(id, data.judul || id);
-      }
-
-      if (heroSubtitle) {
-        heroSubtitle.textContent = preview ? `${preview.slice(0, 120)}...` : "";
-      }
-    }
-
-    function startAutoRotate() {
-      if (rotationKeys.length <= 1) return;
-      if (featuredTimer) clearInterval(featuredTimer);
-
-  featuredTimer = setInterval(() => {
-    currentFeaturedIndex =
-      (currentFeaturedIndex + 1) % rotationKeys.length;
-    renderFeatured(currentFeaturedIndex);
-  }, 6000);
-}
-
-    function stopAutoRotate() {
-      clearInterval(featuredTimer);
-    }
-
-    if (rotationKeys.length) {
-      renderFeatured(currentFeaturedIndex);
-      startAutoRotate();
-
-      //  EVENT HARUS DI DALAM ELSE
-      featuredSection.addEventListener("mouseenter", stopAutoRotate);
-      featuredSection.addEventListener("mouseleave", startAutoRotate);
-    }
-  }
-}
-
 
     const rawData = getArticleRawById(articleId);
     let data = getArticleView(articleId) || rawData;
