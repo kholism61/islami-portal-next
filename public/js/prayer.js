@@ -583,7 +583,21 @@ if (hijriEl) {
   }
 }
 renderHijriInfo();
+    const fajrValue = t.Fajr ? t.Fajr.slice(0, 5) : "";
+    let imsakValue = t.Imsak ? t.Imsak.slice(0, 5) : "";
+    if (!imsakValue && fajrValue) {
+      const [fh, fm] = fajrValue.split(":").map(Number);
+      if (!Number.isNaN(fh) && !Number.isNaN(fm)) {
+        let imsakMin = fh * 60 + fm - 10;
+        if (imsakMin < 0) imsakMin += 24 * 60;
+        const ih = Math.floor(imsakMin / 60);
+        const im = imsakMin % 60;
+        imsakValue = `${String(ih).padStart(2, "0")}:${String(im).padStart(2, "0")}`;
+      }
+    }
+
     prayerTimes = {
+      imsak:   imsakValue,
       fajr:    t.Fajr.slice(0,5),
       dhuhr:   t.Dhuhr.slice(0,5),
       asr:     t.Asr.slice(0,5),
@@ -615,11 +629,12 @@ if (cityEl) {
 ========================= */
 function loadFallbackPrayerTimes() {
   prayerTimes = {
+    imsak: "04:35",
     fajr: "04:45",
     dhuhr: "12:03",
     asr: "15:26",
-    maghrib: "18:12",
-    isha: "19:25"
+    maghrib: "18:07",
+    isha: "19:16"
   };
   updatePrayerUI();
 }
@@ -740,32 +755,17 @@ if (azanAudio && !azanAudio.muted) {
   let nextName = null;
   let nextDiff = null;
 
-  // =========================
-// HITUNG IMSAK (10 menit sebelum subuh)
-// =========================
-let times = { ...prayerTimes };
-
-// =========================
-// TAMBAHKAN IMSAK
-// =========================
-if (prayerTimes.fajr) {
-  const [fh, fm] = prayerTimes.fajr.split(":").map(Number);
-  let imsakMin = fh * 60 + fm - 10;
-  if (imsakMin < 0) imsakMin += 24 * 60;
-
-  const ih = Math.floor(imsakMin / 60);
-  const im = imsakMin % 60;
-
-  times.imsak =
-    String(ih).padStart(2, "0") +
-    ":" +
-    String(im).padStart(2, "0");
-}
+  let times = { ...prayerTimes };
 
 applyPrayerVisualModes(times, nowMin);
 
   Object.entries(times).forEach(([name, time]) => {
-  const [h, m] = time.split(":").map(Number);
+  if (!time || typeof time !== "string") return;
+  const match = time.match(/^(\d{1,2}):(\d{2})/);
+  if (!match) return;
+  const h = Number(match[1]);
+  const m = Number(match[2]);
+  if (Number.isNaN(h) || Number.isNaN(m)) return;
 
   let diff = (h * 60 + m) - nowMin;
 
