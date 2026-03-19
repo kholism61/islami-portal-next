@@ -21,6 +21,20 @@
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    document.addEventListener("scroll", handleScroll, { passive: true, capture: true });
+    window.addEventListener("touchmove", handleScroll, { passive: true });
+    window.addEventListener("orientationchange", handleScroll, { passive: true });
+
+    const interval = window.setInterval(handleScroll, 350);
+    window.addEventListener(
+      "beforeunload",
+      () => {
+        try {
+          window.clearInterval(interval);
+        } catch {}
+      },
+      { once: true }
+    );
 
     scrollBtn.addEventListener("click", () => {
       try {
@@ -35,9 +49,32 @@
 
   if (typeof document === "undefined") return;
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initScrollToTop);
-  } else {
-    initScrollToTop();
+  function scheduleInit() {
+    try {
+      initScrollToTop();
+    } catch {}
   }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleInit);
+  }
+
+  window.addEventListener("load", scheduleInit, { once: true });
+  window.addEventListener("pageshow", scheduleInit);
+  document.addEventListener("visibilitychange", scheduleInit);
+
+  scheduleInit();
+
+  let attempts = 0;
+  const initPoller = window.setInterval(() => {
+    attempts += 1;
+    scheduleInit();
+    if (document.getElementById("scrollToTopBtn")?.dataset?.scrollTopBound === "true") {
+      window.clearInterval(initPoller);
+      return;
+    }
+    if (attempts >= 30) {
+      window.clearInterval(initPoller);
+    }
+  }, 400);
 })();
