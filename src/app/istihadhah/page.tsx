@@ -1,4 +1,6 @@
-import Script from "next/script";
+import FiqhWanitaNav from "@/components/fiqh/FiqhWanitaNav";
+import ScrollToTopButton from "@/components/fiqh/ScrollToTopButton";
+import FiqhPageRuntime from "@/components/fiqh/FiqhPageRuntime";
 
 export const metadata = {
   title: "Kalkulator Istihadhah",
@@ -8,19 +10,8 @@ export default function IstihadhahPage() {
   return (
     <>
       <link rel="stylesheet" href="/css/istihadhah.css" />
-
-      <nav className="navbar">
-        <div className="nav-logo">Fiqh Wanita</div>
-
-        <div className="nav-links">
-          <a href="haid.html">Haid</a>
-          <a href="nifas.html">Nifas</a>
-          <a href="iddah.html">Iddah</a>
-          <a href="istihadhah.html" className="active">
-            Istihadhah
-          </a>
-        </div>
-      </nav>
+      <link rel="stylesheet" href="/css/fiqh-wanita-shared.css" />
+      <FiqhWanitaNav currentPath="/istihadhah" />
 
       <section className="hero">
         <h1>Kalkulator Istihadhah</h1>
@@ -97,27 +88,9 @@ export default function IstihadhahPage() {
         <p> 2026 Portal Literasi Islam</p>
       </footer>
 
-      <Script src="/js/istihadhah.js" strategy="afterInteractive" />
-      <Script id="istihadhah-bind" strategy="afterInteractive">
-        {`
-          (function () {
-            var btn = document.getElementById('hitungIstihadhahBtn');
-            if (!btn) return;
-            if (btn.dataset.bound) return;
-            btn.dataset.bound = '1';
-            btn.addEventListener('click', function () {
-              try {
-                if (typeof window !== 'undefined' && typeof window.hitungIstihadhah === 'function') {
-                  window.hitungIstihadhah();
-                }
-              } catch (e) {}
-            });
-          })();
-        `}
-      </Script>
-      <Script src="/js/fiqh-wanita-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <ScrollToTopButton />
+
+      <FiqhPageRuntime page="istihadhah" />
     </>
   );
 }

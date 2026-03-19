@@ -1,4 +1,7 @@
-import Script from "next/script";
+import Link from "next/link";
+import FiqhWanitaNav from "@/components/fiqh/FiqhWanitaNav";
+import ScrollToTopButton from "@/components/fiqh/ScrollToTopButton";
+import FiqhPageRuntime from "@/components/fiqh/FiqhPageRuntime";
 
 export const metadata = {
   title: "Kalkulator Masa Suci | Portal Literasi Islam",
@@ -9,19 +12,8 @@ export default function MasaSuciPage() {
     <>
       <link rel="stylesheet" href="/css/nifas.css" />
       <link rel="stylesheet" href="/css/suci.css" />
-
-      <nav className="navbar">
-        <div className="nav-title">Fiqh Wanita</div>
-
-        <div className="nav-links">
-          <a href="/haid.html">Kalkulator Haid</a>
-          <a href="/nifas.html">Kalkulator Nifas</a>
-          <a href="/iddah.html">Kalkulator Iddah</a>
-          <a href="/suci.html" className="active">
-            Masa Suci
-          </a>
-        </div>
-      </nav>
+      <link rel="stylesheet" href="/css/fiqh-wanita-shared.css" />
+      <FiqhWanitaNav currentPath="/suci" />
 
       <section className="hero">
         <h1>Kalkulator Masa Suci</h1>
@@ -60,10 +52,10 @@ export default function MasaSuciPage() {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-menu">
-            <a href="/index.html">Beranda</a>
-            <a href="/haid.html">Haid</a>
-            <a href="/nifas.html">Nifas</a>
-            <a href="/iddah.html">Iddah</a>
+            <Link href="/">Beranda</Link>
+            <Link href="/haid">Haid</Link>
+            <Link href="/nifas">Nifas</Link>
+            <Link href="/iddah">Iddah</Link>
           </div>
 
           <div className="footer-copy">
@@ -72,28 +64,9 @@ export default function MasaSuciPage() {
         </div>
       </footer>
 
-      <Script src="/js/suci.js" strategy="afterInteractive" />
-      <Script id="suci-bind" strategy="afterInteractive">
-        {`
-          (function () {
-            var btn = document.getElementById('hitungSuciBtn');
-            if (!btn) return;
-            if (btn.dataset.bound) return;
-            btn.dataset.bound = '1';
-            btn.addEventListener('click', function () {
-              try {
-                if (typeof window !== 'undefined' && typeof window.hitungSuci === 'function') {
-                  window.hitungSuci();
-                }
-              } catch (e) {}
-            });
-          })();
-        `}
-      </Script>
-      <Script src="/js/fiqh-wanita-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <ScrollToTopButton />
+
+      <FiqhPageRuntime page="suci" />
     </>
   );
 }
-

@@ -1,4 +1,6 @@
-import Script from "next/script";
+import FiqhWanitaNav from "@/components/fiqh/FiqhWanitaNav";
+import ScrollToTopButton from "@/components/fiqh/ScrollToTopButton";
+import FiqhPageRuntime from "@/components/fiqh/FiqhPageRuntime";
 
 export const metadata = {
   title: "Kalkulator Nifas",
@@ -8,19 +10,8 @@ export default function NifasPage() {
   return (
     <>
       <link rel="stylesheet" href="/css/nifas.css" />
-
-      <nav className="navbar">
-        <div className="nav-logo">Fiqh Wanita</div>
-
-        <div className="nav-links">
-          <a href="haid.html">Haid</a>
-          <a href="suci.html">Masa Suci</a>
-          <a href="iddah.html">Iddah</a>
-          <a href="nifas.html" className="active">
-            Nifas
-          </a>
-        </div>
-      </nav>
+      <link rel="stylesheet" href="/css/fiqh-wanita-shared.css" />
+      <FiqhWanitaNav currentPath="/nifas" />
 
       <section className="hero">
         <h1>Kalkulator Nifas</h1>
@@ -110,27 +101,9 @@ export default function NifasPage() {
         </div>
       </footer>
 
-      <Script src="/js/nifas.js" strategy="afterInteractive" />
-      <Script id="nifas-bind" strategy="afterInteractive">
-        {`
-          (function () {
-            var btn = document.getElementById('hitungNifasBtn');
-            if (!btn) return;
-            if (btn.dataset.bound) return;
-            btn.dataset.bound = '1';
-            btn.addEventListener('click', function () {
-              try {
-                if (typeof window !== 'undefined' && typeof window.hitungNifas === 'function') {
-                  window.hitungNifas();
-                }
-              } catch (e) {}
-            });
-          })();
-        `}
-      </Script>
-      <Script src="/js/fiqh-wanita-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <ScrollToTopButton />
+
+      <FiqhPageRuntime page="nifas" />
     </>
   );
 }

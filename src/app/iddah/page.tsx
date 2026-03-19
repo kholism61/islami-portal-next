@@ -1,4 +1,7 @@
-import Script from "next/script";
+import Link from "next/link";
+import FiqhWanitaNav from "@/components/fiqh/FiqhWanitaNav";
+import ScrollToTopButton from "@/components/fiqh/ScrollToTopButton";
+import FiqhPageRuntime from "@/components/fiqh/FiqhPageRuntime";
 
 export const metadata = {
   title: "Kalkulator Iddah",
@@ -8,17 +11,8 @@ export default function IddahPage() {
   return (
     <>
       <link rel="stylesheet" href="/css/iddah.css" />
-
-      <nav className="navbar">
-        <div className="nav-title">Fiqh Wanita</div>
-
-        <div className="nav-links">
-          <a href="haid.html">Kalkulator Haid</a>
-          <a href="iddah.html" className="active">
-            Kalkulator Iddah
-          </a>
-        </div>
-      </nav>
+      <link rel="stylesheet" href="/css/fiqh-wanita-shared.css" />
+      <FiqhWanitaNav currentPath="/iddah" />
 
       <section className="hero">
         <h1>Kalkulator Masa Iddah</h1>
@@ -134,10 +128,10 @@ export default function IddahPage() {
           <div className="footer-left">Portal Literasi Islam</div>
 
           <div className="footer-menu">
-            <a href="haid.html">Haid</a>
-            <a href="suci.html">Masa Suci</a>
-            <a href="nifas.html">Nifas</a>
-            <a href="iddah.html">Iddah</a>
+            <Link href="/haid">Haid</Link>
+            <Link href="/suci">Masa Suci</Link>
+            <Link href="/nifas">Nifas</Link>
+            <Link href="/iddah">Iddah</Link>
           </div>
 
           <div className="footer-copy">
@@ -146,27 +140,9 @@ export default function IddahPage() {
         </div>
       </footer>
 
-      <Script src="/js/iddah.js" strategy="afterInteractive" />
-      <Script id="iddah-bind" strategy="afterInteractive">
-        {`
-          (function () {
-            var btn = document.getElementById('hitungIddahBtn');
-            if (!btn) return;
-            if (btn.dataset.bound) return;
-            btn.dataset.bound = '1';
-            btn.addEventListener('click', function () {
-              try {
-                if (typeof window !== 'undefined' && typeof window.hitungIddah === 'function') {
-                  window.hitungIddah();
-                }
-              } catch (e) {}
-            });
-          })();
-        `}
-      </Script>
-      <Script src="/js/fiqh-wanita-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <ScrollToTopButton />
+
+      <FiqhPageRuntime page="iddah" />
     </>
   );
 }

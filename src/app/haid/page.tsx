@@ -1,4 +1,7 @@
-import Script from "next/script";
+import Link from "next/link";
+import FiqhWanitaNav from "@/components/fiqh/FiqhWanitaNav";
+import ScrollToTopButton from "@/components/fiqh/ScrollToTopButton";
+import FiqhPageRuntime from "@/components/fiqh/FiqhPageRuntime";
 
 export const metadata = {
   title: "Kalkulator Haid Syafi'i",
@@ -8,20 +11,8 @@ export default function HaidPage() {
   return (
     <>
       <link rel="stylesheet" href="/css/haid.css" />
-
-      <nav className="navbar">
-        <div className="nav-title">Portal Literasi Islam</div>
-        <div className="nav-links">
-          <a href="index.html">Beranda</a>
-          <a href="tools/mawaris.html">Hitung Mawaris</a>
-          <a href="haid.html" className="active">
-            Kalkulator Haid
-          </a>
-          <a href="nifas.html">Kalkulator Nifas</a>
-          <a href="suci.html">Masa Suci</a>
-          <a href="iddah.html">Kalkulator Iddah</a>
-        </div>
-      </nav>
+      <link rel="stylesheet" href="/css/fiqh-wanita-shared.css" />
+      <FiqhWanitaNav currentPath="/haid" />
 
       <section className="hero">
         <h1>Kalkulator Haid</h1>
@@ -251,9 +242,9 @@ export default function HaidPage() {
           Reset Riwayat
         </button>
 
-        <a href="istihadhah.html" className="istihadhah-btn">
+        <Link href="/istihadhah" className="istihadhah-btn">
           Lanjut ke Kalkulator Istihadhah →
-        </a>
+        </Link>
       </div>
 
       <div className="pre-footer">
@@ -290,11 +281,11 @@ export default function HaidPage() {
 
       <footer className="site-footer">
         <div className="footer-links">
-          <a href="about.html">Tentang</a>
-          <a href="faq.html">FAQ</a>
-          <a href="kontak.html">Kontak</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="disclaimer.html">Disclaimer</a>
+          <Link href="/about">Tentang</Link>
+          <Link href="/faq">FAQ</Link>
+          <Link href="/kontak">Kontak</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/disclaimer">Disclaimer</Link>
         </div>
 
         <div className="footer-copy">
@@ -302,63 +293,9 @@ export default function HaidPage() {
         </div>
       </footer>
 
-      <Script id="mumayyiz-toggle" strategy="afterInteractive">
-        {`
-          document.getElementById("mumayyiz")?.addEventListener("change", function(){
-            document.getElementById("tamyizBox").style.display =
-              this.checked ? "block" : "none";
-          });
-        `}
-      </Script>
-      <Script
-        src="https://cdn.jsdelivr.net/npm/chart.js"
-        strategy="afterInteractive"
-      />
-      <Script src="/js/haid.js" strategy="afterInteractive" />
-      <Script id="haid-bind" strategy="afterInteractive">
-        {`
-          (function () {
-            var btn = document.getElementById('hitungHaidBtn');
-            if (btn && !btn.dataset.bound) {
-              btn.dataset.bound = '1';
-              btn.addEventListener('click', function () {
-                try {
-                  if (typeof window !== 'undefined' && typeof window.hitung === 'function') {
-                    window.hitung();
-                  }
-                } catch (e) {}
-              });
-            }
+      <ScrollToTopButton />
 
-            var exportBtn = document.getElementById('exportHaidHistoryBtn');
-            if (exportBtn && !exportBtn.dataset.bound) {
-              exportBtn.dataset.bound = '1';
-              exportBtn.addEventListener('click', function () {
-                try {
-                  if (typeof window !== 'undefined' && typeof window.exportData === 'function') {
-                    window.exportData();
-                  }
-                } catch (e) {}
-              });
-            }
-
-            var resetBtn = document.getElementById('resetHaidHistoryBtn');
-            if (resetBtn && !resetBtn.dataset.bound) {
-              resetBtn.dataset.bound = '1';
-              resetBtn.addEventListener('click', function () {
-                try {
-                  if (typeof window !== 'undefined' && typeof window.resetHistory === 'function') {
-                    window.resetHistory();
-                  }
-                } catch (e) {}
-              });
-            }
-          })();
-        `}
-      </Script>
-      <Script src="/js/fiqh-wanita-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <FiqhPageRuntime page="haid" />
     </>
   );
 }
