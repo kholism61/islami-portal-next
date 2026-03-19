@@ -629,9 +629,8 @@ export default function ZakatPage() {
         strategy="afterInteractive"
       />
 
-      <Script src="/js/zakat.js?v=20260318a" strategy="afterInteractive" />
+      <Script src="/js/zakat.js?v=20260319a" strategy="afterInteractive" />
       <Script src="/js/zakat-pages-i18n.js?v=20260318b" strategy="afterInteractive" />
-      <Script src="/js/scroll-to-top.js?v=20260319d" strategy="afterInteractive" />
       <Script src="/js/auth.js?v=20260318b" strategy="afterInteractive" />
       <Script src="/js/access-guard.js?v=20260318b" strategy="afterInteractive" />
     </>
