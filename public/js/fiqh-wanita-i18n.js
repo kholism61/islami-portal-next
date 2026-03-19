@@ -85,6 +85,8 @@
       "Kalkulator Istihadhah": "Istihadhah Calculator",
       "Kalkulator Fiqh Wanita - Mazhab Syafi'i": "Women's Fiqh Calculator - Shafi'i School",
       "Kalkulator Fiqh Wanita – Mazhab Syafi'i": "Women's Fiqh Calculator - Shafi'i School",
+      "Fiqh Wanita – Mazhab Syafi'i": "Women's Fiqh – Shafi'i School",
+      "Fiqh Wanita - Mazhab Syafi'i": "Women's Fiqh - Shafi'i School",
       "Kalkulator فقه المرأة - Mazhab Syafi'i": "Women's Fiqh Calculator - Shafi'i School",
       "Mazhab Syafi'i - Sistem Fiqh Wanita": "Shafi'i School - Women's Fiqh System",
       "Mazhab Syafi'i – Sistem Fiqh Wanita": "Shafi'i School - Women's Fiqh System",
@@ -121,9 +123,14 @@
       "Hitung Sekarang": "Calculate Now",
       "Mubtadi’ah (Pertama Kali)": "Mubtadi'ah (First Time)",
       "Mubtadi'ah (Pertama Kali)": "Mubtadi'ah (First Time)",
+      "Mubtadi’ah (Pertama kali)": "Mubtadi'ah (First Time)",
+      "Mubtadi'ah (Pertama kali)": "Mubtadi'ah (First Time)",
+      "Mubtadiah (Pertama Kali)": "Mubtadi'ah (First Time)",
+      "Mubtadiah (Pertama kali)": "Mubtadi'ah (First Time)",
       "Mu’tadah (Punya Kebiasaan)": "Mu'tadah (Has Habit)",
       "Mustahadhah (Darah Terus)": "Mustahadhah (Continuous Bleeding)",
       "Bisa membedakan darah kuat & lemah (Mumayyizah)": "Can distinguish strong and weak blood (Mumayyizah)",
+      "Bisa membedakan darah kuat dan lemah (Mumayyizah)": "Can distinguish strong and weak blood (Mumayyizah)",
       "Warna darah dominan": "Dominant blood color",
       "Merah tua / hitam": "Dark red / black",
       "Merah biasa": "Normal red",
@@ -167,8 +174,15 @@
       "Status Siklus": "Cycle Status",
       "Rata-rata Suci": "Average Purity",
       "Rata-rata Haid": "Average Menstruation",
+      "Rata-rata Haid:": "Average Menstruation:",
+      "Masa Suci": "Purity Period",
+      "Masa Suci:": "Purity Period:",
       "Durasi Haid": "Menstruation Duration",
       "Total Darah": "Total Bleeding",
+
+      "⏱️ Durasi Haid": "⏱️ Menstruation Duration",
+      "🩸 Total Darah": "🩸 Total Bleeding",
+      "📅 Perkiraan siklus berikutnya:": "📅 Estimated next cycle:",
       "Fitur": "Features",
       "Kalkulator Mawaris": "Mawaris Calculator",
       "Artikel Fiqh": "Fiqh Articles",
@@ -197,6 +211,9 @@
       "contoh: 7": "example: 7",
       "Jenis Kondisi": "Condition type",
       "Mu'tadah (punya kebiasaan)": "Mu'tadah (has habit)",
+      "Mu’tadah (punya kebiasaan)": "Mu'tadah (has habit)",
+      "Mu'tadah (punya kebiasaan haid)": "Mu'tadah (has menstruation habit)",
+      "Mu’tadah (punya kebiasaan haid)": "Mu'tadah (has menstruation habit)",
       "Mumayyizah (bisa bedakan darah)": "Mumayyizah (can distinguish blood type)",
       "Mutahayyirah (bingung)": "Mutahayyirah (uncertain)",
       "Hitung": "Calculate",
@@ -416,6 +433,13 @@
       "Jumadil Awal": "Jumada al-Ula",
       "Jumadil Akhir": "Jumada al-Akhirah",
       "Sya'ban": "Sha'ban",
+      "Ramadhan": "Ramadan",
+      "Syawal": "Shawwal",
+      "Dzulqa'dah": "Dhu al-Qa'dah",
+      "Dzulhijjah": "Dhu al-Hijjah",
+      "Muharram": "Muharram",
+      "Safar": "Safar",
+      "Rajab": "Rajab",
       "Dzulqa'dah": "Dhu al-Qa'dah",
       "Agustus": "August",
       "September": "September",
@@ -447,6 +471,8 @@
       "Kalkulator Istihadhah": "حاسبة الاستحاضة",
       "Kalkulator Fiqh Wanita - Mazhab Syafi'i": "حاسبة فقه المرأة - المذهب الشافعي",
       "Kalkulator Fiqh Wanita – Mazhab Syafi'i": "حاسبة فقه المرأة - المذهب الشافعي",
+      "Fiqh Wanita – Mazhab Syafi'i": "فقه المرأة - المذهب الشافعي",
+      "Fiqh Wanita - Mazhab Syafi'i": "فقه المرأة - المذهب الشافعي",
       "Kalkulator فقه المرأة - Mazhab Syafi'i": "حاسبة فقه المرأة - المذهب الشافعي",
       "Mazhab Syafi'i - Sistem Fiqh Wanita": "المذهب الشافعي - نظام فقه المرأة",
       "Mazhab Syafi'i – Sistem Fiqh Wanita": "المذهب الشافعي - نظام فقه المرأة",
@@ -484,9 +510,14 @@
       "Hitung Sekarang": "احسب الآن",
       "Mubtadi’ah (Pertama Kali)": "مبتدئة (أول مرة)",
       "Mubtadi'ah (Pertama Kali)": "\u0645\u0628\u062a\u062f\u0626\u0629 (\u0623\u0648\u0644 \u0645\u0631\u0629)",
+      "Mubtadi’ah (Pertama kali)": "مبتدئة (أول مرة)",
+      "Mubtadi'ah (Pertama kali)": "\u0645\u0628\u062a\u062f\u0626\u0629 (\u0623\u0648\u0644 \u0645\u0631\u0629)",
+      "Mubtadiah (Pertama Kali)": "\u0645\u0628\u062a\u062f\u0626\u0629 (\u0623\u0648\u0644 \u0645\u0631\u0629)",
+      "Mubtadiah (Pertama kali)": "\u0645\u0628\u062a\u062f\u0626\u0629 (\u0623\u0648\u0644 \u0645\u0631\u0629)",
       "Mu’tadah (Punya Kebiasaan)": "معتادة (لها عادة)",
       "Mustahadhah (Darah Terus)": "مستحاضة (نزف مستمر)",
       "Bisa membedakan darah kuat & lemah (Mumayyizah)": "تستطيع التمييز بين الدم القوي والضعيف (مميزة)",
+      "Bisa membedakan darah kuat dan lemah (Mumayyizah)": "تستطيع التمييز بين الدم القوي والضعيف (مميزة)",
       "Warna darah dominan": "لون الدم الغالب",
       "Merah tua / hitam": "أحمر داكن / أسود",
       "Merah biasa": "أحمر عادي",
@@ -530,8 +561,15 @@
       "Status Siklus": "حالة الدورة",
       "Rata-rata Suci": "متوسط الطهر",
       "Rata-rata Haid": "متوسط الحيض",
+      "Rata-rata Haid:": "متوسط الحيض:",
+      "Masa Suci": "مدة الطهر",
+      "Masa Suci:": "مدة الطهر:",
       "Durasi Haid": "مدة الحيض",
       "Total Darah": "إجمالي الدم",
+
+      "⏱️ Durasi Haid": "⏱️ مدة الحيض",
+      "🩸 Total Darah": "🩸 إجمالي الدم",
+      "📅 Perkiraan siklus berikutnya:": "📅 تقدير الدورة القادمة:",
       "Fitur": "الميزات",
       "Kalkulator Mawaris": "حاسبة المواريث",
       "Artikel Fiqh": "مقالات فقهية",
@@ -560,6 +598,9 @@
       "contoh: 7": "مثال: 7",
       "Jenis Kondisi": "نوع الحالة",
       "Mu'tadah (punya kebiasaan)": "معتادة (لها عادة)",
+      "Mu’tadah (punya kebiasaan)": "معتادة (لها عادة)",
+      "Mu'tadah (punya kebiasaan haid)": "معتادة (لها عادة الحيض)",
+      "Mu’tadah (punya kebiasaan haid)": "معتادة (لها عادة الحيض)",
       "Mumayyizah (bisa bedakan darah)": "مميزة (تفرق بين أنواع الدم)",
       "Mutahayyirah (bingung)": "متحيرة",
       "Hitung": "احسب",
@@ -779,6 +820,13 @@
       "Jumadil Awal": "جمادى الأولى",
       "Jumadil Akhir": "جمادى الآخرة",
       "Sya'ban": "شعبان",
+      "Ramadhan": "رمضان",
+      "Syawal": "شوال",
+      "Dzulqa'dah": "ذو القعدة",
+      "Dzulhijjah": "ذو الحجة",
+      "Muharram": "محرم",
+      "Safar": "صفر",
+      "Rajab": "رجب",
       "Dzulqa'dah": "ذو القعدة",
       "Agustus": "أغسطس",
       "September": "سبتمبر",
@@ -787,6 +835,26 @@
       "Desember": "ديسمبر"
     }
   };
+
+  const REVERSE_MAP = {
+    en: new Map(),
+    ar: new Map()
+  };
+
+  function buildReverseMaps() {
+    ["en", "ar"].forEach((lang) => {
+      const map = PHRASE_MAP[lang];
+      if (!map) return;
+      Object.keys(map).forEach((key) => {
+        const val = map[key];
+        if (typeof val === "string" && val) {
+          REVERSE_MAP[lang].set(val, key);
+        }
+      });
+    });
+  }
+
+  buildReverseMaps();
 
   const SORTED_KEYS = {
     en: Object.keys(PHRASE_MAP.en).sort((a, b) => b.length - a.length),
@@ -994,6 +1062,30 @@
     return out;
   }
 
+  function reverseReplaceText(str, lang) {
+    const reverse = REVERSE_MAP[lang];
+    if (!reverse || !str) return str;
+
+    let out = normalizeMojibake(str);
+    const compact = out.replace(/\s+/g, " ").trim();
+    if (reverse.has(compact)) return reverse.get(compact);
+
+    // fallback: replace any translated fragments back to their key
+    const forward = PHRASE_MAP[lang];
+    if (!forward) return out;
+    const translatedValues = Object.keys(forward)
+      .map((key) => ({ key, value: forward[key] }))
+      .filter((x) => typeof x.value === "string" && x.value)
+      .sort((a, b) => String(b.value).length - String(a.value).length);
+
+    translatedValues.forEach(({ key, value }) => {
+      const v = String(value);
+      if (out.includes(v)) out = out.split(v).join(key);
+    });
+
+    return out;
+  }
+
   function translatePlaceholders(root, lang) {
     root.querySelectorAll("[placeholder]").forEach((el) => {
       if (el.__fiqhOriginalPlaceholder == null) {
@@ -1022,7 +1114,15 @@
       const parent = node.parentElement?.tagName;
       if (parent === "SCRIPT" || parent === "STYLE" || parent === "NOSCRIPT") return;
       if (node.__fiqhOriginalText == null) {
-        node.__fiqhOriginalText = node.textContent;
+        // If first time we see this node while non-ID lang is active (e.g., user previously used AR),
+        // normalize it back to the Indonesian key so switching back to ID/EN doesn't keep Arabic.
+        if (lang === "en") {
+          node.__fiqhOriginalText = reverseReplaceText(node.textContent, "en");
+        } else if (lang === "ar") {
+          node.__fiqhOriginalText = reverseReplaceText(node.textContent, "ar");
+        } else {
+          node.__fiqhOriginalText = node.textContent;
+        }
       }
 
       const original = node.__fiqhOriginalText || "";
@@ -1047,6 +1147,12 @@
     if (hero) roots.push(hero);
     const container = document.querySelector(".container");
     if (container) roots.push(container);
+    const dataHaid = document.querySelector(".data-haid");
+    if (dataHaid) roots.push(dataHaid);
+    const chart = document.querySelector(".chart-container");
+    if (chart) roots.push(chart);
+    const preFooter = document.querySelector(".pre-footer");
+    if (preFooter) roots.push(preFooter);
     const footer = document.querySelector("footer");
     if (footer) roots.push(footer);
     if (!roots.length && document.body) roots.push(document.body);
@@ -1124,15 +1230,12 @@
               : original.replace(trimmed, replaceText(trimmed, lang));
           }
         });
-        if (mutation.type === "characterData" && mutation.target?.parentElement) {
-          translateTextNodes(mutation.target.parentElement, lang);
-        }
       });
       busy = false;
     });
     getTranslationRoots().forEach((root) => {
       try {
-        observer.observe(root, { subtree: true, childList: true, characterData: true });
+        observer.observe(root, { subtree: true, childList: true });
       } catch (e) {}
     });
     window.__fiqhI18nObserver = observer;
