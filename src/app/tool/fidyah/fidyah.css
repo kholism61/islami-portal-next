@@ -603,3 +603,24 @@ display:none;
 }
 
 }
+
+body.tool-fidyah .hero-fidyah {
+  text-align: center;
+  padding: 68px 20px 36px;
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.18), rgba(14, 26, 43, 0));
+}
+
+body.tool-fidyah .hero-fidyah .kfi-hero-badge {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.92), rgba(14, 165, 233, 0.86));
+}
+
+body.tool-fidyah .hero-fidyah h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+body.tool-fidyah .hero-fidyah p {
+  max-width: 680px;
+  margin: 0 auto;
+  opacity: 0.82;
+}

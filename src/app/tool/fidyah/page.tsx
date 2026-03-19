@@ -138,14 +138,27 @@ ${formatRupiah(total)}.
       </nav>
 
       <section className="hero-fidyah">
-        <div className="hero-content">
-          <h1>Kalkulator Fidyah Puasa</h1>
+        <div className="kfi-hero-shell">
+          <span className="kfi-hero-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4.8 10.2h14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M6.2 10.2c0 4 2.4 6.8 5.8 6.8s5.8-2.8 5.8-6.8" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+              <path d="M19.3 11.2a2.2 2.2 0 1 0 0 4.4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M8.8 6.2c.4.8.4 1.7-.1 2.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M12 5.3c.5 1 .5 2-.1 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M15.2 6.2c.4.8.4 1.7-.1 2.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          </span>
 
-          <p>
-            Hitung kewajiban fidyah secara praktis sesuai fiqh. Masukkan jumlah
-            hari puasa yang ditinggalkan untuk mengetahui kewajiban fidyah yang
-            harus dibayarkan.
-          </p>
+          <div className="kfi-hero-copy">
+            <h1>Kalkulator Fidyah Puasa</h1>
+
+            <p>
+              Hitung kewajiban fidyah secara praktis sesuai fiqh. Masukkan jumlah
+              hari puasa yang ditinggalkan untuk mengetahui kewajiban fidyah yang
+              harus dibayarkan.
+            </p>
+          </div>
         </div>
       </section>
 

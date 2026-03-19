@@ -397,3 +397,17 @@ border-top:1px solid rgba(255,255,255,0.1);
 color:#aaa;
 
 }
+
+body.tool-kaffarah-sumpah .hero {
+  min-height: 52vh;
+  height: auto;
+  padding: 56px 24px 42px;
+}
+
+body.tool-kaffarah-sumpah .hero .kfi-hero-badge {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.92), rgba(20, 184, 166, 0.88));
+}
+
+body.tool-kaffarah-sumpah .hero p {
+  margin-bottom: 0;
+}

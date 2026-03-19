@@ -99,15 +99,26 @@ export default function KalkulatorQadhaPuasaPage() {
       </nav>
 
       <section className="hero">
-        <div className="hero-content">
-          <h1>Kalkulator Qadha Puasa</h1>
+        <div className="kfi-hero-shell">
+          <span className="kfi-hero-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="6" width="14" height="13" rx="3" stroke="currentColor" strokeWidth="1.8" />
+              <path d="M8 4.5v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M16 4.5v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M5 10h14" stroke="currentColor" strokeWidth="1.8" />
+              <path d="M9 13.2h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M10.5 16h3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          </span>
 
-          <p>
-            Hitung jumlah hari puasa Ramadhan yang harus diganti (qadha) dengan
-            mudah sesuai fiqh.
-          </p>
+          <div className="kfi-hero-copy">
+            <h1>Kalkulator Qadha Puasa</h1>
 
-          <div className="hero-line"></div>
+            <p>
+              Hitung jumlah hari puasa Ramadhan yang harus diganti (qadha) dengan
+              mudah sesuai fiqh.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -132,22 +132,18 @@ Dalil:
       </header>
 
       <section className="hero">
-        <div className="hero-content">
-          <h1>Portal Literasi Islam</h1>
+        <div className="kfi-hero-shell">
+          <span className="kfi-hero-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M9.2 20v-7.3c0-.9.7-1.6 1.6-1.6h.2V5.8c0-1 .8-1.8 1.8-1.8s1.8.8 1.8 1.8v3.6h.5c1 0 1.9.8 1.9 1.9V20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M9.2 12.2 7.8 11a1.8 1.8 0 0 0-2.6.2 1.8 1.8 0 0 0 .2 2.6l2.5 2.2c.8.7 1.3 1.7 1.3 2.8V20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
 
-          <p>
-            Kalkulator fiqh modern: zakat, mawaris, fidyah, kaffarah, dan
-            panduan ibadah berbasis dalil.
-          </p>
+          <div className="kfi-hero-copy">
+            <h1>Kalkulator Kaffarah Sumpah</h1>
 
-          <div className="hero-buttons">
-            <Link href="/kaffarah" className="btn-primary">
-              Gunakan Kalkulator
-            </Link>
-
-            <Link href="/" className="btn-secondary">
-              Baca Artikel
-            </Link>
+            <p>Kaffarah bagi orang yang melanggar sumpah</p>
           </div>
         </div>
       </section>

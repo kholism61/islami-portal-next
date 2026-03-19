@@ -404,3 +404,46 @@ display:none;
 }
 
 }
+
+.tool-card h3{
+margin:0;
+}
+
+.tool-card-icon{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:40px;
+height:40px;
+border-radius:12px;
+line-height:1;
+flex-shrink:0;
+border:1px solid rgba(255,255,255,0.12);
+box-shadow:0 10px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.tool-card-icon svg{
+width:20px;
+height:20px;
+display:block;
+}
+
+.tool-card-icon.jima{
+background:linear-gradient(135deg,rgba(244,63,94,.22),rgba(251,146,60,.2));
+color:#ffd4bf;
+}
+
+.tool-card-icon.sumpah{
+background:linear-gradient(135deg,rgba(14,165,233,.22),rgba(20,184,166,.2));
+color:#baf5ff;
+}
+
+.tool-card-icon.fidyah{
+background:linear-gradient(135deg,rgba(34,197,94,.22),rgba(14,165,233,.2));
+color:#d1fae5;
+}
+
+.tool-card-icon.qadha{
+background:linear-gradient(135deg,rgba(59,130,246,.22),rgba(34,211,238,.2));
+color:#dbeafe;
+}

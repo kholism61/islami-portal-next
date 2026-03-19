@@ -171,12 +171,24 @@ memiliki kaffarah tersendiri.
       </nav>
 
       <section className="hero">
-        <h1>Kaffarah Jima Ramadhan</h1>
+        <div className="kfi-hero-shell">
+          <span className="kfi-hero-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M15.8 5.2a6.2 6.2 0 1 0 2.9 11.7A7.2 7.2 0 1 1 15.8 5.2Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+              <path d="M16.8 7.4v2.1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M15.75 8.45h2.1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          </span>
 
-        <p>
-          Simulasi kewajiban kaffarah bagi orang yang melakukan hubungan suami
-          istri di siang hari bulan Ramadhan.
-        </p>
+          <div className="kfi-hero-copy">
+            <h1>Kaffarah Jima Ramadhan</h1>
+
+            <p>
+              Simulasi kewajiban kaffarah bagi orang yang melakukan hubungan suami
+              istri di siang hari bulan Ramadhan.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="kaffarah-section">

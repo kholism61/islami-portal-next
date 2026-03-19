@@ -547,3 +547,11 @@ font-size:28px;
 }
 
 }
+
+body.tool-qadha-puasa .hero {
+  padding: 84px 20px 60px;
+}
+
+body.tool-qadha-puasa .hero .kfi-hero-badge {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.92), rgba(59, 130, 246, 0.88));
+}

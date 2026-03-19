@@ -510,3 +510,7 @@ font-size:14px;
 }
 
 }
+
+body.tool-kaffarah-jima .hero .kfi-hero-badge {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.92), rgba(251, 146, 60, 0.88));
+}
