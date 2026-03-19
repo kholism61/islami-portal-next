@@ -653,6 +653,10 @@ function renderChart(){
 
 const lang = localStorage.getItem("siteLang") || "id";
 
+if(typeof Chart === "undefined"){
+  return;
+}
+
 const chartLang = {
   id: "Durasi Haid",
   en: "Menstruation Duration",

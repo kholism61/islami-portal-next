@@ -1,102 +1,54 @@
 (() => {
   const TARGET_PAGES = new Set([
-    "haid.html",
-    "istihadhah.html",
-    "nifas.html",
-    "suci.html",
-    "iddah.html"
+    "haid",
+    "istihadhah",
+    "nifas",
+    "suci",
+    "iddah"
   ]);
 
-  const rawPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
-  const page = rawPage.endsWith(".html") ? rawPage : (rawPage ? `${rawPage}.html` : rawPage);
+  function getCurrentPageKey() {
+    const pathname = window.location.pathname.toLowerCase();
+    const rawPage = (pathname.split("/").filter(Boolean).pop() || "").toLowerCase();
+
+    if (pathname.endsWith("/haid") || rawPage === "haid") return "haid";
+    if (pathname.endsWith("/istihadhah") || rawPage === "istihadhah") return "istihadhah";
+    if (pathname.endsWith("/nifas") || rawPage === "nifas") return "nifas";
+    if (pathname.endsWith("/suci") || rawPage === "suci") return "suci";
+    if (pathname.endsWith("/iddah") || rawPage === "iddah") return "iddah";
+
+    return rawPage;
+  }
+
+  const page = getCurrentPageKey();
+  const DEFAULT_TITLE = document.title;
   const host = window.location.hostname;
   const isLocalDev = host === "localhost" || host === "127.0.0.1";
   if (!TARGET_PAGES.has(page)) return;
 
   function setupProdCleanLinks() {
     if (isLocalDev) return;
-
-    const rewriteHref = (href) => {
-      if (!href || typeof href !== "string") return href;
-      const trimmed = href.trim();
-
-      if (
-        !trimmed ||
-        trimmed.startsWith("#") ||
-        trimmed.startsWith("mailto:") ||
-        trimmed.startsWith("tel:") ||
-        trimmed.startsWith("javascript:") ||
-        trimmed.startsWith("http://") ||
-        trimmed.startsWith("https://")
-      ) {
-        return href;
-      }
-
-      if (trimmed.startsWith("assets/") || trimmed.startsWith("css/") || trimmed.startsWith("js/")) {
-        return href;
-      }
-
-      const [pathPart, hashPart] = trimmed.split("#");
-      const [pathOnly, queryPart] = pathPart.split("?");
-      if (!pathOnly) return href;
-      if (!/\.html$/i.test(pathOnly)) return href;
-
-      const normalizedPathOnly = pathOnly.replace(/\\/g, "/");
-      const cleanedPathOnly = normalizedPathOnly.replace(/\.html$/i, "");
-      const finalPathOnly = /(^|\/)index$/i.test(cleanedPathOnly) ? "/" : cleanedPathOnly;
-
-      return `${finalPathOnly}${queryPart ? `?${queryPart}` : ""}${hashPart ? `#${hashPart}` : ""}`;
-    };
-
-    const rewriteAnchors = (root = document) => {
-      root.querySelectorAll("a[href]").forEach((a) => {
-        if (a.dataset.prodHrefRewritten === "true") return;
-        const original = a.getAttribute("href");
-        const next = rewriteHref(original);
-        if (next !== original) {
-          a.setAttribute("href", next);
-          a.dataset.prodHrefRewritten = "true";
-        }
-      });
-    };
-
-    rewriteAnchors(document);
-
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (!(node instanceof Element)) return;
-          if (node.matches?.("a[href]")) {
-            rewriteAnchors(node.parentElement || document);
-            return;
-          }
-          rewriteAnchors(node);
-        });
-      });
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
   }
 
   const LANGS = ["id", "en", "ar"];
   const PAGE_TITLES = {
-    "haid.html": {
+    "haid": {
       en: "Menstrual Calculator | Islamic Literacy Portal",
       ar: "حاسبة الحيض | بوابة الثقافة الإسلامية"
     },
-    "istihadhah.html": {
+    "istihadhah": {
       en: "Istihadhah Calculator | Islamic Literacy Portal",
       ar: "حاسبة الاستحاضة | بوابة الثقافة الإسلامية"
     },
-    "nifas.html": {
+    "nifas": {
       en: "Postpartum Calculator | Islamic Literacy Portal",
       ar: "حاسبة النفاس | بوابة الثقافة الإسلامية"
     },
-    "suci.html": {
+    "suci": {
       en: "Purity Period Calculator | Islamic Literacy Portal",
       ar: "حاسبة مدة الطهر | بوابة الثقافة الإسلامية"
     },
-    "iddah.html": {
+    "iddah": {
       en: "Iddah Calculator | Islamic Literacy Portal",
       ar: "حاسبة العدة | بوابة الثقافة الإسلامية"
     }
@@ -1016,8 +968,9 @@
       `;
       navbar.appendChild(wrap);
       wrap.querySelector("#fiqh-lang-select")?.addEventListener("change", (e) => {
-        localStorage.setItem("siteLang", e.target.value);
-        location.reload();
+        const nextLang = e.target.value;
+        localStorage.setItem("siteLang", nextLang);
+        apply(nextLang);
       });
     }
     const label = wrap.querySelector("#fiqh-lang-label");
@@ -1043,31 +996,109 @@
 
   function translatePlaceholders(root, lang) {
     root.querySelectorAll("[placeholder]").forEach((el) => {
-      const before = el.getAttribute("placeholder");
-      if (!before) return;
-      const after = replaceText(before, lang);
-      if (after !== before) el.setAttribute("placeholder", after);
+      if (el.__fiqhOriginalPlaceholder == null) {
+        el.__fiqhOriginalPlaceholder = el.getAttribute("placeholder") || "";
+      }
+
+      const original = el.__fiqhOriginalPlaceholder;
+      if (!original) return;
+
+      if (lang === "id") {
+        el.setAttribute("placeholder", original);
+        return;
+      }
+
+      const after = replaceText(original, lang);
+      el.setAttribute("placeholder", after);
     });
   }
 
   function translateTextNodes(root, lang) {
+    if (!root) return;
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach((node) => {
       const parent = node.parentElement?.tagName;
       if (parent === "SCRIPT" || parent === "STYLE" || parent === "NOSCRIPT") return;
-      const before = node.textContent;
-      const after = replaceText(before, lang);
-      if (after !== before) node.textContent = after;
+      if (node.__fiqhOriginalText == null) {
+        node.__fiqhOriginalText = node.textContent;
+      }
+
+      const original = node.__fiqhOriginalText || "";
+      const trimmed = original.trim();
+      if (!trimmed) return;
+
+      if (lang === "id") {
+        node.textContent = original;
+        return;
+      }
+
+      const translated = replaceText(trimmed, lang);
+      node.textContent = original.replace(trimmed, translated);
     });
+  }
+
+  function getTranslationRoots() {
+    const roots = [];
+    const navbar = document.querySelector(".navbar");
+    if (navbar) roots.push(navbar);
+    const hero = document.querySelector(".hero");
+    if (hero) roots.push(hero);
+    const container = document.querySelector(".container");
+    if (container) roots.push(container);
+    const footer = document.querySelector("footer");
+    if (footer) roots.push(footer);
+    if (!roots.length && document.body) roots.push(document.body);
+    return roots;
   }
 
   function installAlertTranslator(lang) {
     if (!window.__fiqhAlertOriginal) {
       window.__fiqhAlertOriginal = window.alert.bind(window);
     }
+
+    if (lang === "id") {
+      window.alert = window.__fiqhAlertOriginal;
+      return;
+    }
+
     window.alert = (msg) => window.__fiqhAlertOriginal(replaceText(String(msg ?? ""), lang));
+  }
+
+  function initScrollToTopButton() {
+    const scrollBtn = document.getElementById("scrollToTopBtn");
+    if (!scrollBtn) return;
+
+    if (window.__fiqhScrollState?.handleScroll) {
+      window.removeEventListener("scroll", window.__fiqhScrollState.handleScroll);
+    }
+
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY;
+
+      if (currentScrollY > 320 && isScrollingDown) {
+        scrollBtn.classList.add("show");
+      } else if (currentScrollY < 220 || currentScrollY < lastScrollY) {
+        scrollBtn.classList.remove("show");
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.__fiqhScrollState = { handleScroll };
+
+    if (scrollBtn.dataset.boundScrollTop !== "true") {
+      scrollBtn.dataset.boundScrollTop = "true";
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    handleScroll();
   }
 
   function installObserver(lang) {
@@ -1082,9 +1113,15 @@
             translateTextNodes(node, lang);
             translatePlaceholders(node, lang);
           } else if (node.nodeType === Node.TEXT_NODE) {
-            const before = node.textContent || "";
-            const after = replaceText(before, lang);
-            if (after !== before) node.textContent = after;
+            if (node.__fiqhOriginalText == null) {
+              node.__fiqhOriginalText = node.textContent || "";
+            }
+            const original = node.__fiqhOriginalText || "";
+            const trimmed = original.trim();
+            if (!trimmed) return;
+            node.textContent = lang === "id"
+              ? original
+              : original.replace(trimmed, replaceText(trimmed, lang));
           }
         });
         if (mutation.type === "characterData" && mutation.target?.parentElement) {
@@ -1093,27 +1130,149 @@
       });
       busy = false;
     });
-    observer.observe(document.body, { subtree: true, childList: true, characterData: true });
+    getTranslationRoots().forEach((root) => {
+      try {
+        observer.observe(root, { subtree: true, childList: true, characterData: true });
+      } catch (e) {}
+    });
     window.__fiqhI18nObserver = observer;
   }
 
-  function apply(lang) {
+  function bindAction(buttonId, handlerName) {
+    const button = document.getElementById(buttonId);
+    if (!button) return false;
+
+    if (button.dataset.bound === "1") {
+      button.dataset.fiqhHandlerBound = handlerName;
+      return true;
+    }
+
+    if (button.dataset.fiqhHandlerBound === handlerName) {
+      return true;
+    }
+
+    button.dataset.fiqhHandlerBound = handlerName;
+    button.addEventListener("click", () => {
+      try {
+        const handler = window[handlerName];
+        if (typeof handler === "function") {
+          handler();
+        }
+      } catch (error) {}
+    });
+
+    return true;
+  }
+
+  function bindCurrentPageActions() {
+    const currentPage = getCurrentPageKey();
+
+    if (currentPage === "haid") {
+      const mainBound = bindAction("hitungHaidBtn", "hitung");
+      bindAction("exportHaidHistoryBtn", "exportData");
+      bindAction("resetHaidHistoryBtn", "resetHistory");
+      return mainBound;
+    }
+
+    if (currentPage === "nifas") return bindAction("hitungNifasBtn", "hitungNifas");
+    if (currentPage === "suci") return bindAction("hitungSuciBtn", "hitungSuci");
+    if (currentPage === "iddah") return bindAction("hitungIddahBtn", "hitungIddah");
+    if (currentPage === "istihadhah") return bindAction("hitungIstihadhahBtn", "hitungIstihadhah");
+
+    return false;
+  }
+
+  function isPageReady() {
+    const currentPage = getCurrentPageKey();
+    if (currentPage === "haid") return !!document.getElementById("hitungHaidBtn");
+    if (currentPage === "nifas") return !!document.getElementById("hitungNifasBtn");
+    if (currentPage === "suci") return !!document.getElementById("hitungSuciBtn");
+    if (currentPage === "iddah") return !!document.getElementById("hitungIddahBtn");
+    if (currentPage === "istihadhah") return !!document.getElementById("hitungIstihadhahBtn");
+    return false;
+  }
+
+  function apply(lang = getLang()) {
+    const currentPage = getCurrentPageKey();
+    if (!TARGET_PAGES.has(currentPage) || !isPageReady()) return false;
+
     setDirection(lang);
     ensureStyle();
     ensureSwitcher(lang);
-    if (lang === "id") return;
+    initScrollToTopButton();
+    bindCurrentPageActions();
 
-    const nextTitle = PAGE_TITLES[page]?.[lang];
-    if (nextTitle) document.title = nextTitle;
+    if (lang === "id") {
+      document.title = DEFAULT_TITLE;
+    } else {
+      const nextTitle = PAGE_TITLES[currentPage]?.[lang];
+      document.title = nextTitle || DEFAULT_TITLE;
+    }
 
-    translateTextNodes(document.body, lang);
-    translatePlaceholders(document.body, lang);
+    const roots = getTranslationRoots();
+    roots.forEach((root) => {
+      translateTextNodes(root, lang);
+      translatePlaceholders(root, lang);
+    });
     installAlertTranslator(lang);
     installObserver(lang);
+    return true;
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function applyWhenReady(attempt = 0) {
+    const applied = apply(getLang());
+    if (applied || attempt >= 12) return;
+
+    window.setTimeout(() => {
+      applyWhenReady(attempt + 1);
+    }, 150);
+  }
+
+  function notifyRouteChange() {
+    window.dispatchEvent(new Event("fiqh:routechange"));
+  }
+
+  function installNavigationHooks() {
+    if (window.__fiqhNavHooksInstalled) return;
+    window.__fiqhNavHooksInstalled = true;
+
+    const wrapHistoryMethod = (methodName) => {
+      const original = window.history[methodName];
+      if (typeof original !== "function") return;
+
+      window.history[methodName] = function (...args) {
+        const result = original.apply(this, args);
+        window.setTimeout(notifyRouteChange, 0);
+        return result;
+      };
+    };
+
+    wrapHistoryMethod("pushState");
+    wrapHistoryMethod("replaceState");
+
+    window.addEventListener("popstate", () => {
+      window.setTimeout(notifyRouteChange, 0);
+    });
+    window.addEventListener("fiqh:routechange", () => applyWhenReady());
+  }
+
+  installNavigationHooks();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      setupProdCleanLinks();
+      initScrollToTopButton();
+      applyWhenReady();
+    });
+  } else {
     setupProdCleanLinks();
-    apply(getLang());
+    initScrollToTopButton();
+    applyWhenReady();
+  }
+
+  window.addEventListener("load", () => applyWhenReady());
+  window.addEventListener("storage", (e) => {
+    if (e.key === "siteLang") applyWhenReady();
   });
+  window.addEventListener("fiqh:routechange", () => initScrollToTopButton());
 })();
