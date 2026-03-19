@@ -24,8 +24,8 @@ export default function FiqhWanitaNav({ currentPath }: FiqhWanitaNavProps) {
             src="/assets/images/logo.png"
             alt=""
             className="nav-brand-icon"
-            width={26}
-            height={26}
+            width={22}
+            height={22}
             loading="eager"
           />
         </span>
