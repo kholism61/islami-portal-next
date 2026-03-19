@@ -564,6 +564,45 @@ body.dark #overlay {
   font-size: 14px;
 }
 
+.logo {
+  font-size: 18px;
+}
+
+.nav-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.nav-logo-badge {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  flex: 0 0 auto;
+}
+
+body.dark .nav-logo-badge {
+  background: rgba(2, 6, 23, 0.45);
+  border-color: rgba(148, 163, 184, 0.24);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+}
+
+.nav-logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
+}
+
 /* =====================
    CARD (ARTIKEL)
 ===================== */
@@ -4663,6 +4702,32 @@ header .lang-badge {
   border: none;
 }
 
+#offline-home-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#offline-home-list:empty {
+  display: none;
+}
+
+#offline-home-list .card {
+  width: calc(33.333% - 20px);
+}
+
+@media (max-width: 900px) {
+  #offline-home-list .card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 500px) {
+  #offline-home-list .card {
+    width: 100%;
+  }
+}
+
 /* HEADER */
 .offline-section .section-header {
   display: flex;
@@ -5617,6 +5682,30 @@ html[lang="ar"] .article-content {
 #open-quran:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 28px rgba(250, 204, 21, 0.55);
+}
+
+#open-hadith {
+  padding: 8px 18px;
+  border-radius: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#open-hadith:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.prayer-box #open-quran {
+  margin-inline-end: 14px;
+}
+
+.prayer-box #open-hadith {
+  margin-inline-start: 14px;
 }
 
 /* ===============================
@@ -7487,6 +7576,16 @@ opacity:1;
   justify-content: center;
   border: none;
   cursor: pointer;
+}
+
+.hero-auth-buttons .auth-exit-btn.is-logged-in {
+  background: #2563eb;
+  color: #eff6ff;
+}
+
+.hero-auth-buttons .auth-exit-btn.is-logged-in:hover {
+  background: #1d4ed8;
+  color: #ffffff;
 }
 
 .lang-menu button.active {

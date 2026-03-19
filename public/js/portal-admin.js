@@ -299,7 +299,7 @@
     removableKeys.forEach((key) => localStorage.removeItem(key));
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function init() {
     const adminUser = window.PortalAuth.requireAuth({ adminOnly: true });
     if (!adminUser) return;
 
@@ -348,6 +348,12 @@
         window.location.reload();
       });
     }
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 })();
 

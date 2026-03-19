@@ -104,8 +104,25 @@
   margin-top: 60px;
 }
 
+.bookmark-container > .bookmark-btn,
+.bookmark-container > .clear-bookmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 10px 0 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .bookmark-container > .bookmark-btn,
+  .bookmark-container > .clear-bookmark {
+    width: 100%;
+    margin: 10px 0 0;
+  }
+}
+
 .export-btn {
-  margin: 16px 0;
   padding: 10px 16px;
   border-radius: 10px;
   border: none;
@@ -163,6 +180,10 @@ body.dark .not-found {
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
+}
+
+#clearBookmarks {
+  margin: 12px 10px 0 0;
 }
 
 .clear-bookmark:hover {

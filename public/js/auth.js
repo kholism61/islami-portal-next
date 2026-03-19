@@ -3,7 +3,8 @@
     users: "islamiPortalUsers",
     session: "islamiPortalSession",
     audit: "islamiPortalAudit",
-    legacyUser: "user"
+    legacyUser: "user",
+    attempts: "islamiPortalLoginAttempts"
   };
 
   const ADMIN_EMAILS = [
@@ -49,6 +50,60 @@
       return JSON.parse(value);
     } catch {
       return fallback;
+    }
+  }
+
+  function getAttemptsStore() {
+    const store = safeParse(localStorage.getItem(STORAGE_KEYS.attempts), {});
+    return store && typeof store === "object" ? store : {};
+  }
+
+  function saveAttemptsStore(store) {
+    localStorage.setItem(STORAGE_KEYS.attempts, JSON.stringify(store || {}));
+  }
+
+  function getAttemptState(email) {
+    const key = normalizeEmail(email);
+    const store = getAttemptsStore();
+    const raw = store[key];
+    if (!raw || typeof raw !== "object") return { count: 0, lockedUntil: 0 };
+    return {
+      count: Number(raw.count) || 0,
+      lockedUntil: Number(raw.lockedUntil) || 0
+    };
+  }
+
+  function clearAttemptState(email) {
+    const key = normalizeEmail(email);
+    const store = getAttemptsStore();
+    delete store[key];
+    saveAttemptsStore(store);
+  }
+
+  function registerFailedAttempt(email) {
+    const key = normalizeEmail(email);
+    if (!key) return;
+    const now = Date.now();
+    const store = getAttemptsStore();
+    const current = getAttemptState(key);
+    const nextCount = (current.count || 0) + 1;
+    let lockedUntil = current.lockedUntil || 0;
+
+    if (nextCount >= 5) {
+      lockedUntil = Math.max(lockedUntil, now + 10 * 60 * 1000);
+    }
+
+    store[key] = { count: nextCount, lockedUntil };
+    saveAttemptsStore(store);
+  }
+
+  function ensureNotLocked(email) {
+    const key = normalizeEmail(email);
+    const state = getAttemptState(key);
+    const now = Date.now();
+    if (state.lockedUntil && state.lockedUntil > now) {
+      const seconds = Math.ceil((state.lockedUntil - now) / 1000);
+      throw new Error(rt("errorLocked", { fallback: `Terlalu banyak percobaan. Coba lagi dalam ${seconds} detik.` }));
     }
   }
 
@@ -232,21 +287,21 @@
     const trimmed = String(value).trim();
     if (!trimmed) return value;
 
-    if (isLocalDevHost()) {
-      return trimmed;
-    }
-
     const withSlash = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
     if (withSlash === "/index.html") return "/";
     return withSlash.replace(/\.html$/i, "");
   }
 
   function getPostLoginRedirect(user, next) {
+    if (user && user.role === "admin") {
+      return toPageHref("portal-admin.html");
+    }
+
     if (next) {
       return toPageHref(next);
     }
 
-    return user.role === "admin" ? toPageHref("portal-admin.html") : toPageHref("index.html");
+    return toPageHref("index.html");
   }
 
   function signup(payload) {
@@ -302,6 +357,8 @@
       throw new Error(rt("errorLoginRequired", { fallback: "Email and password are required." }));
     }
 
+    ensureNotLocked(email);
+
     const users = getUsers();
     const user = users.find((item) => normalizeEmail(item.email) === email);
 
@@ -314,8 +371,11 @@
     }
 
     if (user.password !== password) {
+      registerFailedAttempt(email);
       throw new Error(rt("errorWrongPassword", { fallback: "Incorrect password." }));
     }
+
+    clearAttemptState(email);
 
     const sessionUser = persistSession(user);
     pushAudit("signin", `${sessionUser.name} ${auditActionText("signin")}`, email);
@@ -343,15 +403,15 @@
   function requireAuth(options = {}) {
     const settings = {
       adminOnly: false,
-      redirectTo: "signin.html",
+      redirectTo: "/signin",
       ...options
     };
 
     const user = getCurrentUser();
     const currentPage = window.location.pathname.split("/").pop() || "portal-admin.html";
     const currentKey = currentPage.endsWith(".html") ? currentPage : `${currentPage}.html`;
-    const nextTarget = isLocalDevHost() ? currentKey : toPageHref(currentKey);
-    const redirectTo = isLocalDevHost() ? settings.redirectTo : toPageHref(settings.redirectTo);
+    const nextTarget = toPageHref(currentKey);
+    const redirectTo = toPageHref(settings.redirectTo);
 
     if (!user) {
       window.location.href = `${redirectTo}?next=${encodeURIComponent(nextTarget)}`;
@@ -359,7 +419,7 @@
     }
 
     if (settings.adminOnly && user.role !== "admin") {
-      const signinHref = isLocalDevHost() ? "signin.html" : toPageHref("signin.html");
+      const signinHref = toPageHref("signin.html");
       window.location.href = `${signinHref}?next=${encodeURIComponent(nextTarget)}&denied=1`;
       return null;
     }
@@ -460,9 +520,11 @@
         const normalized = normalizeBrandText(el.textContent);
         if (!BRAND_LABELS.has(normalized)) return;
 
+        const iconSrc = new URL("favicon.ico", document.baseURI).toString();
+
         el.dataset.portalBrandDone = "1";
         el.classList.add("portal-nav-brand");
-        el.innerHTML = `<span class="portal-brand-glass"><img class="portal-brand-icon" src="/favicon.ico" alt=""></span><span class="portal-brand-text">${normalized}</span>`;
+        el.innerHTML = `<span class="portal-brand-glass"><img class="portal-brand-icon" src="${iconSrc}" alt=""></span><span class="portal-brand-text">${normalized}</span>`;
       });
     });
   }

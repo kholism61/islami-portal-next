@@ -2,26 +2,29 @@ import Script from "next/script";
 
 import { loadLegacyHtml } from "@/lib/legacy-html";
 
-export default function LegacyHtmlPage({
-  source,
-  className,
-}: {
-  source: string;
-  className?: string;
-}) {
-  const page = loadLegacyHtml(source);
+type Props = {
+  relFilePath: string;
+};
+
+export default function LegacyHtmlPage({ relFilePath }: Props) {
+  const legacy = loadLegacyHtml(relFilePath);
 
   return (
     <>
-      {page.head.stylesheets.map((href) => (
+      {legacy.head.stylesheets.map((href) => (
         <link key={href} rel="stylesheet" href={href} />
       ))}
 
-      {page.head.scripts.map((src) => (
-        <Script key={src} src={src} strategy="afterInteractive" />
+      {legacy.head.scripts.map((script) => (
+        <Script
+          key={script.src}
+          src={script.src}
+          strategy="afterInteractive"
+          type={script.type}
+        />
       ))}
 
-      <div className={className ?? ""} dangerouslySetInnerHTML={{ __html: page.bodyHtml }} />
+      <div dangerouslySetInnerHTML={{ __html: legacy.bodyHtml }} />
     </>
   );
 }

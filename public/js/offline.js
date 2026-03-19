@@ -448,6 +448,11 @@ if (!container || !sortSelect) {
     }
   });
 
+  window.addEventListener("reading-progress-updated", () => {
+    offlineData = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    rerenderAll();
+  });
+
   window.addEventListener("focus", () => {
     offlineData = JSON.parse(localStorage.getItem("offlineArticles")) || {};
     renderOfflineList(searchInput?.value || "");

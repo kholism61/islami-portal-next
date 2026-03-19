@@ -19,6 +19,65 @@ body.dark {
   background: #0f172a;
 }
 
+.scroll-to-top{
+  position: fixed;
+
+  left: 18px;
+  bottom: 26px;
+
+  width: 42px;
+  height: 36px;
+
+  border: none;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  background: linear-gradient(135deg,#ef4444,#dc2626);
+
+  color: white;
+
+  box-shadow:
+    0 6px 16px rgba(0,0,0,0.25),
+    0 3px 8px rgba(239,68,68,0.35);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(14px);
+  transition: all 0.28s ease;
+
+  z-index: 999;
+  pointer-events: none;
+}
+
+.scroll-to-top svg{
+  width: 16px;
+  height: 16px;
+}
+
+.scroll-to-top.show{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-to-top:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.3),
+    0 6px 14px rgba(239,68,68,0.45);
+}
+
+.scroll-to-top:active{
+  transform: scale(0.95);
+}
+
 /* =====================
    HEADER
 ===================== */

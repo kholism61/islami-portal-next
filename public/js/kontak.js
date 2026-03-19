@@ -24,33 +24,7 @@ function t(key) {
   return kontakUiText[lang]?.[key] || kontakUiText.id[key] || key;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const links = document.querySelectorAll(".contact-link");
-
-  links.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      createRipple(event, link);
-    });
-
-    link.addEventListener("click", () => {
-      let textToCopy = "";
-
-      if (link.href.startsWith("mailto:")) {
-        textToCopy = link.textContent.trim();
-        showToast(t("copied_email"));
-      }
-
-      if (link.href.includes("wa.me")) {
-        textToCopy = link.href.split("wa.me/")[1];
-        showToast(t("copied_whatsapp"));
-      }
-
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy);
-      }
-    });
-  });
-
+(function () {
   function createRipple(event, element) {
     const circle = document.createElement("span");
     circle.className = "ripple";
@@ -79,4 +53,42 @@ document.addEventListener("DOMContentLoaded", () => {
       toast.classList.remove("show");
     }, 2200);
   }
-});
+
+  function initKontak() {
+    const links = document.querySelectorAll(".contact-link");
+    if (!links.length) return;
+
+    links.forEach((link) => {
+      if (link.dataset.kontakBound === "true") return;
+      link.dataset.kontakBound = "true";
+
+      link.addEventListener("click", (event) => {
+        createRipple(event, link);
+      });
+
+      link.addEventListener("click", () => {
+        let textToCopy = "";
+
+        if (link.href.startsWith("mailto:")) {
+          textToCopy = link.textContent.trim();
+          showToast(t("copied_email"));
+        }
+
+        if (link.href.includes("wa.me")) {
+          textToCopy = link.href.split("wa.me/")[1];
+          showToast(t("copied_whatsapp"));
+        }
+
+        if (textToCopy) {
+          navigator.clipboard.writeText(textToCopy);
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initKontak);
+  } else {
+    initKontak();
+  }
+})();

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "md:update": "node scripts/generate-article-store.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

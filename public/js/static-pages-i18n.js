@@ -621,7 +621,46 @@ ul2: [
     if (page === "ramadhan.html") applyRamadhan(lang);
   }
 
-  document.addEventListener("DOMContentLoaded", run);
+  function bindScrollToTop() {
+    const scrollBtn = document.getElementById("scrollToTopBtn");
+    if (!scrollBtn) return;
+
+    let lastScrollY = window.scrollY;
+
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY;
+
+      if (currentScrollY > 320 && isScrollingDown) {
+        scrollBtn.classList.add("show");
+      } else if (currentScrollY < 220 || currentScrollY < lastScrollY) {
+        scrollBtn.classList.remove("show");
+      }
+
+      lastScrollY = currentScrollY;
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    handleScroll();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      run();
+      bindScrollToTop();
+    });
+  } else {
+    run();
+    bindScrollToTop();
+  }
   window.addEventListener("portal-language-change", run);
   window.addEventListener("storage", (e) => {
     if (e.key === "siteLang") run();

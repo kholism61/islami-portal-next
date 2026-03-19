@@ -4,7 +4,134 @@
 const SITE_LANGS = ["id", "en", "ar"];
 const localeMap = { id: "id-ID", en: "en-US", ar: "ar-EG" };
 const articleStoreCache = new Map();
-const LEGACY_ARTICLE_STORE = window.__PORTAL_ARTICLE_STORE__ || {};
+
+function getLegacyArticleStore() {
+  const store = window.__PORTAL_ARTICLE_STORE__;
+  return store && typeof store === "object" ? store : {};
+}
+
+function bindArticleSaveButtonsWithRetry(attemptsLeft = 80) {
+  if (!isArticlePage) return;
+  const bookmarkBtn = document.getElementById("bookmarkBtn");
+  const offlineBtn = document.getElementById("offlineSaveBtn");
+
+  const hasAny = !!bookmarkBtn || !!offlineBtn;
+  if (!hasAny) {
+    if ((attemptsLeft || 0) <= 0) return;
+    window.setTimeout(() => bindArticleSaveButtonsWithRetry((attemptsLeft || 0) - 1), 80);
+    return;
+  }
+
+  if (bookmarkBtn && !bookmarkBtn.dataset.bound) {
+    const articleId = getCurrentArticleId();
+    if (!articleId) {
+      bookmarkBtn.disabled = true;
+    } else {
+      let saved = [];
+      try {
+        const parsed = JSON.parse(localStorage.getItem("bookmarks"));
+        saved = Array.isArray(parsed) ? parsed : [];
+      } catch {
+        saved = [];
+      }
+      setArticleBookmarkState(bookmarkBtn, saved.includes(articleId));
+    }
+
+    bookmarkBtn.dataset.bound = "1";
+    bookmarkBtn.addEventListener("click", () => {
+      const id = getCurrentArticleId();
+      if (!id) return;
+
+      let savedNow = [];
+      try {
+        const parsed = JSON.parse(localStorage.getItem("bookmarks"));
+        savedNow = Array.isArray(parsed) ? parsed : [];
+      } catch {
+        savedNow = [];
+      }
+      savedNow = [...new Set(savedNow)];
+
+      const wasSaved = savedNow.includes(id);
+      savedNow = wasSaved ? savedNow.filter((item) => item !== id) : [...savedNow, id];
+      localStorage.setItem("bookmarks", JSON.stringify(savedNow));
+      if (!wasSaved) {
+        try {
+          upsertBookmarkArticleMeta(id);
+        } catch {}
+      } else {
+        try {
+          removeBookmarkArticleMeta(id);
+        } catch {}
+      }
+      setArticleBookmarkState(bookmarkBtn, !wasSaved);
+      window.updateBookmarkBadge?.();
+      try {
+        window.dispatchEvent(new Event("bookmarks-updated"));
+      } catch {}
+      try {
+        showToast(uiText(!wasSaved ? "bookmark_added" : "bookmark_removed"));
+      } catch {}
+    });
+  }
+
+  if (offlineBtn && !offlineBtn.dataset.bound) {
+    const safeId = getCurrentArticleId();
+    if (!safeId) {
+      offlineBtn.disabled = true;
+    }
+
+    offlineBtn.dataset.bound = "1";
+    offlineBtn.addEventListener("click", () => {
+      const id = getCurrentArticleId();
+      if (!id) return;
+
+      const offline = safeJsonParse("offlineArticles", {});
+      const fromStore = getArticleRawById(id) || getLegacyArticleStore()?.[id] || articleStore?.[id];
+      const snapshot = fromStore || buildOfflineSnapshotFromDom(id);
+      if (!snapshot) return;
+      offline[id] = snapshot;
+      localStorage.setItem("offlineArticles", JSON.stringify(offline));
+      try {
+        window.dispatchEvent(new Event("offlineUpdated"));
+      } catch {}
+      try {
+        showToast(uiText("offline_saved"));
+      } catch {}
+    });
+  }
+}
+
+function onDomReady(callback) {
+  if (typeof document === "undefined") return;
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", callback);
+    return;
+  }
+  callback();
+}
+
+onDomReady(() => {
+  try {
+    bindArticleSaveButtonsWithRetry();
+  } catch {}
+});
+
+window.addEventListener("load", () => {
+  try {
+    bindArticleSaveButtonsWithRetry();
+  } catch {}
+});
+
+function safeJsonParse(storageKey, fallbackValue) {
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (!raw) return fallbackValue;
+    const parsed = JSON.parse(raw);
+    return parsed ?? fallbackValue;
+  } catch {
+    return fallbackValue;
+  }
+}
 
 const mojibakePattern = /(?:\u00C3|\u00C2|\u00E2|\u00F0|\u00D8|\u00D9|\u00EF|\u00C4|\u00E1)/;
 const cp1252ByteMap = new Map([
@@ -108,6 +235,142 @@ function normalizeSiteLang(lang = "id") {
   return SITE_LANGS.includes(lang) ? lang : "id";
 }
 
+function getCurrentArticleId() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const fromQuery = params.get("id") || params.get("slug");
+    if (fromQuery) return fromQuery;
+
+    const path = String(window.location.pathname || "");
+    const match = path.match(/^\/(?:article|articles|offline\/read)\/(.+)$/);
+    if (!match || !match[1]) return "";
+    const slug = match[1].split("/")[0];
+    try {
+      return decodeURIComponent(slug);
+    } catch {
+      return slug;
+    }
+  } catch {
+    return "";
+  }
+}
+
+function upsertBookmarkArticleMeta(articleId) {
+  if (!articleId) return;
+
+  const raw = getArticleRawById(articleId);
+  const view = getArticleView(articleId);
+  const source = view || raw;
+  if (!source) return;
+
+  const meta = {
+    id: source.id || articleId,
+    slug: source.slug || articleId,
+    judul: source.judul || "",
+    kategori: source.kategori || "",
+    subkategori: source.subkategori || "",
+    penulis: source.penulis || "",
+    tanggal: source.tanggal || "",
+    createdAt: source.createdAt || "",
+    thumbnail: source.thumbnail || "",
+    preview: source.preview || source.ringkasan || "",
+    ringkasan: source.ringkasan || source.preview || "",
+    bahasa: source.bahasa || source.locale || "",
+    locale: source.locale || source.bahasa || "",
+    lang: source.lang || ""
+  };
+
+  let map = {};
+  try {
+    const parsed = JSON.parse(localStorage.getItem("bookmarkArticles"));
+    map = parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    map = {};
+  }
+
+  map[articleId] = meta;
+  try {
+    localStorage.setItem("bookmarkArticles", JSON.stringify(map));
+  } catch {}
+}
+
+function removeBookmarkArticleMeta(articleId) {
+  if (!articleId) return;
+
+  let map = {};
+  try {
+    const parsed = JSON.parse(localStorage.getItem("bookmarkArticles"));
+    map = parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    map = {};
+  }
+
+  if (!map || typeof map !== "object" || !map[articleId]) return;
+  delete map[articleId];
+  try {
+    localStorage.setItem("bookmarkArticles", JSON.stringify(map));
+  } catch {}
+}
+
+function buildOfflineSnapshotFromDom(articleId) {
+  if (!articleId) return null;
+  const titleEl = document.getElementById("judul-artikel");
+  const penulisEl = document.getElementById("penulis");
+  const tanggalEl = document.getElementById("tanggal");
+  const kategoriEl = document.getElementById("kategori");
+  const isiEl = document.getElementById("isi-artikel");
+  const thumbEl = document.getElementById("article-thumb");
+
+  const isi = isiEl ? isiEl.innerHTML : "";
+  if (!isi) return null;
+
+  const title = titleEl ? (titleEl.textContent || "").trim() : "";
+  const penulis = penulisEl ? (penulisEl.textContent || "").trim() : "";
+  const tanggal = tanggalEl ? (tanggalEl.textContent || "").trim() : "";
+  const kategori = kategoriEl ? (kategoriEl.textContent || "").trim() : "";
+  const thumbnail = thumbEl && thumbEl.getAttribute ? (thumbEl.getAttribute("src") || "") : "";
+
+  return {
+    id: articleId,
+    slug: articleId,
+    judul: title,
+    penulis,
+    tanggal,
+    kategori,
+    thumbnail,
+    isi,
+  };
+}
+
+function getBookmarkArticlesMap() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem("bookmarkArticles"));
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function getLightArticleMeta(articleId) {
+  if (!articleId) return null;
+  const raw = getArticleRawById(articleId);
+  if (raw) return raw;
+
+  const legacy = getLegacyArticleStore();
+  const legacyFound = legacy && typeof legacy === "object" ? legacy[articleId] : null;
+  if (legacyFound) return legacyFound;
+
+  const bookmarksMeta = getBookmarkArticlesMap();
+  const savedMeta = bookmarksMeta && typeof bookmarksMeta === "object" ? bookmarksMeta[articleId] : null;
+  if (savedMeta) return savedMeta;
+
+  const offline = safeJsonParse("offlineArticles", {});
+  const offlineMeta = offline && typeof offline === "object" ? offline[articleId] : null;
+  if (offlineMeta) return offlineMeta;
+
+  return null;
+}
+
 function hasBrokenTranslationText(value = "") {
   const text = String(value || "");
   if (!text) return false;
@@ -146,24 +409,53 @@ function getSiteLang() {
 
 function loadStoreForLang(lang = "id") {
   const safeLang = normalizeSiteLang(lang);
-  if (articleStoreCache.has(safeLang)) {
-    return articleStoreCache.get(safeLang);
-  }
+  const legacy = getLegacyArticleStore();
+  const store = legacy[safeLang];
 
-  const store = LEGACY_ARTICLE_STORE[safeLang];
-  if (store && typeof store === "object") {
-    repairNestedText(store);
-    articleStoreCache.set(safeLang, store);
+  const hasUsableStore = store && typeof store === "object" && Object.keys(store).length > 0;
+  if (hasUsableStore) {
+    const cached = articleStoreCache.get(safeLang);
+    if (cached !== store) {
+      repairNestedText(store);
+      articleStoreCache.set(safeLang, store);
+    }
     return store;
   }
 
-  const emptyStore = {};
-  articleStoreCache.set(safeLang, emptyStore);
-  return emptyStore;
+  const cached = articleStoreCache.get(safeLang);
+  if (cached && typeof cached === "object" && Object.keys(cached).length > 0) {
+    return cached;
+  }
+
+  return {};
 }
 
-const articleStore = loadStoreForLang(getSiteLang());
+let articleStore = loadStoreForLang(getSiteLang());
 const FALLBACK_LANG_ORDER = ["id", "en", "ar"];
+
+function refreshArticleStore() {
+  articleStore = loadStoreForLang(getSiteLang());
+  return articleStore;
+}
+
+function buildSitePath(pathname = "") {
+  const raw = String(pathname || "").trim();
+  if (!raw) return "/";
+  if (/^(https?:)?\/\//i.test(raw)) return raw;
+  if (raw.startsWith("/")) return raw;
+  return `/${raw.replace(/^\.\//, "")}`;
+}
+
+function buildArticleHref(id, title = "") {
+  const basePath = typeof window !== "undefined" && String(window.location?.pathname || "").startsWith("/articles")
+    ? "/articles"
+    : "/article";
+  const params = new URLSearchParams();
+  if (id) params.set("id", String(id));
+  const slug = slugify(title || "");
+  if (slug) params.set("slug", slug);
+  return `${basePath}?${params.toString()}`;
+}
 
 const getLocalizedArticle = (id, lang = getSiteLang()) => {
   const order = [normalizeSiteLang(lang), ...FALLBACK_LANG_ORDER.filter((item) => item !== normalizeSiteLang(lang))];
@@ -195,7 +487,7 @@ function getOfflineArticleById(id) {
   if (!id) return null;
 
   try {
-    const offline = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    const offline = safeJsonParse("offlineArticles", {});
     return offline[id] || null;
   } catch {
     return null;
@@ -216,7 +508,7 @@ function getAllArticleKeys(includeOffline = false) {
 
   if (includeOffline) {
     try {
-      const offline = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+      const offline = safeJsonParse("offlineArticles", {});
       Object.keys(offline).forEach((id) => keys.add(id));
     } catch {
       // ignore invalid offline payload
@@ -322,6 +614,17 @@ function normalizeCategoryLabel(value = "") {
     .replace(/\s+/g, " ");
 }
 
+function normalizeSlugKey(value = "") {
+  return repairMojibakeString(String(value || ""))
+    .replace(/\u00a0/g, " ")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9\-]/g, "")
+    .replace(/\-+/g, "-")
+    .replace(/^\-+|\-+$/g, "");
+}
+
 function getCanonicalCategoryKey(category = "") {
   const token = normalizeCategoryLabel(category);
   if (!token) return null;
@@ -337,9 +640,9 @@ function getStableArticleMeta(id, rawArticle = null, viewArticle = null) {
   const tagSource = baseArticle?.tag || rawArticle?.tag || viewArticle?.tag || "";
 
   return {
-    categoryKey: getCanonicalCategoryKey(categorySource) || normalize(categorySource) || normalizeCategoryLabel(categorySource),
-    subcategoryKey: normalize(subcategorySource),
-    tagKey: normalize(tagSource),
+    categoryKey: getCanonicalCategoryKey(categorySource) || normalizeSlugKey(categorySource) || normalizeCategoryLabel(categorySource),
+    subcategoryKey: normalizeSlugKey(subcategorySource),
+    tagKey: normalizeSlugKey(tagSource),
     rawCategory: categorySource,
     rawSubcategory: subcategorySource,
     rawTag: tagSource,
@@ -376,15 +679,28 @@ const formatArticleDate = (article, lang = getSiteLang(), includeWeekday = false
   ).format(parsed);
 };
 
-const isHomePage =
-  document.getElementById("articles-container") !== null &&
-  !new URLSearchParams(window.location.search).get("id");
+const pageParams = (() => {
+  try {
+    return new URLSearchParams(window.location.search);
+  } catch {
+    return new URLSearchParams();
+  }
+})();
 
 const isArticlePage =
   document.getElementById("isi-artikel") !== null;
 
+const isHomePage =
+  document.getElementById("articles-container") !== null &&
+  !isArticlePage &&
+  !pageParams.get("id") &&
+  !pageParams.get("slug");
+
 let cards = [];
 let activeFilter = "all";
+
+let sidebar = null;
+let overlay = null;
 
 function getArticleView(id) {
   return getLocalizedArticle(id, getSiteLang()) || getArticleRawById(id) || getOfflineArticleById(id);
@@ -813,7 +1129,7 @@ function renderRelatedArticles(articleId, articleKeys, currentRaw, currentView) 
       return `
         <div class="related-card">
           <span class="lang-badge">${item.lang || "ID"}</span>
-          <a href="article?id=${key}&slug=${slugify(item.judul || key)}" class="related-link">
+          <a href="${buildArticleHref(key, item.judul || key)}" class="related-link">
             <img src="${item.thumbnail || "assets/images/default.jpg"}" class="related-thumb" alt="${item.judul || "Artikel"}">
             <span class="category">${item.kategori || ""}</span>
             <h4>${item.judul || ""}</h4>
@@ -843,7 +1159,7 @@ function renderRecommendedArticles(articleId) {
   if (sectionTitle) sectionTitle.textContent = `\u2728 ${uiText("recommended_articles")}`;
   if (!container || !articleId) return;
 
-  const offlineMap = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+  const offlineMap = safeJsonParse("offlineArticles", {});
   const offlineCurrent = offlineMap[articleId] || null;
   const currentRaw = getArticleRawById(articleId) || offlineCurrent;
   const currentView = getArticleView(articleId) || currentRaw;
@@ -859,7 +1175,7 @@ function renderRecommendedArticles(articleId) {
   const currentSubcategory = normalize(currentView?.subkategori || currentRaw?.subkategori || "");
   const currentTag = normalize(currentView?.tag || currentRaw?.tag || "");
 
-  const reading = JSON.parse(localStorage.getItem("readingProgress")) || {};
+  const reading = safeJsonParse("readingProgress", {});
   const userCategories = {};
 
   Object.keys(reading).forEach((id) => {
@@ -917,7 +1233,7 @@ function renderRecommendedArticles(articleId) {
 
   container.innerHTML = scored
     .map((item) => `
-      <a href="article?id=${item.id}&slug=${slugify(item.view.judul || item.id)}" class="recommended-card">
+      <a href="${buildArticleHref(item.id, item.view.judul || item.id)}" class="recommended-card">
         <span class="rec-cat">${item.view.kategori || ""}</span>
         <h4>${item.view.judul || ""}</h4>
         <p>${formatArticleDate(item.view || item.rawArticle, getSiteLang())}</p>
@@ -1121,7 +1437,7 @@ function getArticleScrollOffset() {
   const navbar = document.querySelector(".navbar");
   return (navbar?.offsetHeight || 84) + 12;
 }
-document.addEventListener("DOMContentLoaded", () => {
+onDomReady(() => {
   initDomTextRepair();
 
  // ===============================
@@ -1219,8 +1535,8 @@ if (themeBtn) {
      SIDEBAR TOGGLE
   ===================== */
   const menuBtn = document.getElementById("menuBtn");
-  const sidebar = document.getElementById("sidebar");
-  const overlay = document.getElementById("overlay");
+  sidebar = document.getElementById("sidebar");
+  overlay = document.getElementById("overlay");
 
   if (menuBtn && sidebar && overlay) {
     menuBtn.addEventListener("click", () => {
@@ -1281,6 +1597,8 @@ if (themeBtn) {
     }
   }
 })();
+
+});
 
 
 function applyArticleFilter(filter, triggerElement = null) {
@@ -1343,6 +1661,7 @@ document.querySelectorAll(".sidebar-toggle").forEach(btn => {
       if (item !== parent) item.classList.remove("active");
     });
 
+    if (!parent) return;
     parent.classList.toggle("active");
 
     // auto scroll ke item
@@ -1351,10 +1670,11 @@ document.querySelectorAll(".sidebar-toggle").forEach(btn => {
       block: "start"
     });
 
-    if (filterKey && cards.some((card) =>
-      card.dataset.category === filterKey ||
-      card.dataset.subcategory === filterKey ||
-      card.dataset.tag === filterKey
+    const cardList = Array.isArray(cards) ? cards : Array.from(cards || []);
+    if (filterKey && cardList.some((card) =>
+      card?.dataset?.category === filterKey ||
+      card?.dataset?.subcategory === filterKey ||
+      card?.dataset?.tag === filterKey
     )) {
       applyArticleFilter(filterKey, null);
     }
@@ -1423,48 +1743,62 @@ if (searchInput) {
    AUTO-GENERATE HOME ARTICLES (FINAL AMAN)
 ===================== */
 
-const articlesContainer = document.getElementById("articles-container");
+function waitForHomeStoreAndRender(attemptsLeft = 60) {
+  const articlesContainer = document.getElementById("articles-container");
+  if (!articlesContainer) {
+    if ((attemptsLeft || 0) <= 0) return;
+    window.setTimeout(() => waitForHomeStoreAndRender((attemptsLeft || 0) - 1), 60);
+    return;
+  }
 
-if (articlesContainer && typeof articleStore !== "undefined") {
+  if (!articleStore || typeof articleStore !== "object" || Object.keys(articleStore).length === 0) {
+    refreshArticleStore();
+  }
+
+  if (!articleStore || typeof articleStore !== "object" || Object.keys(articleStore).length === 0) {
+    if ((attemptsLeft || 0) <= 0) return;
+    window.setTimeout(() => waitForHomeStoreAndRender((attemptsLeft || 0) - 1), 60);
+    return;
+  }
 
   articlesContainer.innerHTML = ""; // hapus skeleton SAJA SEKALI
 
   //  urutkan artikel (terbaru dulu)
- const articleKeys = getSortedArticleKeysByDate();
- const displayKeys = articleKeys.length ? articleKeys : getSortedGlobalArticleKeysByDate();
+  const articleKeys = getSortedArticleKeysByDate();
+  const displayKeys = articleKeys.length ? articleKeys : getSortedGlobalArticleKeysByDate();
 
+  function createCards(articles) {
+    articles.forEach((id) => {
+      const article = articleStore[id] || getArticleRawById(id);
+      const articleRaw = getArticleRawById(id) || article;
+      const articleView = getArticleView(id);
+      if (!article || !articleView || !articleRaw) return;
+      const stableMeta = getStableArticleMeta(id, articleRaw, articleView);
 
-  displayKeys.forEach((id) => {
-    const article = articleStore[id] || getArticleRawById(id);
-    const articleRaw = getArticleRawById(id) || article;
-    const articleView = getArticleView(id);
-    if (!article || !articleView || !articleRaw) return;
-    const stableMeta = getStableArticleMeta(id, articleRaw, articleView);
+      const card = document.createElement("article");
+      card.className = "card";
 
-    const card = document.createElement("article");
-    card.className = "card";
+      card.dataset.category = stableMeta.categoryKey;
+      if (stableMeta.subcategoryKey) {
+        card.dataset.subcategory = stableMeta.subcategoryKey;
+      }
+      if (stableMeta.tagKey) {
+        card.dataset.tag = stableMeta.tagKey;
+      }
 
-    card.dataset.category = stableMeta.categoryKey;
-    if (stableMeta.subcategoryKey) {
-      card.dataset.subcategory = stableMeta.subcategoryKey;
-    }
-    if (stableMeta.tagKey) {
-      card.dataset.tag = stableMeta.tagKey;
-    }
+      const isFeaturedArticle = isFlagEnabled(articleRaw.featured);
+      const isPopularArticle = isFlagEnabled(articleRaw.popular);
 
-    const isFeaturedArticle = isFlagEnabled(articleRaw.featured);
-    const isPopularArticle = isFlagEnabled(articleRaw.popular);
+      if (isFeaturedArticle) {
+        card.dataset.featured = "true";
+        card.classList.add("is-featured");
+        card.classList.add("show-featured");
+      }
 
-    if (isFeaturedArticle) {
-      card.dataset.featured = "true";
-      card.classList.add("is-featured");
-      card.classList.add("show-featured");
-    }
-
-    if (isPopularArticle) {
-      card.dataset.popular = "true";
-      card.classList.add("is-popular");
-    }
+      if (isPopularArticle) {
+        card.dataset.popular = "true";
+        card.classList.add("is-popular");
+      }
 
     const daysOld =
       (new Date() - new Date(articleRaw.createdAt || article.createdAt)) / (1000 * 60 * 60 * 24);
@@ -1493,6 +1827,13 @@ if (articlesContainer && typeof articleStore !== "undefined") {
     bookmarkBtn.dataset.id = id;
     bookmarkBtn.innerHTML = "&#9734;";
 
+    try {
+      const saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
+      setCardBookmarkState(bookmarkBtn, Array.isArray(saved) && saved.includes(id));
+    } catch {
+      setCardBookmarkState(bookmarkBtn, false);
+    }
+
     categoryTop.appendChild(categorySpan);
     categoryTop.appendChild(bookmarkBtn);
 
@@ -1505,7 +1846,7 @@ if (articlesContainer && typeof articleStore !== "undefined") {
 
     const readMore = document.createElement("a");
     readMore.className = "read-more";
-    readMore.href = `article?id=${id}&slug=${slugify(titleText)}`;
+    readMore.href = buildArticleHref(id, titleText);
     readMore.textContent = uiText("read_more");
 
     const tanggal = formatArticleDate(articleRaw, getSiteLang(), true);
@@ -1543,41 +1884,71 @@ if (articlesContainer && typeof articleStore !== "undefined") {
     card.appendChild(footer);
 
     articlesContainer.appendChild(card);
+    });
+  }
 
-   // ==============================
-// BOOKMARK BUTTON CARD
-// ==============================
-const starBtn = card.querySelector(".card-bookmark");
+function bindCardBookmarkClicks() {
+  const container = document.getElementById("articles-container") || document;
+  if (!container || container.dataset.bookmarkBound) return;
+  container.dataset.bookmarkBound = "1";
 
-if (starBtn) {
-  const saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
-  setCardBookmarkState(starBtn, saved.includes(id));
+  container.addEventListener("click", (event) => {
+    const target = event.target;
+    const origin =
+      target && target instanceof Element
+        ? target
+        : target && target.parentElement
+          ? target.parentElement
+          : null;
+    const btn = origin ? origin.closest(".card-bookmark") : null;
+    if (!btn) return;
 
-  starBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
 
-    let savedNow = JSON.parse(localStorage.getItem("bookmarks")) || [];
-    savedNow = [...new Set(savedNow)];
+    const id = btn.dataset.id;
+    if (!id) return;
 
-    if (savedNow.includes(id)) {
-      savedNow = savedNow.filter((bookmarkId) => bookmarkId !== id);
-    } else {
-      savedNow.push(id);
-      starBtn.classList.add("pop");
-      setTimeout(() => starBtn.classList.remove("pop"), 250);
+    let savedNow = [];
+    try {
+      savedNow = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    } catch {
+      savedNow = [];
     }
 
-    localStorage.setItem("bookmarks", JSON.stringify(savedNow));
-    const isSaved = savedNow.includes(id);
-    setCardBookmarkState(starBtn, isSaved);
-    showToast(uiText(isSaved ? "bookmark_added" : "bookmark_removed"));
-    updateBookmarkBadge?.();
-  });
-}
-  });
+    savedNow = Array.isArray(savedNow) ? [...new Set(savedNow)] : [];
+    const wasSaved = savedNow.includes(id);
+    const nextSaved = wasSaved ? savedNow.filter((item) => item !== id) : [...savedNow, id];
 
+    localStorage.setItem("bookmarks", JSON.stringify(nextSaved));
+    if (!wasSaved) {
+      try {
+        upsertBookmarkArticleMeta(id);
+      } catch {}
+    } else {
+      try {
+        removeBookmarkArticleMeta(id);
+      } catch {}
+    }
+    setCardBookmarkState(btn, !wasSaved);
+    updateBookmarkBadge();
+    try {
+      window.dispatchEvent(new Event("bookmarks-updated"));
+    } catch {}
+
+    try {
+      showToast(uiText(!wasSaved ? "bookmark_added" : "bookmark_removed"));
+    } catch {}
+  }, true);
+
+}
+
+  createCards(displayKeys);
   cards = document.querySelectorAll(".card");
+  bindCardBookmarkClicks();
+}
+
+waitForHomeStoreAndRender();
 
   // =====================
 // CATEGORY ICON MAP
@@ -1679,7 +2050,74 @@ window.getCategoryIcon = getCategoryIcon;
 // =====================
 const categoryGrid = document.getElementById("category-grid");
 
-if (isHomePage && categoryGrid && typeof window.__PORTAL_ARTICLE_STORE__ !== "undefined") {
+function repairCategoryCards(root = document) {
+  try {
+    if (!root || typeof root.querySelectorAll !== "function") return;
+
+    root.querySelectorAll("a.category-card[data-filter]").forEach((card) => {
+      try {
+        const filter = card?.dataset?.filter;
+        if (!filter) return;
+
+        const hasImg = !!card.querySelector("img");
+        const hasContent = !!card.querySelector(".cat-content");
+        if (hasImg && hasContent) return;
+
+        const stored = window.__portalHomeCategories || {};
+        const data = stored[filter] && typeof stored[filter] === "object"
+          ? stored[filter]
+          : { count: 0, thumb: (typeof getCategoryThumb === "function" ? getCategoryThumb(filter) : "/assets/images/default.jpg"), label: filter };
+
+        while (card.firstChild) card.removeChild(card.firstChild);
+
+        const img = document.createElement("img");
+        const rawThumb = typeof data.thumb === "string" ? data.thumb.trim() : "";
+        const pickThumb = () => {
+          if (filter === "politik") return "/assets/images/politik.jpg?v=20260317e";
+          const candidate = rawThumb
+            || (typeof getCategoryThumb === "function" ? getCategoryThumb(filter) : "")
+            || "/assets/images/default.jpg";
+          if (candidate.startsWith("http://") || candidate.startsWith("https://") || candidate.startsWith("data:")) return candidate;
+          if (candidate.startsWith("/")) return candidate;
+          return "/" + candidate.replace(/^\/+/, "");
+        };
+
+        img.src = pickThumb();
+        const resolvedLang = typeof getSiteLang === "function" ? getSiteLang() : "id";
+        const resolvedLabel = typeof getLocalizedCategory === "function"
+          ? getLocalizedCategory(filter, resolvedLang)
+          : filter;
+        img.alt = resolvedLabel;
+        img.onerror = () => {
+          img.onerror = null;
+          img.src = "/assets/images/default.jpg";
+        };
+
+        const content = document.createElement("div");
+        content.className = "cat-content";
+
+        const title = document.createElement("h3");
+        const icon = typeof getCategoryIcon === "function" ? getCategoryIcon(filter) : "";
+        title.textContent = `${icon} ${resolvedLabel}`.trim();
+
+        const meta = document.createElement("span");
+        meta.textContent = typeof getArticleCountLabel === "function"
+          ? getArticleCountLabel(Number(data.count) || 0, resolvedLang)
+          : String(Number(data.count) || 0);
+
+        content.appendChild(title);
+        content.appendChild(meta);
+
+        card.appendChild(img);
+        card.appendChild(content);
+      } catch {}
+    });
+  } catch {}
+}
+
+function renderHomeCategoryGrid() {
+  if (!isHomePage || !categoryGrid) return;
+  if (typeof window.__PORTAL_ARTICLE_STORE__ === "undefined") return;
 
   const categories = {};
 
@@ -1715,24 +2153,72 @@ if (isHomePage && categoryGrid && typeof window.__PORTAL_ARTICLE_STORE__ !== "un
     categories[key].count++;
   });
 
-  // Pastikan kotak Politik Islam selalu muncul (fallback jika belum keisi dari artikel)
-  if (categoryMeta.politik && !categories.politik) {
-    categories.politik = {
-      count: 0,
-      thumb: "assets/images/politik.jpg",
-      label: getLocalizedCategory("politik", getSiteLang()),
+  const getCategoryThumb = (key) => {
+    const fallback = "/assets/images/default.jpg";
+    const map = {
+      ilmusyariah: "/assets/images/fiqh.png",
+      hadis: "/assets/images/hadis.jpg",
+      ibadah: "/assets/images/kaaba.png",
+      quran: "/assets/images/quran.png",
+      tasawuf: "/assets/images/tasawuf.png",
+      pemikiran: "/assets/images/pemikiran.png",
+      politik: "/assets/images/politik.jpg",
+      ramadhan: "/assets/images/ramadhan.png",
+      keilmuan: "/assets/images/kajian.png"
     };
-  }
+    return map[key] || fallback;
+  };
+
+  Object.keys(categoryMeta).forEach((key) => {
+    if (!categories[key]) {
+      categories[key] = {
+        count: 0,
+        thumb: getCategoryThumb(key),
+        label: getLocalizedCategory(key, getSiteLang())
+      };
+      return;
+    }
+
+    if (!categories[key].thumb) {
+      categories[key].thumb = getCategoryThumb(key);
+    }
+  });
 
   categoryGrid.innerHTML = "";
   const renderCategoryCard = (name, data) => {
+    const safeData = (data && typeof data === "object")
+      ? data
+      : { count: 0, thumb: getCategoryThumb(name), label: name };
+
     const card = document.createElement("a");
     card.href = "#";
     card.dataset.filter = name;
     card.className = "category-card";
 
     const img = document.createElement("img");
-    img.src = data?.thumb || "assets/images/default.jpg";
+    const rawThumb = typeof safeData.thumb === "string" ? safeData.thumb.trim() : "";
+    const politikBuster = "20260317e";
+    const pickThumb = () => {
+      if (name === "politik") return `/assets/images/politik.jpg?v=${politikBuster}`;
+      const candidate = rawThumb || getCategoryThumb(name) || "/assets/images/default.jpg";
+      if (candidate.startsWith("http://") || candidate.startsWith("https://") || candidate.startsWith("data:")) {
+        return candidate;
+      }
+      if (candidate.startsWith("/")) return candidate;
+      return "/" + candidate.replace(/^\/+/, "");
+    };
+    img.src = pickThumb();
+    img.alt = getLocalizedCategory(name, getSiteLang());
+    img.onerror = () => {
+      const alreadyRetried = img.dataset.retry === "1";
+      if (name === "politik" && !alreadyRetried) {
+        img.dataset.retry = "1";
+        img.src = "/assets/images/politik.jpg";
+        return;
+      }
+      img.onerror = null;
+      img.src = "/assets/images/default.jpg";
+    };
 
     const content = document.createElement("div");
     content.className = "cat-content";
@@ -1741,7 +2227,10 @@ if (isHomePage && categoryGrid && typeof window.__PORTAL_ARTICLE_STORE__ !== "un
     title.textContent = `${getCategoryIcon(name)} ${getLocalizedCategory(name, getSiteLang())}`;
 
     const meta = document.createElement("span");
-    meta.textContent = getArticleCountLabel(data.count, getSiteLang());
+    const resolvedLang = typeof getSiteLang === "function" ? getSiteLang() : "id";
+    meta.textContent = typeof getArticleCountLabel === "function"
+      ? getArticleCountLabel(Number(safeData.count) || 0, resolvedLang)
+      : String(Number(safeData.count) || 0);
 
     content.appendChild(title);
     content.appendChild(meta);
@@ -1752,61 +2241,108 @@ if (isHomePage && categoryGrid && typeof window.__PORTAL_ARTICLE_STORE__ !== "un
     categoryGrid.appendChild(card);
   };
 
-  Object.entries(categories).forEach(([name, data]) => {
-    renderCategoryCard(name, data);
+  Object.keys(categoryMeta).forEach((name) => {
+    renderCategoryCard(name, categories[name]);
   });
 
-  // Hard guarantee: card Politik Islam harus ada dan berbentuk category-card
-  if (!categoryGrid.querySelector('.category-card[data-filter="politik"]')) {
-    renderCategoryCard("politik", {
-      count: categories?.politik?.count || 0,
-      thumb: categories?.politik?.thumb || "assets/images/politik.jpg",
+  Object.entries(categories)
+    .filter(([name]) => !categoryMeta[name])
+    .sort(([a], [b]) => a.localeCompare(b))
+    .forEach(([name, data]) => {
+      renderCategoryCard(name, data);
     });
-  }
+
+  try {
+    window.__portalHomeCategories = categories;
+  } catch {}
+
+  window.setTimeout(() => repairCategoryCards(categoryGrid), 0);
+  window.setTimeout(() => repairCategoryCards(categoryGrid), 250);
 }
+
+function initHomeCategoryGridWithRetry(attemptsLeft = 80) {
+  if (!isHomePage || !categoryGrid) return;
+
+  if (typeof window.__PORTAL_ARTICLE_STORE__ === "undefined") {
+    if ((attemptsLeft || 0) <= 0) return;
+    window.setTimeout(() => initHomeCategoryGridWithRetry((attemptsLeft || 0) - 1), 60);
+    return;
+  }
+
+  renderHomeCategoryGrid();
+}
+
+onDomReady(() => {
+  initHomeCategoryGridWithRetry();
+});
+
+onDomReady(() => {
+  try {
+    repairCategoryCards(document);
+  } catch {}
+
+  try {
+    const observer = new MutationObserver(() => {
+      try {
+        repairCategoryCards(document);
+      } catch {}
+    });
+
+    if (document.body) {
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+  } catch {}
+
+  try {
+    let ticks = 0;
+    const timer = window.setInterval(() => {
+      ticks += 1;
+      try {
+        repairCategoryCards(document);
+      } catch {}
+      if (ticks >= 20) window.clearInterval(timer);
+    }, 300);
+  } catch {}
+});
 
 // =====================
 // CATEGORY CARD FILTER
 // =====================
-document.querySelectorAll(".category-card").forEach(card => {
-
-  card.addEventListener("click", e => {
+if (categoryGrid) {
+  categoryGrid.addEventListener("click", (e) => {
+    const target = e.target;
+    const card = target && typeof target.closest === "function"
+      ? target.closest(".category-card")
+      : null;
+    if (!card) return;
 
     e.preventDefault();
 
     const filter = card.dataset.filter;
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) searchInput.value = "";
 
-    const sidebarLink =
-      document.querySelector(`[data-filter="${filter}"]`);
+    // reset main title
+    const mainTitle = document.getElementById("main-title");
+    if (mainTitle) mainTitle.textContent = uiText("title_default");
 
-    if (sidebarLink) {
-      sidebarLink.click();
-    } else {
-      applyArticleFilter(filter, card);
-    }
-
-    document
-      .getElementById("articles-container")
-      ?.scrollIntoView({ behavior: "smooth" });
-
+    renderArticlesByCategory(filter);
   });
+}
 
-});
-
-  //  KHUSUS HOME: tampilkan 3 NON-FEATURED
-  if (isHomePage) {
-    let shown = 0;
-    cards.forEach(card => {
-      const isFeatured = card.dataset.featured === "true";
-      const isPopular = card.dataset.popular === "true";
-      if (!isFeatured && !isPopular && shown < 3) {
-        card.style.display = "block";
-        shown++;
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }
+//  KHUSUS HOME: tampilkan 3 NON-FEATURED
+if (isHomePage) {
+  let shown = 0;
+  cards.forEach(card => {
+    const isFeatured = card.dataset.featured === "true";
+    const isPopular = card.dataset.popular === "true";
+    if (!isFeatured && !isPopular && shown < 3) {
+      card.style.display = "block";
+      shown++;
+    } else {
+      card.style.display = "none";
+    }
+  });
 }
 
 // =====================
@@ -1832,83 +2368,82 @@ if (isHomePage && popularContainer && typeof articleStore !== "undefined") {
   if (sourceKeys.length === 0) {
     popularContainer.innerHTML = "";
     if (popularSection) popularSection.style.display = "none";
-    return;
-  }
+  } else {
+    if (popularSection) popularSection.style.display = "";
 
-  if (popularSection) popularSection.style.display = "";
+    sourceKeys.forEach(id => {
+      const article = getArticleRawById(id) || articleStore[id];
+      const articleView = getArticleView(id) || article;
+      const stableMeta = getStableArticleMeta(id, article, articleView);
 
-  sourceKeys.forEach(id => {
-    const article = getArticleRawById(id) || articleStore[id];
-    const articleView = getArticleView(id) || article;
-    const stableMeta = getStableArticleMeta(id, article, articleView);
+      if (!article || !isFlagEnabled(article.popular)) return;
+      if (!articleView) return;
 
-    if (!article || !isFlagEnabled(article.popular)) return;
-    if (!articleView) return;
+      if (popularShown < 3) {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.classList.add("is-popular");
 
-    if (popularShown < 3) {
-      const card = document.createElement("article");
-      card.className = "card";
-      card.classList.add("is-popular");
+        const langBadge = document.createElement("span");
+        langBadge.className = `lang-badge flag-${articleView.locale || articleView.bahasa || "id"}`;
 
-      const langBadge = document.createElement("span");
-      langBadge.className = `lang-badge flag-${articleView.locale || articleView.bahasa || "id"}`;
+        const img = document.createElement("img");
+        img.className = "thumb";
+        img.src = articleView.thumbnail || article.thumbnail || "assets/images/default.jpg";
+        img.alt = articleView.judul || "";
 
-      const img = document.createElement("img");
-      img.className = "thumb";
-      img.src = articleView.thumbnail || article.thumbnail || "assets/images/default.jpg";
-      img.alt = articleView.judul || "";
+        const categoryTop = document.createElement("div");
+        categoryTop.className = "card-top";
 
-      const categoryTop = document.createElement("div");
-      categoryTop.className = "card-top";
+        const categorySpan = document.createElement("span");
+        categorySpan.className = "category";
+        categorySpan.textContent = getLocalizedCategory(
+          stableMeta.rawCategory || article.kategori || articleView.kategori,
+          getSiteLang()
+        );
 
-      const categorySpan = document.createElement("span");
-      categorySpan.className = "category";
-      categorySpan.textContent = getLocalizedCategory(
-        stableMeta.rawCategory || article.kategori || articleView.kategori,
-        getSiteLang()
-      );
+        categoryTop.appendChild(categorySpan);
 
-      categoryTop.appendChild(categorySpan);
+        const titleEl = document.createElement("h3");
+        const titleText = articleView.judul || "";
+        titleEl.textContent = titleText.length > 40 ? titleText.slice(0, 40) + "..." : titleText;
 
-      const titleEl = document.createElement("h3");
-      const titleText = articleView.judul || "";
-      titleEl.textContent = titleText.length > 40 ? titleText.slice(0, 40) + "..." : titleText;
+        const previewEl = document.createElement("p");
+        previewEl.textContent = `${getPreviewText(articleView).slice(0, 85)}...`;
 
-      const previewEl = document.createElement("p");
-      previewEl.textContent = `${getPreviewText(articleView).slice(0, 85)}...`;
+        const readMore = document.createElement("a");
+        readMore.className = "read-more";
+        readMore.href = buildArticleHref(id, titleText);
+        readMore.textContent = uiText("read_more");
 
-      const readMore = document.createElement("a");
-      readMore.className = "read-more";
-      readMore.href = `article?id=${id}&slug=${slugify(titleText)}`;
-      readMore.textContent = uiText("read_more");
+        const tanggal = formatArticleDate(article, getSiteLang(), true);
+        const dateEl = document.createElement("span");
+        dateEl.className = "card-date";
+        dateEl.textContent = tanggal;
 
-      const tanggal = formatArticleDate(article, getSiteLang(), true);
-      const dateEl = document.createElement("span");
-      dateEl.className = "card-date";
-      dateEl.textContent = tanggal;
+        const footer = document.createElement("div");
+        footer.className = "card-footer";
+        footer.appendChild(readMore);
+        footer.appendChild(dateEl);
 
-      const footer = document.createElement("div");
-      footer.className = "card-footer";
-      footer.appendChild(readMore);
-      footer.appendChild(dateEl);
+        card.appendChild(langBadge);
+        card.appendChild(img);
+        if (getSiteLang() !== "ar") {
+          const popularBadge = document.createElement("span");
+          popularBadge.className = "badge-popular";
+          popularBadge.textContent = uiText("popular_badge");
+          card.appendChild(popularBadge);
+        }
+        card.appendChild(categoryTop);
+        card.appendChild(titleEl);
+        card.appendChild(previewEl);
+        card.appendChild(footer);
 
-      card.appendChild(langBadge);
-      card.appendChild(img);
-      if (getSiteLang() !== "ar") {
-        const popularBadge = document.createElement("span");
-        popularBadge.className = "badge-popular";
-        popularBadge.textContent = uiText("popular_badge");
-        card.appendChild(popularBadge);
+        popularContainer.appendChild(card);
+        popularShown++;
       }
-      card.appendChild(categoryTop);
-      card.appendChild(titleEl);
-      card.appendChild(previewEl);
-      card.appendChild(footer);
-
-      popularContainer.appendChild(card);
-      popularShown++;
-    }
-  });
+    });
+  }
 }
 
 updateSidebarBadges();
@@ -2058,7 +2593,7 @@ if (isHomePage && typeof articleStore !== "undefined") {
       featuredSection.innerHTML = "";
 
       const link = document.createElement("a");
-      link.href = `article?id=${id}&slug=${slug}`;
+      link.href = buildArticleHref(id, data.judul || id);
       link.className = "featured-card fade";
       link.dataset.featuredLabel = `⭐ ${uiText("featured_articles")}`;
 
@@ -2092,7 +2627,7 @@ if (isHomePage && typeof articleStore !== "undefined") {
 
       if (heroFeaturedTitle) {
         heroFeaturedTitle.textContent = data.judul;
-        heroFeaturedTitle.href = `article?id=${id}&slug=${slug}`;
+        heroFeaturedTitle.href = buildArticleHref(id, data.judul || id);
       }
 
       if (heroSubtitle) {
@@ -2143,15 +2678,13 @@ if (isHomePage && typeof articleStore !== "undefined") {
 
 // fallback ke offline
 if (!data) {
-  const offline =
-    JSON.parse(localStorage.getItem("offlineArticles")) || {};
+  const offline = safeJsonParse("offlineArticles", {});
   data = offline[articleId] || null;
 }
 
 if (articleId && data) {
 
-  let offline =
-    JSON.parse(localStorage.getItem("offlineArticles")) || {};
+  let offline = safeJsonParse("offlineArticles", {});
 
   if (rawData && !offline[articleId]) {
     offline[articleId] = rawData;
@@ -2277,12 +2810,11 @@ if (kategoriEl) kategoriEl.textContent = data.kategori;
     if (index > 0) {
       const prevId = articleKeys[index - 1];
       const prevArticle = getArticleView(prevId) || getOfflineArticleById(prevId);
-      if (!prevArticle) {
+      if (!prevId || !prevArticle) {
         prevBtn.style.display = "none";
       } else {
-      const prevSlug = slugify(prevArticle.judul);
-      prevBtn.href = `article?id=${prevId}&slug=${prevSlug}`;
-      prevBtn.textContent = uiText("prev_article");
+        prevBtn.href = buildArticleHref(prevId, prevArticle.judul || prevId);
+        prevBtn.textContent = uiText("prev_article");
       }
     } else {
       prevBtn.style.display = "none";
@@ -2293,12 +2825,11 @@ if (kategoriEl) kategoriEl.textContent = data.kategori;
     if (index < articleKeys.length - 1) {
       const nextId = articleKeys[index + 1];
       const nextArticle = getArticleView(nextId) || getOfflineArticleById(nextId);
-      if (!nextArticle) {
+      if (!nextId || !nextArticle) {
         nextBtn.style.display = "none";
       } else {
-      const nextSlug = slugify(nextArticle.judul);
-      nextBtn.href = `article?id=${nextId}&slug=${nextSlug}`;
-      nextBtn.textContent = uiText("next_article");
+        nextBtn.href = buildArticleHref(nextId, nextArticle.judul || nextId);
+        nextBtn.textContent = uiText("next_article");
       }
     } else {
       nextBtn.style.display = "none";
@@ -2467,11 +2998,6 @@ function applyArabicDirection(container) {
   });
 }
 
-
-
-}
-});
-
 function syncArticleChrome() {
   if (!isArticlePage) return;
 
@@ -2547,47 +3073,63 @@ if (tocToggle) {
 
   if (!bookmarkBtn) return;
 
-  const articleId = new URLSearchParams(window.location.search).get("id");
+  const articleId = getCurrentArticleId();
 
   if (!articleId) {
     bookmarkBtn.disabled = true;
     return;
   }
 
-  const saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
+  let saved = [];
+  try {
+    const parsed = JSON.parse(localStorage.getItem("bookmarks"));
+    saved = Array.isArray(parsed) ? parsed : [];
+  } catch {
+    saved = [];
+  }
+
   setArticleBookmarkState(bookmarkBtn, saved.includes(articleId));
 
+  if (bookmarkBtn.dataset.bound) return;
+  bookmarkBtn.dataset.bound = "1";
+
   bookmarkBtn.addEventListener("click", () => {
-    let savedNow = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    let savedNow = [];
+    try {
+      const parsed = JSON.parse(localStorage.getItem("bookmarks"));
+      savedNow = Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      console.error("Error parsing bookmarks:", e);
+      savedNow = [];
+    }
     savedNow = [...new Set(savedNow)];
 
-    if (savedNow.includes(articleId)) {
-      savedNow = savedNow.filter((id) => id !== articleId);
-
-      const offline = JSON.parse(localStorage.getItem("offlineArticles")) || {};
-      delete offline[articleId];
-      localStorage.setItem("offlineArticles", JSON.stringify(offline));
-      window.dispatchEvent(new Event("offlineUpdated"));
-    } else {
-      savedNow.push(articleId);
-
-      const offline = JSON.parse(localStorage.getItem("offlineArticles")) || {};
-      if (articleStore[articleId]) {
-        offline[articleId] = articleStore[articleId];
-        localStorage.setItem("offlineArticles", JSON.stringify(offline));
-        window.dispatchEvent(new Event("offlineUpdated"));
-      }
-    }
+    const wasSaved = savedNow.includes(articleId);
+    savedNow = wasSaved ? savedNow.filter((id) => id !== articleId) : [...savedNow, articleId];
 
     localStorage.setItem("bookmarks", JSON.stringify(savedNow));
+    if (!wasSaved) {
+      try {
+        upsertBookmarkArticleMeta(articleId);
+      } catch {}
+    } else {
+      try {
+        removeBookmarkArticleMeta(articleId);
+      } catch {}
+    }
     const nowSaved = savedNow.includes(articleId);
     setArticleBookmarkState(bookmarkBtn, nowSaved);
     showToast(uiText(nowSaved ? "bookmark_added" : "bookmark_removed"));
-    updateBookmarkBadge?.();
+    window.updateBookmarkBadge?.();
+    try {
+      window.dispatchEvent(new Event("bookmarks-updated"));
+    } catch {}
   });
 }
 
-syncArticleChrome();
+window.syncArticleChrome = syncArticleChrome;
+
+if (typeof syncArticleChrome === "function") syncArticleChrome();
 
 function updateReadTime() {
   const readTimeEl = document.getElementById("read-time");
@@ -2607,16 +3149,37 @@ function updateReadTime() {
 }
 
 function updateBookmarkBadge() {
-  const badge = document.querySelector(".bookmark-count");
-  if (!badge) return;
+  const badges = Array.from(
+    new Set([
+      ...document.querySelectorAll(".bookmark-count"),
+      ...document.querySelectorAll(".bookmark-badge"),
+      ...document.querySelectorAll("#bookmark-count")
+    ])
+  );
+  if (badges.length === 0) return;
 
-  const saved = JSON.parse(localStorage.getItem("bookmarks")) || [];
-  badge.textContent = saved.length;
-  badge.style.display = saved.length > 0 ? "flex" : "none";
+  let saved = [];
+  try {
+    const parsed = JSON.parse(localStorage.getItem("bookmarks"));
+    saved = Array.isArray(parsed) ? parsed : [];
+  } catch {
+    saved = [];
+  }
+
+  badges.forEach((badge) => {
+    badge.textContent = String(saved.length);
+    badge.style.display = saved.length > 0 ? "flex" : "none";
+  });
 }
 
-// jalankan saat load
-updateBookmarkBadge();
+window.updateBookmarkBadge = updateBookmarkBadge;
+
+onDomReady(() => {
+  updateBookmarkBadge();
+  if (typeof bindCardBookmarkClicks === "function") {
+    bindCardBookmarkClicks();
+  }
+});
 
 window.addEventListener("storage", () => {
   updateBookmarkBadge();
@@ -2827,69 +3390,78 @@ document.querySelectorAll(".prefooter-col a[data-filter]").forEach(link => {
 });
 
 // ===============================
-// READING PROGRESS STANDALONE
+// READING PROGRESS STANDALONE (REMOVED)
 // ===============================
-window.addEventListener("load", () => {
-  const id = new URLSearchParams(window.location.search).get("id");
-  if (!id) return;
-
-  window.addEventListener("scroll", () => {
-    const docHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-
-    if (docHeight <= 0) return;
-
-   let percent = Math.min(
-  100,
-  Math.floor((window.scrollY / docHeight) * 100)
-);
-
-// kalau sudah hampir selesai
-if (percent >= 95) percent = 100;
-
-    const data =
-      JSON.parse(localStorage.getItem("readingProgress")) || {};
-
-    // hanya update kalau lebih besar
-    if (!data[id] || percent > data[id]) {
-     if (percent >= 96) {
-  delete data[id]; // hapus kalau sudah selesai
-} else {
-  data[id] = percent;
-}
-
-localStorage.setItem("readingProgress", JSON.stringify(data));
-    }
-  });
-});
 
 // =====================
 // AUTO SCROLL KE POSISI TERAKHIR (FINAL)
 // =====================
 (function () {
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  const id = params.get("id") || params.get("slug");
   if (!id) return;
 
+  if (window.__PORTAL_AUTO_SCROLL_DONE__) return;
+
   const data =
-    JSON.parse(localStorage.getItem("readingProgress")) || {};
+    safeJsonParse("readingProgress", {});
 
-  const percent = data[id];
-  if (!percent || percent >= 96) return;
+  const rawPercent = data[id];
+  const percent = Number(rawPercent);
+  if (!Number.isFinite(percent) || percent <= 0 || percent >= 96) return;
 
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+  const runAutoScroll = () => {
+    const start = Date.now();
+    const maxWaitMs = 12000;
+
+    const attemptScroll = () => {
+      if (window.__PORTAL_AUTO_SCROLL_DONE__) return;
+
+      const content = document.getElementById("isi-artikel");
+      const hasContent = !!(content && (content.textContent || "").trim().length > 0);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+      if (!hasContent || docHeight <= 0) {
+        if (Date.now() - start > maxWaitMs) return;
+        window.setTimeout(attemptScroll, 120);
+        return;
+      }
 
       const target = (docHeight * percent) / 100;
-
+      window.__PORTAL_AUTO_SCROLL_DONE__ = true;
       window.scrollTo({
         top: target,
-        behavior: "auto"
+        behavior: "smooth"
       });
-    }, 400); // tunggu render artikel
-  });
+
+      window.setTimeout(() => {
+        try {
+          const current = window.scrollY || 0;
+          if (current < Math.max(20, target * 0.25)) {
+            window.scrollTo({
+              top: target,
+              behavior: "smooth"
+            });
+          }
+        } catch {}
+      }, 900);
+    };
+
+    window.setTimeout(attemptScroll, 250);
+
+    window.setTimeout(() => {
+      try {
+        window.dispatchEvent(new Event("portal-auto-scroll"));
+      } catch {}
+    }, 0);
+  };
+
+  if (document.readyState === "complete") {
+    runAutoScroll();
+    return;
+  }
+
+  window.addEventListener("load", runAutoScroll);
 })();
 
 
@@ -2918,40 +3490,6 @@ localStorage.setItem("readingProgress", JSON.stringify(data));
 })();
 
 // =============================
-// AUTO SCROLL KE POSISI TERAKHIR
-// =============================
-window.addEventListener("load", () => {
-  const id = new URLSearchParams(window.location.search).get("id");
-  if (!id) return;
-
-  const data =
-    JSON.parse(localStorage.getItem("readingProgress")) || {};
-
-  const percent = data[id] || 0;
-
-  // kalau sudah hampir selesai, mulai dari atas
-  if (percent >= 95) {
-    window.scrollTo(0, 0);
-    return;
-  }
-
-  // kalau belum selesai, scroll ke posisi terakhir
-  if (percent > 5) {
-    const docHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-
-    const scrollPos = (percent / 100) * docHeight;
-
-    setTimeout(() => {
-      window.scrollTo({
-  top: scrollPos,
-  behavior: "smooth"
-      });
-    }, 300);
-  }
-});
-
-// =============================
 // TOP PROGRESS BAR
 // =============================
 window.addEventListener("scroll", () => {
@@ -2972,32 +3510,40 @@ window.addEventListener("scroll", () => {
   // ===============================
   // SIMPAN PROGRESS BACA
   // ===============================
-  const id = new URLSearchParams(window.location.search).get("id");
+  const id = getCurrentArticleId();
   if (!id) return;
 
   let reading =
-    JSON.parse(localStorage.getItem("readingProgress")) || {};
+    safeJsonParse("readingProgress", {});
 
-  reading[id] = percent;
-  localStorage.setItem(
-    "readingProgress",
-    JSON.stringify(reading)
-  );
+  const prev = Number(reading[id] || 0);
+  const next = Math.max(prev, percent);
+  reading[id] = next;
+  localStorage.setItem("readingProgress", JSON.stringify(reading));
+
+  try {
+    window.dispatchEvent(new CustomEvent("reading-progress-updated", {
+      detail: { id, percent: next }
+    }));
+  } catch {}
 
   // ===============================
   // JIKA ARTIKEL SELESAI
   // ===============================
-  if (percent >= 95 && !reading[id + "_done"]) {
+  if (next >= 95 && !reading[id + "_done"]) {
     reading[id + "_done"] = true;
-    localStorage.setItem(
-      "readingProgress",
-      JSON.stringify(reading)
-    );
+    localStorage.setItem("readingProgress", JSON.stringify(reading));
+
+    try {
+      window.dispatchEvent(new CustomEvent("reading-progress-updated", {
+        detail: { id, percent: next, done: true }
+      }));
+    } catch {}
 
     const today = new Date().toISOString().slice(0, 10);
 
     let history =
-      JSON.parse(localStorage.getItem("readingHistory")) || {};
+      safeJsonParse("readingHistory", {});
 
     history[today] = (history[today] || 0) + 1;
     localStorage.setItem(
@@ -3041,12 +3587,11 @@ document.addEventListener("mouseup", () => {
   const text = selection.toString().trim();
   if (text.length < 20) return;
 
-  const articleId =
-    new URLSearchParams(window.location.search).get("id");
+  const articleId = getCurrentArticleId();
   if (!articleId) return;
 
   const highlights =
-    JSON.parse(localStorage.getItem("highlights")) || {};
+    safeJsonParse("highlights", {});
 
   if (!highlights[articleId]) {
     highlights[articleId] = [];
@@ -3062,23 +3607,37 @@ document.addEventListener("mouseup", () => {
 // =====================
 const offlineBtn = document.getElementById("offlineSaveBtn");
 
-if (offlineBtn) {
-  const params = new URLSearchParams(window.location.search);
-  const articleId = params.get("id");
+if (offlineBtn && !offlineBtn.dataset.bound) {
+  const articleId = getCurrentArticleId();
+
+  if (!articleId) {
+    offlineBtn.disabled = true;
+  }
+
+  offlineBtn.dataset.bound = "1";
 
   offlineBtn.addEventListener("click", () => {
 
-    const offline =
-      JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    const safeId = getCurrentArticleId();
+    if (!safeId) return;
 
-    offline[articleId] = articleStore[articleId];
+    const offline =
+      safeJsonParse("offlineArticles", {});
+
+    const fromStore = getArticleRawById(safeId) || getLegacyArticleStore()?.[safeId] || articleStore?.[safeId];
+    const snapshot = fromStore || buildOfflineSnapshotFromDom(safeId);
+    if (!snapshot) return;
+
+    offline[safeId] = snapshot;
 
     localStorage.setItem(
       "offlineArticles",
       JSON.stringify(offline)
     );
 
-    window.dispatchEvent(new Event("offlineUpdated"));
+    try {
+      window.dispatchEvent(new Event("offlineUpdated"));
+    } catch {}
 
     if (typeof showToast === "function") {
       showToast(uiText("offline_saved"));
@@ -3091,7 +3650,7 @@ function updateOfflineCount() {
   if (!el) return;
 
   const data =
-    JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    safeJsonParse("offlineArticles", {});
 
   el.textContent = Object.keys(data).length;
 }
@@ -3105,12 +3664,12 @@ function renderOfflineHome() {
   const section = document.getElementById("offline-section");
   const list = document.getElementById("offline-home-list");
 
-  if (!section || !list) return;
-
   const offline =
-    JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    safeJsonParse("offlineArticles", {});
 
   const ids = Object.keys(offline);
+
+  if (!section) return;
 
   if (ids.length === 0) {
     section.style.display = "none";
@@ -3118,11 +3677,17 @@ function renderOfflineHome() {
   }
 
   section.style.display = "block";
+
+  // Home tidak menampilkan card/grid offline (hanya header + link).
+  // Jika container list tidak ada, kita cukup toggle visibility section.
+  if (!list) return;
+
   list.innerHTML = "";
+  let rendered = 0;
 
   ids.slice(0, 3).forEach((id) => {
     const article = offline[id];
-    const articleView = getArticleView(id) || article;
+    const articleView = article;
     if (!articleView) return;
 
     const card = document.createElement("article");
@@ -3142,7 +3707,7 @@ function renderOfflineHome() {
 
     const readMore = document.createElement("a");
     readMore.className = "read-more";
-    readMore.href = `article?id=${id}&slug=${slugify(articleView.judul || "")}`;
+    readMore.href = buildArticleHref(id, articleView.judul || "");
     readMore.textContent = uiText("read_offline");
 
     const tanggal = formatArticleDate(article, getSiteLang(), true);
@@ -3161,7 +3726,10 @@ function renderOfflineHome() {
     card.appendChild(footer);
 
     list.appendChild(card);
+    rendered++;
   });
+
+  section.style.display = rendered > 0 ? "block" : "none";
 }
 
 // ===============================
@@ -3188,7 +3756,7 @@ if (downloadBtn) {
     let done = 0;
 
     const offline =
-      JSON.parse(localStorage.getItem("offlineArticles")) || {};
+      safeJsonParse("offlineArticles", {});
 
     progressBox.style.display = "flex";
 
@@ -3278,11 +3846,11 @@ function renderLastReading() {
   if (!section || !container) return;
 
   const progress =
-    JSON.parse(localStorage.getItem("readingProgress")) || {};
+    safeJsonParse("readingProgress", {});
 
   const ids = Object.keys(progress).filter((id) => {
     const percent = Number(progress[id]);
-    return articleStore[id] && !id.endsWith("_done") && Number.isFinite(percent) && percent > 5 && percent < 100;
+    return !id.endsWith("_done") && Number.isFinite(percent) && percent > 5 && percent < 100;
   });
 
   if (ids.length === 0) {
@@ -3291,8 +3859,13 @@ function renderLastReading() {
   }
 
   const id = ids[ids.length - 1];
-  const articleView = getArticleView(id);
-  if (!articleView) return;
+  const articleView = getLightArticleMeta(id) || {
+    id,
+    slug: id,
+    judul: id,
+    kategori: "",
+    thumbnail: "",
+  };
 
   section.style.display = "block";
 
@@ -3322,7 +3895,7 @@ function renderLastReading() {
   note.textContent = uiText("continue_from", { percent });
 
   const link = document.createElement("a");
-  link.href = `article?id=${id}&slug=${slug}`;
+  link.href = buildArticleHref(id, slug);
   link.className = "btn-premium";
   link.textContent = uiText("continue_reading_action");
 
@@ -3352,23 +3925,91 @@ function renderLastReading() {
   }
 }
 
-
-
-setTimeout(() => {
-  renderLastReading();
-  updateReaderStats();
-  updateHomeStats();
-}, 200);
-
-
 // ===============================
 // AUTO REFRESH SAAT KEMBALI KE TAB
 // ===============================
 function refreshHomeWidgets() {
+  // Render fast from localStorage first (no store refresh)
   renderLastReading();
   updateReaderStats();
   updateHomeStats();
+  renderOfflineHome();
+
+  // Optionally refresh store in background to improve titles/categories
+  window.setTimeout(() => {
+    try {
+      refreshArticleStore();
+      renderLastReading();
+      updateReaderStats();
+    } catch {}
+  }, 0);
 }
+
+function refreshHomeQuickWidgets() {
+  updateHomeStats();
+  renderOfflineHome();
+  if (typeof updateOfflineCount === "function") updateOfflineCount();
+}
+
+function initHomeWidgetsWithRetry(attemptsLeft = 80) {
+  if (!isHomePage) return;
+
+  // Quick widgets: do NOT wait for store
+  const offlineStat = document.getElementById("stat-offline");
+  const offlineSection = document.getElementById("offline-section");
+  if (offlineStat || offlineSection) {
+    refreshHomeQuickWidgets();
+  }
+
+  // Reading widgets: wait for store + containers
+  const needs = [
+    document.getElementById("reader-stats"),
+    document.getElementById("last-reading")
+  ];
+
+  const hasReadingContainers = needs.some(Boolean);
+  const hasQuickContainers = !!offlineStat || !!offlineSection;
+  if (!hasReadingContainers && !hasQuickContainers) {
+    if ((attemptsLeft || 0) <= 0) return;
+    window.setTimeout(() => initHomeWidgetsWithRetry((attemptsLeft || 0) - 1), 60);
+    return;
+  }
+
+  if (!hasReadingContainers) {
+    // Quick widgets already handled; keep retrying until reading containers exist.
+    if ((attemptsLeft || 0) <= 0) return;
+    window.setTimeout(() => initHomeWidgetsWithRetry((attemptsLeft || 0) - 1), 60);
+    return;
+  }
+
+  const storeReady = !!(articleStore && typeof articleStore === "object" && Object.keys(articleStore).length > 0);
+  if (!storeReady) {
+    refreshArticleStore();
+  }
+
+  const storeNowReady = !!(articleStore && typeof articleStore === "object" && Object.keys(articleStore).length > 0);
+  if (!storeNowReady) {
+    if ((attemptsLeft || 0) <= 0) {
+      // Still render what we can
+      refreshHomeQuickWidgets();
+      return;
+    }
+    window.setTimeout(() => initHomeWidgetsWithRetry((attemptsLeft || 0) - 1), 60);
+    return;
+  }
+
+  refreshHomeWidgets();
+}
+
+onDomReady(() => {
+  // Render quick widgets immediately to avoid "lambat" feel
+  if (isHomePage) {
+    try {
+      refreshHomeQuickWidgets();
+    } catch {}
+  }
+  initHomeWidgetsWithRetry();
+});
 
 window.addEventListener("focus", refreshHomeWidgets);
 
@@ -3385,7 +4026,7 @@ function updateHomeStats() {
   if (!offlineEl || !statCard) return;
 
   const offline =
-    JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    safeJsonParse("offlineArticles", {});
 
   const count = Object.keys(offline).length;
   offlineEl.textContent = count;
@@ -3426,11 +4067,11 @@ function updateReaderStats() {
   if (!section) return;
 
   const reading =
-    JSON.parse(localStorage.getItem("readingProgress")) || {};
+    safeJsonParse("readingProgress", {});
 
   const ids = Object.keys(reading).filter((id) => {
     const percent = Number(reading[id]);
-    return articleStore[id] && !id.endsWith("_done") && Number.isFinite(percent) && percent > 0;
+    return !id.endsWith("_done") && Number.isFinite(percent) && percent > 0;
   });
 
   if (ids.length === 0) {
@@ -3442,28 +4083,29 @@ function updateReaderStats() {
 
   const articleCount = ids.length;
   let totalMinutes = 0;
-
+  const readingTime = safeJsonParse("readingTime", {});
+  let totalMs = 0;
   ids.forEach((id) => {
-    const percent = Number(reading[id]);
-    const article = articleStore[id];
-    if (!article) return;
-
-    const bodyText = article.isi.replace(/<[^>]*>/g, " ");
-    const words = bodyText.trim().split(/\s+/).filter(Boolean).length;
-    const minutes = Math.ceil(words / 200);
-
-    totalMinutes += Math.round((percent / 100) * minutes);
+    const ms = readingTime && typeof readingTime === "object" ? Number(readingTime[id] || 0) : 0;
+    if (Number.isFinite(ms) && ms > 0) totalMs += ms;
   });
+  if (totalMs > 0) {
+    totalMinutes = Math.max(1, Math.round(totalMs / 60000));
+  } else {
+    totalMinutes = articleCount;
+  }
 
   let lastTitle = uiText("continue_reading_action");
   const lastId = ids[ids.length - 1];
-  const lastArticle = lastId ? getArticleView(lastId) : null;
+  const lastArticle = lastId ? getLightArticleMeta(lastId) : null;
 
   if (lastArticle?.judul) {
     lastTitle =
       lastArticle.judul.length > 18
         ? lastArticle.judul.slice(0, 18) + "..."
         : lastArticle.judul;
+  } else if (lastId) {
+    lastTitle = lastId.length > 18 ? lastId.slice(0, 18) + "..." : lastId;
   }
 
   const elArticles = document.getElementById("stat-articles");
@@ -3495,8 +4137,7 @@ function updateReaderStats() {
 let readingStart = Date.now();
 let totalTime = 0;
 
-const articleIdForTime =
-  new URLSearchParams(window.location.search).get("id");
+const articleIdForTime = getCurrentArticleId();
 
 function saveReadingTime() {
   if (!articleIdForTime) return;
@@ -3506,7 +4147,7 @@ function saveReadingTime() {
   totalTime += sessionTime;
 
   const data =
-    JSON.parse(localStorage.getItem("readingTime")) || {};
+    safeJsonParse("readingTime", {});
 
   data[articleIdForTime] =
   (data[articleIdForTime] || 0) + sessionTime;
@@ -3529,10 +4170,10 @@ function updateReadingStreak() {
   const today = new Date().toDateString();
 
   let data =
-    JSON.parse(localStorage.getItem("readingStreak")) || {
+    safeJsonParse("readingStreak", {
       lastDay: null,
       streak: 0
-    };
+    });
 
   if (data.lastDay !== today) {
     const yesterday = new Date();
@@ -3555,7 +4196,7 @@ updateReadingStreak();
 // RECOMMENDED ARTICLES (ARTICLE PAGE)
 // ===============================
 if (isArticlePage) {
-  const currentId = new URLSearchParams(window.location.search).get("id");
+  const currentId = getCurrentArticleId();
   if (currentId) {
     renderRecommendedArticles(currentId);
   }
@@ -3611,10 +4252,7 @@ window.addEventListener("offlineUpdated", () => {
   if (typeof renderOfflineHome === "function") renderOfflineHome();
 });
 
-
-
-
-
+}
 
 // LEGACY_UI_NORMALIZER_V2
 Object.assign(articleUiText.ar, {
@@ -3705,11 +4343,21 @@ function normalizeLegacyUi() {
       if (lang === 'en') button.textContent = '\u{1F1EC}\u{1F1E7} English';
       if (lang === 'ar') button.textContent = '\u{1F1F8}\u{1F1E6} العربية';
     });
+    setText('.quick-card[href="/about"] .icon', '\u2139\uFE0F');
     setText('.quick-card[href="about"] .icon', '\u2139\uFE0F');
+    setText('.quick-card[href="about.html"] .icon', '\u2139\uFE0F');
+    setText('.quick-card[href="/faq"] .icon', '\u2753');
     setText('.quick-card[href="faq"] .icon', '\u2753');
+    setText('.quick-card[href="faq.html"] .icon', '\u2753');
+    setText('.quick-card[href="/donasi"] .icon', '\u{1F91D}');
     setText('.quick-card[href="donasi"] .icon', '\u{1F91D}');
+    setText('.quick-card[href="donasi.html"] .icon', '\u{1F91D}');
+    setText('.quick-card[href="/kontak"] .icon', '\u2709\uFE0F');
     setText('.quick-card[href="kontak"] .icon', '\u2709\uFE0F');
+    setText('.quick-card[href="kontak.html"] .icon', '\u2709\uFE0F');
+    setText('.quick-card[href="/ramadhan"] .icon', '\u{1F319}');
     setText('.quick-card[href="ramadhan"] .icon', '\u{1F319}');
+    setText('.quick-card[href="ramadhan.html"] .icon', '\u{1F319}');
     setText('.btn-primary[href="#articles-container"]', '\u{1F4DA} ' + uiText('start_reading'));
     setText('.btn-secondary[href="#featured-article"]', '\u2B50 ' + uiText('featured_articles'));
     setText('#hero-featured-label', '\u2B50 ' + uiText('featured_articles') + ':');
@@ -3726,9 +4374,13 @@ function normalizeLegacyUi() {
     setText('.tools-section .section-icon-fixed', '\u{1F6E0}\uFE0F');
     setText('.categories-home .section-icon-fixed', '\u{1F5C2}\uFE0F');
     setText('#offline-section .section-icon-fixed', '\u{1F4E5}');
+    setText('.tool-card[href="/zakat"] .icon', '\u{1F4B0}');
     setText('.tool-card[href="zakat.html"] .icon', '\u{1F4B0}');
+    setText('.tool-card[href="/tools/mawaris"] .icon', '\u{1F9EE}');
     setText('.tool-card[href="tools/mawaris.html"] .icon', '\u{1F9EE}');
+    setText('.tool-card[href="/haid"] .icon', '\u{1F469}');
     setText('.tool-card[href="haid.html"] .icon', '\u{1F469}');
+    setText('.tool-card[href="/kaffarah"] .icon', '\u{1F381}');
     setText('.tool-card[href="kaffarah.html"] .icon', '\u{1F381}');
     setText('.smart-fiqh-card .icon', '\u{1F9E0}');
     setText('.sidebar-link[data-filter="all"] .icon', '\u{1F4DA}');
@@ -3795,10 +4447,9 @@ function normalizeLegacyUi() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', normalizeLegacyUi);
-window.addEventListener('load', normalizeLegacyUi);
+onDomReady(normalizeLegacyUi);
 window.addEventListener('portal-language-change', normalizeLegacyUi);
-if (isArticlePage) syncArticleChrome();
+if (isArticlePage && typeof window.syncArticleChrome === "function") window.syncArticleChrome();
 
 (() => {
   const scrollBtn = document.getElementById("scrollToTopBtn");

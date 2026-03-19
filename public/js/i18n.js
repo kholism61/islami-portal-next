@@ -231,7 +231,7 @@
         submit: "Masuk ke portal",
         alt: "Belum punya akun? Sign Up",
         footer_text: "Ingin mengelola proyek? Gunakan email admin atau buat akun tim terlebih dahulu.",
-        footer_link: "Buka admin setelah login",
+        footer_link: "",
         denied_message: "Akun Anda belum memiliki hak akses admin.",
         session_active: "Session aktif terdeteksi untuk {{email}}. Anda tetap bisa login dengan akun lain dari form ini.",
         signin_success: "Login berhasil. Mengarahkan ke halaman berikutnya..."
@@ -494,7 +494,7 @@
         submit: "Enter the portal",
         alt: "Need an account? Sign Up",
         footer_text: "Need to manage the project? Use an admin email or create a team account first.",
-        footer_link: "Open admin after login",
+        footer_link: "",
         denied_message: "Your account does not have admin access.",
         session_active: "An active session was detected for {{email}}. You can still sign in with another account using this form.",
         signin_success: "Login successful. Redirecting to the next page..."
@@ -757,7 +757,7 @@
         submit: "الدخول إلى البوابة",
         alt: "ليس لديك حساب؟ أنشئ حسابًا",
         footer_text: "تريد إدارة المشروع؟ استخدم بريد المشرف أو أنشئ حساب فريق أولًا.",
-        footer_link: "افتح الإدارة بعد تسجيل الدخول",
+        footer_link: "",
         denied_message: "حسابك لا يملك صلاحية الإدارة.",
         session_active: "تم اكتشاف جلسة نشطة للحساب {{email}}. لا يزال بإمكانك تسجيل الدخول بحساب آخر من خلال هذا النموذج.",
         signin_success: "تم تسجيل الدخول بنجاح. يجري تحويلك إلى الصفحة التالية..."
@@ -1054,7 +1054,7 @@
       { selector: ".submit-btn", key: "submit" },
       { selector: ".alt-btn", key: "alt" },
       { selector: ".auth-footer p", key: "footer_text" },
-      { selector: ".inline-link", key: "footer_link" }
+      { selector: ".auth-footer .footer-link", key: "footer_link" }
     ],
     signup: [
       { selector: ".brand-link strong", key: "brand_name" },
@@ -1086,7 +1086,7 @@
       { selector: ".submit-btn", key: "submit" },
       { selector: ".alt-btn", key: "alt" },
       { selector: ".auth-footer p", key: "footer_text" },
-      { selector: ".inline-link", key: "footer_link" }
+      { selector: ".auth-footer .footer-link", key: "footer_link" }
     ]
   };
 
@@ -1275,19 +1275,89 @@
 
   window.setLang = setLang;
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function init() {
     setupDropdown();
     setupLanguageButtons();
     const lang = getStoredLang();
     applyPageTranslations(lang);
     scheduleReapply(lang);
-    setupProdCleanLinks();
-    setupDevFallbackLinks();
-  });
+  }
 
-  window.addEventListener("load", () => {
-    scheduleReapply(getStoredLang());
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+  function setupProdCleanLinks() {
+    const host = window.location.hostname;
+    const isLocalDev = host === "localhost" || host === "127.0.0.1";
+    if (isLocalDev) return;
+
+    const rewriteHref = (href) => {
+      if (!href || typeof href !== "string") return href;
+      const trimmed = href.trim();
+
+      if (
+        !trimmed ||
+        trimmed.startsWith("#") ||
+        trimmed.startsWith("mailto:") ||
+        trimmed.startsWith("tel:") ||
+        trimmed.startsWith("javascript:") ||
+        trimmed.startsWith("http://") ||
+        trimmed.startsWith("https://")
+      ) {
+        return href;
+      }
+
+      if (trimmed.startsWith("assets/") || trimmed.startsWith("css/") || trimmed.startsWith("js/")) {
+        return href;
+      }
+
+      const [pathPart, hashPart] = trimmed.split("#");
+      const [pathOnly, queryPart] = pathPart.split("?");
+      if (!pathOnly) return href;
+
+      if (!/\.html$/i.test(pathOnly)) {
+        return href;
+      }
+
+      const normalizedPathOnly = pathOnly.replace(/\\/g, "/");
+      const cleanedPathOnly = normalizedPathOnly.replace(/\.html$/i, "");
+      const finalPathOnly = /(^|\/)index$/i.test(cleanedPathOnly) ? "/" : cleanedPathOnly;
+
+      return `${finalPathOnly}${queryPart ? `?${queryPart}` : ""}${hashPart ? `#${hashPart}` : ""}`;
+    };
+
+    const rewriteAnchors = (root = document) => {
+      root.querySelectorAll("a[href]").forEach((a) => {
+        if (a.dataset.prodHrefRewritten === "true") return;
+        const original = a.getAttribute("href");
+        const next = rewriteHref(original);
+        if (next !== original) {
+          a.setAttribute("href", next);
+          a.dataset.prodHrefRewritten = "true";
+        }
+      });
+    };
+
+    rewriteAnchors(document);
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.matches?.("a[href]")) {
+            rewriteAnchors(node.parentElement || document);
+            return;
+          }
+          rewriteAnchors(node);
+        });
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
 
   function setupDevFallbackLinks() {
     const host = window.location.hostname;

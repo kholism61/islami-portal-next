@@ -5,17 +5,39 @@ import { useEffect } from "react";
 export default function ServiceWorkerRegister() {
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") return;
-    if (typeof window === "undefined") return;
-    if (!("serviceWorker" in navigator)) return;
+    if ("serviceWorker" in navigator) {
+      let reloaded = false;
 
-    const onLoad = () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {
-        // ignore
+      navigator.serviceWorker
+        .register("/sw.js?v=20260317e")
+        .then((registration) => {
+          try {
+            registration.update();
+          } catch {}
+
+          if (registration.waiting) {
+            registration.waiting.postMessage({ type: "SKIP_WAITING" });
+          }
+
+          registration.addEventListener("updatefound", () => {
+            const worker = registration.installing;
+            if (!worker) return;
+
+            worker.addEventListener("statechange", () => {
+              if (worker.state === "installed" && navigator.serviceWorker.controller) {
+                worker.postMessage({ type: "SKIP_WAITING" });
+              }
+            });
+          });
+        })
+        .catch(() => {});
+
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (reloaded) return;
+        reloaded = true;
+        window.location.reload();
       });
-    };
-
-    window.addEventListener("load", onLoad);
-    return () => window.removeEventListener("load", onLoad);
+    }
   }, []);
 
   return null;

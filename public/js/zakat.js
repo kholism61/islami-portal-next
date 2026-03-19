@@ -764,25 +764,37 @@ const totalZakat =
    SIMPAN RIWAYAT USER
 ========================== */
 
-const userData = JSON.parse(localStorage.getItem("user"));
-
-if (userData) {
-  const key = "zakatHistory_" + userData.email;
-  const history = JSON.parse(localStorage.getItem(key)) || [];
-
-  history.push({
-    amount: totalZakat,
-    date: new Date().toISOString()
-  });
-
-  localStorage.setItem(key, JSON.stringify(history));
+let userData = null;
+try {
+  userData = JSON.parse(localStorage.getItem("user"));
+} catch {
+  userData = null;
 }
+
+const historyKey = userData && userData.email
+  ? "zakatHistory_" + userData.email
+  : "zakatHistory_public";
+
+let history = [];
+try {
+  history = JSON.parse(localStorage.getItem(historyKey)) || [];
+} catch {
+  history = [];
+}
+
+history.push({
+  amount: totalZakat,
+  date: new Date().toISOString()
+});
+
+localStorage.setItem(historyKey, JSON.stringify(history));
 
   /* =========================
      OUTPUT
   ========================== */
 
-  document.getElementById("zakat-result").innerHTML = `
+  const resultEl = document.getElementById("zakat-result");
+  if (resultEl) resultEl.innerHTML = `
     <h3>${zt("result_title")}</h3>
    <p><strong>${zt("nisab_gold")}:</strong> ${rupiah(nisabMaal)}</p>
     <hr>
@@ -812,6 +824,19 @@ if (userData) {
 
     <h3>${zt("total_money")}: ${rupiah(totalZakat)}</h3>
   `;
+
+  try {
+    const target = resultEl || document.getElementById("zakatChart") || document.getElementById("historyChart");
+    if (target && typeof target.scrollIntoView === "function") {
+      window.requestAnimationFrame(() => {
+        try {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        } catch {
+          target.scrollIntoView();
+        }
+      });
+    }
+  } catch {}
 
 
   /* =========================
@@ -994,7 +1019,7 @@ function loadUser() {
   if (!user) {
     out.style.display = "block";
     inn.style.display = "none";
-    if (app) app.style.display = "none";
+    if (app) app.style.display = "block";
     return;
   }
 
@@ -1003,9 +1028,6 @@ function loadUser() {
   out.style.display = "none";
   inn.style.display = "block";
   if (app) app.style.display = "block";
-
-  const nameEl = document.getElementById("user-name");
-  if (nameEl) nameEl.textContent = data.name;
 }
 
 /* =====================
@@ -1100,13 +1122,16 @@ function logoutUser() {
   localStorage.removeItem("user");
 
   // tampilkan kembali layar login
-  document.getElementById("user-logged-out").style.display = "block";
+  const loggedOutEl = document.getElementById("user-logged-out");
+  if (loggedOutEl) loggedOutEl.style.display = "block";
 
   // sembunyikan tampilan user login
-  document.getElementById("user-logged-in").style.display = "none";
+  const loggedInEl = document.getElementById("user-logged-in");
+  if (loggedInEl) loggedInEl.style.display = "none";
 
   // sembunyikan kalkulator
-  document.getElementById("zakat-app").style.display = "none";
+  const zakatAppEl = document.getElementById("zakat-app");
+  if (zakatAppEl) zakatAppEl.style.display = "block";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1129,7 +1154,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     if (loggedOutEl) loggedOutEl.style.display = "block";
     if (loggedInEl) loggedInEl.style.display = "none";
-    if (zakatAppEl) zakatAppEl.style.display = "none";
+    if (zakatAppEl) zakatAppEl.style.display = "block";
   }
 
   // ==============================
@@ -1202,5 +1227,5 @@ function closeTernakInfo() {
 
 
 
-
+
 

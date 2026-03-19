@@ -24,53 +24,94 @@ function adminCurrency(amount) {
    (dashboard ini menampilkan riwayat zakat
    milik pengguna yang sedang login)
 ========================= */
-document.addEventListener("DOMContentLoaded", () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (!user) {
-    alert(at("loginRequired"));
-    const host = window.location.hostname;
-    const isLocalDev = host === "localhost" || host === "127.0.0.1";
-    window.location.href = isLocalDev ? "zakat.html" : "/zakat";
-    return;
+function getLegacyUser() {
+  try {
+    return JSON.parse(localStorage.getItem("user"));
+  } catch {
+    return null;
   }
+}
 
+function getCurrentUser() {
+  try {
+    const portalUser = window.PortalAuth?.getCurrentUser?.();
+    if (portalUser && portalUser.email) return portalUser;
+  } catch {}
+
+  const legacy = getLegacyUser();
+  if (legacy && legacy.email) return legacy;
+  return null;
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    scheduleAdminLoad();
+  });
+} else {
+  scheduleAdminLoad();
+}
+
+window.addEventListener("portal-language-change", () => {
   loadAdminData();
 });
+
+window.addEventListener("storage", (event) => {
+  if (event.key === "siteLang" || event.key === "user" || event.key === "islamiPortalSession") {
+    loadAdminData();
+  }
+});
+
+function scheduleAdminLoad() {
+  let attempts = 0;
+  const tick = () => {
+    attempts += 1;
+    loadAdminData();
+    const user = getCurrentUser();
+    if (user && user.email) return;
+    if (attempts >= 10) return;
+    setTimeout(tick, 80);
+  };
+  tick();
+}
 
 /* =========================
    LOAD DATA ADMIN
 ========================= */
 function loadAdminData() {
   zakatHistory = [];
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = getCurrentUser();
   if (!user || !user.email) {
     renderTable();
     renderStats();
     return;
   }
 
+  const typeLabel = at("typeZakat") || "Zakat";
+  const isAdmin = false;
+
+  const pushHistory = (owner, raw) => {
+    if (!Array.isArray(raw)) return;
+    const displayName = owner.name || owner.fullName || owner.email || at("fallbackUser");
+    const email = owner.email || at("localUserEmail") || "";
+    raw.forEach((item) => {
+      zakatHistory.push({
+        name: displayName,
+        email,
+        type: typeLabel,
+        amount: Number(item?.amount || item?.total || 0),
+        date: item?.date || item?.createdAt || new Date().toISOString()
+      });
+    });
+  };
+
   const key = "zakatHistory_" + user.email;
   let raw = [];
-
   try {
     raw = JSON.parse(localStorage.getItem(key)) || [];
   } catch {
     raw = [];
   }
-
-  if (Array.isArray(raw)) {
-    const displayName = user.name || user.fullName || user.email || at("fallbackUser");
-    const typeLabel = at("typeZakat") || "Zakat";
-
-    zakatHistory = raw.map((item) => ({
-      name: displayName,
-      email: user.email,
-      type: typeLabel,
-      amount: Number(item.amount || item.total || 0),
-      date: item.date || item.createdAt || new Date().toISOString()
-    }));
-  }
+  pushHistory(user, raw);
 
   renderTable();
   renderStats();
@@ -83,7 +124,7 @@ function loadAdminData() {
    RENDER TABLE
 ========================= */
 function renderTable() {
-  const tableBody = document.querySelector("tbody");
+  const tableBody = document.getElementById("zakat-table") || document.querySelector("tbody");
   if (!tableBody) return;
 
   tableBody.innerHTML = "";
@@ -120,15 +161,17 @@ function renderStats() {
   const totalZakatEl = document.getElementById("total-zakat");
 
   let total = 0;
-  let users = new Set();
+  let transaksi = 0;
 
   zakatHistory.forEach(item => {
-    if (!item.amount) return;
-    total += Number(item.amount);
-    users.add(item.name || "User");
+    const value = Number(item.amount) || 0;
+    if (value > 0) {
+      total += value;
+    }
+    transaksi += 1;
   });
 
-  if (totalUsersEl) totalUsersEl.textContent = users.size;
+  if (totalUsersEl) totalUsersEl.textContent = String(transaksi);
 
   if (totalZakatEl)
     totalZakatEl.textContent = adminCurrency(total);
@@ -138,8 +181,12 @@ function renderStats() {
    GRAFIK BULANAN
 ========================= */
 function drawMonthlyChart() {
-  const ctx = document.getElementById("monthlyChart");
+  const ctxCandidates = document.querySelectorAll("#monthlyChart");
+  const ctx = ctxCandidates && ctxCandidates.length
+    ? ctxCandidates[ctxCandidates.length - 1]
+    : document.getElementById("monthlyChart");
   if (!ctx) return;
+  if (typeof window.Chart !== "function") return;
 
   const monthly = {};
 
@@ -156,22 +203,24 @@ function drawMonthlyChart() {
   const labels = Object.keys(monthly).sort();
   const values = labels.map(k => monthly[k]);
 
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: labels,
-      datasets: [{
-        label: at("chartTotal"),
-        data: values
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false }
+  try {
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: at("chartTotal"),
+          data: values
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        }
       }
-    }
-  });
+    });
+  } catch {}
 }
 
 /* =========================
@@ -206,6 +255,7 @@ function loadDashboardStats(history) {
 function drawYearlyChart(history) {
   const ctx = document.getElementById("yearlyChart");
   if (!ctx) return;
+  if (typeof window.Chart !== "function") return;
 
   const yearly = {};
 
@@ -231,23 +281,25 @@ function drawYearlyChart(history) {
 
   if (labels.length === 0) return;
 
-  new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: labels,
-      datasets: [{
-        label: at("chartYearly"),
-        data: values,
-        tension: 0.3
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: { beginAtZero: true }
+  try {
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [{
+          label: at("chartYearly"),
+          data: values,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
       }
-    }
-  });
+    });
+  } catch {}
 }
 
 /* =========================

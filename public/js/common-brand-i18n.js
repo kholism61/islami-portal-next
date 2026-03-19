@@ -282,10 +282,18 @@
     prefooterBindings.forEach(([selector, key]) => apply(selector, text[key]));
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function init() {
     setupProdCleanLinks();
     run();
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+  window.addEventListener("portal-language-change", run);
   window.addEventListener("storage", (event) => {
     if (event.key === "siteLang") run();
   });

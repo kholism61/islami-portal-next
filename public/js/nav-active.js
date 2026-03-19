@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initNavActive() {
   // =====================
   // NAV ACTIVE
   // =====================
@@ -73,4 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ?.scrollIntoView({ behavior: "smooth" });
     };
   });
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initNavActive);
+} else {
+  initNavActive();
+}

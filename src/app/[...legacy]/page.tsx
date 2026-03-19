@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
-import LegacyHtmlPage from "@/components/core/LegacyHtmlPage";
+import LegacyHtmlPage from "../../components/core/LegacyHtmlPage";
 
 function findLegacyHtmlFile(segments: string[]): string | null {
   const candidate = `${segments.join("/")}.html`;
@@ -20,7 +20,25 @@ function findLegacyHtmlFile(segments: string[]): string | null {
   return null;
 }
 
-export default function LegacyCatchAllPage({ params }: { params: { legacy: string[] } }) {
-  void params;
-  notFound();
+export default async function LegacyCatchAllPage({
+  params,
+}: {
+  params: { legacy?: string[] };
+}) {
+  const segments = Array.isArray(params.legacy) ? params.legacy : [];
+
+  if (segments.length === 1) {
+    const slug = String(segments[0] || "").toLowerCase();
+    if (slug === "index") redirect("/");
+    if (slug === "signin") redirect("/signin");
+    if (slug === "signup") redirect("/signup");
+    if (slug === "portal-admin" || slug === "admin") redirect("/portal-admin");
+  }
+
+  const relFilePath = findLegacyHtmlFile(segments);
+  if (!relFilePath) {
+    notFound();
+  }
+
+  return <LegacyHtmlPage relFilePath={relFilePath} />;
 }

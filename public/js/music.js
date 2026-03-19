@@ -2,10 +2,12 @@
    BACKGROUND MUSIC — FINAL
 ========================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function initMusic() {
   const audio = document.getElementById("bgMusic");
   const toggle = document.getElementById("musicToggle");
   if (!audio || !toggle) return;
+  if (toggle.dataset.musicBound === "true") return;
+  toggle.dataset.musicBound = "true";
 
   /* =========================
      PLAYLIST
@@ -103,5 +105,11 @@ const playlistDark = [
   ========================= */
   loadSong();
   if (isPlaying) playMusic();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initMusic);
+} else {
+  initMusic();
+}
 

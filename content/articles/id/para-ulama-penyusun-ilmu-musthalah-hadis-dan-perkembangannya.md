@@ -109,7 +109,10 @@ Hadis Aziz
 
 Hadis yang diriwayatkan oleh minimal dua perawi di setiap tingkatan sanad. Disebut aziz karena jarang atau karena saling menguatkan antar jalur.
 
-Hadis aziz bukan syarat hadis sahih, bertentangan dengan pendapat sebagian kalangan seperti Abu Ali al-Jubba’i dari Mu’tazilah. ### Penutup Ilmu Musthalah Hadis merupakan benteng utama dalam menjaga kemurnian sunnah Nabi ﷺ. Melalui usaha para ulama besar dari masa ke masa—mulai dari Ar-Ramahurmuzi hingga Ibnu Hajar al-‘Asqalani—umat Islam diwarisi metodologi ilmiah yang sangat kokoh dan rasional.
+Hadis aziz bukan syarat hadis sahih, bertentangan dengan pendapat sebagian kalangan seperti Abu Ali al-Jubba’i dari Mu’tazilah. 
+
+### Penutup
+ Ilmu Musthalah Hadis merupakan benteng utama dalam menjaga kemurnian sunnah Nabi ﷺ. Melalui usaha para ulama besar dari masa ke masa—mulai dari Ar-Ramahurmuzi hingga Ibnu Hajar al-‘Asqalani—umat Islam diwarisi metodologi ilmiah yang sangat kokoh dan rasional.
 
 Pemahaman terhadap pembagian hadis, khususnya mutawatir dan ahad, membantu umat Islam bersikap adil dan ilmiah dalam menerima serta mengamalkan hadis. Dengan demikian, sunnah Nabi ﷺ tetap terjaga, relevan, dan dapat diamalkan dalam kehidupan sehari-hari secara bijak dan bertanggung jawab.
 

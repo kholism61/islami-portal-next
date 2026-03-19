@@ -24,6 +24,7 @@
         footerMenu: "Menu",
         footerNav: ["Beranda", "Kalkulator", "Donasi", "Tentang"],
         footerContact: "Kontak",
+        contactLines: ["Email: nurcholism51@gmail.com", "WhatsApp: +62 821-2430-5278"],
         footerCopy: "(c) 2026 Zakat Portal. All rights reserved."
       },
       portal: {
@@ -75,6 +76,8 @@
         eyebrow: "Portal Login",
         heroTitle: 'Masuk ke <span>portal</span> literasi Islam.',
         desc: "Halaman ini merupakan gerbang autentikasi menuju Portal Literasi Islam. Setelah login, pengguna dapat mengakses editor konten, dashboard pengelolaan, serta berbagai tools utama yang tersedia di dalam portal.",
+        forgotEmail: "Lupa password? Kirim email ke admin",
+        forgotWhatsapp: "Lupa password? Chat WhatsApp admin",
         bullets: [
           "Akses ke berbagai tools portal seperti Smart Fiqh, kalkulator zakat, dan modul literasi Islam.",
           "Dashboard pengelolaan untuk editor, kontributor, dan tim internal portal.",
@@ -154,6 +157,7 @@
         footerMenu: "Menu",
         footerNav: ["Home", "Calculator", "Donate", "About"],
         footerContact: "Contact",
+        contactLines: ["Email: nurcholism51@gmail.com", "WhatsApp: +62 821-2430-5278"],
         footerCopy: "(c) 2026 Zakat Portal. All rights reserved."
       },
       portal: {
@@ -193,6 +197,8 @@
         eyebrow: "Portal Login",
         heroTitle: 'Sign in to the Islamic literacy <span>portal</span>.',
         desc: "This page serves as the authentication gateway to the Islamic Literacy Portal. After signing in, users can access the content editor, management dashboard, and the main tools available across the portal.",
+        forgotEmail: "Forgot your password? Email the admin",
+        forgotWhatsapp: "Forgot your password? Chat the admin on WhatsApp",
         bullets: [
           "Access key portal tools such as Smart Fiqh, the zakat calculator, and Islamic literacy modules.",
           "Management dashboard for editors, contributors, and the internal portal team.",
@@ -272,6 +278,7 @@
         footerMenu: "القائمة",
         footerNav: ["الرئيسية", "الحاسبة", "التبرع", "من نحن"],
         footerContact: "اتصل بنا",
+        contactLines: ["البريد الإلكتروني: nurcholism51@gmail.com", "واتساب: +62 821-2430-5278"],
         footerCopy: "(c) 2026 بوابة الزكاة. جميع الحقوق محفوظة."
       },
       portal: {
@@ -323,6 +330,8 @@
         eyebrow: "تسجيل الدخول إلى البوابة",
         heroTitle: 'تسجيل الدخول إلى <span>بوابة</span> الثقافة الإسلامية.',
         desc: "تمثل هذه الصفحة بوابة التحقق للدخول إلى بوابة الثقافة الإسلامية. بعد تسجيل الدخول يمكن للمستخدم الوصول إلى محرر المحتوى ولوحة الإدارة ومختلف الأدوات الرئيسة المتاحة داخل البوابة.",
+        forgotEmail: "هل نسيت كلمة المرور؟ أرسل بريدًا إلى المدير",
+        forgotWhatsapp: "هل نسيت كلمة المرور؟ تواصل مع المدير عبر واتساب",
         bullets: [
           "الوصول إلى أدوات البوابة الأساسية مثل الفقه الذكي وحاسبة الزكاة ووحدات الثقافة الإسلامية.",
           "لوحة إدارة للمحررين والمساهمين والفريق الداخلي للبوابة.",
@@ -440,6 +449,7 @@
     applyText(".main-footer .footer-col:nth-child(2) h4", t("admin.footerMenu", {}, lang));
     applyTexts(".main-footer .footer-col:nth-child(2) li a", t("admin.footerNav", {}, lang));
     applyText(".main-footer .footer-col:nth-child(3) h4", t("admin.footerContact", {}, lang));
+    applyTexts(".main-footer .footer-col:nth-child(3) p", t("admin.contactLines", {}, lang));
     applyText(".main-footer .footer-bottom", t("admin.footerCopy", {}, lang));
   }
 
@@ -488,6 +498,18 @@
     applyText("#signinHelperOneBody", t("signin.helperOneBody", {}, lang));
     applyText("#signinHelperTwoTitle", t("signin.helperTwoTitle", {}, lang));
     applyText("#signinHelperTwoBody", t("signin.helperTwoBody", {}, lang));
+    applyText("#signinForgotEmail", t("signin.forgotEmail", {}, lang));
+    applyText("#signinForgotWhatsapp", t("signin.forgotWhatsapp", {}, lang));
+  }
+
+  function applySignup(lang) {
+    applyText(".brand-link strong", t("portal.brand", {}, lang));
+    applyText(".auth-topbar-actions nav a:nth-child(1)", t("portal.nav", {}, lang)[0]);
+
+    const existingLink = document.getElementById("signupExistingAccountLink");
+    if (existingLink) {
+      existingLink.textContent = t("signup.existingAccount", {}, lang);
+    }
   }
 
   function run() {
@@ -497,11 +519,16 @@
     if (page === "admin.html") applyAdmin(lang);
     if (page === "portal-admin.html") applyPortal(lang);
     if (page === "signin.html") applySignin(lang);
+    if (page === "signup.html") applySignup(lang);
   }
 
   window.PortalAdminI18n = { getLang, t, formatCurrency };
 
-  document.addEventListener("DOMContentLoaded", run);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
   window.addEventListener("portal-language-change", run);
   window.addEventListener("storage", (event) => {
     if (event.key === "siteLang") run();

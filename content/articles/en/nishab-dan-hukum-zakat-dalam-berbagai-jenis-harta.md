@@ -72,7 +72,6 @@ The phrase **“وَفِيمَا زَادَ فَبِحِسَابِهِ”** indi
 
 > والله أعلم
 
----
 
 ## Permissible Jewelry
 
@@ -121,7 +120,6 @@ Regarding **pierced dinars or dirhams used as necklaces**, there are two opinion
 
 > والله أعلم
 
----
 
 ## Nisab of Agricultural Produce and Fruits
 
@@ -177,7 +175,6 @@ If forty goats are endowed to a specific group of people, then if it is said tha
 
 > والله أعلم
 
----
 
 ## Irrigation of Crops
 
@@ -227,7 +224,6 @@ However, if it is known that one method predominates but its exact proportion is
 
 > والله أعلم
 
----
 
 ## Nisab of Trade Goods
 
@@ -277,7 +273,6 @@ Another opinion states that the haul continues because trade exchange is still p
 
 > والله أعلم
 
----
 
 ## Minerals and Rikaz (Buried Treasure)
 
@@ -319,7 +314,6 @@ If the treasure bears no identifiable signs of either Islam or pre-Islamic origi
 
 > والله أعلم
 
----
 
 ## Conclusion
 

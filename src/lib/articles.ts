@@ -35,8 +35,23 @@ export type ArticleDetail = ArticleSummary & {
   content: string;
 };
 
-const CONTENT_ROOT = path.join(process.cwd(), "content", "articles");
+function resolveContentRoot(): string {
+  let current = process.cwd();
+  for (let i = 0; i < 6; i += 1) {
+    const candidate = path.join(current, "content", "articles");
+    if (fs.existsSync(candidate)) return candidate;
+    const parent = path.dirname(current);
+    if (parent === current) break;
+    current = parent;
+  }
+  return path.join(process.cwd(), "content", "articles");
+}
+
+const CONTENT_ROOT = resolveContentRoot();
 const SUPPORTED_LANGS: ArticleLang[] = ["id", "en", "ar"];
+
+const DEBUG_ARTICLES = process.env.DEBUG_ARTICLES === "1";
+let debugPrintedRoot = false;
 
 function normalizeLang(value: unknown): ArticleLang {
   const raw = String(value || "").toLowerCase();
@@ -72,6 +87,23 @@ function parseMarkdown(source: string) {
 
 function getLangDir(lang: ArticleLang) {
   return path.join(CONTENT_ROOT, lang);
+}
+
+function findMarkdownByFrontmatterSlug(dir: string, targetSlug: string): string | null {
+  const files = safeReadDir(dir).filter((name) => name.toLowerCase().endsWith(".md"));
+  for (const filename of files) {
+    const fullPath = path.join(dir, filename);
+    let source = "";
+    try {
+      source = safeReadFile(fullPath);
+    } catch {
+      continue;
+    }
+    const { data } = parseMarkdown(source);
+    const slug = String(data.slug || "").trim();
+    if (slug && slug === targetSlug) return fullPath;
+  }
+  return null;
 }
 
 export function listArticles(langInput: unknown = "id"): ArticleSummary[] {
@@ -116,16 +148,38 @@ export function getArticle(slugInput: unknown, langInput: unknown = "id"): Artic
   const dir = getLangDir(lang);
   const directPath = path.join(dir, `${slug}.md`);
 
-  const filePath = fs.existsSync(directPath)
-    ? directPath
-    : path.join(dir, `${slug.replace(/\.md$/i, "")}.md`);
+  const normalizedSlug = slug.replace(/\.md$/i, "");
+  const fallbackPath = path.join(dir, `${normalizedSlug}.md`);
 
-  if (!fs.existsSync(filePath)) return null;
+  let filePath = fs.existsSync(directPath) ? directPath : fallbackPath;
+
+  if (DEBUG_ARTICLES) {
+    if (!debugPrintedRoot) {
+      debugPrintedRoot = true;
+      try {
+        console.log("[articles] CONTENT_ROOT=", CONTENT_ROOT);
+      } catch {}
+    }
+    try {
+      console.log("[articles] getArticle", { lang, slug, dir, directExists: fs.existsSync(directPath), fallbackExists: fs.existsSync(fallbackPath) });
+    } catch {}
+  }
+
+  if (!fs.existsSync(filePath)) {
+    const matched = findMarkdownByFrontmatterSlug(dir, normalizedSlug);
+    if (DEBUG_ARTICLES) {
+      try {
+        console.log("[articles] frontmatter-scan", { normalizedSlug, matched });
+      } catch {}
+    }
+    if (!matched) return null;
+    filePath = matched;
+  }
 
   const source = safeReadFile(filePath);
   const { data, content } = parseMarkdown(source);
 
-  const resolvedSlug = String(data.slug || slug.replace(/\.md$/i, ""));
+  const resolvedSlug = String(data.slug || normalizedSlug);
   const title = String(data.title || resolvedSlug);
   const excerpt = String(data.excerpt || "").trim();
   const thumbnail = normalizeThumbnail(data.thumbnail);

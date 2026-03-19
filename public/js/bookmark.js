@@ -1,6 +1,9 @@
 const SITE_LANGS = ["id", "en", "ar"];
 const articleStoreCache = new Map();
-const LEGACY_ARTICLE_STORE = window.__PORTAL_ARTICLE_STORE__ || {};
+
+function getLegacyArticleStore() {
+  return window.__PORTAL_ARTICLE_STORE__ || {};
+}
 
 const bookmarkUiText = {
   id: {
@@ -234,7 +237,7 @@ function loadStoreForLang(lang = "id") {
     return articleStoreCache.get(safeLang);
   }
 
-  const store = LEGACY_ARTICLE_STORE[safeLang];
+  const store = getLegacyArticleStore()[safeLang];
   if (store && typeof store === "object") {
     articleStoreCache.set(safeLang, store);
     return store;
@@ -260,6 +263,13 @@ function getArticleById(id) {
     if (store?.[safeId]) return store[safeId];
   }
 
+  try {
+    const meta = JSON.parse(localStorage.getItem("bookmarkArticles")) || {};
+    if (meta && typeof meta === "object" && meta[safeId]) return meta[safeId];
+  } catch {
+    // ignore
+  }
+
   return null;
 }
 
@@ -269,7 +279,7 @@ function stripHtml(html = "") {
   return temp.textContent || "";
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function initBookmarkPage() {
   const listEl = document.getElementById("bookmark-list");
   const emptyEl = document.getElementById("bookmark-empty");
   const notFoundEl = document.getElementById("bookmarkNotFound");
@@ -285,7 +295,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!listEl || !emptyEl) return;
 
   function getBookmarks() {
-    return JSON.parse(localStorage.getItem("bookmarks")) || [];
+    try {
+      const parsed = JSON.parse(localStorage.getItem("bookmarks"));
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   }
 
   function setBookmarks(nextBookmarks) {
@@ -293,7 +308,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function removeReadingProgress(id) {
-    const data = JSON.parse(localStorage.getItem("readingProgress")) || {};
+    let data = {};
+    try {
+      const parsed = JSON.parse(localStorage.getItem("readingProgress"));
+      data = parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      data = {};
+    }
     delete data[id];
     localStorage.setItem("readingProgress", JSON.stringify(data));
   }
@@ -323,7 +344,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const achievementEl = document.getElementById("achievement-label");
 
     const totalBookmarks = getBookmarks().length;
-    const reading = JSON.parse(localStorage.getItem("readingProgress")) || {};
+    let reading = {};
+    try {
+      const parsed = JSON.parse(localStorage.getItem("readingProgress"));
+      reading = parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      reading = {};
+    }
     const readingCount = Object.keys(reading).filter(
       (id) => !id.endsWith("_done") && reading[id] > 0 && reading[id] < 100
     ).length;
@@ -332,12 +359,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (bookmarkEl) bookmarkEl.textContent = String(totalBookmarks);
     if (readingEl) readingEl.textContent = String(readingCount);
 
-    const streakData = JSON.parse(localStorage.getItem("readingStreak")) || { streak: 0 };
+    let streakData = { streak: 0 };
+    try {
+      const parsed = JSON.parse(localStorage.getItem("readingStreak"));
+      streakData = parsed && typeof parsed === "object" ? parsed : { streak: 0 };
+    } catch {
+      streakData = { streak: 0 };
+    }
     if (streakEl) streakEl.textContent = String(streakData.streak || 0);
 
     const goalTarget = 1;
     const todayKey = new Date().toLocaleDateString("sv-SE");
-    const history = JSON.parse(localStorage.getItem("readingHistory")) || {};
+    let history = {};
+    try {
+      const parsed = JSON.parse(localStorage.getItem("readingHistory"));
+      history = parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      history = {};
+    }
     const todayCount = history[todayKey] || 0;
 
     if (goalStatus) {
@@ -361,7 +400,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderContinueReading() {
     if (!continueEl) return;
 
-    const reading = JSON.parse(localStorage.getItem("readingProgress")) || {};
+    let reading = {};
+    try {
+      const parsed = JSON.parse(localStorage.getItem("readingProgress"));
+      reading = parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      reading = {};
+    }
     const ids = Object.keys(reading).filter(
       (id) => !id.endsWith("_done") && reading[id] > 0
     );
@@ -433,8 +478,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const filter = filterSelect?.value || "all";
 
     saved = saved
-      .map((id) => ({ id, article: getArticleById(id) }))
-      .filter((item) => item.article)
+      .map((id) => {
+        const found = getArticleById(id);
+        const fallback = {
+          id,
+          slug: id,
+          judul: id,
+          kategori: "",
+          isi: "",
+          thumbnail: ""
+        };
+        return { id, article: found || fallback };
+      })
       .filter((item) => filter === "all" || item.article.kategori === filter);
 
     if (sort === "az") {
@@ -455,7 +510,13 @@ document.addEventListener("DOMContentLoaded", () => {
     emptyEl.style.display = "none";
     if (notFoundEl) notFoundEl.style.display = "none";
 
-    const progressMap = JSON.parse(localStorage.getItem("readingProgress")) || {};
+    let progressMap = {};
+    try {
+      const parsed = JSON.parse(localStorage.getItem("readingProgress"));
+      progressMap = parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      progressMap = {};
+    }
 
     saved.forEach(({ id, article }) => {
       const percent = Math.max(0, Math.min(100, Math.round(progressMap[id] || 0)));
@@ -464,7 +525,7 @@ document.addEventListener("DOMContentLoaded", () => {
       item.dataset.id = id;
 
       const thumb = article.thumbnail || "assets/images/default.jpg";
-      const preview = stripHtml(article.isi || "").slice(0, 100);
+      const preview = String(stripHtml(article.isi || "") || "").slice(0, 100);
 
       item.innerHTML = `
         <img src="${thumb}" class="bookmark-thumb" alt="${article.judul || id}">
@@ -477,7 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <span class="reading-percent">${t("reading_percent", { percent })}</span>
           <div class="bookmark-actions">
-            <a href="article?id=${id}&slug=${slugify(article.judul || id)}" class="read-btn">${t("read_btn")}</a>
+            <a href="/article?id=${id}&slug=${slugify(article.judul || id)}" class="read-btn">${t("read_btn")}</a>
             <button class="remove-icon" data-id="${id}" title="${t("remove_btn_title")}">x</button>
           </div>
         </div>
@@ -735,7 +796,20 @@ document.addEventListener("DOMContentLoaded", () => {
     updateStats();
   }
 
-  rerenderAll();
+  (function waitForStoreAndRender(attemptsLeft = 80) {
+    const store = getLegacyArticleStore();
+    const ready = store && typeof store === "object" && Object.keys(store).length > 0;
+    if (!ready) {
+      if ((attemptsLeft || 0) <= 0) {
+        rerenderAll();
+        return;
+      }
+      window.setTimeout(() => waitForStoreAndRender((attemptsLeft || 0) - 1), 60);
+      return;
+    }
+    articleStoreCache.clear();
+    rerenderAll();
+  })();
 
   window.addEventListener("focus", () => {
     renderBookmarks();
@@ -749,6 +823,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  window.addEventListener("portal-language-change", rerenderAll);
-});
+  window.addEventListener("reading-progress-updated", rerenderAll);
 
+  window.addEventListener("portal-language-change", rerenderAll);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initBookmarkPage);
+} else {
+  initBookmarkPage();
+}

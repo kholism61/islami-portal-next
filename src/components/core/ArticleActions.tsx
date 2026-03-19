@@ -25,6 +25,27 @@ function setBookmarks(next: string[]) {
   localStorage.setItem("bookmarks", JSON.stringify(Array.from(new Set(next))));
 }
 
+type BookmarkArticlePayload = {
+  id: string;
+  slug: string;
+  judul: string;
+  kategori?: string;
+  penulis?: string;
+  tanggal?: string;
+  createdAt?: string;
+  thumbnail?: string;
+  ringkasan?: string;
+  isi?: string;
+};
+
+function getBookmarkArticles(): Record<string, BookmarkArticlePayload> {
+  return safeParse<Record<string, BookmarkArticlePayload>>(localStorage.getItem("bookmarkArticles"), {});
+}
+
+function setBookmarkArticles(next: Record<string, BookmarkArticlePayload>) {
+  localStorage.setItem("bookmarkArticles", JSON.stringify(next));
+}
+
 type OfflinePayload = Record<string, unknown>;
 
 function getOffline(): Record<string, OfflinePayload> {
@@ -81,18 +102,74 @@ export default function ArticleActions({ article }: Props) {
     };
   }, [article]);
 
+  const bookmarkPayload = useMemo<BookmarkArticlePayload>(() => {
+    return {
+      id: article.slug,
+      slug: article.slug,
+      judul: article.title,
+      kategori: article.category || "",
+      penulis: article.author || "",
+      tanggal: article.createdAt || "",
+      createdAt: article.createdAt || "",
+      thumbnail: article.thumbnail || "",
+      ringkasan: article.excerpt || "",
+      isi: article.content,
+    };
+  }, [article]);
+
   return (
     <div className="mt-6 grid gap-3 sm:grid-cols-2">
       <button
         type="button"
         onClick={() => {
-          const next = getBookmarks();
-          const nextSaved = next.includes(article.slug)
-            ? next.filter((id) => id !== article.slug)
-            : [...next, article.slug];
-          setBookmarks(nextSaved);
-          setSaved(nextSaved.includes(article.slug));
-          setToast(nextSaved.includes(article.slug) ? "Disimpan ke bookmark" : "Dihapus dari bookmark");
+          try {
+            const next = getBookmarks();
+            const nextSaved = next.includes(article.slug)
+              ? next.filter((id) => id !== article.slug)
+              : [...next, article.slug];
+
+            setBookmarks(nextSaved);
+
+            const nextMeta = getBookmarkArticles();
+            if (nextSaved.includes(article.slug)) {
+              nextMeta[article.slug] = bookmarkPayload;
+            } else {
+              delete nextMeta[article.slug];
+            }
+            setBookmarkArticles(nextMeta);
+
+            const persisted = getBookmarks();
+
+            try {
+              (window as any).__bookmarkDebugLast = {
+                at: Date.now(),
+                slug: article.slug,
+                nextSaved,
+                persisted,
+                hasMeta: Boolean(getBookmarkArticles()[article.slug]),
+              };
+            } catch {}
+
+            if (!persisted.includes(article.slug) && nextSaved.includes(article.slug)) {
+              setToast("Gagal menyimpan bookmark (cek console)");
+              console.error("Bookmark save failed", {
+                slug: article.slug,
+                nextSaved,
+                persisted,
+              });
+              return;
+            }
+
+            try {
+              window.dispatchEvent(new Event("bookmarks-updated"));
+            } catch {}
+
+            setSaved(nextSaved.includes(article.slug));
+            setToast(nextSaved.includes(article.slug) ? "Disimpan ke bookmark" : "Dihapus dari bookmark");
+          } catch (err) {
+            setToast("Gagal menyimpan bookmark (cek console)");
+            console.error("Bookmark click error", err);
+          }
         }}
         className={`rounded-2xl px-4 py-3 text-sm font-extrabold transition ${
           saved ? "bg-amber-500 text-amber-950 hover:bg-amber-400" : "bg-zinc-900 text-white hover:bg-zinc-800"
@@ -104,19 +181,42 @@ export default function ArticleActions({ article }: Props) {
       <button
         type="button"
         onClick={() => {
-          const offline = getOffline();
-          if (offline[article.slug]) {
-            delete offline[article.slug];
-            setOffline(offline);
-            setOfflineSaved(false);
-            setToast("Dihapus dari offline");
-            return;
-          }
+          try {
+            const offline = getOffline();
+            if (offline[article.slug]) {
+              delete offline[article.slug];
+              setOffline(offline);
+              setOfflineSaved(false);
+              setToast("Dihapus dari offline");
+              return;
+            }
 
-          offline[article.slug] = offlinePayload;
-          setOffline(offline);
-          setOfflineSaved(true);
-          setToast("Tersimpan untuk offline");
+            offline[article.slug] = offlinePayload;
+            setOffline(offline);
+
+            const persisted = getOffline();
+            try {
+              (window as any).__offlineDebugLast = {
+                at: Date.now(),
+                slug: article.slug,
+                persisted: Boolean(persisted[article.slug]),
+              };
+            } catch {}
+
+            if (!persisted[article.slug]) {
+              setToast("Gagal menyimpan offline (cek console)");
+              console.error("Offline save failed", {
+                slug: article.slug,
+              });
+              return;
+            }
+
+            setOfflineSaved(true);
+            setToast("Tersimpan untuk offline");
+          } catch (err) {
+            setToast("Gagal menyimpan offline (cek console)");
+            console.error("Offline click error", err);
+          }
         }}
         className={`rounded-2xl border px-4 py-3 text-sm font-extrabold transition ${
           offlineSaved

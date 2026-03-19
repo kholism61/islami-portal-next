@@ -1,5 +1,255 @@
-import LegacyHtmlPage from "@/components/core/LegacyHtmlPage";
+import Script from "next/script";
 
-export default function SmartFiqhThaharahModernPage() {
-  return <LegacyHtmlPage source="smart-fiqh/smart-thaharah-modern.html" />;
+export const metadata = {
+  title: "Smart Fiqh Thaharah | Portal Literasi Islam",
+};
+
+export default function SmartFiqhThaharahPage() {
+  return (
+    <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&family=Amiri:wght@400;700&display=swap"
+        rel="stylesheet"
+      />
+
+      <link rel="stylesheet" href="/smart-fiqh/smart-engine-thaharah.css" />
+
+      <div className="page-glow page-glow-left"></div>
+      <div className="page-glow page-glow-right"></div>
+
+      <nav className="navbar">
+        <div className="nav-container">
+          <a href="../index.html" className="logo" id="logoText">
+            Islami Portal
+          </a>
+
+          <button
+            className="nav-toggle"
+            id="navToggle"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+
+          <div className="nav-panel" id="navPanel">
+            <ul className="nav-menu">
+              <li>
+                <a href="../index.html" id="navHome">
+                  Beranda
+                </a>
+              </li>
+
+              <li>
+                <a href="../smart.html" id="navSmart">
+                  Smart Fiqh
+                </a>
+              </li>
+
+              <li>
+                <a href="../tools/mawaris.html" id="navMawaris">
+                  Hitung Mawaris
+                </a>
+              </li>
+
+              <li>
+                <a href="../zakat.html" id="navZakat">
+                  Kalkulator Zakat
+                </a>
+              </li>
+            </ul>
+
+            <div className="lang-switch" aria-label="Language">
+              <button type="button" data-lang="id" className="active">
+                ID
+              </button>
+
+              <button type="button" data-lang="en">
+                EN
+              </button>
+
+              <button type="button" data-lang="ar">
+                AR
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <header className="hero hero-full">
+        <div className="hero-shell">
+          <span className="hero-badge">Fiqh Decision Flow</span>
+
+          <h1 id="heroTitle">Smart Fiqh Thaharah</h1>
+
+          <p id="heroDesc">
+            Panduan fiqh bersuci yang lebih lengkap untuk wudhu, mandi wajib,
+            tayammum, najis, jenis-jenis najis, luka/perban, uzur medis, dan
+            keraguan dalam thaharah dengan alur Ya/Tidak yang ringkas namun
+            berbobot.
+          </p>
+
+          <div className="hero-stats">
+            <article className="stat-card">
+              <strong>14</strong>
+              <span>Alur Pertanyaan</span>
+            </article>
+
+            <article className="stat-card">
+              <strong>13</strong>
+              <span>Hasil Hukum</span>
+            </article>
+
+            <article className="stat-card">
+              <strong>3</strong>
+              <span>Bahasa Aktif</span>
+            </article>
+          </div>
+        </div>
+      </header>
+
+      <main className="layout-shell">
+        <section className="engine-column">
+          <article className="engine-card engine-primary-card">
+            <div className="engine-head">
+              <div>
+                <span className="section-kicker">Interactive Engine</span>
+                <h2 id="engineTitle">Mesin Hukum Thaharah Lengkap</h2>
+              </div>
+
+              <span className="step-text" id="stepText">
+                Langkah 1
+              </span>
+            </div>
+
+            <div className="progress-track" aria-hidden="true">
+              <div className="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div className="question-box" id="questionBox">
+              <div className="question-mark">?</div>
+
+              <p className="question-title" id="questionText"></p>
+
+              <div className="answer-actions">
+                <button
+                  type="button"
+                  className="btn-answer btn-yes"
+                  id="yesBtn"
+                >
+                  Ya
+                </button>
+
+                <button
+                  type="button"
+                  className="btn-answer btn-no"
+                  id="noBtn"
+                >
+                  Tidak
+                </button>
+              </div>
+            </div>
+
+            <div className="result-box" id="resultBox">
+              <h3 id="resultTitle">Hasil Hukum</h3>
+
+              <p className="result-line">
+                <strong id="labelStatus">Status</strong>
+                <span id="resultStatus"></span>
+              </p>
+
+              <p className="result-line">
+                <strong id="labelObligation">Kewajiban</strong>
+                <span id="resultObligation"></span>
+              </p>
+
+              <p className="result-line">
+                <strong id="labelExplanation">Penjelasan</strong>
+                <span id="resultExplanation"></span>
+              </p>
+
+              <p className="result-line">
+                <strong id="labelReference">Landasan</strong>
+                <span id="resultReference"></span>
+              </p>
+            </div>
+
+            <div className="reset-wrap">
+              <button type="button" className="btn-reset" id="resetBtn">
+                Mulai Ulang
+              </button>
+            </div>
+          </article>
+        </section>
+
+        <aside className="info-column">
+          <article className="info-card">
+            <span className="insight-badge">Cakupan</span>
+
+            <h3>Ruang Lingkup Smart Thaharah</h3>
+
+            <p>
+              Mencakup wudhu, mandi wajib, tayammum, penghalang sampainya air,
+              luka dan jabirah, najis ringan, najis sedang, najis berat, sisa
+              jejak najis yang sulit hilang, uzur medis berkepanjangan, dan
+              kaidah penting untuk menolak waswas dalam bersuci.
+            </p>
+          </article>
+
+          <article className="info-card">
+            <span className="insight-badge">Prinsip</span>
+
+            <h3>Catatan Fiqh Praktis</h3>
+
+            <p>
+              Syariat menuntut ketelitian pada rukun dan syarat, namun menolak
+              waswas, sikap berlebihan, dan beban yang tidak realistis. Air
+              dipakai bila ada dan aman, tayammum diambil saat ada uzur, dan
+              keyakinan tidak gugur hanya karena keraguan.
+            </p>
+          </article>
+
+          <article className="info-card">
+            <span className="insight-badge">Arah Pakai</span>
+
+            <h3>Pedoman Penggunaan</h3>
+
+            <ul className="smart-method-list">
+              <li>Jawab pertanyaan secara berurutan sesuai kondisi nyata.</li>
+
+              <li>
+                Gunakan hasil sebagai panduan awal yang cepat dan terstruktur.
+              </li>
+
+              <li>
+                Untuk kasus medis berat atau sangat spesifik, tetap konsultasi
+                fiqh lanjutan.
+              </li>
+            </ul>
+          </article>
+        </aside>
+      </main>
+
+      <footer className="smart-footer">
+        <p>© 2026 Smart Fiqh Thaharah — Portal Literasi Islam</p>
+      </footer>
+
+      <Script
+        src="/smart-fiqh/smart-data-thaharah.js"
+        strategy="afterInteractive"
+      />
+
+      <Script
+        src="/smart-fiqh/smart-fiqh-engine-thaharah.js"
+        strategy="afterInteractive"
+      />
+
+      <Script src="/js/auth.js" strategy="afterInteractive" />
+
+      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+    </>
+  );
 }

@@ -1,67 +1,250 @@
-import type { Metadata } from "next";
+import Script from "next/script";
 
-import FaqAccordion from "@/components/FaqAccordion";
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "FAQ | Portal Literasi Islam",
-  description: "Pertanyaan umum seputar tujuan, metodologi, dan pengelolaan Portal Literasi Islam.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
-const items = [
-  {
-    q: "Apa tujuan Portal Literasi Islam?",
-    a: "Portal ini bertujuan menghadirkan kajian Islam berbasis keilmuan, metodologi yang jelas, serta adab akademik yang bertanggung jawab.",
-  },
-  {
-    q: "Apakah tulisan di sini merupakan fatwa?",
-    a: "Tidak. Seluruh tulisan disajikan sebagai bahan kajian dan refleksi ilmiah, bukan sebagai fatwa atau klaim kebenaran tunggal.",
-  },
-  {
-    q: "Siapa yang mengelola website ini?",
-    a: "Website ini dikelola secara mandiri oleh Muhammad Nurcholis, mahasiswa Syariah wa Qanun Universitas Al-Azhar, Kairo.",
-  },
-  {
-    q: "Apakah pembaca boleh memberi masukan?",
-    a: "Sangat boleh. Masukan dan diskusi terbuka melalui halaman Kontak atau media sosial yang tersedia.",
-  },
-];
-
-export default function FaqPage() {
+export default function FAQPage() {
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-10">
-      <div className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm sm:p-10">
-        <h1 className="text-2xl font-extrabold tracking-tight text-zinc-900 sm:text-3xl">FAQ</h1>
-        <div className="mt-3 h-1 w-16 rounded-full bg-zinc-900/80" />
+    <>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-FD9932Y04M"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-FD9932Y04M');
+        `}
+      </Script>
 
-        <p className="mt-6 text-sm leading-7 text-zinc-700">
-          Pertanyaan umum seputar tujuan, metodologi, dan pengelolaan Portal Literasi Islam.
+      <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Amiri&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      />
+      <link rel="stylesheet" href="/css/pages.css" />
+
+      <header className="navbar">
+        <div className="nav-inner">
+          <div className="nav-left">
+            <a href="/" className="nav-brand">
+              📚 <span>Portal Literasi Islam</span>
+            </a>
+          </div>
+
+          <nav className="nav-links">
+            <a href="/">Beranda</a>
+            <a href="/about">Tentang</a>
+            <a href="/faq">FAQ</a>
+            <a href="/donasi">Donasi</a>
+            <a href="/kontak">Kontak</a>
+          </nav>
+        </div>
+      </header>
+
+      <main className="page">
+        <h1 className="page-title">FAQ</h1>
+        <div className="page-divider"></div>
+
+        <p className="page-lead">
+          Pertanyaan umum seputar tujuan, metodologi, dan pengelolaan Portal
+          Literasi Islam.
         </p>
 
-        <section className="mt-8">
-          <FaqAccordion items={items} />
-        </section>
+        <section className="faq-section">
+          <div className="faq-item">
+            <button className="faq-question">
+              Apa tujuan Portal Literasi Islam?
+              <span className="faq-icon">+</span>
+            </button>
+            <div className="faq-answer">
+              Portal ini bertujuan menghadirkan kajian Islam berbasis keilmuan,
+              metodologi yang jelas, serta adab akademik yang bertanggung jawab.
+            </div>
+          </div>
 
-        <section className="mt-10 rounded-3xl bg-zinc-50 p-6 sm:p-8">
-          <p className="text-sm font-bold text-zinc-900">Pemberitahuan Pembaruan Situs:</p>
-          <p className="mt-3 text-sm leading-7 text-zinc-700">
-            Jika tampilan atau isi website tidak berubah setelah pembaruan, silakan lakukan langkah berikut:
-          </p>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-700">
-            <li>
-              <span className="font-bold text-zinc-900">Di HP:</span> Hapus cache dan cookie browser, lalu buka kembali
-              situs.
-            </li>
-            <li>
-              <span className="font-bold text-zinc-900">Di laptop/komputer (Windows):</span> Tekan{" "}
-              <span className="font-bold text-zinc-900">Ctrl + Shift + R</span> untuk hard refresh.
-            </li>
-          </ul>
-          <p className="mt-4 text-sm leading-7 text-zinc-700">
-            Website ini menggunakan teknologi <span className="font-bold text-zinc-900">PWA</span> sehingga browser
+          <div className="faq-item">
+            <button className="faq-question">
+              Apakah tulisan di sini merupakan fatwa?
+              <span className="faq-icon">+</span>
+            </button>
+            <div className="faq-answer">
+              Tidak. Seluruh tulisan disajikan sebagai bahan kajian dan refleksi
+              ilmiah, bukan sebagai fatwa atau klaim kebenaran tunggal.
+            </div>
+          </div>
+
+          <div className="faq-item">
+            <button className="faq-question">
+              Siapa yang mengelola website ini?
+              <span className="faq-icon">+</span>
+            </button>
+            <div className="faq-answer">
+              Website ini dikelola secara mandiri oleh Muhammad Nurcholis,
+              mahasiswa Syariah wa Qanun Universitas Al-Azhar, Kairo.
+            </div>
+          </div>
+
+          <div className="faq-item">
+            <button className="faq-question">
+              Apakah pembaca boleh memberi masukan?
+              <span className="faq-icon">+</span>
+            </button>
+            <div className="faq-answer">
+              Sangat boleh. Masukan dan diskusi terbuka melalui halaman Kontak
+              atau media sosial yang tersedia.
+            </div>
+          </div>
+
+          <div className="faq-update-info">
+            <strong>Pemberitahuan Pembaruan Situs:</strong>
+            <br />
+            <br />
+            Jika tampilan atau isi website tidak berubah setelah pembaruan,
+            silakan lakukan langkah berikut:
+            <ul>
+              <li>
+                <strong>Di HP:</strong> Hapus cache dan cookie browser, lalu
+                buka kembali situs.
+              </li>
+              <li>
+                <strong>Di laptop/komputer (Windows):</strong> Tekan{" "}
+                <strong>Ctrl + Shift + R</strong> untuk hard refresh.
+              </li>
+            </ul>
+            Website ini menggunakan teknologi{" "}
+            <strong>PWA (Progressive Web App)</strong> sehingga browser
             terkadang menampilkan versi yang tersimpan.
-          </p>
+          </div>
         </section>
-      </div>
-    </main>
+      </main>
+
+      <button id="scrollToTopBtn" className="scroll-to-top" aria-label="Kembali ke atas" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 19V5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+          <path
+            d="M6 11L12 5L18 11"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+
+      <section className="prefooter">
+        <div className="prefooter-overlay"></div>
+
+        <div className="prefooter-inner">
+          <div className="prefooter-col">
+            <h4>Portal Literasi Islam</h4>
+            <p>
+              Portal kajian Islam yang menghadirkan analisis ilmiah, pemikiran
+              kritis, dan dialog keislaman dalam konteks modern.
+            </p>
+          </div>
+
+          <div className="prefooter-col">
+            <h4>Kajian Utama</h4>
+            <ul>
+              <li>
+                <a href="/?filter=fiqh">Fiqh &amp; Ushul Fiqh</a>
+              </li>
+              <li>
+                <a href="/?filter=hadis">Hadis &amp; Studi Sanad</a>
+              </li>
+              <li>
+                <a href="/?filter=pemikiran">Pemikiran Islam</a>
+              </li>
+              <li>
+                <a href="/?filter=politik">Islam &amp; Negara</a>
+              </li>
+              <li>
+                <a href="/?filter=kontemporer">Isu Kontemporer</a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="prefooter-col">
+            <h4>Fitur</h4>
+            <ul>
+              <li>Artikel Pilihan</li>
+              <li>Bookmark Artikel</li>
+              <li>Pencarian Cerdas</li>
+              <li>Mode Baca</li>
+              <li>Multi Bahasa</li>
+            </ul>
+          </div>
+
+          <div className="prefooter-col">
+            <h4>Catatan</h4>
+            <p className="prefooter-note">
+              Seluruh konten disajikan untuk tujuan edukasi dan kajian ilmiah,
+              bukan sebagai fatwa atau klaim kebenaran tunggal.
+            </p>
+          </div>
+        </div>
+
+        <div className="prefooter-social">
+          <a
+            href="https://wa.me/6282124305278"
+            aria-label="WhatsApp"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fa-brands fa-whatsapp"></i>
+          </a>
+          <a
+            href="https://instagram.com/nurcholism51"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fa-brands fa-instagram"></i>
+          </a>
+          <a
+            href="https://www.threads.net/@nurcholism51"
+            aria-label="Threads"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fa-brands fa-threads"></i>
+          </a>
+          <a href="mailto:nurcholism51@gmail.com" aria-label="Email">
+            <i className="fa-regular fa-envelope"></i>
+          </a>
+        </div>
+      </section>
+
+      <footer className="site-footer">
+        <div className="footer-links">
+          <a href="/about">Tentang</a>
+          <a href="/faq">FAQ</a>
+          <a href="/kontak">Kontak</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/disclaimer">Disclaimer</a>
+        </div>
+
+        <div className="footer-copy">
+          © 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
+        </div>
+      </footer>
+
+      <Script src="/js/faq.js" strategy="afterInteractive" />
+      <Script src="/js/nav-active.js" strategy="afterInteractive" />
+      <Script src="/js/common-brand-i18n.js" strategy="afterInteractive" />
+      <Script src="/js/static-pages-i18n.js" strategy="afterInteractive" />
+      <Script src="/js/auth.js" strategy="afterInteractive" />
+      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+    </>
   );
 }

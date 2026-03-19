@@ -13,7 +13,7 @@ thumbnail: "assets/images/quran.png"
 slug: "keagungan-al-quran-dan-kedudukan-surat-al-fatihah-dalam-ibadah"
 excerpt: "Explains the greatness of the Qur'an, the special rank of Surat al-Fatihah, the rulings on reciting it in prayer, and the meaning of isti'adhah before recitation."
 ---
-```md
+
 ## Introduction
 
 The Qur’an is the sacred book that serves as the primary source of Islamic teachings, a guide for human life, and a path to happiness in this world and the Hereafter. Since it was revealed to the Prophet Muhammad ﷺ, the Qur’an has not only been recited as an act of worship, but has also been studied, memorized, interpreted, and implemented by Muslims throughout the ages. From the generation of the Companions onward, scholars gave tremendous attention to the Qur’an in every aspect: the number of its verses, the arrangement of its chapters, the meanings of its words, and the rulings contained within it.

@@ -1,7 +1,9 @@
 (() => {
   const LANGS = ["id", "en", "ar"];
-  const rawPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
-  const page = rawPage.endsWith(".html") ? rawPage : (rawPage ? `${rawPage}.html` : rawPage);
+  function getPage() {
+    const rawPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
+    return rawPage.endsWith(".html") ? rawPage : (rawPage ? `${rawPage}.html` : rawPage);
+  }
   const state = { zakatInfoOriginal: null };
 
   function decodeMojibake(value) {
@@ -3051,13 +3053,84 @@
 
   function run() {
     const lang = getLang();
+    const page = getPage();
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     if (page === "zakat.html") applyZakat(lang);
     if (page === "zakat-info.html") applyZakatInfo(lang);
   }
 
-  document.addEventListener("DOMContentLoaded", run);
+  function runWithRetry() {
+    const page = getPage();
+    const wantsZakatInfo = page === "zakat-info.html";
+
+    let attempts = 0;
+    const tick = () => {
+      attempts += 1;
+
+      if (wantsZakatInfo) {
+        const ready =
+          document.querySelector(".zakat-table") &&
+          document.querySelector(".fiqh-container") &&
+          document.querySelector("body > h2");
+
+        if (!ready) {
+          if (attempts < 25) return setTimeout(tick, 40);
+          return;
+        }
+      }
+
+      run();
+    };
+
+    tick();
+  }
+
+  function bindRouteChange() {
+    let lastPath = window.location.pathname;
+    const onRouteChange = () => {
+      const nextPath = window.location.pathname;
+      if (nextPath === lastPath) return;
+      lastPath = nextPath;
+      runWithRetry();
+    };
+
+    window.addEventListener("popstate", onRouteChange);
+    window.addEventListener("hashchange", onRouteChange);
+
+    const patchHistory = (method) => {
+      const original = window.history[method];
+      if (typeof original !== "function") return;
+      if (original.__zakatI18nPatched) return;
+
+      const wrapped = function (...args) {
+        const result = original.apply(this, args);
+        try {
+          onRouteChange();
+        } catch {
+          // ignore
+        }
+        return result;
+      };
+      wrapped.__zakatI18nPatched = true;
+      window.history[method] = wrapped;
+    };
+
+    patchHistory("pushState");
+    patchHistory("replaceState");
+
+    window.addEventListener("pageshow", runWithRetry);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      bindRouteChange();
+      runWithRetry();
+    });
+  } else {
+    bindRouteChange();
+    runWithRetry();
+  }
   window.addEventListener("portal-language-change", run);
   window.addEventListener("storage", (event) => {
     if (event.key === "siteLang") run();

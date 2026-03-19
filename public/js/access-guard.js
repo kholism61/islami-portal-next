@@ -8,15 +8,27 @@
   const PUBLIC_PAGES = new Set([
     "",
     "index.html",
+    "index",
     "signin.html",
+    "signin",
     "signup.html",
+    "signup",
     "article.html",
+    "article",
+    "zakat-info.html",
+    "zakat-info",
     "donasi.html",
+    "donasi",
     "kontak.html",
+    "kontak",
     "faq.html",
+    "faq",
     "disclaimer.html",
+    "disclaimer",
     "privacy.html",
+    "privacy",
     "about.html"
+    ,"about"
   ]);
 
   if (PUBLIC_PAGES.has(pageName) || PUBLIC_PAGES.has(pageKey)) {
@@ -33,6 +45,6 @@
   }
 
   const target = `${currentPath}${window.location.search || ""}${window.location.hash || ""}`;
-  const signinPath = isLocalDev ? "/signin.html" : "/signin";
+  const signinPath = "/signin";
   window.location.replace(`${signinPath}?next=${encodeURIComponent(target)}`);
 })();

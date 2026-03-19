@@ -1,4 +1,4 @@
-const CACHE_NAME = "islami-portal-next-v1";
+const CACHE_NAME = "islami-portal-next-v3";
 const OFFLINE_URL = "/offline";
 
 const PRECACHE_URLS = [
@@ -50,12 +50,26 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return;
 
   const isNavigation = request.mode === "navigate";
+  const isHtml = request.headers.get("accept")?.includes("text/html");
+  const isAsset = url.pathname.startsWith("/css/")
+    || url.pathname.startsWith("/js/")
+    || url.pathname.startsWith("/assets/")
+    || url.pathname.endsWith(".css")
+    || url.pathname.endsWith(".js")
+    || url.pathname.endsWith(".mjs")
+    || url.pathname.endsWith(".png")
+    || url.pathname.endsWith(".jpg")
+    || url.pathname.endsWith(".jpeg")
+    || url.pathname.endsWith(".webp")
+    || url.pathname.endsWith(".gif")
+    || url.pathname.endsWith(".svg")
+    || url.pathname.endsWith(".ico");
 
   event.respondWith(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
 
-      if (!isNavigation) {
+      if (!isNavigation && !isHtml && !isAsset) {
         const cached = await cache.match(request);
         if (cached) return cached;
 

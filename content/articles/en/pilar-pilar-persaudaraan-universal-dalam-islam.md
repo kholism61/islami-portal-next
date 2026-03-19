@@ -45,7 +45,6 @@ By understanding these principles, we can see that Islamic teachings aim not onl
 
 Therefore, discussing the pillars of universal brotherhood in Islam becomes extremely important to study deeply. Through understanding these principles, it is hoped that the humanitarian values that lie at the core of Islamic teachings can be rediscovered and serve as solutions to many social problems that humanity still faces today.
 
----
 
 ## The Nature of Human Equality
 
@@ -81,8 +80,6 @@ The Qur’an also emphasizes this principle in another verse:
 
 This verse affirms that human diversity is not meant to demean one another, but to encourage mutual recognition and cooperation. Islam does not reject diversity; rather, it makes it a means to strengthen human relationships within the broader framework of brotherhood.
 
----
-
 ## Principles of Universal Brotherhood
 
 One of the most fundamental teachings in Islam is the principle of universal brotherhood that encompasses all of humanity. This brotherhood is not limited to blood relations, tribal affiliation, nationality, or specific groups, but includes all human beings as creations of Allah who originate from the same source.
@@ -99,7 +96,6 @@ The Qur’an reminds humanity of this reality:
 
 This verse demonstrates that human brotherhood is not merely a social relationship but a consequence of the unity of creation itself.
 
----
 
 ## Social Justice as the Foundation of Brotherhood
 

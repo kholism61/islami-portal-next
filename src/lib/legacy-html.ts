@@ -5,7 +5,7 @@ export type LegacyHead = {
   title?: string;
   description?: string;
   stylesheets: string[];
-  scripts: string[];
+  scripts: Array<{ src: string; type?: string }>;
 };
 
 export type LegacyPage = {
@@ -64,13 +64,20 @@ export function loadLegacyHtml(relFilePath: string): LegacyPage {
     stylesheets.push(normalizePublicHref(href));
   }
 
-  const scripts: string[] = [];
-  for (const match of headChunk.matchAll(/<script[^>]+src=("|')([^"']+)\1[^>]*><\/script>/gi)) {
-    scripts.push(normalizePublicHref(match[2]));
+  const scripts: Array<{ src: string; type?: string }> = [];
+  const extractScript = (tag: string) => {
+    const src = tag.match(/\bsrc=("|')([^"']+)\1/i)?.[2];
+    if (!src) return;
+    const type = tag.match(/\btype=("|')([^"']+)\1/i)?.[2];
+    scripts.push({ src: normalizePublicHref(src), type: type?.trim() || undefined });
+  };
+
+  for (const match of headChunk.matchAll(/<script\b[^>]*\bsrc=("|')[^"']+\1[^>]*><\/script>/gi)) {
+    extractScript(match[0]);
   }
 
-  for (const match of bodyChunk.matchAll(/<script[^>]+src=("|')([^"']+)\1[^>]*><\/script>/gi)) {
-    scripts.push(normalizePublicHref(match[2]));
+  for (const match of bodyChunk.matchAll(/<script\b[^>]*\bsrc=("|')[^"']+\1[^>]*><\/script>/gi)) {
+    extractScript(match[0]);
   }
 
   const bodyHtml = rewriteHtmlLinks(stripScripts(bodyChunk));
