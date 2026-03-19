@@ -965,6 +965,10 @@ Object.assign(articleUiText.en, {
   footer_copy: "(c) 2026 Islamic Literacy Portal - All rights reserved.",
 });
 
+articleUiText.id.smart_fiqh = "Smart Fiqh";
+articleUiText.en.smart_fiqh = "Smart Fiqh";
+articleUiText.ar.smart_fiqh = "\u0627\u0644\u0641\u0642\u0647 \u0627\u0644\u0630\u0643\u064A";
+
 const portalOfflineText = window.PortalI18n?.t?.("offline_notice");
 const portalOnlineText = window.PortalI18n?.t?.("online_status");
 
@@ -4537,6 +4541,10 @@ function normalizeLegacyUi() {
     setText('.tool-card[href="haid.html"] .icon', '\u{1F469}');
     setText('.tool-card[href="/kaffarah"] .icon', '\u{1F381}');
     setText('.tool-card[href="kaffarah.html"] .icon', '\u{1F381}');
+    setText('.tool-card[href="/smart"] .icon', '\u{1F9E0}');
+    setText('.tool-card[href="smart.html"] .icon', '\u{1F9E0}');
+    setText('.tool-card[href="/smart"] h3', uiText('smart_fiqh'));
+    setText('.tool-card[href="smart.html"] h3', uiText('smart_fiqh'));
     setText('.smart-fiqh-card .icon', '\u{1F9E0}');
     setText('.sidebar-link[data-filter="all"] .icon', '\u{1F4DA}');
     setText('.menu-mawaris .icon', '\u{1F9EE}');

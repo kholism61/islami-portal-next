@@ -739,6 +739,44 @@
     window.__kfiObserver = observer;
   }
 
+  function initScrollToTopButton() {
+    const scrollBtn = document.getElementById("scrollToTopBtn");
+    if (!scrollBtn) return;
+
+    if (window.__kfiScrollState?.handleScroll) {
+      window.removeEventListener("scroll", window.__kfiScrollState.handleScroll);
+    }
+
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY;
+
+      if (currentScrollY > 320 && isScrollingDown) {
+        scrollBtn.classList.add("show");
+      } else if (currentScrollY < 220 || currentScrollY < lastScrollY) {
+        scrollBtn.classList.remove("show");
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.__kfiScrollState = {
+      button: scrollBtn,
+      handleScroll
+    };
+
+    if (scrollBtn.dataset.boundScrollTop !== "true") {
+      scrollBtn.dataset.boundScrollTop = "true";
+      scrollBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    handleScroll();
+  }
+
   function patchShareFunctions() {
     ["shareWhatsApp", "shareWA", "shareWhatsapp"].forEach((fnName) => {
       const fn = window[fnName];
@@ -817,6 +855,7 @@
   function maybeApply() {
     const path = getPathname();
     if (!isTargetRoute(path)) return;
+    initScrollToTopButton();
     apply(getLang(), path);
   }
 
@@ -862,6 +901,8 @@
   }
 
   installRouteListener();
+  window.addEventListener("kfi:route-ready", () => initScrollToTopButton());
+  initScrollToTopButton();
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => maybeApply());

@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 
+import Image from "next/image";
+
 import KfiScope from "@/components/kaffarah/KfiScope";
+import ScrollToTopButton from "@/components/fiqh/ScrollToTopButton";
 
 import "./kaffarah-sumpah.css";
 
@@ -111,12 +114,13 @@ Dalil:
         <div className="nav-container">
           <Link href="/" className="logo" aria-label="Portal Literasi Islam">
             <span className="logo-mark" aria-hidden="true">
-              <img
+              <Image
                 src="/assets/images/logo.png"
                 alt=""
                 className="logo-icon"
-                loading="eager"
-                decoding="async"
+                width={32}
+                height={32}
+                priority
               />
             </span>
             <span className="logo-text">Portal Literasi Islam</span>
@@ -124,7 +128,7 @@ Dalil:
 
           <nav>
             <Link href="/">Beranda</Link>
-            <Link href="/kaffarah">Kalkulator Fiqh</Link>
+            <Link href="/kaffarah">Kaffarah &amp; Fidyah</Link>
             <Link href="/about">Tentang</Link>
             <Link href="/kontak">Kontak</Link>
           </nav>
@@ -288,6 +292,8 @@ Dalil:
 
         <div className="footer-bottom">&copy; 2026 Portal Literasi Islam</div>
       </footer>
+
+      <ScrollToTopButton />
     </>
   );
 }

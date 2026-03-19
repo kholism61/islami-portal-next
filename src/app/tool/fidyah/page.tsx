@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 
+import Image from "next/image";
+
 import KfiScope from "@/components/kaffarah/KfiScope";
+import ScrollToTopButton from "@/components/fiqh/ScrollToTopButton";
 
 import "./fidyah.css";
 
@@ -110,12 +113,13 @@ ${formatRupiah(total)}.
         <div className="nav-container">
           <Link href="/" className="logo" aria-label="Portal Literasi Islam">
             <span className="logo-mark" aria-hidden="true">
-              <img
+              <Image
                 src="/assets/images/logo.png"
                 alt=""
                 className="logo-icon"
-                loading="eager"
-                decoding="async"
+                width={32}
+                height={32}
+                priority
               />
             </span>
             <span className="logo-text">Portal Literasi Islam</span>
@@ -305,6 +309,8 @@ ${formatRupiah(total)}.
 
         <p>&copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.</p>
       </footer>
+
+      <ScrollToTopButton />
     </>
   );
 }
