@@ -478,7 +478,7 @@
 
   .mawaris-page .mawaris-container {
     max-width: 100%;
-    padding: 0 15px;
+    padding: 0;
   }
 
   .mawaris-page .form-box {
@@ -508,6 +508,11 @@
 
   .mawaris-page #hasil h3 {
     font-size: 16px;
+  }
+
+  .mawaris-page .form-box,
+  .mawaris-page #hasil {
+    border-radius: 0;
   }
 }
 

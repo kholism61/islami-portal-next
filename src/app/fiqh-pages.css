@@ -75,6 +75,34 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+@media (max-width: 768px) {
+  .fiqh-page .page-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .fiqh-page .content-section {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .fiqh-page .fiqh-table-section {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .fiqh-page .table-wrapper {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
 .fiqh-page .fiqh-table {
   width: 100%;
   border-collapse: collapse;
