@@ -873,30 +873,14 @@
     return pageKey === "haid";
   }
 
-  function persistHaidReloadState(nextLang) {
+  function markHaidLanguageReload(nextLang) {
     if (!shouldReloadForLanguageChange()) return;
-
-    const state = {
-      lang: nextLang,
-      values: {
-        prevEnd: document.getElementById("prevEnd")?.value || "",
-        start: document.getElementById("start")?.value || "",
-        end: document.getElementById("end")?.value || "",
-        type: document.getElementById("type")?.value || "mubtadiah",
-        mumayyiz: !!document.getElementById("mumayyiz")?.checked,
-        strongDays: document.getElementById("strongDays")?.value || "",
-        habit: document.getElementById("habit")?.value || "",
-        bloodColor: document.getElementById("bloodColor")?.value || "dark"
-      },
-      shouldRecalculate: Boolean(document.getElementById("hasil")?.textContent?.trim())
-    };
-
     try {
-      sessionStorage.setItem(HAID_LANG_RELOAD_STATE_KEY, JSON.stringify(state));
+      sessionStorage.setItem(HAID_LANG_RELOAD_STATE_KEY, JSON.stringify({ lang: nextLang }));
     } catch {}
   }
 
-  function restoreHaidReloadState(attempt = 0) {
+  function resetHaidPageAfterLanguageChange() {
     if (!shouldReloadForLanguageChange()) return;
 
     let raw = null;
@@ -912,64 +896,86 @@
       state = null;
     }
 
-    if (!state || (state.lang && state.lang !== getLang())) {
-      try {
-        sessionStorage.removeItem(HAID_LANG_RELOAD_STATE_KEY);
-      } catch {}
-      return;
-    }
-
-    const startInput = document.getElementById("start");
-    const endInput = document.getElementById("end");
-    const typeSelect = document.getElementById("type");
-    const mumayyizInput = document.getElementById("mumayyiz");
-    const tamyizBox = document.getElementById("tamyizBox");
-    const strongDaysInput = document.getElementById("strongDays");
-    const habitInput = document.getElementById("habit");
-    const bloodColorSelect = document.getElementById("bloodColor");
-
-    if (!startInput || !endInput || !typeSelect || !mumayyizInput || !strongDaysInput || !habitInput || !bloodColorSelect) {
-      if (attempt >= 20) return;
-      window.setTimeout(() => restoreHaidReloadState(attempt + 1), 150);
-      return;
-    }
-
-    const values = state.values || {};
-    const prevEndInput = document.getElementById("prevEnd");
-    if (prevEndInput) prevEndInput.value = values.prevEnd || "";
-    startInput.value = values.start || "";
-    endInput.value = values.end || "";
-    typeSelect.value = values.type || "mubtadiah";
-    mumayyizInput.checked = Boolean(values.mumayyiz);
-    if (tamyizBox) {
-      tamyizBox.style.display = mumayyizInput.checked ? "block" : "none";
-    }
-    strongDaysInput.value = values.strongDays || "";
-    habitInput.value = values.habit || "";
-    bloodColorSelect.value = values.bloodColor || "dark";
-
-    if (!state.shouldRecalculate) {
-      try {
-        sessionStorage.removeItem(HAID_LANG_RELOAD_STATE_KEY);
-      } catch {}
-      return;
-    }
-
-    if (typeof window.hitung !== "function") {
-      if (attempt >= 20) return;
-      window.setTimeout(() => restoreHaidReloadState(attempt + 1), 150);
-      return;
-    }
-
     try {
       sessionStorage.removeItem(HAID_LANG_RELOAD_STATE_KEY);
     } catch {}
 
-    window.requestAnimationFrame(() => {
+    if (!state || (state.lang && state.lang !== getLang())) {
+      return;
+    }
+
+    const setValue = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.value = value;
+    };
+
+    const setText = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    };
+
+    const setHtml = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = value;
+    };
+
+    setValue("prevEnd", "");
+    setValue("start", "");
+    setValue("end", "");
+    setValue("strongDays", "");
+    setValue("habit", "");
+    setValue("bloodColor", "dark");
+
+    const typeSelect = document.getElementById("type");
+    if (typeSelect) typeSelect.value = "mubtadiah";
+
+    const mumayyizInput = document.getElementById("mumayyiz");
+    if (mumayyizInput) mumayyizInput.checked = false;
+
+    const tamyizBox = document.getElementById("tamyizBox");
+    if (tamyizBox) tamyizBox.style.display = "none";
+
+    setHtml("hasil", "");
+    setHtml("aiAnalysis", "");
+    setHtml("fatwaText", "");
+    setHtml("predictionList", "");
+    setHtml("timeline", "");
+    setHtml("calendar", "");
+    setHtml("fiqhTimeline", "");
+    setHtml("historyList", "");
+    setText("aiType", "");
+    setText("aiHukum", "");
+    setText("fiqhType", "-");
+    setText("habitHaid", "-");
+    setText("bloodStatus", "-");
+    setText("fiqhRule", "-");
+    setText("fiqhSource", "");
+    setText("hijriDate", "");
+    setText("predDurasi", "-");
+    setText("nextCycle", "-");
+    setText("avgHaid", "");
+    setText("cycle", "");
+    setText("avgCycle", "-");
+    setText("minCycle", "-");
+    setText("maxCycle", "-");
+    setText("cycleStatus", "-");
+    setText("avgSuci", "");
+    setText("monthTitle", "");
+
+    if (window.cycleChart && typeof window.cycleChart.destroy === "function") {
       try {
-        window.hitung();
+        window.cycleChart.destroy();
       } catch {}
-    });
+      window.cycleChart = null;
+    }
+
+    const canvas = document.getElementById("cycleChart");
+    const ctx = canvas && typeof canvas.getContext === "function" ? canvas.getContext("2d") : null;
+    if (ctx && canvas) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    window.scrollTo({ top: 0, behavior: "auto" });
   }
 
   function applyLanguageChange(nextLang) {
@@ -982,7 +988,7 @@
     localStorage.setItem("siteLang", nextLang);
 
     if (shouldReloadForLanguageChange(currentPage)) {
-      persistHaidReloadState(nextLang);
+      markHaidLanguageReload(nextLang);
       window.location.reload();
       return;
     }
@@ -1444,7 +1450,7 @@
     });
     installAlertTranslator(lang);
     installObserver(lang);
-    restoreHaidReloadState();
+    resetHaidPageAfterLanguageChange();
     return true;
   }
 
@@ -1504,7 +1510,7 @@
     if (e.key !== "siteLang") return;
     const nextLang = getLang();
     if (shouldReloadForLanguageChange() && nextLang !== activeLang) {
-      persistHaidReloadState(nextLang);
+      markHaidLanguageReload(nextLang);
       window.location.reload();
       return;
     }
@@ -1513,7 +1519,7 @@
   window.addEventListener("portal-language-change", () => {
     const nextLang = getLang();
     if (shouldReloadForLanguageChange() && nextLang !== activeLang) {
-      persistHaidReloadState(nextLang);
+      markHaidLanguageReload(nextLang);
       window.location.reload();
       return;
     }
