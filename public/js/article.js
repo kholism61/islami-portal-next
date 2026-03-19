@@ -1625,7 +1625,9 @@ if (themeBtn) {
 
 
 function applyArticleFilter(filter, triggerElement = null) {
-  activeFilter = normalize(filter);
+  activeFilter = String(filter || "all")
+    .trim()
+    .toLowerCase();
 
   document
     .querySelectorAll(".sidebar-link, .submenu a, .category-card")
@@ -1667,6 +1669,11 @@ function applyArticleFilter(filter, triggerElement = null) {
   if (featuredSection) {
     featuredSection.style.display =
       activeFilter === "all" && hasHomeFeaturedArticles() ? "block" : "none";
+  }
+
+  if (triggerElement && sidebar && overlay && sidebar.classList.contains("active")) {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
   }
 }
 
