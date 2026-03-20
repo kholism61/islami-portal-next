@@ -14,6 +14,22 @@ overflow-x:hidden;
 
 }
 
+body.tool-qadha-puasa .navbar,
+body.tool-qadha-puasa .hero,
+body.tool-qadha-puasa .calculator-section,
+body.tool-qadha-puasa .pre-footer,
+body.tool-qadha-puasa .footer{
+
+width:100%;
+
+max-width:100%;
+
+overflow-x:hidden;
+
+box-sizing:border-box;
+
+}
+
 /* NAVBAR */
 
 body.tool-qadha-puasa .navbar{
@@ -48,6 +64,12 @@ align-items:center;
 
 padding:15px 20px;
 
+width:100%;
+
+box-sizing:border-box;
+
+min-width:0;
+
 }
 
 body.tool-qadha-puasa .logo{
@@ -75,6 +97,18 @@ list-style:none;
 margin:0;
 
 padding:0;
+
+min-width:0;
+
+max-width:100%;
+
+}
+
+body.tool-qadha-puasa .nav-menu li{
+
+min-width:0;
+
+flex:0 0 auto;
 
 }
 
@@ -128,6 +162,8 @@ margin:auto;
 
 opacity:0.8;
 
+overflow-wrap:anywhere;
+
 }
 
 body.tool-qadha-puasa .hero-line{
@@ -154,6 +190,8 @@ margin:auto;
 
 padding:20px;
 
+box-sizing:border-box;
+
 }
 
 /* CALCULATOR CARD */
@@ -178,6 +216,8 @@ gap:12px;
 
 margin-bottom:25px;
 
+box-sizing:border-box;
+
 }
 
 body.tool-qadha-puasa .calc-card input{
@@ -189,6 +229,8 @@ border-radius:8px;
 border:none;
 
 outline:none;
+
+box-sizing:border-box;
 
 }
 
@@ -243,6 +285,8 @@ padding:25px;
 border-radius:12px;
 
 text-align:center;
+
+overflow:hidden;
 
 }
 
@@ -301,6 +345,8 @@ padding:22px;
 backdrop-filter:blur(10px);
 
 box-shadow:0 10px 30px rgba(0,0,0,0.35);
+
+overflow:hidden;
 
 }
 
@@ -530,89 +576,71 @@ opacity:0.7;
 
 @media(max-width:700px){
 
-body.tool-qadha-puasa .nav-menu{
-
-gap:12px;
-
-font-size:12px;
-
-flex:1 1 100%;
-
-width:100%;
-
-flex-wrap:wrap;
-
-column-gap:14px;
-
-row-gap:8px;
-
-}
-
 body.tool-qadha-puasa.kfi-scope .navbar .nav-menu{
 
-flex:1 1 100%;
+gap:14px;
 
-width:100%;
+flex-wrap:nowrap;
 
-flex-wrap:wrap;
+overflow-x:auto;
 
-overflow:visible;
+overflow-y:hidden;
 
-padding-bottom:0;
+padding-bottom:6px;
+
+min-width:0;
+
+max-width:100%;
 
 }
 
 body.tool-qadha-puasa.kfi-scope .navbar .nav-menu::-webkit-scrollbar{
 
-display:none;
-
-}
-
-body.tool-qadha-puasa .nav-container{
-
-flex-wrap:wrap;
-
-gap:12px;
-
-padding:12px 14px;
+height:4px;
 
 }
 
 body.tool-qadha-puasa.kfi-scope .navbar .nav-container{
 
-display:grid !important;
+padding:12px 14px;
 
-grid-template-columns:1fr auto;
+gap:12px;
 
-grid-template-areas:
-"logo lang"
-"menu menu";
+flex-wrap:wrap;
 
-align-items:center !important;
+align-items:flex-start;
 
-row-gap:10px;
+overflow-x:hidden;
+
+}
+
+body.tool-qadha-puasa.kfi-scope .navbar .nav-container > *{
+
+min-width:0;
+
+max-width:100%;
 
 }
 
 body.tool-qadha-puasa.kfi-scope .navbar .logo{
 
-grid-area:logo;
+max-width:100%;
 
 }
 
-body.tool-qadha-puasa.kfi-scope .navbar .kfi-lang-switch{
+body.tool-qadha-puasa.kfi-scope .logo-text{
 
-grid-area:lang;
+white-space:normal;
 
-margin-left:0 !important;
+overflow-wrap:anywhere;
 
 }
 
-body.tool-qadha-puasa.kfi-scope .navbar .nav-menu{
+body.tool-qadha-puasa.kfi-scope .kfi-lang-switch{
 
-grid-area:menu;
+margin-left:0;
 
-justify-content:flex-start;
+max-width:100%;
 
 }
 
@@ -628,9 +656,51 @@ padding:20px;
 
 }
 
+body.tool-qadha-puasa .container{
+
+padding:16px 14px;
+
+}
+
 body.tool-qadha-puasa .calc-card button{
 
 width:100%;
+
+}
+
+body.tool-qadha-puasa .result-grid{
+
+gap:14px;
+
+}
+
+body.tool-qadha-puasa .result-card{
+
+padding:20px;
+
+}
+
+body.tool-qadha-puasa .guide-section{
+
+padding:18px 16px;
+
+}
+
+body.tool-qadha-puasa .guide-header h3{
+
+font-size:20px;
+
+}
+
+body.tool-qadha-puasa .pre-footer{
+
+display:none;
+
+}
+
+body.tool-qadha-puasa .footer-links{
+
+gap:12px;
 
 }
 

@@ -130,20 +130,24 @@ display:flex;
 
 justify-content:center;
 
-padding:40px;
+padding:40px 20px 56px;
 
 }
 
 
 body.tool-kaffarah-jima .kaffarah-card{
 
-width:500px;
+width:min(100%,500px);
 
 background:rgba(255,255,255,0.05);
 
 padding:30px;
 
 border-radius:16px;
+
+box-sizing:border-box;
+
+box-shadow:0 14px 34px rgba(0,0,0,0.28);
 
 }
 
@@ -169,12 +173,16 @@ background:#0e2a4a;
 
 color:white;
 
+box-sizing:border-box;
+
 }
 
 
 body.tool-kaffarah-jima .harga-preset{
 
-display:flex;
+display:grid;
+
+grid-template-columns:repeat(4,minmax(0,1fr));
 
 gap:10px;
 
@@ -185,7 +193,9 @@ margin-bottom:20px;
 
 body.tool-kaffarah-jima .harga-preset button{
 
-padding:6px 14px;
+width:100%;
+
+padding:10px 12px;
 
 border:none;
 
@@ -375,7 +385,9 @@ background:#00b3c9;
 
 body.tool-kaffarah-jima .stats-container{
 
-display:flex;
+display:grid;
+
+grid-template-columns:repeat(2,minmax(0,1fr));
 
 gap:15px;
 
@@ -434,18 +446,17 @@ body.tool-kaffarah-jima .harga-btn:hover{
 background:#3c556f;
 }
 
-body.tool-kaffarah-jima .harga-btn.active{
-background:#00e0ff;
-color:#001018;
-box-shadow:0 0 8px rgba(0,224,255,.6);
-}
-
 body.tool-kaffarah-jima .action-buttons{
 display:flex;
 justify-content:center;
 gap:12px;
 margin-top:25px;
 flex-wrap:wrap;
+width:min(100%,500px);
+margin-left:auto;
+margin-right:auto;
+padding:0 20px 20px;
+box-sizing:border-box;
 }
 
 body.tool-kaffarah-jima .action-buttons button{
@@ -455,6 +466,7 @@ border:none;
 font-size:14px;
 cursor:pointer;
 transition:0.25s;
+flex:1 1 140px;
 }
 
 body.tool-kaffarah-jima .btn-copy{
@@ -479,33 +491,77 @@ background:#1ebe5d;
 
 body.tool-kaffarah-jima .nav-container{
 
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
+padding:12px 14px;
 
 }
 
-body.tool-kaffarah-jima nav{
+body.tool-kaffarah-jima .hero{
 
-display:flex;
+padding:72px 14px 40px;
+
+}
+
+body.tool-kaffarah-jima .hero h1{
+
+font-size:28px;
+
+line-height:1.2;
+
+}
+
+body.tool-kaffarah-jima .kaffarah-section{
+
+padding:20px 14px 36px;
+
+}
+
+body.tool-kaffarah-jima .kaffarah-card{
+
+padding:20px 16px;
+
+border-radius:14px;
+
+}
+
+body.tool-kaffarah-jima .harga-preset{
+
+grid-template-columns:repeat(2,minmax(0,1fr));
+
+}
+
+body.tool-kaffarah-jima .stats-container{
+
+grid-template-columns:1fr;
+
+}
+
+body.tool-kaffarah-jima .summary-title{
+
+font-size:15px;
+
+line-height:1.5;
+
+}
+
+body.tool-kaffarah-jima .action-buttons{
+
+padding:0 14px 20px;
+
+margin-top:20px;
+
+}
+
+body.tool-kaffarah-jima .action-buttons button{
+
+width:100%;
+
+}
+
+body.tool-kaffarah-jima .footer-links{
 
 flex-wrap:wrap;
 
-justify-content:center;
-
 gap:12px;
-
-margin-top:8px;
-
-}
-
-body.tool-kaffarah-jima nav a{
-
-font-size:14px;
 
 }
 
