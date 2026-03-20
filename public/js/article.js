@@ -2171,6 +2171,10 @@ function renderHomeFeaturedArticles() {
     const content = document.createElement("div");
     content.className = "featured-content";
 
+    const featuredBadge = document.createElement("span");
+    featuredBadge.className = "featured-inline-badge";
+    featuredBadge.textContent = uiText("featured_articles");
+
     const category = document.createElement("span");
     category.className = "category";
     category.textContent = getLocalizedCategory(data.kategori || "", getSiteLang());
@@ -2181,6 +2185,7 @@ function renderHomeFeaturedArticles() {
     const desc = document.createElement("p");
     desc.textContent = `${preview.slice(0, 160)}...`;
 
+    content.appendChild(featuredBadge);
     content.appendChild(category);
     content.appendChild(title);
     content.appendChild(desc);

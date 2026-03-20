@@ -42,19 +42,7 @@ export default function HomePageClient() {
 
   return (
     <>
-      <link rel="stylesheet" href="/css/style.css?v=20260317e" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Amiri&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      />
+      <link rel="stylesheet" href="/css/style.css?v=20260320b" />
 
       <div className="home-page">
         <section className="quick-menu">
@@ -345,6 +333,7 @@ export default function HomePageClient() {
               <img id="featured-thumb" className="featured-thumb" alt="" />
 
               <div className="featured-content">
+                <span className="featured-inline-badge">Artikel Pilihan</span>
                 <span id="featured-category" className="category"></span>
                 <h2 id="featured-title"></h2>
                 <p id="featured-excerpt"></p>
@@ -1244,7 +1233,7 @@ export default function HomePageClient() {
               target="_blank"
               rel="noreferrer"
             >
-              <i className="fa-brands fa-whatsapp"></i>
+              <span className="social-glyph" aria-hidden="true">WA</span>
             </a>
             <a
               href="https://instagram.com/nurcholism51"
@@ -1252,7 +1241,7 @@ export default function HomePageClient() {
               target="_blank"
               rel="noreferrer"
             >
-              <i className="fa-brands fa-instagram"></i>
+              <span className="social-glyph" aria-hidden="true">IG</span>
             </a>
             <a
               href="https://www.threads.net/@nurcholism51"
@@ -1260,10 +1249,10 @@ export default function HomePageClient() {
               target="_blank"
               rel="noreferrer"
             >
-              <i className="fa-brands fa-threads"></i>
+              <span className="social-glyph" aria-hidden="true">TH</span>
             </a>
             <a href="mailto:nurcholism51@gmail.com" aria-label="Email">
-              <i className="fa-regular fa-envelope"></i>
+              <span className="social-glyph" aria-hidden="true">ML</span>
             </a>
           </div>
         </section>
@@ -1298,7 +1287,7 @@ export default function HomePageClient() {
             className="floating-btn wa-btn"
             aria-label="Chat via WhatsApp"
           >
-            <i className="fa-brands fa-whatsapp"></i>
+            <span className="social-glyph" aria-hidden="true">WA</span>
           </a>
         </div>
 
@@ -1529,7 +1518,7 @@ export default function HomePageClient() {
       </Script>
 
       <Script src="/js/article-store.js?v=20260317h" strategy="afterInteractive" />
-      <Script src="/js/article.js?v=20260317h" strategy="afterInteractive" type="module" />
+      <Script src="/js/article.js?v=20260320a" strategy="afterInteractive" type="module" />
       <Script src="/js/bookmark.js?v=20260317e" strategy="afterInteractive" type="module" />
       <Script src="/js/prayer.js?v=20260317e" strategy="afterInteractive" type="module" />
       <Script src="/js/i18n.js?v=20260317e" strategy="afterInteractive" />
