@@ -578,6 +578,44 @@ padding:12px 14px;
 
 }
 
+body.tool-qadha-puasa.kfi-scope .navbar .nav-container{
+
+display:grid !important;
+
+grid-template-columns:1fr auto;
+
+grid-template-areas:
+"logo lang"
+"menu menu";
+
+align-items:center !important;
+
+row-gap:10px;
+
+}
+
+body.tool-qadha-puasa.kfi-scope .navbar .logo{
+
+grid-area:logo;
+
+}
+
+body.tool-qadha-puasa.kfi-scope .navbar .kfi-lang-switch{
+
+grid-area:lang;
+
+margin-left:0 !important;
+
+}
+
+body.tool-qadha-puasa.kfi-scope .navbar .nav-menu{
+
+grid-area:menu;
+
+justify-content:flex-start;
+
+}
+
 body.tool-qadha-puasa .hero{
 
 padding:72px 14px 44px;

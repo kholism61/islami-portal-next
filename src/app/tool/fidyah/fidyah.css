@@ -91,6 +91,30 @@ gap:22px;
     padding-bottom:0;
   }
 
+  body.tool-fidyah.kfi-scope .navbar .nav-container{
+    display:grid !important;
+    grid-template-columns:1fr auto;
+    grid-template-areas:
+      "logo lang"
+      "menu menu";
+    align-items:center !important;
+    row-gap:10px;
+  }
+
+  body.tool-fidyah.kfi-scope .navbar .logo{
+    grid-area:logo;
+  }
+
+  body.tool-fidyah.kfi-scope .navbar .kfi-lang-switch{
+    grid-area:lang;
+    margin-left:0 !important;
+  }
+
+  body.tool-fidyah.kfi-scope .navbar .nav-menu{
+    grid-area:menu;
+    justify-content:flex-start;
+  }
+
   body.tool-fidyah.kfi-scope .navbar .nav-menu::-webkit-scrollbar{
     display:none;
   }
