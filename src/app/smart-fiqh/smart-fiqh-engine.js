@@ -36,6 +36,8 @@
     resultReference: document.getElementById('resultReference'),
     resultIbarah: document.getElementById('resultIbarah'),
     resultEvidence: document.getElementById('resultEvidence'),
+    labelIbarah: document.getElementById('labelIbarah'),
+    labelEvidenceText: document.getElementById('labelEvidenceText'),
     fiqhEvidenceWrap: document.getElementById('fiqhEvidenceWrap'),
     resetBtn: document.getElementById('resetBtn'),
     fiqhNoteTitle: document.getElementById('fiqhNoteTitle'),
@@ -128,6 +130,8 @@
     setText('aiAdviceLabel', config.meta.aiAdviceLabel);
     setText('aiEvidenceLabel', config.meta.aiEvidenceLabel);
     setText('aiSourceLabel', config.meta.aiSourceLabel);
+    setText('labelIbarah', config.meta.labelIbarah || { id: 'Ibarah:', en: 'Fiqh Text:', ar: '\u0627\u0644\u0639\u0628\u0627\u0631\u0629:' });
+    setText('labelEvidenceText', config.meta.labelEvidenceText || { id: 'Dalil:', en: 'Evidence:', ar: '\u0627\u0644\u062f\u0644\u064a\u0644:' });
     setText('noteBadge', config.meta.noteBadge);
     setText('noteBadgeSecondary', config.meta.noteBadge);
     setText('methodBadge', config.meta.methodBadge);
