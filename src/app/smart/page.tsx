@@ -1,7 +1,7 @@
 import SmartHubClient from "@/components/smart-fiqh/SmartHubClient";
 
 export const metadata = {
-  title: "Smart Fiqh | Portal Literasi Islam",
+  title: "Smart Fiqh",
 };
 
 export default function SmartPage() {

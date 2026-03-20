@@ -6,7 +6,7 @@ import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
 import "../smart-engine.css";
 
 export const metadata = {
-  title: "Smart Fiqh Haid | Portal Literasi Islam",
+  title: "Smart Fiqh Haid",
 };
 
 export default function SmartFiqhHaidPage() {

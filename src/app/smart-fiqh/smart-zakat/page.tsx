@@ -6,7 +6,7 @@ import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
 import "../smart-engine.css";
 
 export const metadata = {
-  title: "Smart Fiqh Zakat | Portal Literasi Islam",
+  title: "Smart Fiqh Zakat",
 };
 
 export default function SmartFiqhZakatPage() {

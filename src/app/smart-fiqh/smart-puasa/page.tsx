@@ -6,7 +6,7 @@ import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
 import "./smart-engine-puasa.css";
 
 export const metadata = {
-  title: "Smart Fiqh Puasa | Portal Literasi Islam",
+  title: "Smart Fiqh Puasa",
 };
 
 export default function SmartFiqhPuasaPage() {

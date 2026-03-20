@@ -6,7 +6,7 @@ import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
 import "./smart-engine-thaharah.css";
 
 export const metadata = {
-  title: "Smart Fiqh Thaharah | Portal Literasi Islam",
+  title: "Smart Fiqh Thaharah",
 };
 
 export default function SmartFiqhThaharahPage() {
@@ -41,7 +41,7 @@ export default function SmartFiqhThaharahPage() {
             aria-label="Toggle navigation"
             aria-expanded="false"
           >
-            ☰
+            {"\u2630"}
           </button>
 
           <div className="nav-panel" id="navPanel">
@@ -243,7 +243,7 @@ export default function SmartFiqhThaharahPage() {
       </main>
 
       <footer className="smart-footer">
-        <p>&copy; 2026 Smart Fiqh Thaharah — Portal Literasi Islam</p>
+        <p>&copy; 2026 Smart Fiqh Thaharah - Portal Literasi Islam</p>
       </footer>
     </>
   );

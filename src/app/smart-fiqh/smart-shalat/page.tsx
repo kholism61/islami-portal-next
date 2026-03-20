@@ -6,7 +6,7 @@ import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
 import "../smart-engine.css";
 
 export const metadata = {
-  title: "Smart Fiqh Shalat Lengkap | Portal Literasi Islam",
+  title: "Smart Fiqh Shalat Lengkap",
 };
 
 export default function SmartFiqhShalatPage() {
