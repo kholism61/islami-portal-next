@@ -536,15 +536,15 @@ gap:12px;
 
 font-size:12px;
 
-flex-wrap:nowrap;
+flex:1 1 100%;
 
-overflow-x:auto;
+width:100%;
 
-overflow-y:hidden;
+flex-wrap:wrap;
 
--webkit-overflow-scrolling:touch;
+column-gap:14px;
 
-padding-bottom:6px;
+row-gap:8px;
 
 }
 

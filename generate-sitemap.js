@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const baseUrl = "https://islamic-portal.vercel.app";
+const baseUrl = "https://islami-portal-next.vercel.app/";
 const contentRoot = path.join(process.cwd(), "content", "articles");
 const langs = ["id", "en", "ar"];
 
