@@ -45,6 +45,46 @@ body.kfi-scope .navbar .nav-container {
   gap: 16px;
 }
 
+body.kfi-scope .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(8, 25, 44, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.kfi-scope .navbar .nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+body.kfi-scope .navbar .nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.kfi-scope .navbar .nav-menu a {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+body.kfi-scope .navbar .nav-menu a:hover {
+  color: #7dd3fc;
+}
+
 body.kfi-scope .navbar .nav-menu,
 body.kfi-scope .navbar nav {
   flex: 1 1 auto;
@@ -71,6 +111,36 @@ body.kfi-scope.rtl-ui .logo-text {
 
   body.kfi-scope .logo-text {
     font-size: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  body.kfi-scope .navbar .nav-container {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  body.kfi-scope .navbar .nav-menu,
+  body.kfi-scope .navbar nav {
+    flex: 1 1 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+
+  body.kfi-scope .navbar .nav-menu {
+    flex-wrap: nowrap;
+    gap: 14px;
+  }
+
+  body.kfi-scope .navbar .nav-menu::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  body.kfi-scope .navbar .nav-menu::-webkit-scrollbar-thumb {
+    background: rgba(125, 211, 252, 0.35);
+    border-radius: 999px;
   }
 }
 

@@ -1,4 +1,5 @@
 import Script from "next/script";
+import Image from "next/image";
 
 export const metadata = {
   title: "Portal Literasi Islam | Mimbar Ilmu untuk Umat",
@@ -84,12 +85,13 @@ export default function ArticlePage() {
         </a>
 
         <div className="nav-logo-badge" aria-hidden="true">
-          <img
+          <Image
             src="/assets/images/logo.png"
             alt=""
             className="nav-logo-img"
-            loading="eager"
-            decoding="async"
+            width={28}
+            height={28}
+            priority
           />
         </div>
 

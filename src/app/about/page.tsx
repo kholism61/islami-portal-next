@@ -1,4 +1,5 @@
 import Script from "next/script";
+import Image from "next/image";
 
 export const metadata = {
   title: "Tentang | Portal Literasi Islam",
@@ -153,7 +154,12 @@ export default function AboutPage() {
       <section className="author-section">
         <div className="author-card">
           <div className="author-photo">
-            <img src="/assets/images/author.jpg" alt="Muhammad Nurcholis" />
+            <Image
+              src="/assets/images/author.jpg"
+              alt="Muhammad Nurcholis"
+              width={260}
+              height={260}
+            />
           </div>
 
           <div className="author-info">

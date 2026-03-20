@@ -250,6 +250,35 @@ transition:0.2s;
 
 }
 
+@media (max-width: 640px){
+  body.tool-kaffarah-sumpah .nav-container{
+    padding:12px 14px;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  body.tool-kaffarah-sumpah .container{
+    margin:36px auto;
+    padding:16px 14px;
+  }
+
+  body.tool-kaffarah-sumpah nav{
+    width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:6px;
+  }
+
+  body.tool-kaffarah-sumpah nav a{
+    margin-left:0;
+    margin-right:14px;
+    display:inline-block;
+    font-size:14px;
+  }
+}
+
 body.tool-kaffarah-sumpah nav a:hover{
 
 color:#00d4ff;

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 Host: https://islamic-portal.vercel.app
-Sitemap: https://islamic-portal.vercel.app/sitemap.xml
+Sitemap: https://islami-portal-next.vercel.app/

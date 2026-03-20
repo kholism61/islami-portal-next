@@ -536,7 +536,43 @@ gap:12px;
 
 font-size:12px;
 
+flex-wrap:nowrap;
+
+overflow-x:auto;
+
+overflow-y:hidden;
+
+-webkit-overflow-scrolling:touch;
+
+padding-bottom:6px;
+
+}
+
+body.tool-qadha-puasa .nav-container{
+
 flex-wrap:wrap;
+
+gap:12px;
+
+padding:12px 14px;
+
+}
+
+body.tool-qadha-puasa .hero{
+
+padding:72px 14px 44px;
+
+}
+
+body.tool-qadha-puasa .calc-card{
+
+padding:20px;
+
+}
+
+body.tool-qadha-puasa .calc-card button{
+
+width:100%;
 
 }
 
@@ -548,8 +584,10 @@ font-size:28px;
 
 }
 
-body.tool-qadha-puasa .hero {
-  padding: 84px 20px 60px;
+@media (min-width: 701px){
+  body.tool-qadha-puasa .hero {
+    padding: 84px 20px 60px;
+  }
 }
 
 body.tool-qadha-puasa .hero .kfi-hero-badge {

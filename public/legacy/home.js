@@ -2247,7 +2247,7 @@ if (articleId && data) {
       description: plainText,
       image: data.thumbnail
         ? [data.thumbnail]
-        : ["https://islamic-portal.vercel.app/assets/images/logo.png"],
+        : ["https://islami-portal-next.vercel.app/assets/images/logo.png"],
       author: {
         "@type": "Person",
         name: "Muhammad Nurcholis"
@@ -2257,7 +2257,7 @@ if (articleId && data) {
         name: "Portal Literasi Islam",
         logo: {
           "@type": "ImageObject",
-          url: "https://islamic-portal.vercel.app/assets/images/logo.png"
+          url: "https://islami-portal-next.vercel.app/assets/images/logo.png"
         }
       },
       datePublished: rawData?.tanggal || new Date().toISOString(),

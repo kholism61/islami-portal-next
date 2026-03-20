@@ -1,4 +1,5 @@
 import Script from "next/script";
+import Image from "next/image";
 
 export const metadata = {
   title: "Admin Portal Literasi Islam",
@@ -22,7 +23,7 @@ export default function AdminPage() {
         <header className="admin-topbar">
           <a href="/" className="brand-mark">
             <span className="brand-icon" aria-hidden="true">
-              <img src="/favicon.ico" alt="" />
+              <Image src="/favicon.ico" alt="" width={24} height={24} priority />
             </span>
             <span>
               <strong>Portal Literasi Islam</strong>

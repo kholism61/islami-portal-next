@@ -1,4 +1,5 @@
 import Script from "next/script";
+import Image from "next/image";
 
 export const metadata = {
   title: "Donasi | Portal Literasi Islam",
@@ -103,10 +104,12 @@ export default function DonasiPage() {
               </button>
 
               <div className="qris-content">
-                <img
+                <Image
                   src="/assets/images/qris.png"
                   alt="QRIS Donasi Portal Literasi Islam"
                   className="qris-image"
+                  width={360}
+                  height={360}
                 />
                 <p className="qris-text">
                   Scan QRIS menggunakan e-wallet atau mobile banking Anda.

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 
@@ -48,7 +49,13 @@ export default function ZakatPage() {
           </div>
 
           <div className="hero-image">
-            <img src="/assets/images/ilustrasi.png" alt="Ilustrasi Zakat" />
+            <Image
+              src="/assets/images/ilustrasi.png"
+              alt="Ilustrasi Zakat"
+              width={520}
+              height={420}
+              priority
+            />
           </div>
         </div>
       </section>
