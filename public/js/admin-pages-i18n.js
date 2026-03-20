@@ -67,7 +67,7 @@
           "Aktivitas login terakhir"
         ],
         sectionBtn: ["Export users", "Reset analytics"],
-        quickLinks: ["Smart Fiqh", "Jadwal Ramadhan", "Bookmark", "Kontak"],
+        quickLinks: ["Smart Fiqh", "Jadwal Imsakiyah", "Bookmark", "Kontak"],
         usersHead: ["Nama", "Email", "Role", "Bergabung"],
         trxHead: ["Nama", "Kategori", "Nominal", "Tanggal"]
       },
@@ -321,7 +321,7 @@
           "آخر نشاط تسجيل دخول"
         ],
         sectionBtn: ["تصدير المستخدمين", "إعادة ضبط التحليلات"],
-        quickLinks: ["الفقه الذكي", "جدول رمضان", "المحفوظات", "اتصل بنا"],
+        quickLinks: ["الفقه الذكي", "جدول الإمساكية", "المحفوظات", "اتصل بنا"],
         usersHead: ["الاسم", "البريد", "الدور", "تاريخ الانضمام"],
         trxHead: ["الاسم", "الفئة", "المبلغ", "التاريخ"]
       },

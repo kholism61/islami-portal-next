@@ -1,11 +1,11 @@
 import Script from "next/script";
 
 export const metadata = {
-  title: "Jadwal Ramadhan",
+  title: "Jadwal Imsakiyah",
   description:
-    "Jadwal Ramadhan, waktu imsak, subuh, dan berbuka puasa otomatis berdasarkan lokasi Anda.",
+    "Jadwal Imsakiyah, waktu imsak, subuh, dan maghrib otomatis berdasarkan lokasi Anda.",
   keywords: [
-    "Ramadhan",
+    "Imsakiyah",
     "Jadwal Puasa",
     "Imsak",
     "Subuh",
@@ -42,12 +42,12 @@ export default function RamadhanPage() {
 
       <nav className="ramadhan-navbar">
         <div className="logo">
-          🌙 <span>Jadwal Ramadhan</span>
+          🌙 <span>Jadwal Imsakiyah</span>
         </div>
 
         <div className="nav-links">
           <a href="/">Beranda</a>
-          <a href="/ramadhan">Ramadhan</a>
+          <a href="/ramadhan">Imsakiyah</a>
           <a href="/bookmark">Bookmark</a>
         </div>
 
@@ -63,7 +63,7 @@ export default function RamadhanPage() {
         <div className="hero-overlay"></div>
 
         <div className="hero-content">
-          <h1>🌙 Ramadhan Mubarak</h1>
+          <h1>🌙 Ied Fitri Mubarak</h1>
           <p className="hero-sub">Bulan penuh berkah, ampunan, dan rahmat.</p>
 
           <h2 className="ramadhan-countdown">
@@ -94,7 +94,7 @@ export default function RamadhanPage() {
         </div>
 
         <section className="ramadhan-box" id="jadwal">
-          <h1>🗓️ Jadwal Ramadhan</h1>
+          <h1>🗓️ Jadwal Imsakiyah</h1>
           📍 <p id="ramadhan-city">Mendeteksi lokasi…</p>
 
           <div
@@ -106,7 +106,7 @@ export default function RamadhanPage() {
           </div>
 
           <div className="ramadhan-table-box">
-            <h2>📅 Jadwal Ramadhan 1 Bulan</h2>
+            <h2>📅 Jadwal Imsakiyah 1 Bulan</h2>
 
             <div className="qibla-box">
               <h3>🧭 Arah Kiblat</h3>

@@ -1,8 +1,8 @@
 ﻿const doaHarian = [
   {
-    arab: "اللهم بارك لنا في رمضان وبلغنا ليلة القدر",
-    id: "Ya Allah, berkahilah kami di bulan Ramadhan dan pertemukan kami dengan Lailatul Qadr.",
-    en: "O Allah, bless us in Ramadan and allow us to reach Laylatul Qadr."
+    arab: "تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ صَالِحَ الْأَعْمَالِ",
+    id: "Taqabbalallahu minna wa minkum shalihal a'mal (Semoga Allah menerima amal ibadah kami dan kalian).",
+    en: "May Allah accept (good deeds) from us and from you."
   },
   {
     arab: "اللهم قوِّ إيماننا وثبّت قلوبنا على دينك",
@@ -132,7 +132,7 @@ const ramadhanUiText = {
     unsupported_notification: "Browser tidak mendukung notifikasi.",
     notification_enabled: "Notifikasi Aktif",
     qibla_from_north: "{{degree}}° dari utara",
-    dua_sahur: "Aku niat berpuasa esok hari untuk menunaikan kewajiban bulan Ramadhan tahun ini karena Allah Ta'ala.",
+    dua_sahur: "Aku niat berpuasa esok hari karena Allah Ta'ala.",
     dua_iftar: "Ya Allah, karena-Mu aku berpuasa, kepada-Mu aku beriman, dan dengan rezeki-Mu aku berbuka."
   },
   en: {
@@ -147,7 +147,7 @@ const ramadhanUiText = {
     notification_enabled: "Notifications On",
     qibla_from_north: "{{degree}}° from north",
     dua_sahur:
-      "I intend to fast tomorrow to fulfill the obligation of Ramadan this year for Allah the Most High.",
+      "I intend to fast tomorrow for the sake of Allah the Most High.",
     dua_iftar:
       "O Allah, for You I fasted, in You I believe, and with Your provision I break my fast."
   },
@@ -162,7 +162,7 @@ const ramadhanUiText = {
     unsupported_notification: "المتصفح لا يدعم الإشعارات.",
     notification_enabled: "تم تفعيل الإشعارات",
     qibla_from_north: "{{degree}}° من الشمال",
-    dua_sahur: "نويت صوم غدٍ لأداء فرض شهر رمضان هذه السنة لله تعالى.",
+    dua_sahur: "نويت صوم غدٍ لله تعالى.",
     dua_iftar: "اللهم لك صمت وبك آمنت وعلى رزقك أفطرت."
   }
 };
@@ -462,7 +462,7 @@ if (duaBox && duaText) {
   if (hour >= 2 && hour < 5) {
     duaText.innerHTML = `
       <div class="dua-arab">
-نَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانَ هَذِهِ السَّنَةِ لِلّٰهِ تَعَالَى
+نَوَيْتُ صَوْمَ غَدٍ لِلّٰهِ تَعَالَى
       </div>
       <div class="dua-arti">
         ${t("dua_sahur")}

@@ -204,7 +204,7 @@ export default function AdminPage() {
               </div>
               <div className="quick-links">
                 <a href="/smart">Smart Fiqh</a>
-                <a href="/ramadhan">Jadwal Ramadhan</a>
+                <a href="/ramadhan">Jadwal Imsakiyah</a>
                 <a href="/bookmark">Bookmark</a>
                 <a href="/kontak">Kontak</a>
               </div>

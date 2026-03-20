@@ -82,7 +82,7 @@ export default function HomePageClient() {
             <a href="/ramadhan" className="quick-card ramadhan-card">
               <span className="icon">🌙</span>
               <div>
-                <strong>Jadwal Ramadhan</strong>
+                <strong>Jadwal Imsakiyah</strong>
                 <small>Imsak &amp; Berbuka</small>
               </div>
             </a>

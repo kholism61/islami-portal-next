@@ -136,9 +136,9 @@
       ar: "سياسة الخصوصية - بوابة الثقافة الإسلامية"
     },
     "ramadhan.html": {
-      id: "Jadwal Ramadhan | Portal Literasi Islam",
-      en: "Ramadan Schedule | Islamic Literacy Portal",
-      ar: "جدول رمضان | بوابة الثقافة الإسلامية"
+      id: "Jadwal Imsakiyah | Portal Literasi Islam",
+      en: "Imsakiyah Schedule | Islamic Literacy Portal",
+      ar: "جدول الإمساكية | بوابة الثقافة الإسلامية"
     }
   };
 
