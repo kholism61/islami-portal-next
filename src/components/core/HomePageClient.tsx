@@ -940,6 +940,50 @@ export default function HomePageClient() {
               </ul>
             </li>
 
+            <li className="has-children">
+              <button className="sidebar-toggle" type="button">
+                <span className="icon">🛡️</span>
+                <span className="text">Palestina &amp; Perjuangan</span>
+                <span className="badge" data-count="palestina">
+                  0
+                </span>
+              </button>
+              <ul className="submenu">
+                <li>
+                  <a href="#" data-filter="palestina-sejarah">
+                    Sejarah &amp; Konflik
+                  </a>
+                </li>
+                <li>
+                  <a href="#" data-filter="palestina-opini">
+                    Opini &amp; Analisis
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li className="has-children">
+              <button className="sidebar-toggle" type="button">
+                <span className="icon">📑</span>
+                <span className="text">Fatwa Dar al-Ifta</span>
+                <span className="badge" data-count="fatwa">
+                  0
+                </span>
+              </button>
+              <ul className="submenu">
+                <li>
+                  <a href="#" data-filter="fatwa-ibadah">
+                    Fatwa Ibadah
+                  </a>
+                </li>
+                <li>
+                  <a href="#" data-filter="fatwa-kontemporer">
+                    Fatwa Kontemporer
+                  </a>
+                </li>
+              </ul>
+            </li>
+
             <li className="single-item">
               <a href="/tools/mawaris" className="sidebar-link menu-mawaris">
                 <span className="icon">🧮</span>
@@ -1518,10 +1562,10 @@ export default function HomePageClient() {
       </Script>
 
       <Script src="/js/article-store.js?v=20260317h" strategy="afterInteractive" />
-      <Script src="/js/article.js?v=20260320a" strategy="afterInteractive" type="module" />
+      <Script src="/js/article.js?v=20260320c" strategy="afterInteractive" type="module" />
       <Script src="/js/bookmark.js?v=20260317e" strategy="afterInteractive" type="module" />
       <Script src="/js/prayer.js?v=20260317e" strategy="afterInteractive" type="module" />
-      <Script src="/js/i18n.js?v=20260317e" strategy="afterInteractive" />
+      <Script src="/js/i18n.js?v=20260320c" strategy="afterInteractive" />
 
     </>
   );

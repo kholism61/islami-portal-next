@@ -369,7 +369,7 @@ function getLightArticleMeta(articleId) {
   if (offlineMeta) return offlineMeta;
 
   return null;
-}
+};
 
 function hasBrokenTranslationText(value = "") {
   const text = String(value || "");
@@ -470,7 +470,20 @@ const getLocalizedArticle = (id, lang = getSiteLang()) => {
 
   return null;
 };
+/*
+  palestina: {
+    labels: { id: "Palestina & Perjuangan", en: "Palestine & Resistance", ar: "ÙÙ„Ø³Ø·ÙŠÙ† ÙˆØ§Ù„Ù…Ù‚Ø§ÙˆÙ…Ø©" },
+    icon: "ðŸ›¡ï¸",
+    aliases: ["palestina", "palestina & perjuangan", "palestine", "palestine & resistance", "gaza", "ÙÙ„Ø³Ø·ÙŠÙ†", "ÙÙ„Ø³Ø·ÙŠÙ† ÙˆØ§Ù„Ù…Ù‚Ø§ÙˆÙ…Ø©"],
+  },
+  fatwa: {
+    labels: { id: "Fatwa Dar al-Ifta", en: "Dar al-Ifta Fatwas", ar: "ÙØªØ§ÙˆÙ‰ Ø¯Ø§Ø± Ø§Ù„Ø¥ÙØªØ§Ø¡" },
+    icon: "ðŸ“‘",
+    aliases: ["fatwa", "fatwa dar al-ifta", "dar al-ifta", "dar al-ifta fatwas", "ÙØªÙˆÙ‰", "ÙØªØ§ÙˆÙ‰ Ø¯Ø§Ø± Ø§Ù„Ø¥ÙØªØ§Ø¡"],
+  },
+};
 
+*/
 function getArticleRawById(id) {
   if (!id) return null;
   if (isUsableArticleTranslation(articleStore[id], getSiteLang())) return articleStore[id];
@@ -604,6 +617,53 @@ const categoryMeta = {
     icon: "🎓",
     aliases: ["keilmuan", "knowledge", "islamic scholarship", "tradisi keilmuan islam", "المعرفة", "التراث العلمي الإسلامي"],
   },
+  palestina: {
+    labels: { id: "Palestina & Perjuangan", en: "Palestine & Resistance", ar: "ÙÙ„Ø³Ø·ÙŠÙ† ÙˆØ§Ù„Ù…Ù‚Ø§ÙˆÙ…Ø©" },
+    icon: "🛡️",
+    aliases: ["palestina", "palestina & perjuangan", "palestine", "palestine & resistance", "gaza", "ÙÙ„Ø³Ø·ÙŠÙ†", "ÙÙ„Ø³Ø·ÙŠÙ† ÙˆØ§Ù„Ù…Ù‚Ø§ÙˆÙ…Ø©"],
+  },
+  fatwa: {
+    labels: { id: "Fatwa Dar al-Ifta", en: "Dar al-Ifta Fatwas", ar: "ÙØªØ§ÙˆÙ‰ Ø¯Ø§Ø± Ø§Ù„Ø¥ÙØªØ§Ø¡" },
+    icon: "📑",
+    aliases: ["fatwa", "fatwa dar al-ifta", "dar al-ifta", "dar al-ifta fatwas", "ÙØªÙˆÙ‰", "ÙØªØ§ÙˆÙ‰ Ø¯Ø§Ø± Ø§Ù„Ø¥ÙØªØ§Ø¡"],
+  },
+};
+
+categoryMeta.palestina = {
+  ...categoryMeta.palestina,
+  labels: {
+    id: "Palestina & Perjuangan",
+    en: "Palestine & Resistance",
+    ar: "\u0641\u0644\u0633\u0637\u064A\u0646 \u0648\u0627\u0644\u0645\u0642\u0627\u0648\u0645\u0629",
+  },
+  icon: "\u{1F6E1}\uFE0F",
+  aliases: [
+    "palestina",
+    "palestina & perjuangan",
+    "palestine",
+    "palestine & resistance",
+    "gaza",
+    "\u0641\u0644\u0633\u0637\u064A\u0646",
+    "\u0641\u0644\u0633\u0637\u064A\u0646 \u0648\u0627\u0644\u0645\u0642\u0627\u0648\u0645\u0629",
+  ],
+};
+
+categoryMeta.fatwa = {
+  ...categoryMeta.fatwa,
+  labels: {
+    id: "Fatwa Dar al-Ifta",
+    en: "Dar al-Ifta Fatwas",
+    ar: "\u0641\u062A\u0627\u0648\u0649 \u062F\u0627\u0631 \u0627\u0644\u0625\u0641\u062A\u0627\u0621",
+  },
+  icon: "\u{1F4D1}",
+  aliases: [
+    "fatwa",
+    "fatwa dar al-ifta",
+    "dar al-ifta",
+    "dar al-ifta fatwas",
+    "\u0641\u062A\u0648\u0649",
+    "\u0641\u062A\u0627\u0648\u0649 \u062F\u0627\u0631 \u0627\u0644\u0625\u0641\u062A\u0627\u0621",
+  ],
 };
 
 function normalizeCategoryLabel(value = "") {
@@ -645,6 +705,24 @@ function getCanonicalSubcategoryKey(categoryKey, subcategory = "") {
   if (categoryKey === "pemikiran") {
     if (token.includes("klasik") || token.includes("classic")) return "pemikiran-klasik";
     if (token.includes("modern")) return "pemikiran-modern";
+  }
+
+  if (categoryKey === "palestina") {
+    if (token.includes("sejarah") || token.includes("history") || token.includes("konflik") || token.includes("conflict")) {
+      return "palestina-sejarah";
+    }
+    if (token.includes("opini") || token.includes("opinion") || token.includes("analisis") || token.includes("analysis")) {
+      return "palestina-opini";
+    }
+  }
+
+  if (categoryKey === "fatwa") {
+    if (token.includes("ibadah") || token.includes("worship") || token.includes("ritual")) {
+      return "fatwa-ibadah";
+    }
+    if (token.includes("kontemporer") || token.includes("contemporary") || token.includes("modern")) {
+      return "fatwa-kontemporer";
+    }
   }
 
   return null;
@@ -2466,7 +2544,9 @@ function renderHomeCategoryGrid() {
       pemikiran: "/assets/images/pemikiran.png",
       politik: "/assets/images/politik.jpg",
       ramadhan: "/assets/images/ramadhan.png",
-      keilmuan: "/assets/images/kajian.png"
+      keilmuan: "/assets/images/kajian.png",
+      palestina: "/assets/images/palestina.png",
+      fatwa: "/assets/images/dar-ifta.jpg"
     };
     return map[key] || fallback;
   };
