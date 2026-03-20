@@ -6,7 +6,7 @@ export default function AdminPage() {
   return (
     <>
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-FD9932Y04M"
+        src="https://www.googletagmanager.com/gtag/js?id=G-5YD3GDLQVG"
         strategy="afterInteractive"
       />
       <Script id="google-analytics" strategy="afterInteractive">
@@ -14,7 +14,7 @@ export default function AdminPage() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-FD9932Y04M');
+          gtag('config', 'G-5YD3GDLQVG');
         `}
       </Script>
 

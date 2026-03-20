@@ -618,7 +618,7 @@ export default function ZakatPage() {
       </footer>
 
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-FD9932Y04M"
+        src="https://www.googletagmanager.com/gtag/js?id=G-5YD3GDLQVG"
         strategy="afterInteractive"
       />
       <Script id="google-analytics" strategy="afterInteractive">
@@ -627,7 +627,7 @@ export default function ZakatPage() {
           function gtag(){dataLayer.push(arguments);}
           window.gtag = gtag;
           gtag('js', new Date());
-          gtag('config', 'G-FD9932Y04M');
+          gtag('config', 'G-5YD3GDLQVG');
         `}
       </Script>
 
