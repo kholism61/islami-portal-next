@@ -1,4 +1,4 @@
-const CACHE_NAME = "islami-portal-next-v3";
+const CACHE_NAME = "islami-portal-next-v4";
 const OFFLINE_URL = "/offline";
 
 const PRECACHE_URLS = [
