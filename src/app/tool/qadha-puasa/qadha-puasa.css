@@ -548,6 +548,26 @@ row-gap:8px;
 
 }
 
+body.tool-qadha-puasa.kfi-scope .navbar .nav-menu{
+
+flex:1 1 100%;
+
+width:100%;
+
+flex-wrap:wrap;
+
+overflow:visible;
+
+padding-bottom:0;
+
+}
+
+body.tool-qadha-puasa.kfi-scope .navbar .nav-menu::-webkit-scrollbar{
+
+display:none;
+
+}
+
 body.tool-qadha-puasa .nav-container{
 
 flex-wrap:wrap;

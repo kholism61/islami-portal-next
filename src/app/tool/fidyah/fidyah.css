@@ -82,6 +82,18 @@ gap:22px;
     row-gap:8px;
     justify-content:flex-start;
   }
+
+  body.tool-fidyah.kfi-scope .navbar .nav-menu{
+    flex:1 1 100%;
+    width:100%;
+    flex-wrap:wrap;
+    overflow:visible;
+    padding-bottom:0;
+  }
+
+  body.tool-fidyah.kfi-scope .navbar .nav-menu::-webkit-scrollbar{
+    display:none;
+  }
 }
 
 body.tool-fidyah .nav-menu a{
