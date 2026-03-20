@@ -1,4 +1,9 @@
-import Script from "next/script";
+import Image from "next/image";
+import Link from "next/link";
+
+import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
+
+import "./smart-engine-puasa.css";
 
 export const metadata = {
   title: "Smart Fiqh Puasa | Portal Literasi Islam",
@@ -7,34 +12,46 @@ export const metadata = {
 export default function SmartFiqhPuasaPage() {
   return (
     <>
-      <link rel="stylesheet" href="/smart-fiqh/smart-engine-puasa.css" />
+      <SmartFiqhScope page="puasa" />
 
       <nav className="navbar">
         <div className="nav-container">
-          <a href="../index.html" className="logo" id="logoText">
-            Islami Portal
-          </a>
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <Image
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                width={32}
+                height={32}
+                priority
+              />
+            </span>
+            <span className="logo-text" id="logoText">
+              Portal Literasi Islam
+            </span>
+          </Link>
 
           <ul className="nav-menu">
             <li>
-              <a href="../index.html" id="navHome">
+              <Link href="/" id="navHome">
                 Beranda
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="../smart.html" id="navSmart">
+              <Link href="/smart" id="navSmart">
                 Smart Fiqh
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="../tools/mawaris.html" id="navMawaris">
+              <Link href="/tools/mawaris" id="navMawaris">
                 Hitung Mawaris
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="../zakat.html" id="navZakat">
+              <Link href="/zakat" id="navZakat">
                 Kalkulator Zakat
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -62,7 +79,7 @@ export default function SmartFiqhPuasaPage() {
         <p id="heroDesc">
           Panduan fiqh puasa Ramadhan, qadha, nadzar, dan puasa sunnah dengan
           pertanyaan yang lebih panjang, dalil ringkas, serta analisis fiqh
-          modern berbasis mazhab Syafi&apos;i.
+          modern berbasis mazhab Syafi'i.
         </p>
       </section>
 
@@ -221,7 +238,7 @@ export default function SmartFiqhPuasaPage() {
 
               <li id="smartMethodPoint2">
                 2) Takyif Fiqhi: petakan status mukallaf, haid/nifas, niat, uzur
-                syar&apos;i, serta pembatal yang disengaja atau tidak disengaja.
+                syar'i, serta pembatal yang disengaja atau tidak disengaja.
               </li>
 
               <li id="smartMethodPoint3">
@@ -235,14 +252,9 @@ export default function SmartFiqhPuasaPage() {
 
       <footer className="smart-footer">
         <p id="smartFooterCopy">
-          © 2026 Portal Literasi Islam - Smart Fiqh Puasa
+          &copy; 2026 Portal Literasi Islam - Smart Fiqh Puasa
         </p>
       </footer>
-
-      <Script src="/smart-fiqh/smart-data-puasa.js" strategy="afterInteractive" />
-      <Script src="/smart-fiqh/smart-fiqh-engine.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }

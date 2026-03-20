@@ -1,4 +1,9 @@
-import Script from "next/script";
+import Image from "next/image";
+import Link from "next/link";
+
+import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
+
+import "../smart-engine.css";
 
 export const metadata = {
   title: "Smart Fiqh Zakat | Portal Literasi Islam",
@@ -7,37 +12,49 @@ export const metadata = {
 export default function SmartFiqhZakatPage() {
   return (
     <>
-      <link rel="stylesheet" href="/smart-fiqh/smart-engine.css" />
+      <SmartFiqhScope page="zakat" />
 
       <nav className="navbar">
         <div className="nav-container">
-          <a href="../index.html" className="logo" id="logoText">
-            Islami Portal
-          </a>
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <Image
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                width={32}
+                height={32}
+                priority
+              />
+            </span>
+            <span className="logo-text" id="logoText">
+              Portal Literasi Islam
+            </span>
+          </Link>
 
           <ul className="nav-menu">
             <li>
-              <a href="../index.html" id="navHome">
+              <Link href="/" id="navHome">
                 Beranda
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a href="../smart.html" id="navSmart">
+              <Link href="/smart" id="navSmart">
                 Smart Fiqh
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a href="../tools/mawaris.html" id="navMawaris">
+              <Link href="/tools/mawaris" id="navMawaris">
                 Hitung Mawaris
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a href="../zakat.html" id="navZakat">
+              <Link href="/zakat" id="navZakat">
                 Kalkulator Zakat
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -69,7 +86,7 @@ export default function SmartFiqhZakatPage() {
             Analisis zakat fitrah dan zakat mal yang jauh lebih lengkap:
             emas-perak, uang, perdagangan, ternak, pertanian, rikaz, tambang,
             saham, sukuk, penghasilan terakumulasi, dan investasi syariah dengan
-            alur Ya/Tidak yang modern serta tetap berpijak pada fiqh Syafi&apos;i,
+            alur Ya/Tidak yang modern serta tetap berpijak pada fiqh Syafi'i,
             nisab, haul, dan audit nilai bersih.
           </p>
         </div>
@@ -247,22 +264,9 @@ export default function SmartFiqhZakatPage() {
 
       <footer className="smart-footer">
         <p id="smartFooterCopy">
-          © 2026 Portal Literasi Islam - Smart Fiqh Zakat
+          &copy; 2026 Portal Literasi Islam - Smart Fiqh Zakat
         </p>
       </footer>
-
-      <Script
-        src="/smart-fiqh/smart-data-zakat.js"
-        strategy="afterInteractive"
-      />
-
-      <Script
-        src="/smart-fiqh/smart-fiqh-engine.js"
-        strategy="afterInteractive"
-      />
-
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }

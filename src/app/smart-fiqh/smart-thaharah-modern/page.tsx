@@ -1,4 +1,9 @@
-import Script from "next/script";
+import Image from "next/image";
+import Link from "next/link";
+
+import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
+
+import "./smart-engine-thaharah.css";
 
 export const metadata = {
   title: "Smart Fiqh Thaharah | Portal Literasi Islam",
@@ -7,24 +12,28 @@ export const metadata = {
 export default function SmartFiqhThaharahPage() {
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&family=Amiri:wght@400;700&display=swap"
-        rel="stylesheet"
-      />
-
-      <link rel="stylesheet" href="/smart-fiqh/smart-engine-thaharah.css" />
+      <SmartFiqhScope page="thaharah" />
 
       <div className="page-glow page-glow-left"></div>
       <div className="page-glow page-glow-right"></div>
 
       <nav className="navbar">
         <div className="nav-container">
-          <a href="../index.html" className="logo" id="logoText">
-            Islami Portal
-          </a>
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="logo-mark" aria-hidden="true">
+              <Image
+                src="/assets/images/logo.png"
+                alt=""
+                className="logo-icon"
+                width={32}
+                height={32}
+                priority
+              />
+            </span>
+            <span className="logo-text" id="logoText">
+              Portal Literasi Islam
+            </span>
+          </Link>
 
           <button
             className="nav-toggle"
@@ -38,27 +47,27 @@ export default function SmartFiqhThaharahPage() {
           <div className="nav-panel" id="navPanel">
             <ul className="nav-menu">
               <li>
-                <a href="../index.html" id="navHome">
+                <Link href="/" id="navHome">
                   Beranda
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a href="../smart.html" id="navSmart">
+                <Link href="/smart" id="navSmart">
                   Smart Fiqh
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a href="../tools/mawaris.html" id="navMawaris">
+                <Link href="/tools/mawaris" id="navMawaris">
                   Hitung Mawaris
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a href="../zakat.html" id="navZakat">
+                <Link href="/zakat" id="navZakat">
                   Kalkulator Zakat
-                </a>
+                </Link>
               </li>
             </ul>
 
@@ -234,22 +243,8 @@ export default function SmartFiqhThaharahPage() {
       </main>
 
       <footer className="smart-footer">
-        <p>© 2026 Smart Fiqh Thaharah — Portal Literasi Islam</p>
+        <p>&copy; 2026 Smart Fiqh Thaharah — Portal Literasi Islam</p>
       </footer>
-
-      <Script
-        src="/smart-fiqh/smart-data-thaharah.js"
-        strategy="afterInteractive"
-      />
-
-      <Script
-        src="/smart-fiqh/smart-fiqh-engine-thaharah.js"
-        strategy="afterInteractive"
-      />
-
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }

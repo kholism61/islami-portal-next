@@ -7,7 +7,7 @@
     return;
   }
 
-  const DEFAULT_LANG = localStorage.getItem('smartFiqhLang') || 'id';
+  const DEFAULT_LANG = localStorage.getItem('siteLang') || localStorage.getItem('smartFiqhLang') || 'id';
   const LANGS = ['id', 'en', 'ar'];
   const state = {
     lang: LANGS.includes(DEFAULT_LANG) ? DEFAULT_LANG : 'id',
@@ -498,6 +498,7 @@
     if (!LANGS.includes(lang)) return;
     state.lang = lang;
     localStorage.setItem('smartFiqhLang', lang);
+    localStorage.setItem('siteLang', lang);
     updateBaseTexts();
     if (state.finished && state.resultId) {
       renderResult(state.resultId);

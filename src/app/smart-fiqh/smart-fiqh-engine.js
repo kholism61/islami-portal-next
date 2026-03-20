@@ -3,7 +3,7 @@
   if(!config || !config.flow) return;
 
   const state = {
-    lang: localStorage.getItem('siteLang') || 'id',
+    lang: localStorage.getItem('siteLang') || localStorage.getItem('smartFiqhLang') || 'id',
     currentNode: config.flow.start,
     answers: [],
     totalSteps: countQuestions(config.flow.start)
@@ -206,6 +206,7 @@
   function setLanguage(lang){
     state.lang = lang;
     localStorage.setItem('siteLang', lang);
+    localStorage.setItem('smartFiqhLang', lang);
     applyDirection();
     applyMeta();
     updateLanguageButtons();
