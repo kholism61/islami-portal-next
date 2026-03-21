@@ -3707,7 +3707,21 @@ window.addEventListener("scroll", () => {
     safeJsonParse("readingProgress", {});
 
   const prev = Number(reading[id] || 0);
-  const next = Math.max(prev, percent);
+  const wasDone = Boolean(reading[id + "_done"]);
+
+  // If user re-reads from the top after finishing, restart progress instead of sticking at 100%.
+  const nearTop = (window.scrollY || 0) < 80;
+  const looksLikeRestart = nearTop && percent <= 8 && (wasDone || prev >= 95);
+
+  if (looksLikeRestart) {
+    reading[id] = percent;
+    if (Object.prototype.hasOwnProperty.call(reading, id + "_done")) {
+      delete reading[id + "_done"];
+    }
+  }
+
+  const prevAfterReset = Number(reading[id] || 0);
+  const next = Math.max(prevAfterReset, percent);
   reading[id] = next;
   localStorage.setItem("readingProgress", JSON.stringify(reading));
 
