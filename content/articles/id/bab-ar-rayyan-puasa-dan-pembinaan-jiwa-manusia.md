@@ -1,17 +1,20 @@
 ---
-title: "Bab ar-Rayyan: Puasa dan Pembinaan Jiwa Manusia"
-author: "Tim Kajian Ramadhan"
-date: "19 Februari 2026"
-createdAt: "2026-02-19"
+title: 'Bab ar-Rayyan: Puasa dan Pembinaan Jiwa Manusia'
+author: Tim Kajian Ramadhan
+date: 19 Februari 2026
+createdAt: '2026-02-19'
 popular: false
-category: "ramadhan"
-subcategory: "catatan-ramadhan"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/ramadhan.png"
-slug: "bab-ar-rayyan-puasa-dan-pembinaan-jiwa-manusia"
-excerpt: "Puasa dan Pembinaan Jiwa Manusia Dalam rangkaian kegiatan ilmiah Ramadhan, Al-Azhar menyelenggarakan multaqa fiqih “Bab ar-Rayyan” dengan tema “Puasa dan Dampaknya dalam Pembinaan"
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/ramadhan.png
+slug: bab-ar-rayyan-puasa-dan-pembinaan-jiwa-manusia
+excerpt: >-
+  Puasa dan Pembinaan Jiwa Manusia Dalam rangkaian kegiatan ilmiah Ramadhan,
+  Al-Azhar menyelenggarakan multaqa fiqih “Bab ar-Rayyan” dengan tema “Puasa dan
+  Dampaknya dalam Pembinaan
 ---
 ### Puasa dan Pembinaan Jiwa Manusia
 

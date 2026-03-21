@@ -1,17 +1,20 @@
-﻿---
-title: "Fasting as a Path to God-Consciousness and a Gate to Paradise"
-author: "Tim Kajian Ramadhan"
-date: "5 March 2026"
-createdAt: "2026-03-05"
+---
+title: Fasting as a Path to God-Consciousness and a Gate to Paradise
+author: Tim Kajian Ramadhan
+date: 5 March 2026
+createdAt: '2026-03-05'
 popular: false
-category: "Ramadan"
-subcategory: "tadabbur"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/sujud.webp"
-slug: "puasa-sebagai-jalan-menuju-ketakwaan-dan-pintu-surga"
-excerpt: "Shows fasting as a discipline of taqwa that purifies the soul, opens the gate to Paradise, and teaches that Ramadan is a season of ease, prayer, and moral renewal."
+category: ramadhan
+subcategory: tadabbur
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/sujud.webp
+slug: puasa-sebagai-jalan-menuju-ketakwaan-dan-pintu-surga
+excerpt: >-
+  Shows fasting as a discipline of taqwa that purifies the soul, opens the gate
+  to Paradise, and teaches that Ramadan is a season of ease, prayer, and moral
+  renewal.
 ---
 ## Introduction
 

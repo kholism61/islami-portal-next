@@ -1,17 +1,20 @@
-﻿---
-title: "الفرح بالله: مسار روحي في الحياة اليومية"
-author: "فريق دراسات التصوف"
-date: "14 فبراير 2026"
-createdAt: "2026-02-14"
+---
+title: 'الفرح بالله: مسار روحي في الحياة اليومية'
+author: فريق دراسات التصوف
+date: 14 فبراير 2026
+createdAt: '2026-02-14'
 popular: false
-category: "التصوف"
-subcategory: "التصوف والطريقة"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/tasawuf.png"
-slug: "bergembira-karena-allah-jalan-ruhani-dalam-kehidupan-sehari-hari-berdasarkan-nasihat-ibnu-athaillah-as-sakandari"
-excerpt: "يعرض وصايا ابن عطاء الله السكندري في جعل الفرح بالله وحده، وفهم النعم، وتحرير القلب من التعلق بالخلق."
+category: tasawuf
+subcategory: ''
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/tasawuf.png
+slug: >-
+  bergembira-karena-allah-jalan-ruhani-dalam-kehidupan-sehari-hari-berdasarkan-nasihat-ibnu-athaillah-as-sakandari
+excerpt: >-
+  يعرض وصايا ابن عطاء الله السكندري في جعل الفرح بالله وحده، وفهم النعم، وتحرير
+  القلب من التعلق بالخلق.
 ---
 ## المقدمة
 

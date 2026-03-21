@@ -1,17 +1,19 @@
-﻿---
-title: "بر الوالدين: طريق إلى الجنة ومصدر للبركة"
-author: "Tim Kajian Ramadhan"
-date: "22 فبراير 2026"
-createdAt: "2026-02-22"
+---
+title: 'بر الوالدين: طريق إلى الجنة ومصدر للبركة'
+author: Tim Kajian Ramadhan
+date: 22 فبراير 2026
+createdAt: '2026-02-22'
 popular: false
-category: "رمضان"
-subcategory: "مذكرات رمضان"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/ortu.png"
-slug: "berbakti-kepada-orang-tua-jalan-menuju-surga-dan-sumber-keberkahan"
-excerpt: "يذكّر بأن بر الوالدين من أعظم الفرائض، وأنه سبب للبركة وإجابة الدعاء ودخول الجنة، وأن عقوقهما من الذنوب العظيمة."
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/ortu.png
+slug: berbakti-kepada-orang-tua-jalan-menuju-surga-dan-sumber-keberkahan
+excerpt: >-
+  يذكّر بأن بر الوالدين من أعظم الفرائض، وأنه سبب للبركة وإجابة الدعاء ودخول
+  الجنة، وأن عقوقهما من الذنوب العظيمة.
 ---
 ### مذكرات رمضان: بر الوالدين طريق إلى الجنة ومصدر للبركة
 

@@ -1,17 +1,19 @@
-﻿---
-title: "Fasting in Islamic Law: Obligation, Virtues, and Etiquette"
-author: "Fiqh Study Team"
-date: "13 February 2026"
-createdAt: "2026-02-13"
+---
+title: 'Fasting in Islamic Law: Obligation, Virtues, and Etiquette'
+author: Fiqh Study Team
+date: 13 February 2026
+createdAt: '2026-02-13'
 popular: false
-category: "Islamic Law"
-subcategory: "Fiqh"
-tag: "fiqhibadah"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/puasa.png"
-slug: "puasa-kewajiban-keutamaan-dan-adab-dalam-syariat-islam"
-excerpt: "Summarizes the obligation of fasting, its spiritual merits, and the manners that perfect the believer’s fast in the Shariah."
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: en
+lang: EN
+thumbnail: assets/images/puasa.png
+slug: puasa-kewajiban-keutamaan-dan-adab-dalam-syariat-islam
+excerpt: >-
+  Summarizes the obligation of fasting, its spiritual merits, and the manners
+  that perfect the believer’s fast in the Shariah.
 ---
 ## Introduction
 

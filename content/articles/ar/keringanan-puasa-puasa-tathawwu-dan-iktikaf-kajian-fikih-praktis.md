@@ -1,17 +1,19 @@
-﻿---
-title: "رخص الصيام وصوم التطوع والاعتكاف: دراسة فقهية عملية"
-author: "فريق دراسات الفقه"
-date: "12 فبراير 2026"
-createdAt: "2026-02-12"
+---
+title: 'رخص الصيام وصوم التطوع والاعتكاف: دراسة فقهية عملية'
+author: فريق دراسات الفقه
+date: 12 فبراير 2026
+createdAt: '2026-02-12'
 popular: false
-category: "الفقه الإسلامي"
-subcategory: "الفقه"
-tag: "fiqhibadah"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/iktikaf.png"
-slug: "keringanan-puasa-puasa-tathawwu-dan-iktikaf-kajian-fikih-praktis"
-excerpt: "عرض فقهي عملي لرخصة الفطر للمريض والمسافر، وفضائل صوم التطوع، وأحكام الاعتكاف والاعتكاف المنذور."
+category: ilmusyariah
+subcategory: ''
+tag: fiqhibadah
+language: ar
+lang: AR
+thumbnail: assets/images/iktikaf.png
+slug: keringanan-puasa-puasa-tathawwu-dan-iktikaf-kajian-fikih-praktis
+excerpt: >-
+  عرض فقهي عملي لرخصة الفطر للمريض والمسافر، وفضائل صوم التطوع، وأحكام الاعتكاف
+  والاعتكاف المنذور.
 ---
 ## صيام المسافر والمريض
 

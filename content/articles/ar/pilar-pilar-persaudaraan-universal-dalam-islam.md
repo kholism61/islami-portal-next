@@ -1,17 +1,19 @@
-﻿---
-title: "أركان الأخوة الإنسانية الشاملة في الإسلام"
-author: "فريق دراسات الفكر"
-date: "13 فبراير 2026"
-createdAt: "2026-02-13"
+---
+title: أركان الأخوة الإنسانية الشاملة في الإسلام
+author: فريق دراسات الفكر
+date: 13 فبراير 2026
+createdAt: '2026-02-13'
 popular: true
-category: "الفكر"
-subcategory: "الفكر الاجتماعي الإسلامي"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/hugo.webp"
-slug: "pilar-pilar-persaudaraan-universal-dalam-islam"
-excerpt: "بيان لمبادئ المساواة الإنسانية والأخوة الشاملة والعدالة الاجتماعية، مع نقد التفاوت الجائر وسوء استخدام الدين في التاريخ الاجتماعي."
+category: pemikiran
+subcategory: ''
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/hugo.webp
+slug: pilar-pilar-persaudaraan-universal-dalam-islam
+excerpt: >-
+  بيان لمبادئ المساواة الإنسانية والأخوة الشاملة والعدالة الاجتماعية، مع نقد
+  التفاوت الجائر وسوء استخدام الدين في التاريخ الاجتماعي.
 ---
 ## المقدمة
 

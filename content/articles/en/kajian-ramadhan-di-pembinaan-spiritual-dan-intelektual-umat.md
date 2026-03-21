@@ -1,17 +1,21 @@
-﻿---
-title: "Ramadan Lessons at Al-Jami' al-Azhar: Spiritual and Intellectual Formation of the Ummah"
-author: "Tim Kajian Ramadhan"
-date: "27 February 2026"
-createdAt: "2026-02-27"
+---
+title: >-
+  Ramadan Lessons at Al-Jami' al-Azhar: Spiritual and Intellectual Formation of
+  the Ummah
+author: Tim Kajian Ramadhan
+date: 27 February 2026
+createdAt: '2026-02-27'
 popular: false
-category: "Ramadan"
-subcategory: "tadabbur"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/kajian.png"
-slug: "kajian-ramadhan-di-pembinaan-spiritual-dan-intelektual-umat"
-excerpt: "Presents Ramadan lectures at Al-Jami' al-Azhar as a school of moral integrity, humility, trust in Allah, and intellectual renewal for the Muslim community."
+category: ramadhan
+subcategory: tadabbur
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/kajian.png
+slug: kajian-ramadhan-di-pembinaan-spiritual-dan-intelektual-umat
+excerpt: >-
+  Presents Ramadan lectures at Al-Jami' al-Azhar as a school of moral integrity,
+  humility, trust in Allah, and intellectual renewal for the Muslim community.
 ---
 ## Introduction
 

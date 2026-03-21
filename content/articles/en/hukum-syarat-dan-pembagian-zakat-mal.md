@@ -1,17 +1,20 @@
-﻿---
-title: "The Ruling, Conditions, and Distribution of Zakat al-Mal"
-author: "Fiqh Study Team"
-date: "12 February 2026"
-createdAt: "2026-02-12"
+---
+title: 'The Ruling, Conditions, and Distribution of Zakat al-Mal'
+author: Fiqh Study Team
+date: 12 February 2026
+createdAt: '2026-02-12'
 popular: false
-category: "Islamic Law"
-subcategory: "Fiqh"
-tag: "fiqhibadah"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/mal.png"
-slug: "hukum-syarat-dan-pembagian-zakat-mal"
-excerpt: "Explains the meaning of zakat al-mal, its legal basis, the categories of wealth subject to zakat, and the detailed conditions for its obligation in Islamic law."
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: en
+lang: EN
+thumbnail: assets/images/mal.png
+slug: hukum-syarat-dan-pembagian-zakat-mal
+excerpt: >-
+  Explains the meaning of zakat al-mal, its legal basis, the categories of
+  wealth subject to zakat, and the detailed conditions for its obligation in
+  Islamic law.
 ---
 ## Introduction
 

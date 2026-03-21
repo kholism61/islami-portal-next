@@ -1,17 +1,19 @@
-﻿---
-title: "الوقت أعظم النعم والعبادة تنظم إيقاع الحياة"
-author: "Tim Kajian Ramadhan"
-date: "21 فبراير 2026"
-createdAt: "2026-02-21"
+---
+title: الوقت أعظم النعم والعبادة تنظم إيقاع الحياة
+author: Tim Kajian Ramadhan
+date: 21 فبراير 2026
+createdAt: '2026-02-21'
 popular: false
-category: "رمضان"
-subcategory: "مذكرات رمضان"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/waktu.png"
-slug: "waktu-adalah-nikmat-terbesar-dan-ibadah-sebagai-pengatur-irama-kehidupan"
-excerpt: "يتأمل في قيمة الوقت بوصفه من أعظم نعم الله، ويبين كيف تضبط الصلاة والصيام حياة المسلم بإيقاع تعبدي منظم."
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/waktu.png
+slug: waktu-adalah-nikmat-terbesar-dan-ibadah-sebagai-pengatur-irama-kehidupan
+excerpt: >-
+  يتأمل في قيمة الوقت بوصفه من أعظم نعم الله، ويبين كيف تضبط الصلاة والصيام حياة
+  المسلم بإيقاع تعبدي منظم.
 ---
 ### مذكرات رمضان: الوقت أعظم النعم والعبادة تنظم إيقاع الحياة
 

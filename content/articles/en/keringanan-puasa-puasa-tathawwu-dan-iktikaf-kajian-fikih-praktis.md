@@ -1,17 +1,22 @@
-﻿---
-title: "Legal Concessions in Fasting, Voluntary Fasts, and I'tikaf: A Practical Fiqh Study"
-author: "Fiqh Study Team"
-date: "12 February 2026"
-createdAt: "2026-02-12"
+---
+title: >-
+  Legal Concessions in Fasting, Voluntary Fasts, and I'tikaf: A Practical Fiqh
+  Study
+author: Fiqh Study Team
+date: 12 February 2026
+createdAt: '2026-02-12'
 popular: false
-category: "Islamic Law"
-subcategory: "Fiqh"
-tag: "fiqhibadah"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/iktikaf.png"
-slug: "keringanan-puasa-puasa-tathawwu-dan-iktikaf-kajian-fikih-praktis"
-excerpt: "A practical fiqh overview of concessions for the sick and travelers in Ramadan, recommended voluntary fasts, and the rules of i'tikaf and vowed seclusion."
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: en
+lang: EN
+thumbnail: assets/images/iktikaf.png
+slug: keringanan-puasa-puasa-tathawwu-dan-iktikaf-kajian-fikih-praktis
+excerpt: >-
+  A practical fiqh overview of concessions for the sick and travelers in
+  Ramadan, recommended voluntary fasts, and the rules of i'tikaf and vowed
+  seclusion.
 ---
 ## Fasting for the Traveler and the Sick
 

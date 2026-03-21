@@ -1,18 +1,19 @@
 ---
-title: "مفهوم مقاصد الشريعة في الحياة الحديثة"
-author: "Redaksi Maqasid"
-date: "20 يناير 2026"
-createdAt: "2026-01-20"
+title: مفهوم مقاصد الشريعة في الحياة الحديثة
+author: Redaksi Maqasid
+date: 20 يناير 2026
+createdAt: '2026-01-20'
 popular: false
-category: "الفقه الإسلامي"
-subcategory: "أصول الفقه"
-tag: "مقاصد الشريعة"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/maqasid.jpg"
-slug: "maqashid-syariah"
-excerpt: "يوضح أن الشريعة الإسلامية قائمة على الحكمة والغاية والمصلحة، ويؤكد أن مقاصد الشريعة ينبغي أن تصبح منهجًا محوريًا لفهم الأحكام الشرعية في الحياة المعاصرة."
-
+category: ilmusyariah
+subcategory: ushulfiqh
+tag: maqashidsyariah
+language: ar
+lang: AR
+thumbnail: assets/images/maqasid.jpg
+slug: maqashid-syariah
+excerpt: >-
+  يوضح أن الشريعة الإسلامية قائمة على الحكمة والغاية والمصلحة، ويؤكد أن مقاصد
+  الشريعة ينبغي أن تصبح منهجًا محوريًا لفهم الأحكام الشرعية في الحياة المعاصرة.
 ---
 ## المقدمة
 

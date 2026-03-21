@@ -1,17 +1,19 @@
-﻿---
-title: "باب الريان: الصيام وتزكية النفس الإنسانية"
-author: "Tim Kajian Ramadhan"
-date: "19 فبراير 2026"
-createdAt: "2026-02-19"
+---
+title: 'باب الريان: الصيام وتزكية النفس الإنسانية'
+author: Tim Kajian Ramadhan
+date: 19 فبراير 2026
+createdAt: '2026-02-19'
 popular: false
-category: "رمضان"
-subcategory: "مذكرات رمضان"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/ramadhan.png"
-slug: "bab-ar-rayyan-puasa-dan-pembinaan-jiwa-manusia"
-excerpt: "يبين كيف يربي الصيام التقوى، ويوقظ الضمير، ويقوي ضبط النفس، ويجعل رمضان موسمًا حقيقيًا للإصلاح الروحي والأخلاقي."
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/ramadhan.png
+slug: bab-ar-rayyan-puasa-dan-pembinaan-jiwa-manusia
+excerpt: >-
+  يبين كيف يربي الصيام التقوى، ويوقظ الضمير، ويقوي ضبط النفس، ويجعل رمضان موسمًا
+  حقيقيًا للإصلاح الروحي والأخلاقي.
 ---
 ### الصيام وتزكية النفس الإنسانية
 

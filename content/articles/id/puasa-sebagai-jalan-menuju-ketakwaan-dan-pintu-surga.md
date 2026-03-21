@@ -1,17 +1,20 @@
 ---
-title: "Puasa sebagai Jalan Menuju Ketakwaan dan Pintu Surga"
-author: "Tim Kajian Ramadhan"
-date: "5 Maret 2026"
-createdAt: "2026-03-05"
+title: Puasa sebagai Jalan Menuju Ketakwaan dan Pintu Surga
+author: Tim Kajian Ramadhan
+date: 5 Maret 2026
+createdAt: '2026-03-05'
 popular: false
-category: "ramadhan"
-subcategory: "tadabbur"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/sujud.webp"
-slug: "puasa-sebagai-jalan-menuju-ketakwaan-dan-pintu-surga"
-excerpt: "Pendahuluan Bulan Ramadhan merupakan salah satu anugerah terbesar yang Allah karuniakan kepada umat Islam. Kedatangannya tidak sekadar menandai pergantian waktu dalam kalender hijr"
+category: ramadhan
+subcategory: tadabbur
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/sujud.webp
+slug: puasa-sebagai-jalan-menuju-ketakwaan-dan-pintu-surga
+excerpt: >-
+  Pendahuluan Bulan Ramadhan merupakan salah satu anugerah terbesar yang Allah
+  karuniakan kepada umat Islam. Kedatangannya tidak sekadar menandai pergantian
+  waktu dalam kalender hijr
 ---
 ## Pendahuluan
 

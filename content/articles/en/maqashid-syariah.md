@@ -1,17 +1,20 @@
 ---
-title: "The Concept of Maqasid al-Shariah in Modern Life"
-author: "Maqasid Editorial"
-date: "20 January 2026"
-createdAt: "2026-01-20"
+title: The Concept of Maqasid al-Shariah in Modern Life
+author: Maqasid Editorial
+date: 20 January 2026
+createdAt: '2026-01-20'
 popular: false
-category: "Islamic Law"
-subcategory: "Usul al-Fiqh"
-tag: "Maqasid Syariah"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/maqasid.jpg"
-slug: "maqashid-syariah"
-excerpt: "Explains that Islamic law is built upon wisdom, purpose, and benefit, and argues that maqasid al-shariah should become a central method for understanding law in modern life."
+category: ilmusyariah
+subcategory: ushulfiqh
+tag: maqashidsyariah
+language: en
+lang: EN
+thumbnail: assets/images/maqasid.jpg
+slug: maqashid-syariah
+excerpt: >-
+  Explains that Islamic law is built upon wisdom, purpose, and benefit, and
+  argues that maqasid al-shariah should become a central method for
+  understanding law in modern life.
 ---
 ## Introduction
 

@@ -1,17 +1,19 @@
-﻿---
-title: "Ramadan Notes: The Prohibition of Hoarding in the Perspective of Islamic Law"
-author: "Tim Kajian Ramadhan"
-date: "3 March 2026"
-createdAt: "2026-03-03"
+---
+title: 'Ramadan Notes: The Prohibition of Hoarding in the Perspective of Islamic Law'
+author: Tim Kajian Ramadhan
+date: 3 March 2026
+createdAt: '2026-03-03'
 popular: false
-category: "Ramadan"
-subcategory: "ramadan-notes"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/penimbunan.png"
-slug: "catatan-ramadhan-larangan-ihtikar-penimbunan-barang-dalam-perspektif-syariah"
-excerpt: "Explains why Islam condemns hoarding essential goods, how it harms society, and why honest trade is part of moral worship in Ramadan."
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/penimbunan.png
+slug: catatan-ramadhan-larangan-ihtikar-penimbunan-barang-dalam-perspektif-syariah
+excerpt: >-
+  Explains why Islam condemns hoarding essential goods, how it harms society,
+  and why honest trade is part of moral worship in Ramadan.
 ---
 ## Introduction
 

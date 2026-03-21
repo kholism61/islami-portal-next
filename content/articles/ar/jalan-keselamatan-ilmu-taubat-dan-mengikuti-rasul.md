@@ -1,17 +1,19 @@
-﻿---
-title: "طريق النجاة: العلم والتوبة واتباع الرسول"
-author: "فريق الدراسات التصوفية"
-date: "10 فبراير 2026"
-createdAt: "2026-02-10"
+---
+title: 'طريق النجاة: العلم والتوبة واتباع الرسول'
+author: فريق الدراسات التصوفية
+date: 10 فبراير 2026
+createdAt: '2026-02-10'
 popular: true
-category: "التصوف"
-subcategory: "التصوف والأخلاق"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/sufi.png"
-slug: "jalan-keselamatan-ilmu-taubat-dan-mengikuti-rasul"
-excerpt: "يبين أن طريق النجاة يبدأ بالعلم النافع، ويتطهر بالتوبة الصادقة، ويكتمل باتباع النبي محمد صلى الله عليه وسلم."
+category: tasawuf
+subcategory: ''
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/sufi.png
+slug: jalan-keselamatan-ilmu-taubat-dan-mengikuti-rasul
+excerpt: >-
+  يبين أن طريق النجاة يبدأ بالعلم النافع، ويتطهر بالتوبة الصادقة، ويكتمل باتباع
+  النبي محمد صلى الله عليه وسلم.
 ---
 ## المقدمة
 

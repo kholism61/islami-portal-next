@@ -1,17 +1,20 @@
-﻿---
-title: "Ramadan as a School of Sincerity and Purification of the Soul"
-author: "Ramadan Study Team"
-date: "13 February 2026"
-createdAt: "2026-02-13"
+---
+title: Ramadan as a School of Sincerity and Purification of the Soul
+author: Ramadan Study Team
+date: 13 February 2026
+createdAt: '2026-02-13'
 popular: false
-category: "Ramadan"
-subcategory: "Spiritual Reflection"
-tag: "ramadhan"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/ramadhan.png"
-slug: "ramadhan-madrasah-keikhlasan-dan-penyucian-jiwa"
-excerpt: "Reflects on Ramadan as a spiritual school that trains sincerity, deepens awareness of Allah, and purifies the soul from ostentation and the love of praise."
+category: ramadhan
+subcategory: spiritual-reflection
+tag: ramadhan
+language: en
+lang: EN
+thumbnail: assets/images/ramadhan.png
+slug: ramadhan-madrasah-keikhlasan-dan-penyucian-jiwa
+excerpt: >-
+  Reflects on Ramadan as a spiritual school that trains sincerity, deepens
+  awareness of Allah, and purifies the soul from ostentation and the love of
+  praise.
 ---
 ### Ramadan as a School of Sincerity and Purification of the Soul
 

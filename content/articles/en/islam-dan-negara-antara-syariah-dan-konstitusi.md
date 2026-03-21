@@ -1,17 +1,20 @@
-﻿---
-title: "Islam and the State: Between Sharia and Constitution"
-author: "Politics Editorial Team"
-date: "15 January 2026"
-createdAt: "2026-01-15"
+---
+title: 'Islam and the State: Between Sharia and Constitution'
+author: Politics Editorial Team
+date: 15 January 2026
+createdAt: '2026-01-15'
 popular: true
-category: "Politics"
-subcategory: "Political Thought"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/politik.jpg"
-slug: "islam-dan-negara-antara-syariah-dan-konstitusi"
-excerpt: "Examines the relationship between Islam, Sharia, and constitutional order in modern political life through classical scholarship, maqasid, and contemporary Muslim thought."
+category: politik
+subcategory: political-thought
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/politik.jpg
+slug: islam-dan-negara-antara-syariah-dan-konstitusi
+excerpt: >-
+  Examines the relationship between Islam, Sharia, and constitutional order in
+  modern political life through classical scholarship, maqasid, and contemporary
+  Muslim thought.
 ---
 ## Introduction
 

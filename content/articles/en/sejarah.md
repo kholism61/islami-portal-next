@@ -1,17 +1,20 @@
-﻿---
-title: "History of Al-Jami' al-Azhar"
-author: "Tim Kajian Ramadhan"
-date: "27 February 2026"
-createdAt: "2026-02-27"
+---
+title: History of Al-Jami' al-Azhar
+author: Tim Kajian Ramadhan
+date: 27 February 2026
+createdAt: '2026-02-27'
 popular: false
-category: "Ramadan"
-subcategory: "azhar-history"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/syarif.png"
-slug: "sejarah"
-excerpt: "Traces the long history of Al-Jami' al-Azhar as a mosque, university, intellectual authority, and symbol of moderation, scholarship, and national leadership."
+category: ramadhan
+subcategory: sejarah-azhar
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/syarif.png
+slug: sejarah
+excerpt: >-
+  Traces the long history of Al-Jami' al-Azhar as a mosque, university,
+  intellectual authority, and symbol of moderation, scholarship, and national
+  leadership.
 ---
 ## History of Al-Jami' al-Azhar
 

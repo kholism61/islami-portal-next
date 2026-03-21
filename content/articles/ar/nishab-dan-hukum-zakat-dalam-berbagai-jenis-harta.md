@@ -1,17 +1,19 @@
-﻿---
-title: "النصاب وأحكام الزكاة في أنواع الأموال المختلفة"
-author: "فريق دراسات الفقه"
-date: "21 فبراير 2026"
-createdAt: "2026-02-21"
+---
+title: النصاب وأحكام الزكاة في أنواع الأموال المختلفة
+author: فريق دراسات الفقه
+date: 21 فبراير 2026
+createdAt: '2026-02-21'
 popular: false
-category: "الفقه الإسلامي"
-subcategory: "الفقه"
-tag: "fiqhibadah"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/harta.png"
-slug: "nishab-dan-hukum-zakat-dalam-berbagai-jenis-harta"
-excerpt: "شرح لأحكام النصاب والزكاة في الذهب والفضة والزروع والثمار وعروض التجارة والمعادن والركاز مع أدلتها وأهم تفصيلاتها الفقهية."
+category: ilmusyariah
+subcategory: ''
+tag: fiqhibadah
+language: ar
+lang: AR
+thumbnail: assets/images/harta.png
+slug: nishab-dan-hukum-zakat-dalam-berbagai-jenis-harta
+excerpt: >-
+  شرح لأحكام النصاب والزكاة في الذهب والفضة والزروع والثمار وعروض التجارة
+  والمعادن والركاز مع أدلتها وأهم تفصيلاتها الفقهية.
 ---
 ### نصاب الذهب والفضة
 

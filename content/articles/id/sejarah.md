@@ -1,17 +1,20 @@
 ---
-title: "Sejarah الجامع الأزهر"
-author: "Tim Kajian Ramadhan"
-date: "27 Februari 2026"
-createdAt: "2026-02-27"
+title: Sejarah الجامع الأزهر
+author: Tim Kajian Ramadhan
+date: 27 Februari 2026
+createdAt: '2026-02-27'
 popular: false
-category: "ramadhan"
-subcategory: "sejarah-azhar"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/syarif.png"
-slug: "sejarah"
-excerpt: "Sejarah الجامع الأزهر الجامع الأزهر merupakan universitas tertua di dunia yang terus berfungsi secara berkesinambungan hingga hari ini, sekaligus salah satu masjid jami’ terpenting"
+category: ramadhan
+subcategory: sejarah-azhar
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/syarif.png
+slug: sejarah
+excerpt: >-
+  Sejarah الجامع الأزهر الجامع الأزهر merupakan universitas tertua di dunia yang
+  terus berfungsi secara berkesinambungan hingga hari ini, sekaligus salah satu
+  masjid jami’ terpenting
 ---
 ## Sejarah الجامع الأزهر
 

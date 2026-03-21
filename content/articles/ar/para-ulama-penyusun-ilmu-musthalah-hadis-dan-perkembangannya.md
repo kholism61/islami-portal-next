@@ -1,17 +1,19 @@
-﻿---
-title: "العلماء الأوائل في علم مصطلح الحديث وتطوره"
-author: "فريق دراسات الحديث"
-date: "13 فبراير 2026"
-createdAt: "2026-02-13"
+---
+title: العلماء الأوائل في علم مصطلح الحديث وتطوره
+author: فريق دراسات الحديث
+date: 13 فبراير 2026
+createdAt: '2026-02-13'
 popular: false
-category: "الحديث"
-subcategory: "مصطلح الحديث"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/hadis.jpg"
-slug: "para-ulama-penyusun-ilmu-musthalah-hadis-dan-perkembangannya"
-excerpt: "عرض لأوائل العلماء الذين أسهموا في بناء علم مصطلح الحديث، ولدور الخطيب البغدادي وابن الصلاح، ولأهم التقسيمات المتعلقة بالأخبار والرواية."
+category: hadis
+subcategory: hadis-mustolah
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/hadis.jpg
+slug: para-ulama-penyusun-ilmu-musthalah-hadis-dan-perkembangannya
+excerpt: >-
+  عرض لأوائل العلماء الذين أسهموا في بناء علم مصطلح الحديث، ولدور الخطيب
+  البغدادي وابن الصلاح، ولأهم التقسيمات المتعلقة بالأخبار والرواية.
 ---
 ## المقدمة
 

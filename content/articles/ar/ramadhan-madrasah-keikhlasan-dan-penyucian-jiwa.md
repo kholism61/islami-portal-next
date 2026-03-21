@@ -1,17 +1,19 @@
-﻿---
-title: "رمضان مدرسة الإخلاص وتزكية النفس"
-author: "فريق دراسات رمضان"
-date: "13 فبراير 2026"
-createdAt: "2026-02-13"
+---
+title: رمضان مدرسة الإخلاص وتزكية النفس
+author: فريق دراسات رمضان
+date: 13 فبراير 2026
+createdAt: '2026-02-13'
 popular: false
-category: "رمضان"
-subcategory: "تأملات إيمانية"
-tag: "ramadhan"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/ramadhan.png"
-slug: "ramadhan-madrasah-keikhlasan-dan-penyucian-jiwa"
-excerpt: "تأمل في رمضان بوصفه مدرسة روحية تربي الإخلاص، وتعمق مراقبة الله، وتطهر النفس من الرياء وحب الثناء."
+category: ramadhan
+subcategory: ''
+tag: ramadhan
+language: ar
+lang: AR
+thumbnail: assets/images/ramadhan.png
+slug: ramadhan-madrasah-keikhlasan-dan-penyucian-jiwa
+excerpt: >-
+  تأمل في رمضان بوصفه مدرسة روحية تربي الإخلاص، وتعمق مراقبة الله، وتطهر النفس
+  من الرياء وحب الثناء.
 ---
 ### رمضان مدرسة الإخلاص وتزكية النفس
 

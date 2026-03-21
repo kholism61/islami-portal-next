@@ -1,17 +1,20 @@
-﻿---
-title: "The Path of Salvation: Knowledge, Repentance, and Following the Messenger"
-author: "Tasawuf Study Team"
-date: "10 February 2026"
-createdAt: "2026-02-10"
+---
+title: 'The Path of Salvation: Knowledge, Repentance, and Following the Messenger'
+author: Tasawuf Study Team
+date: 10 February 2026
+createdAt: '2026-02-10'
 popular: true
-category: "Tasawuf"
-subcategory: "Tasawuf and Character"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/sufi.png"
-slug: "jalan-keselamatan-ilmu-taubat-dan-mengikuti-rasul"
-excerpt: "Explains that the road to salvation begins with beneficial knowledge, is purified through sincere repentance, and is perfected by following the Prophet Muhammad."
+category: tasawuf
+subcategory: tasawuf-and-character
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/sufi.png
+slug: jalan-keselamatan-ilmu-taubat-dan-mengikuti-rasul
+excerpt: >-
+  Explains that the road to salvation begins with beneficial knowledge, is
+  purified through sincere repentance, and is perfected by following the Prophet
+  Muhammad.
 ---
 ## Introduction
 

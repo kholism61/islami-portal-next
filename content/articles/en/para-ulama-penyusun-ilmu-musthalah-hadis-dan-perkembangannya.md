@@ -1,17 +1,20 @@
-﻿---
-title: "The Early Scholars of Mustalah al-Hadith and Its Development"
-author: "Hadith Study Team"
-date: "13 February 2026"
-createdAt: "2026-02-13"
+---
+title: The Early Scholars of Mustalah al-Hadith and Its Development
+author: Hadith Study Team
+date: 13 February 2026
+createdAt: '2026-02-13'
 popular: false
-category: "Hadith"
-subcategory: "Mustalah al-Hadith"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/hadis.jpg"
-slug: "para-ulama-penyusun-ilmu-musthalah-hadis-dan-perkembangannya"
-excerpt: "Surveys the early scholars who shaped mustalah al-hadith, the role of al-Khatib al-Baghdadi and Ibn al-Salah, and the major categories used in hadith transmission."
+category: hadis
+subcategory: hadis-mustolah
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/hadis.jpg
+slug: para-ulama-penyusun-ilmu-musthalah-hadis-dan-perkembangannya
+excerpt: >-
+  Surveys the early scholars who shaped mustalah al-hadith, the role of
+  al-Khatib al-Baghdadi and Ibn al-Salah, and the major categories used in
+  hadith transmission.
 ---
 ## Introduction
 

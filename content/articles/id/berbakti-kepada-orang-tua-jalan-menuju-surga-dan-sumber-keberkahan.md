@@ -1,17 +1,20 @@
 ---
-title: "Berbakti kepada Orang Tua, Jalan Menuju Surga dan Sumber Keberkahan"
-author: "Tim Kajian Ramadhan"
-date: "22 Februari 2026"
-createdAt: "2026-02-22"
+title: 'Berbakti kepada Orang Tua, Jalan Menuju Surga dan Sumber Keberkahan'
+author: Tim Kajian Ramadhan
+date: 22 Februari 2026
+createdAt: '2026-02-22'
 popular: false
-category: "ramadhan"
-subcategory: "catatan-ramadhan"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/ortu.png"
-slug: "berbakti-kepada-orang-tua-jalan-menuju-surga-dan-sumber-keberkahan"
-excerpt: "Catatan Ramadhan: Berbakti kepada Orang Tua, Jalan Menuju Surga dan Sumber Keberkahan Pada malam kelima bulan Ramadhan 1447 H, seusai salat tarawih, Masjid Al-Azhar menggelar Multa"
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/ortu.png
+slug: berbakti-kepada-orang-tua-jalan-menuju-surga-dan-sumber-keberkahan
+excerpt: >-
+  Catatan Ramadhan: Berbakti kepada Orang Tua, Jalan Menuju Surga dan Sumber
+  Keberkahan Pada malam kelima bulan Ramadhan 1447 H, seusai salat tarawih,
+  Masjid Al-Azhar menggelar Multa
 ---
 ### Catatan Ramadhan: Berbakti kepada Orang Tua, Jalan Menuju Surga dan Sumber Keberkahan
 

@@ -1,17 +1,20 @@
 ---
-title: "Para Ulama Penyusun Ilmu Musthalah Hadis dan Perkembangannya"
-author: "Tim Kajian Hadis"
-date: "18 Januari 2026"
-createdAt: "2026-01-18"
+title: Para Ulama Penyusun Ilmu Musthalah Hadis dan Perkembangannya
+author: Tim Kajian Hadis
+date: 18 Januari 2026
+createdAt: '2026-01-18'
 popular: false
-category: "hadis"
-subcategory: "hadis-mustolah"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/hadis.jpg"
-slug: "para-ulama-penyusun-ilmu-musthalah-hadis-dan-perkembangannya"
-excerpt: "Pendahuluan Ilmu Musthalah Hadis merupakan salah satu cabang penting dalam khazanah keilmuan Islam. Ilmu ini berfungsi untuk menjelaskan kaidah-kaidah dalam menilai hadis Nabi ﷺ, b"
+category: hadis
+subcategory: hadis-mustolah
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/hadis.jpg
+slug: para-ulama-penyusun-ilmu-musthalah-hadis-dan-perkembangannya
+excerpt: >-
+  Pendahuluan Ilmu Musthalah Hadis merupakan salah satu cabang penting dalam
+  khazanah keilmuan Islam. Ilmu ini berfungsi untuk menjelaskan kaidah-kaidah
+  dalam menilai hadis Nabi ﷺ, b
 ---
 ## Pendahuluan
 

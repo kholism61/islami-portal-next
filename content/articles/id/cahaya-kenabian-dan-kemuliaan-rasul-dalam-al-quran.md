@@ -1,17 +1,20 @@
 ---
-title: "Cahaya Kenabian dan Kemuliaan Rasul dalam Al-Qur’an"
-author: "Tim Kajian Syama'il"
-date: "5 Februari 2026"
-createdAt: "2026-02-05"
+title: Cahaya Kenabian dan Kemuliaan Rasul dalam Al-Qur’an
+author: Tim Kajian Syama'il
+date: 5 Februari 2026
+createdAt: '2026-02-05'
 popular: false
-category: "hadis"
-subcategory: "syama'il"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/nabawi.png"
-slug: "cahaya-kenabian-dan-kemuliaan-rasul-dalam-al-quran"
-excerpt: "Pendahuluan Al-Qur’an sebagai kitab suci umat Islam tidak hanya berisi hukum dan petunjuk kehidupan, tetapi juga menggambarkan secara jelas kemuliaan Nabi Muhammad ﷺ. Allah ﷻ sendir"
+category: hadis
+subcategory: syamail
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/nabawi.png
+slug: cahaya-kenabian-dan-kemuliaan-rasul-dalam-al-quran
+excerpt: >-
+  Pendahuluan Al-Qur’an sebagai kitab suci umat Islam tidak hanya berisi hukum
+  dan petunjuk kehidupan, tetapi juga menggambarkan secara jelas kemuliaan Nabi
+  Muhammad ﷺ. Allah ﷻ sendir
 ---
 ## Pendahuluan
 

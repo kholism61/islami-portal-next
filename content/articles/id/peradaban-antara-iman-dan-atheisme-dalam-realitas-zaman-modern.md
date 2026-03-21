@@ -1,17 +1,20 @@
 ---
-title: "Peradaban antara Iman dan Atheisme dalam Realitas Zaman Modern"
-author: "Tim Kajian Pemikiran"
-date: "12 Februari 2026"
-createdAt: "2026-02-12"
+title: Peradaban antara Iman dan Atheisme dalam Realitas Zaman Modern
+author: Tim Kajian Pemikiran
+date: 12 Februari 2026
+createdAt: '2026-02-12'
 popular: false
-category: "pemikiran"
-subcategory: "pemikiran-modern"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/pemikiran.png"
-slug: "peradaban-antara-iman-dan-atheisme-dalam-realitas-zaman-modern"
-excerpt: "Pendahuluan Tulisan ini menggambarkan kondisi peradaban modern yang didominasi oleh materialisme. Zaman yang dihadapi manusia saat ini digambarkan sebagai masa ketika materi mengua"
+category: pemikiran
+subcategory: pemikiran-modern
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/pemikiran.png
+slug: peradaban-antara-iman-dan-atheisme-dalam-realitas-zaman-modern
+excerpt: >-
+  Pendahuluan Tulisan ini menggambarkan kondisi peradaban modern yang didominasi
+  oleh materialisme. Zaman yang dihadapi manusia saat ini digambarkan sebagai
+  masa ketika materi mengua
 ---
 ## Pendahuluan
 

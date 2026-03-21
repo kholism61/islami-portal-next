@@ -1,17 +1,20 @@
-﻿---
-title: "Nisab and the Law of Zakat in Different Types of Wealth"
-author: "Fiqh Study Team"
-date: "21 February 2026"
-createdAt: "2026-02-21"
+---
+title: Nisab and the Law of Zakat in Different Types of Wealth
+author: Fiqh Study Team
+date: 21 February 2026
+createdAt: '2026-02-21'
 popular: false
-category: "Islamic Law"
-subcategory: "Fiqh"
-tag: "fiqhibadah"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/harta.png"
-slug: "nishab-dan-hukum-zakat-dalam-berbagai-jenis-harta"
-excerpt: "Explains the nisab and zakat rulings for gold, silver, crops, trade goods, mining output, and buried treasure, together with their proofs and major juristic details."
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: en
+lang: EN
+thumbnail: assets/images/harta.png
+slug: nishab-dan-hukum-zakat-dalam-berbagai-jenis-harta
+excerpt: >-
+  Explains the nisab and zakat rulings for gold, silver, crops, trade goods,
+  mining output, and buried treasure, together with their proofs and major
+  juristic details.
 ---
 ### Nisab of Gold and Silver
 

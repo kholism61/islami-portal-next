@@ -1,17 +1,19 @@
 ---
-title: "أحكام الصيام والتحذير من العمل الذي لا ثواب فيه"
-author: "Tim Kajian Fiqh"
-date: "7 فبراير 2026"
-createdAt: "2026-02-07"
+title: أحكام الصيام والتحذير من العمل الذي لا ثواب فيه
+author: Tim Kajian Fiqh
+date: 7 فبراير 2026
+createdAt: '2026-02-07'
 popular: false
-category: "الفقه الإسلامي"
-subcategory: "العبادات"
-tag: "fiqhibadah"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/fiqh.png"
-slug: "hukum-hukum-puasa-dan-peringatan-dari-amal-yang-sia-sia"
-excerpt: "يبيّن الأحكام الأساسية المتعلقة بالصيام، ويحذّر من أن الأجر الروحي للصيام قد يضيع إذا لم تُحفظ آدابه وحدوده."
+category: ilmusyariah
+subcategory: ''
+tag: fiqhibadah
+language: ar
+lang: AR
+thumbnail: assets/images/fiqh.png
+slug: hukum-hukum-puasa-dan-peringatan-dari-amal-yang-sia-sia
+excerpt: >-
+  يبيّن الأحكام الأساسية المتعلقة بالصيام، ويحذّر من أن الأجر الروحي للصيام قد
+  يضيع إذا لم تُحفظ آدابه وحدوده.
 ---
 ## المقدمة
 

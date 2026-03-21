@@ -1,17 +1,17 @@
 ---
-title: "الثقافة القرائية أساس نهضة الحضارة الإسلامية"
-author: "Tim Kajian Keilmuan"
-date: "2 فبراير 2026"
-createdAt: "2026-02-02"
+title: الثقافة القرائية أساس نهضة الحضارة الإسلامية
+author: Tim Kajian Keilmuan
+date: 2 فبراير 2026
+createdAt: '2026-02-02'
 popular: false
-category: "المعرفة"
-subcategory: "التراث العلمي"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/literasi.jpg"
-slug: "literasi-sebagai-fondasi-kebangkitan-peradaban-islam"
-excerpt: " منذ أن نزل الوحي الأول على النبي محمد صلى الله عليه وسلم، أصبحت القراءة الأساس الرئيس لنهضة الحضارة الإسلامية. فالأمر بـ اقرأ الوارد في القرآن الكريم يؤكد أن المعرفة هي الخطوة الأولى في طريق العلم والوعي."
+category: keilmuan
+subcategory: ''
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/literasi.jpg
+slug: literasi-sebagai-fondasi-kebangkitan-peradaban-islam
+excerpt: ' منذ أن نزل الوحي الأول على النبي محمد صلى الله عليه وسلم، أصبحت القراءة الأساس الرئيس لنهضة الحضارة الإسلامية. فالأمر بـ اقرأ الوارد في القرآن الكريم يؤكد أن المعرفة هي الخطوة الأولى في طريق العلم والوعي.'
 ---
 ## المقدمة
 

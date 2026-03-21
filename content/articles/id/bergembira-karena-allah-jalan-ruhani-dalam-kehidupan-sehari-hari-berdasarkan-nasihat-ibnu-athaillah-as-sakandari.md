@@ -1,17 +1,23 @@
 ---
-title: "Bergembira karena Allah: Jalan Ruhani dalam Kehidupan Sehari-hari, (Berdasarkan nasihat Ibnu ‘Athaillah as-Sakandari)"
-author: "Tim Kajian Tasawuf"
-date: "14 Februari 2026"
-createdAt: "2026-02-14"
+title: >-
+  Bergembira karena Allah: Jalan Ruhani dalam Kehidupan Sehari-hari,
+  (Berdasarkan nasihat Ibnu ‘Athaillah as-Sakandari)
+author: Tim Kajian Tasawuf
+date: 14 Februari 2026
+createdAt: '2026-02-14'
 popular: false
-category: "tasawuf"
-subcategory: "tasawuf-tarekat"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/tasawuf.png"
-slug: "bergembira-karena-allah-jalan-ruhani-dalam-kehidupan-sehari-hari-berdasarkan-nasihat-ibnu-athaillah-as-sakandari"
-excerpt: "Pendahuluan Surat dan nasihat Ibnu ‘Athaillah as-Sakandari kepada para sahabatnya berisi bimbingan ruhani yang menekankan hubungan hati seorang hamba dengan Tuhannya. Ia tidak memu"
+category: tasawuf
+subcategory: tasawuf-tarekat
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/tasawuf.png
+slug: >-
+  bergembira-karena-allah-jalan-ruhani-dalam-kehidupan-sehari-hari-berdasarkan-nasihat-ibnu-athaillah-as-sakandari
+excerpt: >-
+  Pendahuluan Surat dan nasihat Ibnu ‘Athaillah as-Sakandari kepada para
+  sahabatnya berisi bimbingan ruhani yang menekankan hubungan hati seorang hamba
+  dengan Tuhannya. Ia tidak memu
 ---
 ## Pendahuluan
 

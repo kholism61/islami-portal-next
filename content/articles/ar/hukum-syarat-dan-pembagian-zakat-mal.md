@@ -1,17 +1,19 @@
-﻿---
-title: "أحكام وشروط وتقسيم زكاة المال"
-author: "فريق دراسات الفقه"
-date: "12 فبراير 2026"
-createdAt: "2026-02-12"
+---
+title: أحكام وشروط وتقسيم زكاة المال
+author: فريق دراسات الفقه
+date: 12 فبراير 2026
+createdAt: '2026-02-12'
 popular: false
-category: "الفقه الإسلامي"
-subcategory: "الفقه"
-tag: "fiqhibadah"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/mal.png"
-slug: "hukum-syarat-dan-pembagian-zakat-mal"
-excerpt: "مقال يشرح معنى زكاة المال وأساس وجوبها وأنواع الأموال التي تجب فيها، مع بيان الشروط والتفصيلات الفقهية الرئيسة."
+category: ilmusyariah
+subcategory: ''
+tag: fiqhibadah
+language: ar
+lang: AR
+thumbnail: assets/images/mal.png
+slug: hukum-syarat-dan-pembagian-zakat-mal
+excerpt: >-
+  مقال يشرح معنى زكاة المال وأساس وجوبها وأنواع الأموال التي تجب فيها، مع بيان
+  الشروط والتفصيلات الفقهية الرئيسة.
 ---
 ## المقدمة
 

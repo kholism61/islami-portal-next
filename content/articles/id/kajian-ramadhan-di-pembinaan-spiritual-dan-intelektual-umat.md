@@ -1,17 +1,20 @@
 ---
-title: "Kajian Ramadhan di الجامع الأزهر: Pembinaan Spiritual dan Intelektual Umat"
-author: "Tim Kajian Ramadhan"
-date: "27 Februari 2026"
-createdAt: "2026-02-27"
+title: 'Kajian Ramadhan di الجامع الأزهر: Pembinaan Spiritual dan Intelektual Umat'
+author: Tim Kajian Ramadhan
+date: 27 Februari 2026
+createdAt: '2026-02-27'
 popular: false
-category: "ramadhan"
-subcategory: "tadabbur"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/kajian.png"
-slug: "kajian-ramadhan-di-pembinaan-spiritual-dan-intelektual-umat"
-excerpt: "Pendahuluan Dalam rangka menghidupkan suasana spiritual bulan suci Ramadhan,الجامع الأزهر menyelenggarakan berbagai kegiatan dakwah dan ilmiah di dalam lingkungan masjid bersejarah"
+category: ramadhan
+subcategory: tadabbur
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/kajian.png
+slug: kajian-ramadhan-di-pembinaan-spiritual-dan-intelektual-umat
+excerpt: >-
+  Pendahuluan Dalam rangka menghidupkan suasana spiritual bulan suci
+  Ramadhan,الجامع الأزهر menyelenggarakan berbagai kegiatan dakwah dan ilmiah di
+  dalam lingkungan masjid bersejarah
 ---
 ## Pendahuluan
 

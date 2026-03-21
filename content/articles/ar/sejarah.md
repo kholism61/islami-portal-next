@@ -1,17 +1,19 @@
-﻿---
-title: "تاريخ الجامع الأزهر"
-author: "Tim Kajian Ramadhan"
-date: "27 فبراير 2026"
-createdAt: "2026-02-27"
+---
+title: تاريخ الجامع الأزهر
+author: Tim Kajian Ramadhan
+date: 27 فبراير 2026
+createdAt: '2026-02-27'
 popular: false
-category: "رمضان"
-subcategory: "تاريخ الأزهر"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/syarif.png"
-slug: "sejarah"
-excerpt: "يستعرض التاريخ الطويل للجامع الأزهر بوصفه مسجدًا وجامعةً ومرجعًا علميًا ورمزًا للاعتدال والقيادة الوطنية والحضارية."
+category: ramadhan
+subcategory: sejarah-azhar
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/syarif.png
+slug: sejarah
+excerpt: >-
+  يستعرض التاريخ الطويل للجامع الأزهر بوصفه مسجدًا وجامعةً ومرجعًا علميًا ورمزًا
+  للاعتدال والقيادة الوطنية والحضارية.
 ---
 ## تاريخ الجامع الأزهر
 

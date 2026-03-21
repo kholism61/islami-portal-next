@@ -1,17 +1,19 @@
 ---
-title: "نور النبوة ومكانة الرسول في القرآن الكريم"
-author: "Tim Kajian Syama'il"
-date: "5 فبراير 2026"
-createdAt: "2026-02-05"
+title: نور النبوة ومكانة الرسول في القرآن الكريم
+author: Tim Kajian Syama'il
+date: 5 فبراير 2026
+createdAt: '2026-02-05'
 popular: false
-category: "الحديث"
-subcategory: "الشمائل"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/nabawi.png"
-slug: "cahaya-kenabian-dan-kemuliaan-rasul-dalam-al-quran"
-excerpt: "يستكشف تصوير القرآن الكريم للنبي محمد ﷺ بوصفه رحمةً، ونورًا، وهادياً، وأحبَّ الرسل إلى الله، الذي رفع الله درجته وعلَا ذكره."
+category: hadis
+subcategory: syamail
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/nabawi.png
+slug: cahaya-kenabian-dan-kemuliaan-rasul-dalam-al-quran
+excerpt: >-
+  يستكشف تصوير القرآن الكريم للنبي محمد ﷺ بوصفه رحمةً، ونورًا، وهادياً، وأحبَّ
+  الرسل إلى الله، الذي رفع الله درجته وعلَا ذكره.
 ---
 ## المقدمة
 

@@ -1,17 +1,20 @@
 ---
-title: "Waktu adalah Nikmat Terbesar dan Ibadah sebagai Pengatur Irama Kehidupan"
-author: "Tim Kajian Ramadhan"
-date: "21 Februari 2026"
-createdAt: "2026-02-21"
+title: Waktu adalah Nikmat Terbesar dan Ibadah sebagai Pengatur Irama Kehidupan
+author: Tim Kajian Ramadhan
+date: 21 Februari 2026
+createdAt: '2026-02-21'
 popular: false
-category: "ramadhan"
-subcategory: "catatan-ramadhan"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/waktu.png"
-slug: "waktu-adalah-nikmat-terbesar-dan-ibadah-sebagai-pengatur-irama-kehidupan"
-excerpt: "Catatan Ramadhan: Waktu adalah Nikmat Terbesar dan Ibadah sebagai Pengatur Irama Kehidupan Pada malam keempat bulan Ramadhan 1447 H, seusai salat tarawih, diselenggarakan Multaqa A"
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/waktu.png
+slug: waktu-adalah-nikmat-terbesar-dan-ibadah-sebagai-pengatur-irama-kehidupan
+excerpt: >-
+  Catatan Ramadhan: Waktu adalah Nikmat Terbesar dan Ibadah sebagai Pengatur
+  Irama Kehidupan Pada malam keempat bulan Ramadhan 1447 H, seusai salat
+  tarawih, diselenggarakan Multaqa A
 ---
 ### Catatan Ramadhan: Waktu adalah Nikmat Terbesar dan Ibadah sebagai Pengatur Irama Kehidupan
 

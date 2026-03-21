@@ -1,17 +1,19 @@
-﻿---
-title: "مذكرات رمضان: تحريم الاحتكار في منظور الشريعة"
-author: "Tim Kajian Ramadhan"
-date: "3 مارس 2026"
-createdAt: "2026-03-03"
+---
+title: 'مذكرات رمضان: تحريم الاحتكار في منظور الشريعة'
+author: Tim Kajian Ramadhan
+date: 3 مارس 2026
+createdAt: '2026-03-03'
 popular: false
-category: "رمضان"
-subcategory: "مذكرات رمضان"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/penimbunan.png"
-slug: "catatan-ramadhan-larangan-ihtikar-penimbunan-barang-dalam-perspektif-syariah"
-excerpt: "يوضح لماذا حرمت الشريعة الاحتكار، وكيف يضر بالمجتمع، ولماذا تعد العدالة في التجارة جزءًا من العبادة والأخلاق في رمضان."
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/penimbunan.png
+slug: catatan-ramadhan-larangan-ihtikar-penimbunan-barang-dalam-perspektif-syariah
+excerpt: >-
+  يوضح لماذا حرمت الشريعة الاحتكار، وكيف يضر بالمجتمع، ولماذا تعد العدالة في
+  التجارة جزءًا من العبادة والأخلاق في رمضان.
 ---
 ## مقدمة
 

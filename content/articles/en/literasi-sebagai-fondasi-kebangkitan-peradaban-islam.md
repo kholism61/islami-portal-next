@@ -1,17 +1,20 @@
 ---
-title: "Literacy as the Foundation of the Revival of Islamic Civilization"
-author: "Tim Kajian Keilmuan"
-date: "2 February 2026"
-createdAt: "2026-02-02"
+title: Literacy as the Foundation of the Revival of Islamic Civilization
+author: Tim Kajian Keilmuan
+date: 2 February 2026
+createdAt: '2026-02-02'
 popular: false
-category: "knowledge"
-subcategory: "scholarly-tradition"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/literasi.jpg"
-slug: "literasi-sebagai-fondasi-kebangkitan-peradaban-islam"
-excerpt: "Explains that reading and writing have been central to Islamic civilization from the first revelation onward and remain the basis for intellectual, moral, and civilizational renewal."
+category: keilmuan
+subcategory: scholarly-tradition
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/literasi.jpg
+slug: literasi-sebagai-fondasi-kebangkitan-peradaban-islam
+excerpt: >-
+  Explains that reading and writing have been central to Islamic civilization
+  from the first revelation onward and remain the basis for intellectual, moral,
+  and civilizational renewal.
 ---
 ## Introduction
 

@@ -1,17 +1,19 @@
-﻿---
-title: "الحضارة بين الإيمان والإلحاد في واقع العصر الحديث"
-author: "فريق دراسات الفكر"
-date: "12 فبراير 2026"
-createdAt: "2026-02-12"
+---
+title: الحضارة بين الإيمان والإلحاد في واقع العصر الحديث
+author: فريق دراسات الفكر
+date: 12 فبراير 2026
+createdAt: '2026-02-12'
 popular: false
-category: "الفكر"
-subcategory: "الفكر الحديث"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/pemikiran.png"
-slug: "peradaban-antara-iman-dan-atheisme-dalam-realitas-zaman-modern"
-excerpt: "تأمل في الحضارة الحديثة تحت هيمنة المادية، وضعف سلطة الدين، ودور الإسلام في استعادة التوازن الروحي، وتحديات الدعوة في العصر العلماني."
+category: pemikiran
+subcategory: ''
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/pemikiran.png
+slug: peradaban-antara-iman-dan-atheisme-dalam-realitas-zaman-modern
+excerpt: >-
+  تأمل في الحضارة الحديثة تحت هيمنة المادية، وضعف سلطة الدين، ودور الإسلام في
+  استعادة التوازن الروحي، وتحديات الدعوة في العصر العلماني.
 ---
 
 ## المقدمة

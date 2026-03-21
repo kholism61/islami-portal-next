@@ -1,17 +1,19 @@
-﻿---
-title: "الصيام في الشريعة الإسلامية: الوجوب والفضائل والآداب"
-author: "فريق دراسات الفقه"
-date: "13 فبراير 2026"
-createdAt: "2026-02-13"
+---
+title: 'الصيام في الشريعة الإسلامية: الوجوب والفضائل والآداب'
+author: فريق دراسات الفقه
+date: 13 فبراير 2026
+createdAt: '2026-02-13'
 popular: false
-category: "الفقه الإسلامي"
-subcategory: "الفقه"
-tag: "fiqhibadah"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/puasa.png"
-slug: "puasa-kewajiban-keutamaan-dan-adab-dalam-syariat-islam"
-excerpt: "خلاصة في وجوب الصيام وفضائله وآدابه التي تكمل أثره التعبدي والتربوي في حياة المسلم."
+category: ilmusyariah
+subcategory: ''
+tag: fiqhibadah
+language: ar
+lang: AR
+thumbnail: assets/images/puasa.png
+slug: puasa-kewajiban-keutamaan-dan-adab-dalam-syariat-islam
+excerpt: >-
+  خلاصة في وجوب الصيام وفضائله وآدابه التي تكمل أثره التعبدي والتربوي في حياة
+  المسلم.
 ---
 ## المقدمة
 

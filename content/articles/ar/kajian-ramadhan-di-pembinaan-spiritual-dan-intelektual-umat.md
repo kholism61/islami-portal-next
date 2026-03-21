@@ -1,17 +1,19 @@
-﻿---
-title: "دروس رمضان في الجامع الأزهر: بناء روحي وفكري للأمة"
-author: "Tim Kajian Ramadhan"
-date: "27 فبراير 2026"
-createdAt: "2026-02-27"
+---
+title: 'دروس رمضان في الجامع الأزهر: بناء روحي وفكري للأمة'
+author: Tim Kajian Ramadhan
+date: 27 فبراير 2026
+createdAt: '2026-02-27'
 popular: false
-category: "رمضان"
-subcategory: "تدبر"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/kajian.png"
-slug: "kajian-ramadhan-di-pembinaan-spiritual-dan-intelektual-umat"
-excerpt: "يصور دروس رمضان في الجامع الأزهر مدرسةً لبناء النزاهة والتواضع والتوكل، وتجديد الوعي العلمي والروحي في الأمة."
+category: ramadhan
+subcategory: ''
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/kajian.png
+slug: kajian-ramadhan-di-pembinaan-spiritual-dan-intelektual-umat
+excerpt: >-
+  يصور دروس رمضان في الجامع الأزهر مدرسةً لبناء النزاهة والتواضع والتوكل، وتجديد
+  الوعي العلمي والروحي في الأمة.
 ---
 ## مقدمة
 

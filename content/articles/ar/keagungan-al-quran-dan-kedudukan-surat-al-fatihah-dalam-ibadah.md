@@ -1,17 +1,19 @@
-﻿---
-title: "عظمة القرآن ومكانة سورة الفاتحة في العبادة"
-author: "فريق دراسات التفسير"
-date: "11 فبراير 2026"
-createdAt: "2026-02-11"
+---
+title: عظمة القرآن ومكانة سورة الفاتحة في العبادة
+author: فريق دراسات التفسير
+date: 11 فبراير 2026
+createdAt: '2026-02-11'
 popular: false
-category: "القرآن"
-subcategory: "التفسير"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/quran.png"
-slug: "keagungan-al-quran-dan-kedudukan-surat-al-fatihah-dalam-ibadah"
-excerpt: "مقال يبين عظمة القرآن الكريم، وفضل سورة الفاتحة، وأحكام قراءتها في الصلاة، ومعنى الاستعاذة قبل التلاوة."
+category: quran
+subcategory: quran-tafsir-surah
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/quran.png
+slug: keagungan-al-quran-dan-kedudukan-surat-al-fatihah-dalam-ibadah
+excerpt: >-
+  مقال يبين عظمة القرآن الكريم، وفضل سورة الفاتحة، وأحكام قراءتها في الصلاة،
+  ومعنى الاستعاذة قبل التلاوة.
 ---
 ## المقدمة
 

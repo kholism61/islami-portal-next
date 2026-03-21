@@ -1,17 +1,20 @@
-﻿---
-title: "Civilisation Between Faith and Atheism in the Reality of the Modern Age"
-author: "Thought Study Team"
-date: "12 February 2026"
-createdAt: "2026-02-12"
+---
+title: Civilisation Between Faith and Atheism in the Reality of the Modern Age
+author: Thought Study Team
+date: 12 February 2026
+createdAt: '2026-02-12'
 popular: false
-category: "Thought"
-subcategory: "Modern Thought"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/pemikiran.png"
-slug: "peradaban-antara-iman-dan-atheisme-dalam-realitas-zaman-modern"
-excerpt: "Reflects on modern civilisation under materialism, the weakening of religion, the role of Islam in restoring spiritual balance, and the challenge of da'wah in a secular age."
+category: pemikiran
+subcategory: modern-thought
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/pemikiran.png
+slug: peradaban-antara-iman-dan-atheisme-dalam-realitas-zaman-modern
+excerpt: >-
+  Reflects on modern civilisation under materialism, the weakening of religion,
+  the role of Islam in restoring spiritual balance, and the challenge of da'wah
+  in a secular age.
 ---
 ## Introduction
 

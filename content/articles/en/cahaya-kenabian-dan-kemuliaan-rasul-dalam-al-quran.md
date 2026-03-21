@@ -1,17 +1,20 @@
 ---
-title: "The Light of Prophethood and the Nobility of the Messenger in the Qur'an"
-author: "Tim Kajian Syama'il"
-date: "5 February 2026"
-createdAt: "2026-02-05"
+title: The Light of Prophethood and the Nobility of the Messenger in the Qur'an
+author: Tim Kajian Syama'il
+date: 5 February 2026
+createdAt: '2026-02-05'
 popular: false
-category: "hadith"
-subcategory: "shama'il"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/nabawi.png"
-slug: "cahaya-kenabian-dan-kemuliaan-rasul-dalam-al-quran"
-excerpt: "Explores the Qur'anic portrayal of the Prophet Muhammad ? as mercy, light, guide, and the most beloved messenger whose rank and mention were raised by Allah."
+category: hadis
+subcategory: syamail
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/nabawi.png
+slug: cahaya-kenabian-dan-kemuliaan-rasul-dalam-al-quran
+excerpt: >-
+  Explores the Qur'anic portrayal of the Prophet Muhammad ? as mercy, light,
+  guide, and the most beloved messenger whose rank and mention were raised by
+  Allah.
 ---
 ## Introduction
 

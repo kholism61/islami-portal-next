@@ -1,17 +1,19 @@
-﻿---
-title: "الإسلام والدولة: بين الشريعة والدستور"
-author: "هيئة التحرير السياسية"
-date: "15 يناير 2026"
-createdAt: "2026-01-15"
+---
+title: 'الإسلام والدولة: بين الشريعة والدستور'
+author: هيئة التحرير السياسية
+date: 15 يناير 2026
+createdAt: '2026-01-15'
 popular: true
-category: "السياسة"
-subcategory: "الفكر السياسي الإسلامي"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/politik.jpg"
-slug: "islam-dan-negara-antara-syariah-dan-konstitusi"
-excerpt: "مقال يشرح علاقة الإسلام والشريعة والنظام الدستوري في الدولة الحديثة من خلال التراث الكلاسيكي وفقه المقاصد وآراء المفكرين المعاصرين."
+category: politik
+subcategory: ''
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/politik.jpg
+slug: islam-dan-negara-antara-syariah-dan-konstitusi
+excerpt: >-
+  مقال يشرح علاقة الإسلام والشريعة والنظام الدستوري في الدولة الحديثة من خلال
+  التراث الكلاسيكي وفقه المقاصد وآراء المفكرين المعاصرين.
 ---
 ## المقدمة
 

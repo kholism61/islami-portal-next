@@ -1,17 +1,20 @@
 ---
-title: "Ketentuan dan Hikmah Zakat Fitrah dalam Syariat Islam"
-author: "Tim Kajian Fiqh"
-date: "27 Februari 2026"
-createdAt: "2026-02-27"
+title: Ketentuan dan Hikmah Zakat Fitrah dalam Syariat Islam
+author: Tim Kajian Fiqh
+date: 27 Februari 2026
+createdAt: '2026-02-27'
 popular: false
-category: "Ilmu Syariah"
-subcategory: "fiqh"
-tag: "fiqhibadah"
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/fitrah.png"
-slug: "ketentuan-dan-hikmah-zakat-fitrah-dalam-syariat-islam"
-excerpt: "Pendahuluan Zakat fitrah merupakan salah satu kewajiban agung dalam syariat Islam yang memiliki kedudukan khusus karena berkaitan langsung dengan penutup ibadah puasa Ramadhan. Ia"
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: id
+lang: ID
+thumbnail: assets/images/fitrah.png
+slug: ketentuan-dan-hikmah-zakat-fitrah-dalam-syariat-islam
+excerpt: >-
+  Pendahuluan Zakat fitrah merupakan salah satu kewajiban agung dalam syariat
+  Islam yang memiliki kedudukan khusus karena berkaitan langsung dengan penutup
+  ibadah puasa Ramadhan. Ia
 ---
 ## Pendahuluan
 

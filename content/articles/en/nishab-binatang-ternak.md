@@ -1,17 +1,20 @@
-﻿---
-title: "The Nisab of Livestock"
-author: "Fiqh Study Team"
-date: "21 February 2026"
-createdAt: "2026-02-21"
+---
+title: The Nisab of Livestock
+author: Fiqh Study Team
+date: 21 February 2026
+createdAt: '2026-02-21'
 popular: false
-category: "Islamic Law"
-subcategory: "Fiqh"
-tag: "fiqhibadah"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/ternak.png"
-slug: "nishab-binatang-ternak"
-excerpt: "Explains the zakat thresholds for camels, cattle, and sheep or goats, including shared ownership and the main technical terms used in classical fiqh."
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: en
+lang: EN
+thumbnail: assets/images/ternak.png
+slug: nishab-binatang-ternak
+excerpt: >-
+  Explains the zakat thresholds for camels, cattle, and sheep or goats,
+  including shared ownership and the main technical terms used in classical
+  fiqh.
 ---
 ## Introduction
 

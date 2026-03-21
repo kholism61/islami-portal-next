@@ -1,17 +1,19 @@
-﻿---
-title: "Honoring One's Parents, a Path to Paradise and a Source of Blessing"
-author: "Tim Kajian Ramadhan"
-date: "22 Maret 2026"
-createdAt: "2026-02-22"
+---
+title: 'Honoring One''s Parents, a Path to Paradise and a Source of Blessing'
+author: Tim Kajian Ramadhan
+date: 22 Maret 2026
+createdAt: '2026-02-22'
 popular: false
-category: "Ramadan"
-subcategory: "ramadan-notes"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/ortu.png"
-slug: "berbakti-kepada-orang-tua-jalan-menuju-surga-dan-sumber-keberkahan"
-excerpt: "Reflects on honoring parents as one of the greatest obligations in Islam and a source of blessing, answered prayer, and entrance into Paradise."
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/ortu.png
+slug: berbakti-kepada-orang-tua-jalan-menuju-surga-dan-sumber-keberkahan
+excerpt: >-
+  Reflects on honoring parents as one of the greatest obligations in Islam and a
+  source of blessing, answered prayer, and entrance into Paradise.
 ---
 ### Ramadan Notes: Honoring One's Parents, a Path to Paradise and a Source of Blessing
 

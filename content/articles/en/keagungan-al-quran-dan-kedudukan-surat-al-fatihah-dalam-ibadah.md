@@ -1,17 +1,20 @@
-﻿---
-title: "The Greatness of the Qur'an and the Place of Surat al-Fatihah in Worship"
-author: "Tafsir Study Team"
-date: "11 February 2026"
-createdAt: "2026-02-11"
+---
+title: The Greatness of the Qur'an and the Place of Surat al-Fatihah in Worship
+author: Tafsir Study Team
+date: 11 February 2026
+createdAt: '2026-02-11'
 popular: false
-category: "Qur'an"
-subcategory: "Tafsir"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/quran.png"
-slug: "keagungan-al-quran-dan-kedudukan-surat-al-fatihah-dalam-ibadah"
-excerpt: "Explains the greatness of the Qur'an, the special rank of Surat al-Fatihah, the rulings on reciting it in prayer, and the meaning of isti'adhah before recitation."
+category: quran
+subcategory: quran-tafsir-surah
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/quran.png
+slug: keagungan-al-quran-dan-kedudukan-surat-al-fatihah-dalam-ibadah
+excerpt: >-
+  Explains the greatness of the Qur'an, the special rank of Surat al-Fatihah,
+  the rulings on reciting it in prayer, and the meaning of isti'adhah before
+  recitation.
 ---
 
 ## Introduction

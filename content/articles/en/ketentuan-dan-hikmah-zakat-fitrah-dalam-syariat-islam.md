@@ -1,17 +1,19 @@
-﻿---
-title: "The Rulings and Wisdom of Zakat al-Fitr in Islamic Law"
-author: "Tim Kajian Fiqh"
-date: "27 February 2026"
-createdAt: "2026-02-27"
+---
+title: The Rulings and Wisdom of Zakat al-Fitr in Islamic Law
+author: Tim Kajian Fiqh
+date: 27 February 2026
+createdAt: '2026-02-27'
 popular: false
-category: "Islamic Law"
-subcategory: "fiqh"
-tag: "fiqhibadah"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/fitrah.png"
-slug: "ketentuan-dan-hikmah-zakat-fitrah-dalam-syariat-islam"
-excerpt: "Summarizes the legal rulings, conditions, recipients, and spiritual wisdom of zakat al-fitr together with a brief note on voluntary charity in Islamic law."
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: en
+lang: EN
+thumbnail: assets/images/fitrah.png
+slug: ketentuan-dan-hikmah-zakat-fitrah-dalam-syariat-islam
+excerpt: >-
+  Summarizes the legal rulings, conditions, recipients, and spiritual wisdom of
+  zakat al-fitr together with a brief note on voluntary charity in Islamic law.
 ---
 ## Introduction
 

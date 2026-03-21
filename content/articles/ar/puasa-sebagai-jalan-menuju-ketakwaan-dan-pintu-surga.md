@@ -1,17 +1,19 @@
-﻿---
-title: "الصيام طريق إلى التقوى وباب إلى الجنة"
-author: "Tim Kajian Ramadhan"
-date: "5 مارس 2026"
-createdAt: "2026-03-05"
+---
+title: الصيام طريق إلى التقوى وباب إلى الجنة
+author: Tim Kajian Ramadhan
+date: 5 مارس 2026
+createdAt: '2026-03-05'
 popular: false
-category: "رمضان"
-subcategory: "تدبر"
-tag: ""
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/sujud.webp"
-slug: "puasa-sebagai-jalan-menuju-ketakwaan-dan-pintu-surga"
-excerpt: "يبين أن الصيام تربية على التقوى، وسبب لرحمة الله، ومدخل إلى الجنة، وأن رمضان شهر الدعاء والخير وتجديد الصلة بالله."
+category: ramadhan
+subcategory: ''
+tag: ''
+language: ar
+lang: AR
+thumbnail: assets/images/sujud.webp
+slug: puasa-sebagai-jalan-menuju-ketakwaan-dan-pintu-surga
+excerpt: >-
+  يبين أن الصيام تربية على التقوى، وسبب لرحمة الله، ومدخل إلى الجنة، وأن رمضان
+  شهر الدعاء والخير وتجديد الصلة بالله.
 ---
 ## مقدمة
 

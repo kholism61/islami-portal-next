@@ -1,17 +1,19 @@
-﻿---
-title: "أحكام زكاة الفطر وحكمتها في الشريعة الإسلامية"
-author: "Tim Kajian Fiqh"
-date: "27 فبراير 2026"
-createdAt: "2026-02-27"
+---
+title: أحكام زكاة الفطر وحكمتها في الشريعة الإسلامية
+author: Tim Kajian Fiqh
+date: 27 فبراير 2026
+createdAt: '2026-02-27'
 popular: false
-category: "العلوم الشرعية"
-subcategory: "الفقه"
-tag: "fiqhibadah"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/fitrah.png"
-slug: "ketentuan-dan-hikmah-zakat-fitrah-dalam-syariat-islam"
-excerpt: "يلخص أحكام زكاة الفطر وشروطها ومصارفها وحكمتها الروحية والاجتماعية، مع إشارة موجزة إلى الصدقة التطوعية في الفقه الإسلامي."
+category: ilmusyariah
+subcategory: ''
+tag: fiqhibadah
+language: ar
+lang: AR
+thumbnail: assets/images/fitrah.png
+slug: ketentuan-dan-hikmah-zakat-fitrah-dalam-syariat-islam
+excerpt: >-
+  يلخص أحكام زكاة الفطر وشروطها ومصارفها وحكمتها الروحية والاجتماعية، مع إشارة
+  موجزة إلى الصدقة التطوعية في الفقه الإسلامي.
 ---
 ## المقدمة
 

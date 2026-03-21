@@ -1,17 +1,20 @@
 ---
-title: "Nishab dan Hukum Zakat dalam Berbagai Jenis Harta"
-author: "Tim Kajian Fiqh"
-date: "21 Februari 2026"
-createdAt: "2026-02-21"
+title: Nishab dan Hukum Zakat dalam Berbagai Jenis Harta
+author: Tim Kajian Fiqh
+date: 21 Februari 2026
+createdAt: '2026-02-21'
 popular: false
-category: "Ilmu Syariah"
-subcategory: "fiqh"
-tag: "fiqhibadah"
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/harta.png"
-slug: "nishab-dan-hukum-zakat-dalam-berbagai-jenis-harta"
-excerpt: "Nishab Emas dan Perak Awal nishab emas adalah sebagaimana perkataan para ulama: وَأَوَّلُ نِصَابِ الذَّهَبِ عِشْرُوْنَ مِثْقَالًا وَفِيهِ رُبُعُ الْعُشْرِ وَهُوَ نِصْفُ مِثْقَالِ و"
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: id
+lang: ID
+thumbnail: assets/images/harta.png
+slug: nishab-dan-hukum-zakat-dalam-berbagai-jenis-harta
+excerpt: >-
+  Nishab Emas dan Perak Awal nishab emas adalah sebagaimana perkataan para
+  ulama: وَأَوَّلُ نِصَابِ الذَّهَبِ عِشْرُوْنَ مِثْقَالًا وَفِيهِ رُبُعُ
+  الْعُشْرِ وَهُوَ نِصْفُ مِثْقَالِ و
 ---
 ### Nishab Emas dan Perak
 

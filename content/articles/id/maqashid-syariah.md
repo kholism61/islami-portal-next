@@ -1,17 +1,20 @@
 ---
-title: "Konsep Maqashid Syariah dalam Kehidupan Modern"
-author: "Redaksi Maqasid"
-date: "20 Januari 2026"
-createdAt: "2026-01-20"
+title: Konsep Maqashid Syariah dalam Kehidupan Modern
+author: Redaksi Maqasid
+date: 20 Januari 2026
+createdAt: '2026-01-20'
 popular: false
-category: "Ilmu Syariah"
-subcategory: "Ushul Fiqh"
-tag: "Maqashid Syariah"
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/maqasid.jpg"
-slug: "maqashid-syariah"
-excerpt: "Pendahuluan Syariat Islam diturunkan oleh Allah SWT bukan sekadar kumpulan perintah dan larangan yang kaku, melainkan sebuah sistem ilahi yang penuh hikmah, tujuan, dan maslahat ba"
+category: ilmusyariah
+subcategory: ushulfiqh
+tag: maqashidsyariah
+language: id
+lang: ID
+thumbnail: assets/images/maqasid.jpg
+slug: maqashid-syariah
+excerpt: >-
+  Pendahuluan Syariat Islam diturunkan oleh Allah SWT bukan sekadar kumpulan
+  perintah dan larangan yang kaku, melainkan sebuah sistem ilahi yang penuh
+  hikmah, tujuan, dan maslahat ba
 ---
 ## Pendahuluan
 

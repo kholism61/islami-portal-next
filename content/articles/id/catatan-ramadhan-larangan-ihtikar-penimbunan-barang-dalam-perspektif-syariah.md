@@ -1,17 +1,22 @@
 ---
-title: "Catatan Ramadhan: Larangan Ihtikar (Penimbunan Barang) dalam Perspektif Syariah"
-author: "Tim Kajian Ramadhan"
-date: "3 Maret 2026"
-createdAt: "2026-03-03"
+title: >-
+  Catatan Ramadhan: Larangan Ihtikar (Penimbunan Barang) dalam Perspektif
+  Syariah
+author: Tim Kajian Ramadhan
+date: 3 Maret 2026
+createdAt: '2026-03-03'
 popular: false
-category: "ramadhan"
-subcategory: "catatan-ramadhan"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/penimbunan.png"
-slug: "catatan-ramadhan-larangan-ihtikar-penimbunan-barang-dalam-perspektif-syariah"
-excerpt: "Pendahuluan Bulan Ramadhan tidak hanya menjadi waktu bagi umat Islam untuk meningkatkan kualitas ibadah spiritual, tetapi juga menjadi momentum penting untuk memperbaiki perilaku s"
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/penimbunan.png
+slug: catatan-ramadhan-larangan-ihtikar-penimbunan-barang-dalam-perspektif-syariah
+excerpt: >-
+  Pendahuluan Bulan Ramadhan tidak hanya menjadi waktu bagi umat Islam untuk
+  meningkatkan kualitas ibadah spiritual, tetapi juga menjadi momentum penting
+  untuk memperbaiki perilaku s
 ---
 ## Pendahuluan
 

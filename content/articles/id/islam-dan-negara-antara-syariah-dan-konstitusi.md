@@ -1,17 +1,20 @@
 ---
-title: "Islam dan Negara: Antara Syariah dan Konstitusi"
-author: "Redaksi Politik"
-date: "15 Januari 2026"
-createdAt: "2026-01-15"
+title: 'Islam dan Negara: Antara Syariah dan Konstitusi'
+author: Redaksi Politik
+date: 15 Januari 2026
+createdAt: '2026-01-15'
 popular: true
-category: "Politik"
-subcategory: "Politik Islam"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/politik.jpg"
-slug: "islam-dan-negara-antara-syariah-dan-konstitusi"
-excerpt: "Pendahuluan Relasi antara Islam dan negara merupakan salah satu isu paling penting dan sensitif dalam pemikiran Islam modern. Di satu sisi, Islam diyakini sebagai agama yang membaw"
+category: politik
+subcategory: politik-islam
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/politik.jpg
+slug: islam-dan-negara-antara-syariah-dan-konstitusi
+excerpt: >-
+  Pendahuluan Relasi antara Islam dan negara merupakan salah satu isu paling
+  penting dan sensitif dalam pemikiran Islam modern. Di satu sisi, Islam
+  diyakini sebagai agama yang membaw
 ---
 ## Pendahuluan
 

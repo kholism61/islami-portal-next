@@ -1,17 +1,20 @@
 ---
-title: "Pilar-Pilar Persaudaraan Universal dalam Islam"
-author: "Tim Kajian Pemikiran"
-date: "06 Maret 2026"
-createdAt: "2026-03-06"
+title: Pilar-Pilar Persaudaraan Universal dalam Islam
+author: Tim Kajian Pemikiran
+date: 06 Maret 2026
+createdAt: '2026-03-06'
 popular: true
-category: "pemikiran"
-subcategory: "pemikiran-modern"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/hugo.webp"
-slug: "pilar-pilar-persaudaraan-universal-dalam-islam"
-excerpt: "Pendahuluan Sejak awal kemunculannya, Islam membawa sebuah visi besar mengenai kesatuan umat manusia. Ajaran ini tidak hanya berbicara tentang hubungan manusia dengan Tuhan, tetapi"
+category: pemikiran
+subcategory: pemikiran-modern
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/hugo.webp
+slug: pilar-pilar-persaudaraan-universal-dalam-islam
+excerpt: >-
+  Pendahuluan Sejak awal kemunculannya, Islam membawa sebuah visi besar mengenai
+  kesatuan umat manusia. Ajaran ini tidak hanya berbicara tentang hubungan
+  manusia dengan Tuhan, tetapi
 ---
 ## Pendahuluan
 

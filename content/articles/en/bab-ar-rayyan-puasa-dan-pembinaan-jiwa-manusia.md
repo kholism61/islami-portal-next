@@ -1,17 +1,20 @@
-﻿---
-title: "Bab ar-Rayyan: Fasting and the Cultivation of the Human Soul"
-author: "Tim Kajian Ramadhan"
-date: "19 February 2026"
-createdAt: "2026-02-19"
+---
+title: 'Bab ar-Rayyan: Fasting and the Cultivation of the Human Soul'
+author: Tim Kajian Ramadhan
+date: 19 February 2026
+createdAt: '2026-02-19'
 popular: false
-category: "Ramadan"
-subcategory: "ramadan-notes"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/ramadhan.png"
-slug: "bab-ar-rayyan-puasa-dan-pembinaan-jiwa-manusia"
-excerpt: "Explains how fasting trains taqwa, awakens conscience, strengthens self-control, and turns Ramadan into a true season of moral and spiritual reform."
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/ramadhan.png
+slug: bab-ar-rayyan-puasa-dan-pembinaan-jiwa-manusia
+excerpt: >-
+  Explains how fasting trains taqwa, awakens conscience, strengthens
+  self-control, and turns Ramadan into a true season of moral and spiritual
+  reform.
 ---
 ### Fasting and the Cultivation of the Human Soul
 

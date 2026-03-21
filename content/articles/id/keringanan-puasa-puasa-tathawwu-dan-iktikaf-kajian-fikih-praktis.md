@@ -1,17 +1,20 @@
 ---
-title: "Keringanan Puasa, Puasa Tathawwu‘, dan Iktikaf: Kajian Fikih Praktis"
-author: "Tim Kajian Fiqh"
-date: "12 Februari 2026"
-createdAt: "2026-02-12"
+title: 'Keringanan Puasa, Puasa Tathawwu‘, dan Iktikaf: Kajian Fikih Praktis'
+author: Tim Kajian Fiqh
+date: 12 Februari 2026
+createdAt: '2026-02-12'
 popular: false
-category: "Ilmu Syariah"
-subcategory: "fiqh"
-tag: "fiqhibadah"
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/iktikaf.png"
-slug: "keringanan-puasa-puasa-tathawwu-dan-iktikaf-kajian-fikih-praktis"
-excerpt: "Puasa bagi Musafir dan Orang Sakit وَ الْمَرِيضُ وَ الْمُسَافِرُ سَفَرًا طَوِيلًا يُفْطِرَانِ وَيَقْضِيَانِ “Orang sakit dan musafir dengan safar yang panjang, keduanya berbuka dan"
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: id
+lang: ID
+thumbnail: assets/images/iktikaf.png
+slug: keringanan-puasa-puasa-tathawwu-dan-iktikaf-kajian-fikih-praktis
+excerpt: >-
+  Puasa bagi Musafir dan Orang Sakit وَ الْمَرِيضُ وَ الْمُسَافِرُ سَفَرًا
+  طَوِيلًا يُفْطِرَانِ وَيَقْضِيَانِ “Orang sakit dan musafir dengan safar yang
+  panjang, keduanya berbuka dan
 ---
 ## Puasa bagi Musafir dan Orang Sakit
 

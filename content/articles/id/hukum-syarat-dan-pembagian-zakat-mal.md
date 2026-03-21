@@ -1,17 +1,20 @@
 ---
-title: "Hukum, Syarat, dan Pembagian Zakat Mal"
-author: "Tim Kajian Fiqh"
-date: "12 Februari 2026"
-createdAt: "2026-02-12"
+title: 'Hukum, Syarat, dan Pembagian Zakat Mal'
+author: Tim Kajian Fiqh
+date: 12 Februari 2026
+createdAt: '2026-02-12'
 popular: false
-category: "Ilmu Syariah"
-subcategory: "fiqh"
-tag: "fiqhibadah"
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/mal.png"
-slug: "hukum-syarat-dan-pembagian-zakat-mal"
-excerpt: "Pendahuluan Zakat merupakan salah satu rukun Islam yang memiliki kedudukan sangat penting dalam syariat. Ia bukan hanya ibadah yang berkaitan dengan harta, tetapi juga sarana penyu"
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: id
+lang: ID
+thumbnail: assets/images/mal.png
+slug: hukum-syarat-dan-pembagian-zakat-mal
+excerpt: >-
+  Pendahuluan Zakat merupakan salah satu rukun Islam yang memiliki kedudukan
+  sangat penting dalam syariat. Ia bukan hanya ibadah yang berkaitan dengan
+  harta, tetapi juga sarana penyu
 ---
 ## Pendahuluan
 

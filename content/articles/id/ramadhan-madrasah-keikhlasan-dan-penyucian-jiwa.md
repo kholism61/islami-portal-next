@@ -1,17 +1,20 @@
 ---
-title: "🌙 Ramadhan: Madrasah Keikhlasan dan Penyucian Jiwa"
-author: "Tim Kajian Ramadhan"
-date: "19 Februari 2026"
-createdAt: "2026-02-19"
+title: "\U0001F319 Ramadhan: Madrasah Keikhlasan dan Penyucian Jiwa"
+author: Tim Kajian Ramadhan
+date: 19 Februari 2026
+createdAt: '2026-02-19'
 popular: false
-category: "ramadhan"
-subcategory: "catatan-ramadhan"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/azhar.png"
-slug: "ramadhan-madrasah-keikhlasan-dan-penyucian-jiwa"
-excerpt: "Madrasah Keikhlasan dan Penyucian Jiwa Ramadhan bukan sekadar bulan menahan lapar dan dahaga, tetapi sebuah madrasah keimanan. Di dalamnya, seorang muslim dididik untuk mencapai ma"
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/azhar.png
+slug: ramadhan-madrasah-keikhlasan-dan-penyucian-jiwa
+excerpt: >-
+  Madrasah Keikhlasan dan Penyucian Jiwa Ramadhan bukan sekadar bulan menahan
+  lapar dan dahaga, tetapi sebuah madrasah keimanan. Di dalamnya, seorang muslim
+  dididik untuk mencapai ma
 ---
 ### Madrasah Keikhlasan dan Penyucian Jiwa
 

@@ -1,17 +1,20 @@
 ---
-title: "Literasi sebagai Fondasi Kebangkitan Peradaban Islam"
-author: "Tim Kajian Keilmuan"
-date: "2 Februari 2026"
-createdAt: "2026-02-02"
+title: Literasi sebagai Fondasi Kebangkitan Peradaban Islam
+author: Tim Kajian Keilmuan
+date: 2 Februari 2026
+createdAt: '2026-02-02'
 popular: false
-category: "keilmuan"
-subcategory: "tradisi-keilmuan"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/literasi.jpg"
-slug: "literasi-sebagai-fondasi-kebangkitan-peradaban-islam"
-excerpt: "Pendahuluan Sejak wahyu pertama turun kepada Nabi Muhammad SAW, membaca menjadi fondasi utama kebangkitan peradaban Islam. Perintah \"Iqra\" yang termaktub dalam Al-Qur’an menekankan"
+category: keilmuan
+subcategory: tradisi-keilmuan
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/literasi.jpg
+slug: literasi-sebagai-fondasi-kebangkitan-peradaban-islam
+excerpt: >-
+  Pendahuluan Sejak wahyu pertama turun kepada Nabi Muhammad SAW, membaca
+  menjadi fondasi utama kebangkitan peradaban Islam. Perintah "Iqra" yang
+  termaktub dalam Al-Qur’an menekankan
 ---
 ## Pendahuluan
 

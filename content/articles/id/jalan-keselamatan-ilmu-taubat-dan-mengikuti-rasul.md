@@ -1,17 +1,20 @@
 ---
-title: "Jalan Keselamatan: Ilmu, Taubat, dan Mengikuti Rasul"
-author: "Tim Kajian Tasawuf"
-date: "10 Februari 2026"
-createdAt: "2026-02-10"
+title: 'Jalan Keselamatan: Ilmu, Taubat, dan Mengikuti Rasul'
+author: Tim Kajian Tasawuf
+date: 10 Februari 2026
+createdAt: '2026-02-10'
 popular: true
-category: "tasawuf"
-subcategory: "tasawuf-akhlak"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/sufi.png"
-slug: "jalan-keselamatan-ilmu-taubat-dan-mengikuti-rasul"
-excerpt: "Pendahuluan Perjalanan seorang hamba menuju keselamatan di dunia dan akhirat bukanlah jalan yang lurus tanpa rintangan. Ia merupakan perjalanan panjang yang penuh ujian, godaan, da"
+category: tasawuf
+subcategory: tasawuf-akhlak
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/sufi.png
+slug: jalan-keselamatan-ilmu-taubat-dan-mengikuti-rasul
+excerpt: >-
+  Pendahuluan Perjalanan seorang hamba menuju keselamatan di dunia dan akhirat
+  bukanlah jalan yang lurus tanpa rintangan. Ia merupakan perjalanan panjang
+  yang penuh ujian, godaan, da
 ---
 ## Pendahuluan
 

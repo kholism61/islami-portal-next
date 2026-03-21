@@ -1,17 +1,19 @@
-﻿---
-title: "نصاب بهيمة الأنعام"
-author: "فريق دراسات الفقه"
-date: "21 فبراير 2026"
-createdAt: "2026-02-21"
+---
+title: نصاب بهيمة الأنعام
+author: فريق دراسات الفقه
+date: 21 فبراير 2026
+createdAt: '2026-02-21'
 popular: false
-category: "الفقه الإسلامي"
-subcategory: "الفقه"
-tag: "fiqhibadah"
-language: "ar"
-lang: "AR"
-thumbnail: "assets/images/ternak.png"
-slug: "nishab-binatang-ternak"
-excerpt: "شرح لأنصبة زكاة الإبل والبقر والغنم، مع بيان أحكام الخلطة وأهم المصطلحات العمرية المستعملة في كتب الفقه."
+category: ilmusyariah
+subcategory: ''
+tag: fiqhibadah
+language: ar
+lang: AR
+thumbnail: assets/images/ternak.png
+slug: nishab-binatang-ternak
+excerpt: >-
+  شرح لأنصبة زكاة الإبل والبقر والغنم، مع بيان أحكام الخلطة وأهم المصطلحات
+  العمرية المستعملة في كتب الفقه.
 ---
 
 ## المقدمة

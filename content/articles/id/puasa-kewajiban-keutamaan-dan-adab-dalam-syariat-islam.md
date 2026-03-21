@@ -1,17 +1,20 @@
 ---
-title: "Puasa: Kewajiban, Keutamaan, dan Adab dalam Syariat Islam"
-author: "Tim Kajian ibadah"
-date: "9 Februari 2026"
-createdAt: "2026-02-09"
+title: 'Puasa: Kewajiban, Keutamaan, dan Adab dalam Syariat Islam'
+author: Tim Kajian ibadah
+date: 9 Februari 2026
+createdAt: '2026-02-09'
 popular: false
-category: "ibadah"
-subcategory: "ibadah-puasa"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/puasa.png"
-slug: "puasa-kewajiban-keutamaan-dan-adab-dalam-syariat-islam"
-excerpt: "Pendahuluan Puasa merupakan salah satu rukun Islam yang memiliki kedudukan sangat agung dalam syariat. Ibadah ini bukan sekadar menahan lapar dan dahaga, tetapi merupakan sarana pe"
+category: ibadah
+subcategory: ibadah-puasa
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/puasa.png
+slug: puasa-kewajiban-keutamaan-dan-adab-dalam-syariat-islam
+excerpt: >-
+  Pendahuluan Puasa merupakan salah satu rukun Islam yang memiliki kedudukan
+  sangat agung dalam syariat. Ibadah ini bukan sekadar menahan lapar dan dahaga,
+  tetapi merupakan sarana pe
 ---
 ## Pendahuluan
 

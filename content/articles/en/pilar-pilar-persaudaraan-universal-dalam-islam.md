@@ -1,17 +1,20 @@
-﻿---
-title: "The Pillars of Universal Brotherhood in Islam"
-author: "Thought Study Team"
-date: "13 February 2026"
-createdAt: "2026-02-13"
+---
+title: The Pillars of Universal Brotherhood in Islam
+author: Thought Study Team
+date: 13 February 2026
+createdAt: '2026-02-13'
 popular: true
-category: "Thought"
-subcategory: "Islamic Social Thought"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/hugo.webp"
-slug: "pilar-pilar-persaudaraan-universal-dalam-islam"
-excerpt: "Explains human equality, universal brotherhood, social justice, and Islam’s critique of inequality and religious misuse in the historical experience of Muslim civilisation."
+category: pemikiran
+subcategory: islamic-social-thought
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/hugo.webp
+slug: pilar-pilar-persaudaraan-universal-dalam-islam
+excerpt: >-
+  Explains human equality, universal brotherhood, social justice, and Islam’s
+  critique of inequality and religious misuse in the historical experience of
+  Muslim civilisation.
 ---
 ## Introduction
 

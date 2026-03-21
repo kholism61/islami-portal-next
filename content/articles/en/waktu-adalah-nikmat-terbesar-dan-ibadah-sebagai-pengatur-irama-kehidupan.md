@@ -1,17 +1,19 @@
-﻿---
-title: "Time Is the Greatest Blessing and Worship Orders the Rhythm of Life"
-author: "Tim Kajian Ramadhan"
-date: "21 February 2026"
-createdAt: "2026-02-21"
+---
+title: Time Is the Greatest Blessing and Worship Orders the Rhythm of Life
+author: Tim Kajian Ramadhan
+date: 21 February 2026
+createdAt: '2026-02-21'
 popular: false
-category: "Ramadan"
-subcategory: "ramadan-notes"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/waktu.png"
-slug: "waktu-adalah-nikmat-terbesar-dan-ibadah-sebagai-pengatur-irama-kehidupan"
-excerpt: "Reflects on time as one of the greatest blessings in Islam and explains how prayer and fasting teach Muslims to live by a disciplined rhythm of worship."
+category: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/waktu.png
+slug: waktu-adalah-nikmat-terbesar-dan-ibadah-sebagai-pengatur-irama-kehidupan
+excerpt: >-
+  Reflects on time as one of the greatest blessings in Islam and explains how
+  prayer and fasting teach Muslims to live by a disciplined rhythm of worship.
 ---
 ### Ramadan Notes: Time Is the Greatest Blessing and Worship Orders the Rhythm of Life
 

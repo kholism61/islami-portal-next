@@ -42,7 +42,7 @@ export default function HomePageClient() {
 
   return (
     <>
-      <link rel="stylesheet" href="/css/style.css?v=20260320b" />
+      <link rel="stylesheet" href="/css/style.css?v=20260321a" />
 
       <div className="home-page">
         <section className="quick-menu">

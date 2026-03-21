@@ -1,17 +1,20 @@
 ---
-title: "Keagungan Al-Qur’an dan Kedudukan Surat al-Fatihah dalam Ibadah"
-author: "Tim Kajian Tafsir"
-date: "11 Februari 2026"
-createdAt: "2026-02-11"
+title: Keagungan Al-Qur’an dan Kedudukan Surat al-Fatihah dalam Ibadah
+author: Tim Kajian Tafsir
+date: 11 Februari 2026
+createdAt: '2026-02-11'
 popular: false
-category: "quran"
-subcategory: "quran-tafsir-ayat"
-tag: ""
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/quran.png"
-slug: "keagungan-al-quran-dan-kedudukan-surat-al-fatihah-dalam-ibadah"
-excerpt: "Pendahuluan Al-Qur’an adalah kitab suci yang menjadi sumber utama ajaran Islam, pedoman hidup bagi manusia, serta petunjuk menuju kebahagiaan dunia dan akhirat. Sejak diturunkan ke"
+category: quran
+subcategory: quran-tafsir-ayat
+tag: ''
+language: id
+lang: ID
+thumbnail: assets/images/quran.png
+slug: keagungan-al-quran-dan-kedudukan-surat-al-fatihah-dalam-ibadah
+excerpt: >-
+  Pendahuluan Al-Qur’an adalah kitab suci yang menjadi sumber utama ajaran
+  Islam, pedoman hidup bagi manusia, serta petunjuk menuju kebahagiaan dunia dan
+  akhirat. Sejak diturunkan ke
 ---
 ## Pendahuluan
 

@@ -1,17 +1,20 @@
 ---
-title: "Nishab Binatang Ternak"
-author: "Tim Kajian Fiqh"
-date: "20 Februari 2026"
-createdAt: "2026-02-20"
+title: Nishab Binatang Ternak
+author: Tim Kajian Fiqh
+date: 20 Februari 2026
+createdAt: '2026-02-20'
 popular: false
-category: "Ilmu Syariah"
-subcategory: "fiqh"
-tag: "fiqhibadah"
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/ternak.png"
-slug: "nishab-binatang-ternak"
-excerpt: "Pendahuluan Zakat binatang ternak merupakan bagian dari zakat mal yang telah ditetapkan secara rinci dalam syariat Islam. Pembahasannya termasuk di antara bab yang paling detail da"
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: id
+lang: ID
+thumbnail: assets/images/ternak.png
+slug: nishab-binatang-ternak
+excerpt: >-
+  Pendahuluan Zakat binatang ternak merupakan bagian dari zakat mal yang telah
+  ditetapkan secara rinci dalam syariat Islam. Pembahasannya termasuk di antara
+  bab yang paling detail da
 ---
 ## Pendahuluan
 

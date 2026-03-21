@@ -685,6 +685,18 @@ function normalizeSlugKey(value = "") {
     .replace(/^\-+|\-+$/g, "");
 }
 
+function isKnownCategoryKey(value = "") {
+  const token = normalizeSlugKey(value);
+  if (!token) return false;
+  return Boolean(categoryMeta && Object.prototype.hasOwnProperty.call(categoryMeta, token));
+}
+
+function resolveCategoryKey(value = "") {
+  const token = normalizeSlugKey(value);
+  if (token && isKnownCategoryKey(token)) return token;
+  return getCanonicalCategoryKey(value) || token || null;
+}
+
 function getCanonicalCategoryKey(category = "") {
   const token = normalizeCategoryLabel(category);
   if (!token) return null;
@@ -735,15 +747,20 @@ function getStableArticleMeta(id, rawArticle = null, viewArticle = null) {
   const subcategorySource = baseArticle?.subkategori || rawArticle?.subkategori || viewArticle?.subkategori || "";
   const tagSource = baseArticle?.tag || rawArticle?.tag || viewArticle?.tag || "";
 
-  const categoryKey = getCanonicalCategoryKey(categorySource)
-    || normalizeSlugKey(categorySource)
+  const categoryKey = resolveCategoryKey(categorySource)
     || normalizeCategoryLabel(categorySource);
+
+  const subcategoryKeyDirect = normalizeSlugKey(subcategorySource);
+  const subcategoryKey = subcategoryKeyDirect
+    || getCanonicalSubcategoryKey(categoryKey, subcategorySource)
+    || null;
+
+  const tagKey = normalizeSlugKey(tagSource);
 
   return {
     categoryKey,
-    subcategoryKey: getCanonicalSubcategoryKey(categoryKey, subcategorySource)
-      || normalizeSlugKey(subcategorySource),
-    tagKey: normalizeSlugKey(tagSource),
+    subcategoryKey,
+    tagKey,
     rawCategory: categorySource,
     rawSubcategory: subcategorySource,
     rawTag: tagSource,
@@ -751,8 +768,10 @@ function getStableArticleMeta(id, rawArticle = null, viewArticle = null) {
 }
 
 function getLocalizedCategory(category, lang = getSiteLang()) {
-  const key = getCanonicalCategoryKey(category);
-  if (key) return categoryMeta[key].labels[lang] || categoryMeta[key].labels.id;
+  const key = resolveCategoryKey(category);
+  if (key && categoryMeta[key]?.labels) {
+    return categoryMeta[key].labels[lang] || categoryMeta[key].labels.id;
+  }
   return repairMojibakeString(String(category || "")).trim() || category || "";
 }
 
@@ -1776,8 +1795,10 @@ function applyArticleFilter(filter, triggerElement = null) {
 document.querySelectorAll(".sidebar-toggle").forEach(btn => {
   btn.addEventListener("click", () => {
     const parent = btn.closest(".has-children");
-    const label = btn.querySelector(".text")?.textContent?.trim() || "";
-    const filterKey = getCanonicalCategoryKey(label) || normalize(label);
+    const filterKey = btn.querySelector(".badge")?.dataset?.count
+      || btn.dataset?.filter
+      || parent?.querySelector(":scope > .sidebar-link")?.dataset?.filter
+      || null;
 
     document.querySelectorAll(".has-children").forEach(item => {
       if (item !== parent) item.classList.remove("active");

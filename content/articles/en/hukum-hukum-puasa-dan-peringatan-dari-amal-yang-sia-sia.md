@@ -1,17 +1,19 @@
 ---
-title: "The Rulings of Fasting and a Warning Against Deeds That Lose Their Reward"
-author: "Tim Kajian Fiqh"
-date: "7 February 2026"
-createdAt: "2026-02-07"
+title: The Rulings of Fasting and a Warning Against Deeds That Lose Their Reward
+author: Tim Kajian Fiqh
+date: 7 February 2026
+createdAt: '2026-02-07'
 popular: false
-category: "Islamic Law"
-subcategory: "fiqh"
-tag: "fiqhibadah"
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/fiqh.png"
-slug: "hukum-hukum-puasa-dan-peringatan-dari-amal-yang-sia-sia"
-excerpt: "Explains major rulings related to fasting and warns that the spiritual reward of fasting can be lost when its manners and limits are not preserved."
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: en
+lang: EN
+thumbnail: assets/images/fiqh.png
+slug: hukum-hukum-puasa-dan-peringatan-dari-amal-yang-sia-sia
+excerpt: >-
+  Explains major rulings related to fasting and warns that the spiritual reward
+  of fasting can be lost when its manners and limits are not preserved.
 ---
 ## Introduction
 

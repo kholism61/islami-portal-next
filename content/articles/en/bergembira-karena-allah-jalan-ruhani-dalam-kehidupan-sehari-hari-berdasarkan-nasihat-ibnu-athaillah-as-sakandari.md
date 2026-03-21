@@ -1,17 +1,21 @@
-﻿---
-title: "Rejoicing in Allah: A Spiritual Path in Daily Life"
-author: "Tasawuf Study Team"
-date: "14 February 2026"
-createdAt: "2026-02-14"
+---
+title: 'Rejoicing in Allah: A Spiritual Path in Daily Life'
+author: Tasawuf Study Team
+date: 14 February 2026
+createdAt: '2026-02-14'
 popular: false
-category: "Tasawuf"
-subcategory: "Tasawuf and Tarekat"
-tag: ""
-language: "en"
-lang: "EN"
-thumbnail: "assets/images/tasawuf.png"
-slug: "bergembira-karena-allah-jalan-ruhani-dalam-kehidupan-sehari-hari-berdasarkan-nasihat-ibnu-athaillah-as-sakandari"
-excerpt: "Presents Ibn 'Ata'illah al-Sakandari's spiritual counsel on finding joy in Allah alone, understanding divine gifts, and freeing the heart from dependence on created things."
+category: tasawuf
+subcategory: tasawuf-and-tarekat
+tag: ''
+language: en
+lang: EN
+thumbnail: assets/images/tasawuf.png
+slug: >-
+  bergembira-karena-allah-jalan-ruhani-dalam-kehidupan-sehari-hari-berdasarkan-nasihat-ibnu-athaillah-as-sakandari
+excerpt: >-
+  Presents Ibn 'Ata'illah al-Sakandari's spiritual counsel on finding joy in
+  Allah alone, understanding divine gifts, and freeing the heart from dependence
+  on created things.
 ---
 ## Introduction
 

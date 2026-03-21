@@ -1,17 +1,20 @@
 ---
-title: "Hukum-hukum Puasa dan Peringatan dari Amal yang Sia-sia"
-author: "Tim Kajian Fiqh"
-date: "7 Februari 2026"
-createdAt: "2026-02-07"
+title: Hukum-hukum Puasa dan Peringatan dari Amal yang Sia-sia
+author: Tim Kajian Fiqh
+date: 7 Februari 2026
+createdAt: '2026-02-07'
 popular: false
-category: "Ilmu Syariah"
-subcategory: "fiqh"
-tag: "fiqhibadah"
-language: "id"
-lang: "ID"
-thumbnail: "assets/images/fiqh.png"
-slug: "hukum-hukum-puasa-dan-peringatan-dari-amal-yang-sia-sia"
-excerpt: "Pendahuluan Puasa merupakan salah satu ibadah yang memiliki kedudukan agung dalam Islam. Ia bukan sekadar menahan diri dari makan dan minum, tetapi juga latihan spiritual yang menu"
+category: ilmusyariah
+subcategory: fiqh
+tag: fiqhibadah
+language: id
+lang: ID
+thumbnail: assets/images/fiqh.png
+slug: hukum-hukum-puasa-dan-peringatan-dari-amal-yang-sia-sia
+excerpt: >-
+  Pendahuluan Puasa merupakan salah satu ibadah yang memiliki kedudukan agung
+  dalam Islam. Ia bukan sekadar menahan diri dari makan dan minum, tetapi juga
+  latihan spiritual yang menu
 ---
 ## Pendahuluan
 
