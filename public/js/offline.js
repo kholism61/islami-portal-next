@@ -1,6 +1,21 @@
 const SITE_LANGS = ["id", "en", "ar"];
 const articleStoreCache = new Map();
-const LEGACY_ARTICLE_STORE = window.__PORTAL_ARTICLE_STORE__ || {};
+
+function getLegacyArticleStore() {
+  const store = window.__PORTAL_ARTICLE_STORE__;
+  return store && typeof store === "object" ? store : {};
+}
+
+function safeJsonParse(storageKey, fallbackValue) {
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (!raw) return fallbackValue;
+    const parsed = JSON.parse(raw);
+    return parsed ?? fallbackValue;
+  } catch {
+    return fallbackValue;
+  }
+}
 
 const offlineUiText = {
   id: {
@@ -183,15 +198,14 @@ function loadStoreForLang(lang = "id") {
     return articleStoreCache.get(safeLang);
   }
 
-  const store = LEGACY_ARTICLE_STORE[safeLang];
+  const store = getLegacyArticleStore()?.[safeLang];
   if (store && typeof store === "object") {
     articleStoreCache.set(safeLang, store);
     return store;
   }
 
-  const emptyStore = {};
-  articleStoreCache.set(safeLang, emptyStore);
-  return emptyStore;
+  // Do not cache empty results. Article store might load after this script.
+  return {};
 }
 
 function getDownloadStore() {
@@ -227,10 +241,10 @@ if (!container || !sortSelect) {
   // not on offline page
 } else {
   let activeFilter = "all";
-  let offlineData = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+  let offlineData = safeJsonParse("offlineArticles", {});
 
   function getProgressData() {
-    return JSON.parse(localStorage.getItem("readingProgress")) || {};
+    return safeJsonParse("readingProgress", {});
   }
 
   function updateOfflineStats() {
@@ -311,7 +325,7 @@ if (!container || !sortSelect) {
         </div>
         <p class="offline-progress-text">${t("progress_text", { percent: progress })}</p>
         <div class="offline-actions">
-          <a href="article?id=${id}&slug=${slugify(displayArticle.judul || article.judul || id)}" class="btn-premium">${t("read_article")}</a>
+          <a href="/article?id=${id}&slug=${slugify(displayArticle.judul || article.judul || id)}" class="btn-premium">${t("read_article")}</a>
           <button class="delete-btn" data-id="${id}">${t("delete_btn")}</button>
         </div>
       `;
@@ -424,15 +438,15 @@ if (!container || !sortSelect) {
 
   downloadAllBtn?.addEventListener("click", () => {
     const store = getDownloadStore();
-    const ids = Object.keys(store);
+    const ids = Object.keys(store || {});
 
-    if (ids.length === 0) {
+    if (!ids.length) {
       window.alert(t("download_none"));
       return;
     }
 
     localStorage.setItem("offlineArticles", JSON.stringify(store));
-    offlineData = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    offlineData = safeJsonParse("offlineArticles", {});
     renderOfflineList(searchInput?.value || "");
     window.alert(t("download_done", { count: ids.length }));
   });
@@ -443,18 +457,18 @@ if (!container || !sortSelect) {
       event.key === "offlineArticles" ||
       event.key === "siteLang"
     ) {
-      offlineData = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+      offlineData = safeJsonParse("offlineArticles", {});
       rerenderAll();
     }
   });
 
   window.addEventListener("reading-progress-updated", () => {
-    offlineData = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    offlineData = safeJsonParse("offlineArticles", {});
     rerenderAll();
   });
 
   window.addEventListener("focus", () => {
-    offlineData = JSON.parse(localStorage.getItem("offlineArticles")) || {};
+    offlineData = safeJsonParse("offlineArticles", {});
     renderOfflineList(searchInput?.value || "");
   });
 
