@@ -4293,6 +4293,13 @@ onDomReady(() => {
 
 window.addEventListener("focus", refreshHomeWidgets);
 
+window.addEventListener("reading-progress-updated", () => {
+  if (!isHomePage) return;
+  try {
+    refreshHomeWidgets();
+  } catch {}
+});
+
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     refreshHomeWidgets();
