@@ -189,6 +189,15 @@ body::before {
   font-family: "Playfair Display", serif;
 }
 
+.hero .hero-title {
+  background: linear-gradient(90deg, #e2e8f0 0%, #93c5fd 40%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: 0 10px 30px rgba(2, 6, 23, 0.35);
+}
+
 .hero p {
   font-size: 18px;
   line-height: 1.7;

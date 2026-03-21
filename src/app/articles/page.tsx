@@ -368,11 +368,11 @@ export default function ArticlePage() {
 
       <div id="toast" className="toast"></div>
 
-      <Script src="/js/article-store.js?v=20260317b" strategy="afterInteractive" />
-      <Script src="/js/bookmark.js?v=20260317b" strategy="afterInteractive" type="module" />
-      <Script src="/js/article.js?v=20260317b" strategy="afterInteractive" type="module" />
+      <Script src="/js/article-store.js?v=20260321a" strategy="afterInteractive" />
+      <Script src="/js/bookmark.js?v=20260321a" strategy="afterInteractive" type="module" />
+      <Script src="/js/article.js?v=20260321a" strategy="afterInteractive" type="module" />
       <Script src="/js/music.js" strategy="afterInteractive" type="module" />
-      <Script src="/js/i18n.js?v=20260316a" strategy="afterInteractive" />
+      <Script src="/js/i18n.js?v=20260321a" strategy="afterInteractive" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
       <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>

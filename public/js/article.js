@@ -1222,32 +1222,40 @@ function renderRelatedArticles(articleId, articleKeys, currentRaw, currentView) 
   relatedContainer.innerHTML = "";
   relatedSection.style.display = "block";
 
-  const currentCategory = normalize(currentRaw?.kategori || currentView?.kategori || "");
-  const currentSubcategory = normalize(currentRaw?.subkategori || currentView?.subkategori || "");
+  const currentStableMeta = getStableArticleMeta(articleId, currentRaw, currentView);
+  const currentCategoryKey = currentStableMeta?.categoryKey || "";
+
+  if (!currentCategoryKey) {
+    relatedSection.style.display = "none";
+    return;
+  }
 
   let relatedKeys = articleKeys
     .filter((key) => key !== articleId)
       .filter((key) => {
-      const item = strictOnly ? getStrictLocalizedArticle(key) : (getStrictLocalizedArticle(key) || getArticleView(key));
-      if (!item) return false;
+      const rawItem = getArticleRawById(key) || null;
+      const viewItem = (strictOnly ? getStrictLocalizedArticle(key) : null)
+        || getArticleView(key)
+        || rawItem;
 
-      const itemCategory = normalize(item.kategori || "");
-      const itemSubcategory = normalize(item.subkategori || "");
+      if (!rawItem && !viewItem) return false;
 
-      return (
-        (currentSubcategory && itemSubcategory === currentSubcategory) ||
-        (currentCategory && itemCategory === currentCategory)
-      );
+      const stableMeta = getStableArticleMeta(key, rawItem, viewItem);
+      return stableMeta?.categoryKey === currentCategoryKey;
     })
     .slice(0, 3);
 
   if (relatedKeys.length === 0) {
-    relatedKeys = articleKeys.filter((key) => key !== articleId).slice(0, 3);
+    relatedSection.style.display = "none";
+    return;
   }
 
   const cards = relatedKeys
     .map((key) => {
-      const item = strictOnly ? getStrictLocalizedArticle(key) : (getStrictLocalizedArticle(key) || getArticleView(key));
+      const rawItem = getArticleRawById(key) || null;
+      const item = (strictOnly ? getStrictLocalizedArticle(key) : null)
+        || getArticleView(key)
+        || rawItem;
       if (!item) return "";
 
       return `
@@ -4247,23 +4255,16 @@ function initHomeWidgetsWithRetry(attemptsLeft = 80) {
     return;
   }
 
+  // Reading widgets should render even if store isn't ready (use localStorage first).
+  refreshHomeWidgets();
+
+  // Refresh store in background to improve titles/categories.
   const storeReady = !!(articleStore && typeof articleStore === "object" && Object.keys(articleStore).length > 0);
   if (!storeReady) {
-    refreshArticleStore();
+    try {
+      refreshArticleStore();
+    } catch {}
   }
-
-  const storeNowReady = !!(articleStore && typeof articleStore === "object" && Object.keys(articleStore).length > 0);
-  if (!storeNowReady) {
-    if ((attemptsLeft || 0) <= 0) {
-      // Still render what we can
-      refreshHomeQuickWidgets();
-      return;
-    }
-    window.setTimeout(() => initHomeWidgetsWithRetry((attemptsLeft || 0) - 1), 60);
-    return;
-  }
-
-  refreshHomeWidgets();
 }
 
 onDomReady(() => {

@@ -223,9 +223,9 @@ export default function BookmarkPage() {
         src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
         strategy="afterInteractive"
       />
-      <Script src="/js/article-store.js?v=20260317b" strategy="afterInteractive" />
-      <Script src="/js/article.js?v=20260317b" strategy="afterInteractive" type="module" />
-      <Script src="/js/bookmark.js?v=20260317b" strategy="afterInteractive" type="module" />
+      <Script src="/js/article-store.js?v=20260321a" strategy="afterInteractive" />
+      <Script src="/js/article.js?v=20260321a" strategy="afterInteractive" type="module" />
+      <Script src="/js/bookmark.js?v=20260321a" strategy="afterInteractive" type="module" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
       <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>

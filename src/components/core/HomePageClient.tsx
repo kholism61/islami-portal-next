@@ -1561,11 +1561,11 @@ export default function HomePageClient() {
         `}
       </Script>
 
-      <Script src="/js/article-store.js?v=20260317h" strategy="afterInteractive" />
-      <Script src="/js/article.js?v=20260320c" strategy="afterInteractive" type="module" />
-      <Script src="/js/bookmark.js?v=20260317e" strategy="afterInteractive" type="module" />
-      <Script src="/js/prayer.js?v=20260317e" strategy="afterInteractive" type="module" />
-      <Script src="/js/i18n.js?v=20260320c" strategy="afterInteractive" />
+      <Script src="/js/article-store.js?v=20260321a" strategy="afterInteractive" />
+      <Script src="/js/article.js?v=20260321a" strategy="afterInteractive" type="module" />
+      <Script src="/js/bookmark.js?v=20260321a" strategy="afterInteractive" type="module" />
+      <Script src="/js/prayer.js?v=20260321a" strategy="afterInteractive" type="module" />
+      <Script src="/js/i18n.js?v=20260321a" strategy="afterInteractive" />
 
     </>
   );
