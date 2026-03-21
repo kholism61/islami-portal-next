@@ -1281,7 +1281,7 @@ export default function HomePageClient() {
               target="_blank"
               rel="noreferrer"
             >
-              <span className="social-glyph" aria-hidden="true">WA</span>
+              <i className="fa-brands fa-whatsapp" aria-hidden="true"></i>
             </a>
             <a
               href="https://instagram.com/nurcholism51"
@@ -1289,7 +1289,7 @@ export default function HomePageClient() {
               target="_blank"
               rel="noreferrer"
             >
-              <span className="social-glyph" aria-hidden="true">IG</span>
+              <i className="fa-brands fa-instagram" aria-hidden="true"></i>
             </a>
             <a
               href="https://www.threads.net/@nurcholism51"
@@ -1297,10 +1297,10 @@ export default function HomePageClient() {
               target="_blank"
               rel="noreferrer"
             >
-              <span className="social-glyph" aria-hidden="true">TH</span>
+              <i className="fa-brands fa-threads" aria-hidden="true"></i>
             </a>
             <a href="mailto:nurcholism51@gmail.com" aria-label="Email">
-              <span className="social-glyph" aria-hidden="true">ML</span>
+              <i className="fa-regular fa-envelope" aria-hidden="true"></i>
             </a>
           </div>
         </section>
@@ -1335,7 +1335,7 @@ export default function HomePageClient() {
             className="floating-btn wa-btn"
             aria-label="Chat via WhatsApp"
           >
-            <span className="social-glyph" aria-hidden="true">WA</span>
+            <i className="fa-brands fa-whatsapp" aria-hidden="true"></i>
           </a>
         </div>
 
