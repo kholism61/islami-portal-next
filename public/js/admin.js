@@ -349,18 +349,18 @@ function renderStats() {
 
   if (totalUsersEl) totalUsersEl.textContent = String(transaksi);
 
-  if (totalZakatEl)
+  if (totalZakatEl) {
     totalZakatEl.textContent = adminCurrency(total);
+  }
 }
 
 /* =========================
    GRAFIK BULANAN
 ========================= */
 function drawMonthlyChart() {
-  const ctxCandidates = document.querySelectorAll("#monthlyChart");
-  const ctx = ctxCandidates && ctxCandidates.length
-    ? ctxCandidates[ctxCandidates.length - 1]
-    : document.getElementById("monthlyChart");
+  const ctx =
+    document.getElementById("monthlyChartTop") ||
+    document.getElementById("monthlyChart");
   if (!ctx) return;
   if (typeof window.Chart !== "function") return;
 

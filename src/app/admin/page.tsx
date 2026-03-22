@@ -74,17 +74,19 @@ export default function AdminPage() {
       </div>
 
       <h2>Riwayat Zakat</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nama</th>
-            <th>Jenis</th>
-            <th>Jumlah</th>
-            <th>Tanggal</th>
-          </tr>
-        </thead>
-        <tbody id="zakat-table"></tbody>
-      </table>
+      <div className="admin-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Jenis</th>
+              <th>Jumlah</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tbody id="zakat-table"></tbody>
+        </table>
+      </div>
 
       <div className="admin-chart">
         <h3>Grafik Zakat Bulanan</h3>
@@ -125,7 +127,6 @@ export default function AdminPage() {
         </div>
 
         <div className="admin-charts">
-          <canvas id="monthlyChart" height={120}></canvas>
           <canvas id="yearlyChart" height={120}></canvas>
         </div>
       </section>
