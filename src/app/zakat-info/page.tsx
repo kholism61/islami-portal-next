@@ -17,7 +17,7 @@ export default function ZakatInfoPage() {
         <div className="nav-container">
           <div className="logo">
             <span className="logo-glass">
-              <img src="/favicon.ico" alt="" className="logo-icon" width={16} height={16} />
+              <img src="/favicon.ico" alt="" className="logo-icon" width={12} height={12} />
             </span>
             <span className="logo-text">Portal Literasi Islam</span>
           </div>
