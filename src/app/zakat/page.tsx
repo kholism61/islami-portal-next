@@ -9,18 +9,27 @@ export default function ZakatPage() {
     <>
       <link rel="canonical" href="https://islami-portal-next.vercel.app/zakat" />
       <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      <link rel="stylesheet" href="/css/zakat.css?v=20260318a" />
+      <link rel="stylesheet" href="/css/zakat.css?v=20260323" />
 
       <nav className="main-navbar">
         <div className="nav-container">
           <div className="logo">
-            📚 <span>Portal Literasi Islam</span>
+            <span className="logo-glass">
+              <img src="/favicon.ico" alt="" className="logo-icon" width={18} height={18} />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
           </div>
 
           <div className="nav-links">
             <Link href="/">Beranda</Link>
             <Link href="/ramadhan">Ramadhan</Link>
             <Link href="/bookmark">Bookmark</Link>
+          </div>
+
+          <div className="lang-switch" aria-label="Bahasa">
+            <button type="button" data-lang="id">ID</button>
+            <button type="button" data-lang="en">EN</button>
+            <button type="button" data-lang="ar">AR</button>
           </div>
 
           <button id="themeToggle" className="theme-btn">

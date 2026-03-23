@@ -163,6 +163,30 @@ main {
   cursor: pointer;
 }
 
+.main-navbar .lang-switch {
+  display: flex;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 6px 8px;
+}
+.main-navbar .lang-switch button {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.main-navbar .lang-switch button:hover,
+.main-navbar .lang-switch button.active {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 @media (max-width: 768px) {
   .nav-container {
     flex-direction: column;
@@ -774,17 +798,60 @@ body.dark .zakat-history {
   transform: translateY(-2px);
 }
 
+.main-navbar .logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+/* Sama ukuran home: nav-logo-badge 34px, nav-logo-img 18px */
+.main-navbar .logo .logo-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-shrink: 0;
+}
+
+.main-navbar .logo .logo-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  object-fit: contain;
+}
+
+/* zakat-info: sedikit lebih kecil */
+.page-zakat-info .main-navbar .logo .logo-glass {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.page-zakat-info .main-navbar .logo .logo-icon {
+  width: 16px;
+  height: 16px;
+}
+
 .logo {
   display: flex;
-  flex-direction: column;   /* ubah ke vertikal */
-  align-items: center;      /* rata tengah */
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   gap: 6px;
   color: white;
   font-weight: bold;
 }
 
-.logo img {
+.logo img:not(.logo-icon) {
   width: 230px;
   height: auto;
   display: block;
@@ -1033,46 +1100,101 @@ body.dark footer {
   color: #94a3b8;
 }
 
-/* AUTO RTL SAAT GOOGLE SET ARAB */
-html[lang="ar"] body,
+/* =========================
+   ARABIC/RTL - Zakat mulai dari kanan
+========================= */
 html[dir="rtl"] body,
+html.rtl-ui body,
 body.rtl-ui {
   direction: rtl;
   text-align: right;
 }
 
-html[lang="ar"] .hero,
-html[lang="ar"] .navbar,
-html[lang="ar"] .quick-menu,
-html[lang="ar"] .article-content,
-html[dir="rtl"] .navbar,
-body.rtl-ui .navbar {
+html[dir="rtl"] .main-navbar,
+html.rtl-ui .main-navbar,
+body.rtl-ui .main-navbar {
+  direction: rtl;
   text-align: right;
 }
 
-/* Arabic: nav mulai dari kanan (desktop) - Zakat */
+html[dir="rtl"] .zakat-hero,
+html[dir="rtl"] .zakat-stats,
+html[dir="rtl"] .zakat-info-cards,
+html[dir="rtl"] .zakat-box,
+html[dir="rtl"] .zakat-result,
+html[dir="rtl"] .zakat-cta,
+html[dir="rtl"] .site-footer,
+html[dir="rtl"] .table-wrapper,
+html[dir="rtl"] .zakat-table,
+html[dir="rtl"] .fiqh-container,
+html[dir="rtl"] .fiqh-section,
+html.rtl-ui .zakat-hero,
+html.rtl-ui .zakat-stats,
+html.rtl-ui .zakat-info-cards,
+html.rtl-ui .zakat-box,
+html.rtl-ui .zakat-result,
+html.rtl-ui .zakat-cta,
+html.rtl-ui .site-footer,
+html.rtl-ui .table-wrapper,
+html.rtl-ui .zakat-table,
+html.rtl-ui .fiqh-container,
+html.rtl-ui .fiqh-section,
+body.rtl-ui .zakat-hero,
+body.rtl-ui .zakat-stats,
+body.rtl-ui .zakat-info-cards,
+body.rtl-ui .zakat-box,
+body.rtl-ui .zakat-result,
+body.rtl-ui .zakat-cta,
+body.rtl-ui .site-footer,
+body.rtl-ui .table-wrapper,
+body.rtl-ui .zakat-table,
+body.rtl-ui .fiqh-container,
+body.rtl-ui .fiqh-section {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Arabic: nav mulai dari kanan (direction:rtl sudah bikin flow kanan→kiri, no row-reverse) */
 @media (min-width: 769px) {
   html[dir="rtl"] .main-navbar .nav-container,
+  html.rtl-ui .main-navbar .nav-container,
   body.rtl-ui .main-navbar .nav-container {
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 
   html[dir="rtl"] .main-navbar .nav-links,
+  html.rtl-ui .main-navbar .nav-links,
   body.rtl-ui .main-navbar .nav-links {
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 }
 
+/* Arabic: nav mobile */
 @media (max-width: 768px) {
-  html[dir="rtl"] .main-navbar .logo,
-  body.rtl-ui .main-navbar .logo {
-    text-align: center;
+  html[dir="rtl"] .main-navbar .nav-container,
+  html.rtl-ui .main-navbar .nav-container,
+  body.rtl-ui .main-navbar .nav-container {
+    flex-direction: column;
+    align-items: center;
+    direction: rtl !important;
   }
 
   html[dir="rtl"] .main-navbar .nav-links,
+  html.rtl-ui .main-navbar .nav-links,
   body.rtl-ui .main-navbar .nav-links {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse !important;
+    direction: rtl !important;
   }
+}
+
+/* Arabic: scroll-to-top di kanan (start side RTL) */
+html[dir="rtl"] .scroll-to-top,
+html.rtl-ui .scroll-to-top,
+body.rtl-ui .scroll-to-top {
+  left: auto !important;
+  right: calc(18px + env(safe-area-inset-right, 0px));
 }
 
 .hero-content {
@@ -1344,4 +1466,169 @@ body.dark .box-section {
     height: auto !important;
   }
 
+}
+
+/* =========================
+   ZAKAT INFO (table + fiqh)
+   Dipakai oleh /zakat-info
+========================= */
+.table-wrapper {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.zakat-info-title {
+  max-width: 1000px;
+  margin: 40px auto 20px auto;
+  padding: 0 16px;
+}
+
+.zakat-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+.zakat-table thead {
+  background: #0f172a;
+  color: white;
+}
+
+.zakat-table th,
+.zakat-table td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.zakat-table td:last-child {
+  text-align: justify;
+  line-height: 1.7;
+}
+
+.zakat-table th:last-child {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .table-wrapper {
+    margin: 25px auto;
+    padding: 0 12px;
+  }
+
+  .zakat-info-title {
+    margin: 25px auto 15px auto;
+    padding: 0 12px;
+    font-size: 22px;
+  }
+
+  .zakat-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 14px;
+  }
+
+  .zakat-table th,
+  .zakat-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .zakat-table td:last-child {
+    text-align: left;
+  }
+}
+
+/* FIQH SECTION */
+.fiqh-section {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, #f1f5ff, #ffffff);
+}
+
+.fiqh-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .fiqh-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fiqh-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 50px;
+  color: #1e3a8a;
+  font-weight: 700;
+  position: relative;
+}
+
+.fiqh-section h2::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #1e40af, #3b82f6);
+  display: block;
+  margin: 15px auto 0;
+  border-radius: 10px;
+}
+
+.fiqh-card {
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(30, 64, 175, 0.15);
+  transition: 0.3s ease;
+}
+
+.fiqh-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(30, 64, 175, 0.25);
+}
+
+.fiqh-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 22px;
+  color: #1e3a8a;
+}
+
+.fiqh-card p {
+  margin-bottom: 20px;
+  line-height: 1.9;
+  color: #334155;
+  font-size: 1rem;
+  text-align: justify;
+}
+
+.fiqh-card p:last-child {
+  margin-bottom: 0;
+}
+
+.fiqh-image {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 15px;
+}
+
+.fiqh-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.fiqh-card:hover .fiqh-image img {
+  transform: scale(1.05);
 }

@@ -1,8 +1,8 @@
 (() => {
   const LANGS = ["id", "en", "ar"];
   function getPage() {
-    const rawPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
-    return rawPage.endsWith(".html") ? rawPage : (rawPage ? `${rawPage}.html` : rawPage);
+    const rawPage = (window.location.pathname.split("/").pop() || "").toLowerCase().replace(/\.html$/i, "");
+    return rawPage || "";
   }
   const state = { zakatInfoOriginal: null };
 
@@ -84,6 +84,7 @@
         heroBody: "Hitung zakat maal, penghasilan, emas, perdagangan, dan fitrah dengan metode fiqih yang terpercaya.",
         heroButtons: ["Mulai Hitung", "Pelajari Zakat"],
         stats: ["Pengguna", "Zakat dihitung", "Metode perhitungan", "Sesuai fiqh"],
+        statsValues: ["10.000+", "Rp 2 M+", "4 Mazhab", "100%"],
         calcTitle: "Metode Perhitungan",
         chooseMazhab: "Pilih mazhab",
         infoTitles: ["Zakat Maal", "Zakat Penghasilan", "Zakat Fitrah", "Tentang Zakat", "Nisab Zakat", "Penyaluran Zakat"],
@@ -116,7 +117,20 @@
         sectionRent: "Zakat Properti Sewa",
         sectionLivestock: "Syarat Wajib Zakat Ternak",
         sectionNisab: "Pengaturan Nisab",
-        rikazNote: "Zakat rikaz sebesar 20% dan tidak mensyaratkan haul maupun nisab."
+        rikazNote: "Zakat rikaz sebesar 20% dan tidak mensyaratkan haul maupun nisab.",
+        options: {
+          mazhab: {
+            syafii: "Syafi'i (umum di Indonesia)",
+            hanafi: "Hanafi",
+            maliki: "Maliki",
+            hanbali: "Hanbali"
+          }
+        },
+        labels: {
+          "fitrah-harga": "Harga beras per kg (Rp)",
+          "emas-harga": "Harga emas per gram (Rp)",
+          goldPrice: "Harga emas per gram (Rp)"
+        }
       },
       en: {
         pageTitle: "Zakat Calculator | Islamic Literacy Portal",
@@ -126,6 +140,7 @@
         heroBody: "Calculate wealth, income, gold, trade, and fitrah zakat with trusted fiqh methods.",
         heroButtons: ["Start Calculating", "Learn Zakat"],
         stats: ["Users", "Zakat calculated", "Calculation methods", "Fiqh compliant"],
+        statsValues: ["10,000+", "IDR 2M+", "4 Madhhabs", "100%"],
         calcTitle: "Calculation Method",
         chooseMazhab: "Choose madhhab",
         infoTitles: ["Wealth Zakat", "Income Zakat", "Fitrah Zakat", "About Zakat", "Nisab", "Distribution"],
@@ -261,6 +276,7 @@
         heroBody: "احسب زكاة المال والدخل والذهب والتجارة وزكاة الفطر بطريقة فقهية موثوقة.",
         heroButtons: ["ابدأ الحساب", "تعلّم الزكاة"],
         stats: ["المستخدمون", "زكاة محسوبة", "طرق الحساب", "مطابق للفقه"],
+        statsValues: ["+١٠٬٠٠٠", "Rp ٢ م+", "٤ مذاهب", "١٠٠٪"],
         calcTitle: "منهج الحساب",
         chooseMazhab: "اختر المذهب",
         infoTitles: ["زكاة المال", "زكاة الدخل", "زكاة الفطر", "حول الزكاة", "نصاب الزكاة", "توزيع الزكاة"],
@@ -355,7 +371,7 @@
         },
         options: {
           mazhab: {
-            syafii: "الشافعي",
+            syafii: "الشافعي (شائع في إندونيسيا)",
             hanafi: "الحنفي",
             maliki: "المالكي",
             hanbali: "الحنبلي"
@@ -2944,12 +2960,13 @@
     const pack = text.zakat[lang] || text.zakat.id;
     document.title = pack.pageTitle;
 
-    applyText(".main-navbar .logo span", pack.brand);
+    applyText(".main-navbar .logo .logo-text", pack.brand);
     applyTexts(".main-navbar .nav-links a", pack.nav);
     applyText(".zakat-hero h1", pack.heroTitle);
     applyText(".zakat-hero .hero-text p", pack.heroBody);
     applyTexts(".hero-buttons a", pack.heroButtons);
     applyTexts(".zakat-stats .stat-box p", pack.stats);
+    if (pack.statsValues) applyTexts(".zakat-stats .stat-box h3", pack.statsValues);
     applyText(".zakat-mazhab h2", pack.calcTitle);
     applyText(".zakat-mazhab label", pack.chooseMazhab);
     applyTexts(".zakat-info-cards .info-card h3", pack.infoTitles);
@@ -3025,7 +3042,7 @@
     const pack = text.zakatInfo[lang] || text.zakatInfo.id;
 
     document.title = pack.pageTitle;
-    applyText(".main-navbar .logo", `📚 ${pack.brand}`);
+    applyText(".main-navbar .logo .logo-text", pack.brand);
     applyTexts(".main-navbar .nav-links a", pack.nav);
     applyText("body > h2", pack.heading);
     applyTexts(".zakat-table thead th", pack.tableHead);
@@ -3056,14 +3073,36 @@
     const page = getPage();
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-    document.body.classList.toggle("rtl-ui", lang === "ar");
-    if (page === "zakat.html") applyZakat(lang);
-    if (page === "zakat-info.html") applyZakatInfo(lang);
+    document.documentElement.classList.toggle("rtl-ui", lang === "ar");
+    if (document.body) document.body.classList.toggle("rtl-ui", lang === "ar");
+    if (page === "zakat") applyZakat(lang);
+    if (page === "zakat-info") applyZakatInfo(lang);
+    syncLangSwitchActive(lang);
+  }
+
+  function syncLangSwitchActive(lang) {
+    document.querySelectorAll(".main-navbar .lang-switch button[data-lang]").forEach((btn) => {
+      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+    });
+  }
+
+  function bindLangSwitch() {
+    if (window.__zakatLangSwitchBound) return;
+    window.__zakatLangSwitchBound = true;
+    document.addEventListener("click", (e) => {
+      const btn = e.target?.closest?.(".main-navbar .lang-switch button[data-lang]");
+      if (!btn) return;
+      const lang = btn.getAttribute("data-lang");
+      if (!lang || !LANGS.includes(lang)) return;
+      localStorage.setItem("siteLang", lang);
+      run();
+      window.dispatchEvent(new CustomEvent("portal-language-change"));
+    });
   }
 
   function runWithRetry() {
     const page = getPage();
-    const wantsZakatInfo = page === "zakat-info.html";
+    const wantsZakatInfo = page === "zakat-info";
 
     let attempts = 0;
     const tick = () => {
@@ -3125,10 +3164,12 @@
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
+      bindLangSwitch();
       bindRouteChange();
       runWithRetry();
     });
   } else {
+    bindLangSwitch();
     bindRouteChange();
     runWithRetry();
   }

@@ -594,17 +594,36 @@ table,
   }
 }
 
-html[lang="ar"] body,
+/* =========================
+   ARABIC/RTL - Admin mulai dari kanan
+========================= */
 html[dir="rtl"] body,
+html.rtl-ui body,
 body.rtl-ui {
   direction: rtl;
   text-align: right;
 }
 
-html[lang="ar"] .hero,
-html[lang="ar"] .navbar,
+html[dir="rtl"] .main-navbar,
 html[dir="rtl"] .navbar,
+html.rtl-ui .main-navbar,
+html.rtl-ui .navbar,
+body.rtl-ui .main-navbar,
 body.rtl-ui .navbar {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] .admin-header,
+html[dir="rtl"] .admin-stats,
+html[dir="rtl"] .admin-table-wrapper,
+html.rtl-ui .admin-header,
+html.rtl-ui .admin-stats,
+html.rtl-ui .admin-table-wrapper,
+body.rtl-ui .admin-header,
+body.rtl-ui .admin-stats,
+body.rtl-ui .admin-table-wrapper {
+  direction: rtl;
   text-align: right;
 }
 
@@ -612,13 +631,45 @@ body.rtl-ui .navbar {
 @media (min-width: 769px) {
   html[dir="rtl"] .main-navbar .nav-container,
   html[dir="rtl"] .nav-container,
+  html.rtl-ui .main-navbar .nav-container,
+  html.rtl-ui .nav-container,
   body.rtl-ui .main-navbar .nav-container,
   body.rtl-ui .nav-container {
-    flex-direction: row-reverse;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 
   html[dir="rtl"] .nav-menu,
+  html.rtl-ui .nav-menu,
+  body.rtl-ui .nav-menu {
+    flex-direction: row !important;
+    direction: rtl !important;
+  }
+}
+
+/* Arabic: nav mobile */
+@media (max-width: 768px) {
+  html[dir="rtl"] .main-navbar .nav-container,
+  html[dir="rtl"] .nav-container,
+  html.rtl-ui .main-navbar .nav-container,
+  html.rtl-ui .nav-container,
+  body.rtl-ui .main-navbar .nav-container,
+  body.rtl-ui .nav-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  html[dir="rtl"] .nav-menu,
+  html.rtl-ui .nav-menu,
   body.rtl-ui .nav-menu {
     flex-direction: row-reverse;
   }
+}
+
+/* Arabic: scroll-to-top di kanan */
+html[dir="rtl"] .scroll-to-top,
+html.rtl-ui .scroll-to-top,
+body.rtl-ui .scroll-to-top {
+  left: auto !important;
+  right: calc(18px + env(safe-area-inset-right, 0px));
 }

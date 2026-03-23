@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const LANGS = ["id", "en", "ar"];
   function getCurrentRouteInfo() {
     const pathname = window.location.pathname.toLowerCase();
@@ -940,10 +940,11 @@
 
   function isPageReady() {
     const pageKey = getCurrentPageKey();
+    if (pageKey !== "mawaris" && pageKey !== "tabel-fiqh" && pageKey !== "metodologi") return false;
     if (pageKey === "mawaris") return !!document.querySelector(".mawaris-container");
     if (pageKey === "tabel-fiqh") return !!document.querySelector(".fiqh-table-section");
     if (pageKey === "metodologi") return !!document.querySelector(".content-section");
-    return true;
+    return false;
   }
 
   function apply(lang = getLang()) {

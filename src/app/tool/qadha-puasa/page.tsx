@@ -56,8 +56,8 @@ export default function KalkulatorQadhaPuasaPage() {
   return (
     <>
       <KfiScope bodyClass="tool-qadha-puasa" />
-      <link rel="preload" as="style" href="/css/kaffarah-shared.css" />
-      <link rel="stylesheet" href="/css/kaffarah-shared.css" />
+      <link rel="preload" as="style" href="/css/kaffarah-shared.css?v=20260323" />
+      <link rel="stylesheet" href="/css/kaffarah-shared.css?v=20260323" />
       <nav className="navbar">
         <div className="nav-container">
           <Link href="/" className="logo" aria-label="Portal Literasi Islam">

@@ -212,20 +212,34 @@ body.kfi-scope.rtl-ui .logo-text {
 
 /* Arabic/RTL: kaffarah/fidyah/sumpah - seluruh halaman mulai dari kanan */
 html[dir="rtl"] body.kfi-scope,
+html.rtl-ui body.kfi-scope,
 body.kfi-scope.rtl-ui {
   direction: rtl;
   text-align: right;
 }
 
+/* Arabic/RTL mobile: glass nav tetap center, content dari kanan */
+@media (max-width: 768px) {
+  html[dir="rtl"] body.kfi-scope .navbar .nav-container,
+  html.rtl-ui body.kfi-scope .navbar .nav-container,
+  body.kfi-scope.rtl-ui .navbar .nav-container {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+}
+
 /* Arabic/RTL: nav mulai dari kanan (desktop) - semua tools kaffarah */
 @media (min-width: 641px) {
   html[dir="rtl"] body.kfi-scope .navbar .nav-container,
+  html.rtl-ui body.kfi-scope .navbar .nav-container,
   body.kfi-scope.rtl-ui .navbar .nav-container {
     flex-direction: row-reverse !important;
   }
 
   html[dir="rtl"] body.kfi-scope .navbar .nav-menu,
   html[dir="rtl"] body.kfi-scope .navbar nav,
+  html.rtl-ui body.kfi-scope .navbar .nav-menu,
+  html.rtl-ui body.kfi-scope .navbar nav,
   body.kfi-scope.rtl-ui .navbar .nav-menu,
   body.kfi-scope.rtl-ui .navbar nav {
     flex-direction: row-reverse !important;
@@ -304,6 +318,7 @@ body.kfi-scope .kfi-hero-copy {
 
 body.kfi-scope .scroll-to-top {
   position: fixed;
+  left: auto;
   right: 22px;
   bottom: calc(22px + env(safe-area-inset-bottom, 0px));
   width: 52px;
@@ -346,7 +361,21 @@ body.kfi-scope .scroll-to-top:active {
   transform: translateY(0);
 }
 
+/* RTL: scroll button di kiri (Arab dari kanan) */
+html[dir="rtl"] body.kfi-scope .scroll-to-top,
+html.rtl-ui body.kfi-scope .scroll-to-top,
+body.kfi-scope.rtl-ui .scroll-to-top {
+  left: 22px;
+  right: auto !important;
+}
+
 @media (max-width: 768px) {
+  html[dir="rtl"] body.kfi-scope .scroll-to-top,
+  html.rtl-ui body.kfi-scope .scroll-to-top,
+  body.kfi-scope.rtl-ui .scroll-to-top {
+    left: 16px;
+    right: auto !important;
+  }
   body.kfi-scope .scroll-to-top {
     right: 16px;
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));

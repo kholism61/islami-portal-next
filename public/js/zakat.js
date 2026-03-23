@@ -1,4 +1,4 @@
-﻿/* =====================
+/* =====================
    DARK MODE TOGGLE
 ===================== */
  const themeBtn = document.getElementById("themeToggle");
@@ -262,7 +262,8 @@ const ZAKAT_UI_TEXT = {
     mazhab_maliki: "Mazhab Maliki: menekankan kepemilikan penuh dan kestabilan harta sebelum zakat.",
     mazhab_hanbali: "Mazhab Hanbali: mirip dengan Syafi’i, dengan beberapa perbedaan dalam detail harta.",
     monthly_separator: " — ",
-    livestock_modal_note: "Berdasarkan ketentuan zakat ternak dalam hadits Nabi ﷺ dan fiqh klasik."
+    livestock_modal_note: "Berdasarkan ketentuan zakat ternak dalam hadits Nabi ﷺ dan fiqh klasik.",
+    currencyPrefix: "Rp"
   },
   en: {
     yearly_chart_label: "Total Zakat per Year",
@@ -324,7 +325,8 @@ const ZAKAT_UI_TEXT = {
     mazhab_maliki: "Maliki school: emphasizes full ownership and asset stability before zakat.",
     mazhab_hanbali: "Hanbali school: similar to Syafi’i with some differences in details.",
     monthly_separator: " — ",
-    livestock_modal_note: "Based on classical fiqh and the Prophet's ﷺ hadith on livestock zakat."
+    livestock_modal_note: "Based on classical fiqh and the Prophet's ﷺ hadith on livestock zakat.",
+    currencyPrefix: "IDR "
   },
   ar: {
     yearly_chart_label: "إجمالي الزكاة السنوي",
@@ -386,7 +388,8 @@ const ZAKAT_UI_TEXT = {
     mazhab_maliki: "المذهب المالكي يؤكد تمام الملك واستقرار المال قبل الوجوب.",
     mazhab_hanbali: "المذهب الحنبلي قريب من الشافعي مع فروق في بعض التفاصيل.",
     monthly_separator: " — ",
-    livestock_modal_note: "وفق أحكام زكاة الأنعام في الحديث النبوي والفقه الكلاسيكي."
+    livestock_modal_note: "وفق أحكام زكاة الأنعام في الحديث النبوي والفقه الكلاسيكي.",
+    currencyPrefix: "Rp"
   }
 };
 
@@ -410,7 +413,8 @@ function zt(key, params = {}) {
 
 
 function rupiah(num) {
-  return "Rp" + Math.round(num).toLocaleString("id-ID");
+  const prefix = (ZAKAT_UI_TEXT[getZakatLang()] || ZAKAT_UI_TEXT.id).currencyPrefix || "Rp";
+  return prefix + Math.round(num).toLocaleString("id-ID");
 }
 
 function drawHistoryChart() {

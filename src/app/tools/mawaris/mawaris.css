@@ -571,6 +571,7 @@
 
 /* Arabic/RTL: seluruh halaman mawaris mulai dari kanan */
 html[dir="rtl"] .mawaris-page,
+html.rtl-ui .mawaris-page,
 body.rtl-ui .mawaris-page {
   direction: rtl;
   text-align: right;
@@ -578,39 +579,48 @@ body.rtl-ui .mawaris-page {
 
 /* Arabic/RTL: nav mulai dari kanan (desktop) - Mawaris */
 html[dir="rtl"] .mawaris-page .nav-container,
+html.rtl-ui .mawaris-page .nav-container,
 body.rtl-ui .mawaris-page .nav-container {
   direction: rtl;
 }
 
 html[dir="rtl"] .mawaris-page .logo,
+html.rtl-ui .mawaris-page .logo,
 body.rtl-ui .mawaris-page .logo {
   flex-direction: row-reverse;
 }
 
 @media (min-width: 769px) {
   html[dir="rtl"] .mawaris-page .nav-container,
+  html.rtl-ui .mawaris-page .nav-container,
   body.rtl-ui .mawaris-page .nav-container {
     flex-direction: row-reverse !important;
   }
 
   html[dir="rtl"] .mawaris-page .nav-links,
+  html.rtl-ui .mawaris-page .nav-links,
   body.rtl-ui .mawaris-page .nav-links {
     flex-direction: row-reverse !important;
   }
 }
 
+/* Arabic/RTL mobile: nav center, links dari kanan */
 @media (max-width: 768px) {
   html[dir="rtl"] .mawaris-page .nav-container,
+  html.rtl-ui .mawaris-page .nav-container,
   body.rtl-ui .mawaris-page .nav-container {
     flex-direction: column;
+    align-items: center;
   }
 
   html[dir="rtl"] .mawaris-page .nav-links,
+  html.rtl-ui .mawaris-page .nav-links,
   body.rtl-ui .mawaris-page .nav-links {
     flex-direction: row-reverse;
   }
 
   html[dir="rtl"] .mawaris-page .logo,
+  html.rtl-ui .mawaris-page .logo,
   body.rtl-ui .mawaris-page .logo {
     justify-content: center;
   }
@@ -671,13 +681,24 @@ body.rtl-ui .mawaris-page .logo {
   margin-top: 6px;
 }
 
-html[dir="rtl"] .mawaris-page .i18n-helper-card {
+html[dir="rtl"] .mawaris-page .i18n-helper-card,
+html.rtl-ui .mawaris-page .i18n-helper-card,
+body.rtl-ui .mawaris-page .i18n-helper-card {
   text-align: right;
+}
+
+/* RTL: scroll button di kanan (Arab dari kanan) */
+html[dir="rtl"] .mawaris-page .scroll-to-top,
+html.rtl-ui .mawaris-page .scroll-to-top,
+body.rtl-ui .mawaris-page .scroll-to-top {
+  left: auto;
+  right: 18px;
 }
 
 .mawaris-page .scroll-to-top {
   position: fixed;
   left: 18px;
+  right: auto;
   bottom: 26px;
   width: 42px;
   height: 36px;

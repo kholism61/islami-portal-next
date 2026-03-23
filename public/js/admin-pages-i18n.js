@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const LANGS = ["id", "en", "ar"];
   const rawPage = (window.location.pathname.split("/").pop() || "").toLowerCase();
   const page = rawPage.endsWith(".html") ? rawPage : (rawPage ? `${rawPage}.html` : rawPage);
@@ -516,6 +516,8 @@
     const lang = getLang();
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.classList.toggle("rtl-ui", lang === "ar");
+    if (document.body) document.body.classList.toggle("rtl-ui", lang === "ar");
     if (page === "admin.html") applyAdmin(lang);
     if (page === "portal-admin.html") applyPortal(lang);
     if (page === "signin.html") applySignin(lang);

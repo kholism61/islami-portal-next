@@ -9,21 +9,32 @@ export const metadata: Metadata = {
 
 export default function ZakatInfoPage() {
   return (
-    <>
+    <div className="page-zakat-info">
       <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      <link rel="stylesheet" href="/css/zakat-info.css?v=20260318b" />
+      <link rel="stylesheet" href="/css/zakat.css?v=20260323" />
 
       <nav className="main-navbar">
         <div className="nav-container">
-          <div className="logo">📚 Portal Literasi Islam</div>
+          <div className="logo">
+            <span className="logo-glass">
+              <img src="/favicon.ico" alt="" className="logo-icon" width={16} height={16} />
+            </span>
+            <span className="logo-text">Portal Literasi Islam</span>
+          </div>
           <div className="nav-links">
             <Link href="/">Beranda</Link>
             <Link href="/zakat">Kalkulator Zakat</Link>
           </div>
+
+          <div className="lang-switch" aria-label="Bahasa">
+            <button type="button" data-lang="id">ID</button>
+            <button type="button" data-lang="en">EN</button>
+            <button type="button" data-lang="ar">AR</button>
+          </div>
         </div>
       </nav>
 
-      <h2>Ringkasan Jenis-Jenis Zakat</h2>
+      <h2 className="zakat-info-title">Ringkasan Jenis-Jenis Zakat</h2>
 
       <div className="table-wrapper">
         <table className="zakat-table">
@@ -1466,21 +1477,12 @@ export default function ZakatInfoPage() {
       <button id="scrollToTopBtn" className="scroll-to-top" aria-label="Kembali ke atas" type="button">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M12 19V5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-          <path
-            d="M6 11L12 5L18 11"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+          <path d="M6 11L12 5L18 11" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
-      <Script src="https://cdn.jsdelivr.net/npm/chart.js" strategy="afterInteractive" />
       <Script src="/js/zakat-pages-i18n.js?v=20260318b" strategy="afterInteractive" />
-      <Script src="/js/auth.js?v=20260318a" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js?v=20260318a" strategy="afterInteractive" />
       <Script src="/js/scroll-to-top.js?v=20260318b" strategy="afterInteractive" />
-    </>
+    </div>
   );
 }

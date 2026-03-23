@@ -1,6 +1,8 @@
 /* Arabic/RTL: seluruh halaman mulai dari kanan */
 html[dir="rtl"],
 html[dir="rtl"] body,
+html.rtl-ui,
+html.rtl-ui body,
 body.rtl-ui {
   direction: rtl;
   text-align: right;
@@ -158,17 +160,20 @@ body.rtl-ui {
 
 /* Arabic/RTL: nav mulai dari kanan (desktop) - Haid, Nifas, Suci, Iddah, Istihadhah */
 body.rtl-ui .nav-brand,
+html.rtl-ui .nav-brand,
 html[dir="rtl"] .nav-brand {
   flex-direction: row-reverse;
 }
 
 body.rtl-ui .nav-links,
+html.rtl-ui .nav-links,
 html[dir="rtl"] .nav-links {
   flex-direction: row-reverse;
 }
 
 @media (min-width: 901px) {
   body.rtl-ui .navbar,
+  html.rtl-ui .navbar,
   html[dir="rtl"] .navbar {
     flex-direction: row-reverse !important;
     direction: rtl;

@@ -48,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
         <Script src="/js/rtl-init.js?v=1" strategy="beforeInteractive" />
         <ServiceWorkerRegister />
         <SiteChrome>{children}</SiteChrome>

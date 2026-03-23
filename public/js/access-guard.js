@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   const pathname = window.location.pathname || "/index.html";
   const currentPath = pathname === "/" ? "index.html" : pathname.replace(/^\//, "");
   const pageName = currentPath.split("/").pop() || "index.html";
@@ -15,6 +15,8 @@
     "signup",
     "article.html",
     "article",
+    "zakat.html",
+    "zakat",
     "zakat-info.html",
     "zakat-info",
     "donasi.html",
