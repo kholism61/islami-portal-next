@@ -248,50 +248,36 @@ font-size:15px;
 transition:0.2s;
 }
 
-@media (max-width: 640px){
+@media (max-width: 768px) {
   body.tool-kaffarah-sumpah .navbar,
   body.tool-kaffarah-sumpah header.navbar{
-    width:100%;
-    display:flex;
-    justify-content:center;
+    width:100% !important;
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
     box-sizing:border-box;
   }
 
   body.tool-kaffarah-sumpah .nav-container{
-    padding:12px 14px;
+    padding:12px 16px;
     gap:12px;
     flex-wrap:wrap;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-  }
-
-  body.tool-kaffarah-sumpah .container{
-    margin:36px auto;
-    padding:16px 16px;
-    width:100%;
-    max-width:100%;
-    margin-left:auto;
-    margin-right:auto;
-    box-sizing:border-box;
-  }
-
-  body.tool-kaffarah-sumpah .kfi-hero-shell{
-    width:100%;
-    max-width:100%;
-    padding:0 16px;
-    box-sizing:border-box;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    max-width:420px !important;
   }
 
   body.tool-kaffarah-sumpah nav{
-    width:min(100%, 420px);
-    max-width:420px;
+    width:100% !important;
+    max-width:420px !important;
     margin-left:auto !important;
     margin-right:auto !important;
-    align-self:center;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
+    align-self:stretch !important;
+    display:flex !important;
+    flex-wrap:wrap !important;
+    justify-content:center !important;
     gap:10px;
     padding:10px 14px;
     background:rgba(255,255,255,0.12);
@@ -309,22 +295,25 @@ transition:0.2s;
   }
 }
 
-body.tool-kaffarah-sumpah nav a:hover{
-color:#00d4ff;
+@media (max-width: 640px){
+  body.tool-kaffarah-sumpah .container{
+    margin:36px auto;
+    padding:16px 16px;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+  }
+
+  body.tool-kaffarah-sumpah .kfi-hero-shell{
+    width:100%;
+    max-width:100%;
+    padding:0 16px;
+    box-sizing:border-box;
+  }
 }
 
-@media (max-width: 768px) {
-  body.tool-kaffarah-sumpah .nav-container {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  body.tool-kaffarah-sumpah nav {
-    width: min(100%, 420px);
-    margin-left: auto !important;
-    margin-right: auto !important;
-    align-self: center;
-  }
+body.tool-kaffarah-sumpah nav a:hover{
+color:#00d4ff;
 }
 
 /* Arabic/RTL: nav mulai dari kanan (desktop) */

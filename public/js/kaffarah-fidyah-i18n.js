@@ -523,27 +523,24 @@
       }
       body.kfi-scope .navbar .nav-container {
         width: 100%;
-        max-width: 100%;
         box-sizing: border-box;
-        padding-left: 18px !important;
-        padding-right: 18px !important;
         display: flex;
         align-items: center;
         gap: 16px;
       }
+      @media (min-width: 769px) {
+        body.kfi-scope .navbar .nav-container {
+          max-width: 1200px;
+          padding-left: 18px !important;
+          padding-right: 18px !important;
+        }
+      }
       @media (max-width: 768px) {
         body.kfi-scope .navbar .nav-container,
         body.kfi-scope header.navbar .nav-container {
-          flex-direction: column !important;
-          align-items: center !important;
-          justify-content: center !important;
-        }
-        body.kfi-scope .navbar .nav-menu,
-        body.kfi-scope .navbar nav,
-        body.kfi-scope header.navbar nav {
-          align-self: center !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
+          max-width: 420px !important;
+          padding-left: 16px !important;
+          padding-right: 16px !important;
         }
       }
       body.kfi-scope .navbar .logo {

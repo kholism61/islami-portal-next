@@ -70,36 +70,34 @@ backdrop-filter:blur(12px);
 }
 
 @media (max-width: 768px){
+  body.tool-fidyah .navbar{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+  }
+
   body.tool-fidyah .nav-container{
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
     flex-wrap:wrap;
     gap:10px;
-    padding:12px 14px;
+    padding:12px 16px;
+    width:100% !important;
+    max-width:420px !important;
   }
 
-  body.tool-fidyah .nav-menu{
-    width:min(100%, 420px);
-    max-width:420px;
-    margin-left:auto !important;
-    margin-right:auto !important;
-    flex:0 0 auto;
-    flex-wrap:wrap;
-    column-gap:14px;
-    row-gap:8px;
-    justify-content:center;
-    align-self:center;
-  }
-
+  body.tool-fidyah .nav-menu,
   body.tool-fidyah.kfi-scope .navbar .nav-menu{
-    flex:0 0 auto;
-    width:min(100%, 420px);
-    max-width:420px;
+    flex:0 0 auto !important;
+    width:100% !important;
+    max-width:420px !important;
     margin-left:auto !important;
     margin-right:auto !important;
     flex-wrap:wrap;
-    overflow:visible;
     padding:10px 14px;
     justify-content:center;
-    align-self:center;
+    align-self:stretch;
     background:rgba(255,255,255,0.12);
     border:1px solid rgba(255,255,255,0.18);
     border-radius:16px;
@@ -109,28 +107,15 @@ backdrop-filter:blur(12px);
 
   body.tool-fidyah.kfi-scope .navbar .nav-container{
     display:flex !important;
-    flex-direction:column;
+    flex-direction:column !important;
     align-items:center !important;
-    justify-content:center;
-    gap:10px;
-    width:100%;
-    padding:12px 16px;
+    justify-content:center !important;
+    max-width:420px !important;
   }
 
-  body.tool-fidyah.kfi-scope .navbar .logo{
-    align-self:center;
-  }
-
+  body.tool-fidyah.kfi-scope .navbar .logo,
   body.tool-fidyah.kfi-scope .navbar .kfi-lang-switch{
-    align-self:center;
-    margin-left:0 !important;
-  }
-
-  body.tool-fidyah.kfi-scope .navbar .nav-menu{
-    align-self:center;
-    justify-content:center;
-    margin-left:auto !important;
-    margin-right:auto !important;
+    align-self:center !important;
   }
 
   body.tool-fidyah.kfi-scope .navbar .nav-menu::-webkit-scrollbar{

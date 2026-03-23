@@ -1,3 +1,11 @@
+/* Arabic/RTL: seluruh halaman mulai dari kanan */
+html[dir="rtl"],
+html[dir="rtl"] body,
+body.rtl-ui {
+  direction: rtl;
+  text-align: right;
+}
+
 .navbar {
   gap: 18px;
 }
@@ -162,6 +170,7 @@ html[dir="rtl"] .nav-links {
 @media (min-width: 901px) {
   body.rtl-ui .navbar,
   html[dir="rtl"] .navbar {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse !important;
+    direction: rtl;
   }
 }

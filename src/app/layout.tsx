@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import ServiceWorkerRegister from "@/components/core/ServiceWorkerRegister";
@@ -48,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Script src="/js/rtl-init.js?v=1" strategy="beforeInteractive" />
         <ServiceWorkerRegister />
         <SiteChrome>{children}</SiteChrome>
       </body>

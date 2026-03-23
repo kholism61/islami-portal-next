@@ -350,12 +350,12 @@ body.rtl-ui .navbar {
 @media (min-width: 769px) {
   html[dir="rtl"] .main-navbar .nav-container,
   body.rtl-ui .main-navbar .nav-container {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse !important;
   }
 
   html[dir="rtl"] .main-navbar .nav-links,
   body.rtl-ui .main-navbar .nav-links {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse !important;
   }
 }
 

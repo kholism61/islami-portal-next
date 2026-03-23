@@ -3056,6 +3056,7 @@
     const page = getPage();
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.body.classList.toggle("rtl-ui", lang === "ar");
     if (page === "zakat.html") applyZakat(lang);
     if (page === "zakat-info.html") applyZakatInfo(lang);
   }

@@ -137,40 +137,29 @@ body.kfi-scope.rtl-ui .logo-text {
   }
 }
 
+/* Mobile: glass nav TETAP DI TENGAH - Kaffarah, Fidyah, Sumpah */
 @media (max-width: 768px) {
   body.kfi-scope .navbar,
   body.kfi-scope header.navbar {
-    width: 100%;
+    width: 100% !important;
     box-sizing: border-box;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 12px 16px !important;
   }
 
   body.kfi-scope .navbar .nav-container,
   body.kfi-scope header.navbar .nav-container {
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-@media (max-width: 640px) {
-  body.kfi-scope .navbar,
-  body.kfi-scope header.navbar {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 12px 16px;
-    box-sizing: border-box;
-  }
-
-  body.kfi-scope .navbar .nav-container,
-  body.kfi-scope header.navbar .nav-container {
-    padding: 12px 16px;
-    gap: 12px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 420px !important;
+    padding: 0 16px !important;
+    gap: 12px !important;
+    box-sizing: border-box !important;
   }
 
   body.kfi-scope .navbar .nav-menu,
@@ -178,23 +167,37 @@ body.kfi-scope.rtl-ui .logo-text {
   body.kfi-scope header.navbar .nav-menu,
   body.kfi-scope header.navbar nav {
     flex: 0 0 auto !important;
-    width: min(100%, 420px) !important;
-    max-width: 420px;
+    width: 100% !important;
+    max-width: 420px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    align-self: stretch !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 10px 14px !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 16px !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+
+  body.kfi-scope .navbar .logo,
+  body.kfi-scope .navbar .kfi-lang-switch,
+  body.kfi-scope header.navbar .logo {
     align-self: center !important;
   }
 
-  body.kfi-scope .navbar .nav-menu {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 16px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+  body.kfi-scope .navbar .nav-menu::-webkit-scrollbar,
+  body.kfi-scope header.navbar nav::-webkit-scrollbar {
+    height: 4px;
+  }
+  body.kfi-scope .navbar .nav-menu::-webkit-scrollbar-thumb,
+  body.kfi-scope header.navbar nav::-webkit-scrollbar-thumb {
+    background: rgba(125, 211, 252, 0.35);
+    border-radius: 999px;
   }
 
   body.kfi-scope .navbar .nav-menu::-webkit-scrollbar {
@@ -207,18 +210,25 @@ body.kfi-scope.rtl-ui .logo-text {
   }
 }
 
+/* Arabic/RTL: kaffarah/fidyah/sumpah - seluruh halaman mulai dari kanan */
+html[dir="rtl"] body.kfi-scope,
+body.kfi-scope.rtl-ui {
+  direction: rtl;
+  text-align: right;
+}
+
 /* Arabic/RTL: nav mulai dari kanan (desktop) - semua tools kaffarah */
 @media (min-width: 641px) {
   html[dir="rtl"] body.kfi-scope .navbar .nav-container,
   body.kfi-scope.rtl-ui .navbar .nav-container {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse !important;
   }
 
   html[dir="rtl"] body.kfi-scope .navbar .nav-menu,
   html[dir="rtl"] body.kfi-scope .navbar nav,
   body.kfi-scope.rtl-ui .navbar .nav-menu,
   body.kfi-scope.rtl-ui .navbar nav {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse !important;
   }
 }
 
