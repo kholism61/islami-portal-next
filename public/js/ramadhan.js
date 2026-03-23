@@ -175,12 +175,6 @@ function normalizeTree(node) {
   }
   return node;
 }
-const prayerNameByLang = {
-  id: { fajr: "Subuh", dhuhr: "Dzuhur", asr: "Ashar", maghrib: "Maghrib", isha: "Isya" },
-  en: { fajr: "Fajr", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha" },
-  ar: { fajr: "الفجر", dhuhr: "الظهر", asr: "العصر", maghrib: "المغرب", isha: "العشاء" }
-};
-
 normalizeTree(doaHarian);
 normalizeTree(ramadhanUiText);
 normalizeTree(prayerNameByLang);

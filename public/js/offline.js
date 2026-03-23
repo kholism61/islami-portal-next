@@ -1,5 +1,5 @@
 var SITE_LANGS = window.SITE_LANGS || (window.SITE_LANGS = ["id", "en", "ar"]);
-const articleStoreCache = new Map();
+var articleStoreCache = window.__PORTAL_ARTICLE_STORE_CACHE__ || (window.__PORTAL_ARTICLE_STORE_CACHE__ = new Map());
 
 function getLegacyArticleStore() {
   const store = window.__PORTAL_ARTICLE_STORE__;
