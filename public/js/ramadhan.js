@@ -51,7 +51,62 @@
   }
 ];
 
-const SITE_LANGS = ["id", "en", "ar"];
+var SITE_LANGS = window.SITE_LANGS || (window.SITE_LANGS = ["id", "en", "ar"]);
+
+const ramadhanUiText = {
+  id: {
+    location_unavailable: "Lokasi tidak tersedia",
+    notification_imsak_title: "Waktu Imsak",
+    notification_imsak_body: "Sudah masuk waktu imsak. Segera selesaikan sahur.",
+    notification_prayer_title: "Waktu {{prayer}}",
+    notification_prayer_body: "Sudah masuk waktu {{prayer}}",
+    countdown_to_imsak: "Menuju Imsak: {{hour}}j {{minute}}m",
+    countdown_to_iftar: "Menuju Berbuka: {{hour}}j {{minute}}m",
+    unsupported_notification: "Browser tidak mendukung notifikasi.",
+    notification_enabled: "Notifikasi Aktif",
+    qibla_from_north: "{{degree}}° dari utara",
+    dua_sahur: "Aku niat berpuasa esok hari karena Allah Ta'ala.",
+    dua_iftar: "Ya Allah, karena-Mu aku berpuasa, kepada-Mu aku beriman, dan dengan rezeki-Mu aku berbuka."
+  },
+  en: {
+    location_unavailable: "Location is not available",
+    notification_imsak_title: "Imsak Time",
+    notification_imsak_body: "Imsak time has started. Please finish suhoor.",
+    notification_prayer_title: "{{prayer}} Time",
+    notification_prayer_body: "{{prayer}} time has started",
+    countdown_to_imsak: "Until Imsak: {{hour}}h {{minute}}m",
+    countdown_to_iftar: "Until Iftar: {{hour}}h {{minute}}m",
+    unsupported_notification: "Your browser does not support notifications.",
+    notification_enabled: "Notifications On",
+    qibla_from_north: "{{degree}}° from north",
+    dua_sahur:
+      "I intend to fast tomorrow for the sake of Allah the Most High.",
+    dua_iftar:
+      "O Allah, for You I fasted, in You I believe, and with Your provision I break my fast."
+  },
+  ar: {
+    location_unavailable: "الموقع غير متاح",
+    notification_imsak_title: "وقت الإمساك",
+    notification_imsak_body: "دخل وقت الإمساك. يُرجى إنهاء السحور.",
+    notification_prayer_title: "وقت {{prayer}}",
+    notification_prayer_body: "دخل وقت {{prayer}}",
+    countdown_to_imsak: "حتى الإمساك: {{hour}}س {{minute}}د",
+    countdown_to_iftar: "حتى الإفطار: {{hour}}س {{minute}}د",
+    unsupported_notification: "المتصفح لا يدعم الإشعارات.",
+    notification_enabled: "تم تفعيل الإشعارات",
+    qibla_from_north: "{{degree}}° من الشمال",
+    dua_sahur: "نويت صوم غدٍ لله تعالى.",
+    dua_iftar: "اللهم لك صمت وبك آمنت وعلى رزقك أفطرت."
+  }
+};
+
+
+
+const prayerNameByLang = {
+  id: { fajr: "Subuh", dhuhr: "Dzuhur", asr: "Ashar", maghrib: "Maghrib", isha: "Isya" },
+  en: { fajr: "Fajr", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha" },
+  ar: { fajr: "الفجر", dhuhr: "الظهر", asr: "العصر", maghrib: "المغرب", isha: "العشاء" }
+};
 
 function decodeMojibake(value) {
   if (typeof value !== "string") return value;
@@ -120,55 +175,6 @@ function normalizeTree(node) {
   }
   return node;
 }
-const ramadhanUiText = {
-  id: {
-    location_unavailable: "Lokasi tidak tersedia",
-    notification_imsak_title: "Waktu Imsak",
-    notification_imsak_body: "Sudah masuk waktu imsak. Segera selesaikan sahur.",
-    notification_prayer_title: "Waktu {{prayer}}",
-    notification_prayer_body: "Sudah masuk waktu {{prayer}}",
-    countdown_to_imsak: "Menuju Imsak: {{hour}}j {{minute}}m",
-    countdown_to_iftar: "Menuju Berbuka: {{hour}}j {{minute}}m",
-    unsupported_notification: "Browser tidak mendukung notifikasi.",
-    notification_enabled: "Notifikasi Aktif",
-    qibla_from_north: "{{degree}}° dari utara",
-    dua_sahur: "Aku niat berpuasa esok hari karena Allah Ta'ala.",
-    dua_iftar: "Ya Allah, karena-Mu aku berpuasa, kepada-Mu aku beriman, dan dengan rezeki-Mu aku berbuka."
-  },
-  en: {
-    location_unavailable: "Location is not available",
-    notification_imsak_title: "Imsak Time",
-    notification_imsak_body: "Imsak time has started. Please finish suhoor.",
-    notification_prayer_title: "{{prayer}} Time",
-    notification_prayer_body: "{{prayer}} time has started",
-    countdown_to_imsak: "Until Imsak: {{hour}}h {{minute}}m",
-    countdown_to_iftar: "Until Iftar: {{hour}}h {{minute}}m",
-    unsupported_notification: "Your browser does not support notifications.",
-    notification_enabled: "Notifications On",
-    qibla_from_north: "{{degree}}° from north",
-    dua_sahur:
-      "I intend to fast tomorrow for the sake of Allah the Most High.",
-    dua_iftar:
-      "O Allah, for You I fasted, in You I believe, and with Your provision I break my fast."
-  },
-  ar: {
-    location_unavailable: "الموقع غير متاح",
-    notification_imsak_title: "وقت الإمساك",
-    notification_imsak_body: "دخل وقت الإمساك. يُرجى إنهاء السحور.",
-    notification_prayer_title: "وقت {{prayer}}",
-    notification_prayer_body: "دخل وقت {{prayer}}",
-    countdown_to_imsak: "حتى الإمساك: {{hour}}س {{minute}}د",
-    countdown_to_iftar: "حتى الإفطار: {{hour}}س {{minute}}د",
-    unsupported_notification: "المتصفح لا يدعم الإشعارات.",
-    notification_enabled: "تم تفعيل الإشعارات",
-    qibla_from_north: "{{degree}}° من الشمال",
-    dua_sahur: "نويت صوم غدٍ لله تعالى.",
-    dua_iftar: "اللهم لك صمت وبك آمنت وعلى رزقك أفطرت."
-  }
-};
-
-
-
 const prayerNameByLang = {
   id: { fajr: "Subuh", dhuhr: "Dzuhur", asr: "Ashar", maghrib: "Maghrib", isha: "Isya" },
   en: { fajr: "Fajr", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha" },

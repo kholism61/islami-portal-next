@@ -1,7 +1,7 @@
 // =====================
 // GLOBAL STATE
 // =====================
-const SITE_LANGS = ["id", "en", "ar"];
+var SITE_LANGS = window.SITE_LANGS || (window.SITE_LANGS = ["id", "en", "ar"]);
 const localeMap = { id: "id-ID", en: "en-US", ar: "ar-EG" };
 const articleStoreCache = new Map();
 

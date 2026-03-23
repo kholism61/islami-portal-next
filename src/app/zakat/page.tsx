@@ -9,7 +9,7 @@ export default function ZakatPage() {
     <>
       <link rel="canonical" href="https://islami-portal-next.vercel.app/zakat" />
       <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      <link rel="stylesheet" href="/css/zakat.css?v=20260323" />
+      <link rel="stylesheet" href="/css/zakat.css?v=20260323b" />
 
       <nav className="main-navbar">
         <div className="nav-container">

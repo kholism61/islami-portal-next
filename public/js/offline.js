@@ -1,4 +1,4 @@
-const SITE_LANGS = ["id", "en", "ar"];
+var SITE_LANGS = window.SITE_LANGS || (window.SITE_LANGS = ["id", "en", "ar"]);
 const articleStoreCache = new Map();
 
 function getLegacyArticleStore() {
