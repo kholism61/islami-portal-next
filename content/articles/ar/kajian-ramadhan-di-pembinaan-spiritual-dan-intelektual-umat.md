@@ -5,7 +5,7 @@ date: 27 فبراير 2026
 createdAt: '2026-02-27'
 popular: false
 category: ramadhan
-subcategory: ''
+subcategory: tadabbur
 tag: ''
 language: ar
 lang: AR

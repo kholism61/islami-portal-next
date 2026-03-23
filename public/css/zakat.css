@@ -1050,7 +1050,7 @@ body.rtl-ui .navbar {
   text-align: right;
 }
 
-/* Arabic: center title, desktop nav horizontal dari kanan */
+/* Arabic: nav mulai dari kanan (desktop) - Zakat */
 @media (min-width: 769px) {
   html[dir="rtl"] .main-navbar .nav-container,
   body.rtl-ui .main-navbar .nav-container {

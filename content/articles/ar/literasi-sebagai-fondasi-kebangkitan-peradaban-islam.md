@@ -5,7 +5,7 @@ date: 2 فبراير 2026
 createdAt: '2026-02-02'
 popular: false
 category: keilmuan
-subcategory: ''
+subcategory: tradisi-keilmuan
 tag: ''
 language: ar
 lang: AR

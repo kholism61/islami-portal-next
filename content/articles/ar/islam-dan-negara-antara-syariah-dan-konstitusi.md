@@ -5,7 +5,7 @@ date: 15 يناير 2026
 createdAt: '2026-01-15'
 popular: true
 category: politik
-subcategory: ''
+subcategory: politik-islam
 tag: ''
 language: ar
 lang: AR

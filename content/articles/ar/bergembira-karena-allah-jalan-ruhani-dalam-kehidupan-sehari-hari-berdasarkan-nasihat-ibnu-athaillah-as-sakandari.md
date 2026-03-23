@@ -5,7 +5,7 @@ date: 14 فبراير 2026
 createdAt: '2026-02-14'
 popular: false
 category: tasawuf
-subcategory: ''
+subcategory: tasawuf-tarekat
 tag: ''
 language: ar
 lang: AR

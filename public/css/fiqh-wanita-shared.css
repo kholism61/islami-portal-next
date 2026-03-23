@@ -148,17 +148,20 @@
   }
 }
 
-/* Arabic/RTL: center title, desktop horizontal */
-body.rtl-ui .nav-brand {
+/* Arabic/RTL: nav mulai dari kanan (desktop) - Haid, Nifas, Suci, Iddah, Istihadhah */
+body.rtl-ui .nav-brand,
+html[dir="rtl"] .nav-brand {
   flex-direction: row-reverse;
 }
 
-body.rtl-ui .nav-links {
+body.rtl-ui .nav-links,
+html[dir="rtl"] .nav-links {
   flex-direction: row-reverse;
 }
 
 @media (min-width: 901px) {
-  body.rtl-ui .navbar {
+  body.rtl-ui .navbar,
+  html[dir="rtl"] .navbar {
     flex-direction: row-reverse;
   }
 }

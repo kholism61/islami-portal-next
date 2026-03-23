@@ -5,7 +5,7 @@ date: 21 فبراير 2026
 createdAt: '2026-02-21'
 popular: false
 category: ilmusyariah
-subcategory: ''
+subcategory: fiqh
 tag: fiqhibadah
 language: ar
 lang: AR

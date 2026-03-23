@@ -5,7 +5,7 @@ date: 12 فبراير 2026
 createdAt: '2026-02-12'
 popular: false
 category: pemikiran
-subcategory: ''
+subcategory: pemikiran-modern
 tag: ''
 language: ar
 lang: AR

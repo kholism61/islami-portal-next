@@ -5,8 +5,8 @@ date: 13 فبراير 2026
 createdAt: '2026-02-13'
 popular: false
 category: ramadhan
-subcategory: ''
-tag: ramadhan
+subcategory: catatan-ramadhan
+tag: ''
 language: ar
 lang: AR
 thumbnail: assets/images/ramadhan.png
