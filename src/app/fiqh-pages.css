@@ -221,6 +221,12 @@
 .fiqh-page .nav-links {
   display: flex;
   gap: 25px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .fiqh-page .nav-links a {
@@ -331,6 +337,7 @@
   .fiqh-page .nav-container {
     flex-direction: column;
     gap: 10px;
+    align-items: center;
   }
 
   .fiqh-page .logo {
@@ -341,7 +348,17 @@
   .fiqh-page .nav-links {
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 12px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .fiqh-page .nav-links a {

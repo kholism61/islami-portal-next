@@ -1,4 +1,4 @@
-﻿/* =====================
+/* =====================
    BASE
 ===================== */
 body {
@@ -377,6 +377,12 @@ table,
   margin-bottom: 25px;
 }
 
+@media (max-width: 768px) {
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
 .admin-filters {
   display: flex;
   gap: 12px;
@@ -472,11 +478,20 @@ table,
   }
 
   .nav-menu {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-    padding: 0;
+    padding: 10px 14px;
     margin: 0;
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 }
 
@@ -494,6 +509,13 @@ table,
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 
 .footer-col h3,

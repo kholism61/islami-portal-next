@@ -58,13 +58,15 @@ color:white;
 }
 
 body.tool-fidyah .nav-menu{
-
 list-style:none;
-
 display:flex;
-
 gap:22px;
-
+padding:10px 16px;
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+border-radius:16px;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
 @media (max-width: 700px){
@@ -76,19 +78,31 @@ gap:22px;
 
   body.tool-fidyah .nav-menu{
     width:100%;
+    max-width:420px;
+    margin-left:auto;
+    margin-right:auto;
     flex:1 1 100%;
     flex-wrap:wrap;
     column-gap:14px;
     row-gap:8px;
-    justify-content:flex-start;
+    justify-content:center;
   }
 
   body.tool-fidyah.kfi-scope .navbar .nav-menu{
     flex:1 1 100%;
     width:100%;
+    max-width:420px;
+    margin-left:auto;
+    margin-right:auto;
     flex-wrap:wrap;
     overflow:visible;
-    padding-bottom:0;
+    padding:10px 14px;
+    justify-content:center;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:16px;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
   }
 
   body.tool-fidyah.kfi-scope .navbar .nav-container{
@@ -98,21 +112,25 @@ gap:22px;
       "logo lang"
       "menu menu";
     align-items:center !important;
+    justify-items:center;
     row-gap:10px;
   }
 
   body.tool-fidyah.kfi-scope .navbar .logo{
     grid-area:logo;
+    justify-self:start;
   }
 
   body.tool-fidyah.kfi-scope .navbar .kfi-lang-switch{
     grid-area:lang;
     margin-left:0 !important;
+    justify-self:end;
   }
 
   body.tool-fidyah.kfi-scope .navbar .nav-menu{
     grid-area:menu;
-    justify-content:flex-start;
+    justify-self:center;
+    justify-content:center;
   }
 
   body.tool-fidyah.kfi-scope .navbar .nav-menu::-webkit-scrollbar{

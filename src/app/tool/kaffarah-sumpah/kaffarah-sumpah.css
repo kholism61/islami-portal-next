@@ -211,19 +211,24 @@ z-index:1000;
 }
 
 body.tool-kaffarah-sumpah .nav-container{
-
 max-width:1200px;
-
 margin:auto;
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
 padding:15px 20px;
+}
 
+body.tool-kaffarah-sumpah nav{
+display:flex;
+align-items:center;
+gap:14px;
+padding:10px 16px;
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+border-radius:16px;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
 body.tool-kaffarah-sumpah .logo{
@@ -237,17 +242,10 @@ color:#00d4ff;
 }
 
 body.tool-kaffarah-sumpah nav a{
-
 color:white;
-
 text-decoration:none;
-
-margin-left:20px;
-
 font-size:15px;
-
 transition:0.2s;
-
 }
 
 @media (max-width: 640px){
@@ -255,6 +253,8 @@ transition:0.2s;
     padding:12px 14px;
     gap:12px;
     flex-wrap:wrap;
+    flex-direction:column;
+    align-items:center;
   }
 
   body.tool-kaffarah-sumpah .container{
@@ -264,18 +264,26 @@ transition:0.2s;
 
   body.tool-kaffarah-sumpah nav{
     width:100%;
-    overflow-x:auto;
-    overflow-y:hidden;
-    white-space:nowrap;
-    -webkit-overflow-scrolling:touch;
-    padding-bottom:6px;
+    max-width:420px;
+    margin-left:auto;
+    margin-right:auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    padding:10px 14px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:16px;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
   }
 
   body.tool-kaffarah-sumpah nav a{
-    margin-left:0;
-    margin-right:14px;
+    margin:0;
     display:inline-block;
     font-size:14px;
+    white-space:nowrap;
   }
 }
 

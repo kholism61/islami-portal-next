@@ -332,19 +332,18 @@ color:white;
 
 }
 
-/* menu */
-
+/* menu - desktop glass */
 .nav-menu{
-
 list-style:none;
-
 display:flex;
-
 gap:22px;
-
 margin:0;
-padding:0;
-
+padding:10px 16px;
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.18);
+border-radius:16px;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 }
 
 /* link */
@@ -404,9 +403,10 @@ justify-content:center;
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
+align-items:center;
 gap:10px;
 padding:10px 14px;
-margin:0;
+margin:0 auto;
 list-style:none;
 background:rgba(255,255,255,0.12);
 border:1px solid rgba(255,255,255,0.18);
@@ -415,6 +415,7 @@ backdrop-filter:blur(12px);
 -webkit-backdrop-filter:blur(12px);
 width:100%;
 max-width:420px;
+align-self:center;
 }
 
 .nav-menu li{
