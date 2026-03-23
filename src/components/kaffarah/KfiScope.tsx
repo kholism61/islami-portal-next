@@ -16,7 +16,7 @@ declare global {
 }
 
 const SCRIPT_ID = "kfi-i18n-script";
-const SCRIPT_SRC = "/js/kaffarah-fidyah-i18n.js?v=20260323";
+const SCRIPT_SRC = "/js/kaffarah-fidyah-i18n.js?v=20260324";
 
 function loadKfiI18nScript() {
   if (typeof window === "undefined") return Promise.resolve();

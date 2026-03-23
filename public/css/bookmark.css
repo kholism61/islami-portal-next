@@ -1,3 +1,15 @@
+body {
+  background: linear-gradient(
+    155deg,
+    #059669 0%,
+    #0d9488 20%,
+    #06b6d4 45%,
+    #0284c7 70%,
+    #1e40af 100%
+  ) !important;
+  background-attachment: fixed !important;
+}
+
 .navbar {
   position: sticky;
   top: 0;
@@ -730,7 +742,15 @@ body.dark .reading-bar {
    DARK MODE BOOKMARK PAGE
 ========================= */
 body.dark {
-  background: #0f172a;
+  background: linear-gradient(
+    155deg,
+    #064e3b 0%,
+    #0f766e 25%,
+    #0c4a6e 55%,
+    #1e3a8a 85%,
+    #0f172a 100%
+  ) !important;
+  background-attachment: fixed !important;
   color: #e5e7eb;
 }
 

@@ -627,6 +627,26 @@ const categoryMeta = {
     icon: "📑",
     aliases: ["fatwa", "fatwa dar al-ifta", "dar al-ifta", "dar al-ifta fatwas", "ÙØªÙˆÙ‰", "ÙØªØ§ÙˆÙ‰ Ø¯Ø§Ø± Ø§Ù„Ø¥ÙØªØ§Ø¡"],
   },
+  kalam: {
+    labels: { id: "Ilmu Kalam", en: "Islamic Theology", ar: "علم الكلام" },
+    icon: "🧭",
+    aliases: ["kalam", "ilmu kalam", "kalam-akidah", "kalam-klasik", "kalam-modern", "علم الكلام"],
+  },
+  sirah: {
+    labels: { id: "Sirah Nabawiyah", en: "Prophetic Biography", ar: "السيرة النبوية" },
+    icon: "🕊️",
+    aliases: ["sirah", "sirah nabawiyah", "sirah-makkiyah", "sirah-madaniyah", "السيرة", "السيرة النبوية"],
+  },
+  psikologi: {
+    labels: { id: "Psikologi", en: "Psychology", ar: "علم النفس" },
+    icon: "🧠",
+    aliases: ["psikologi", "psychology", "nafs-dalam-islam", "psikologi-ibadah", "tazkiyatun-nafs", "psikologi-sosial", "psikologi-pendidikan", "kesehatan-mental", "علم النفس"],
+  },
+  kontemporer: {
+    labels: { id: "Tantangan Zaman", en: "Contemporary Challenges", ar: "التحديات المعاصرة" },
+    icon: "🌐",
+    aliases: ["kontemporer", "tantangan zaman", "isu kontemporer", "etika-digital", "politik-global", "gender", "ekonomi-modern", "التحديات المعاصرة"],
+  },
 };
 
 categoryMeta.palestina = {
@@ -704,40 +724,97 @@ function getCanonicalCategoryKey(category = "") {
   return Object.entries(categoryMeta).find(([, meta]) => meta.aliases.includes(token))?.[0] || null;
 }
 
+/* Subkategori mengikuti ID, tampilan pakai label id/en/ar */
+const subcategoryMeta = {
+  "catatan-ramadhan": { id: "Catatan Ramadhan", en: "Ramadan Notes", ar: "ملاحظات رمضان" },
+  "tadabbur": { id: "Tadabbur", en: "Reflection", ar: "التدبر" },
+  "sejarah-azhar": { id: "Sejarah Azhar", en: "Al-Azhar History", ar: "تاريخ الأزهر" },
+  "fiqh": { id: "Fiqh", en: "Fiqh", ar: "الفقه" },
+  "ushulfiqh": { id: "Ushul Fiqh", en: "Usul al-Fiqh", ar: "أصول الفقه" },
+  "hadis-mustolah": { id: "Mustolah Hadis", en: "Hadith Terminology", ar: "مصطلح الحديث" },
+  "hadis-ulumul": { id: "Ulumul Hadis", en: "Hadith Sciences", ar: "علوم الحديث" },
+  "syamail": { id: "Syamail", en: "Shamā'il", ar: "الشمائل" },
+  "tasawuf-tarekat": { id: "Tasawuf & Tarekat", en: "Tasawuf & Tariqa", ar: "التصوف والطريقة" },
+  "tasawuf-akhlak": { id: "Tasawuf & Akhlak", en: "Tasawuf & Character", ar: "التصوف والأخلاق" },
+  "politik-islam": { id: "Politik Islam", en: "Islamic Politics", ar: "السياسة الإسلامية" },
+  "pemikiran-modern": { id: "Pemikiran Modern", en: "Modern Thought", ar: "الفكر الحديث" },
+  "pemikiran-klasik": { id: "Pemikiran Klasik", en: "Classical Thought", ar: "الفكر الكلاسيكي" },
+  "tradisi-keilmuan": { id: "Tradisi Keilmuan", en: "Scholarly Tradition", ar: "التقاليد العلمية" },
+  "ibadah-shalat": { id: "Ibadah Shalat", en: "Prayer Worship", ar: "عبادة الصلاة" },
+  "ibadah-puasa": { id: "Ibadah Puasa", en: "Fasting Worship", ar: "عبادة الصوم" },
+  "quran-tafsir-surah": { id: "Tafsir Surah", en: "Surah Tafsir", ar: "تفسير السور" },
+  "quran-tafsir-ayat": { id: "Tafsir Ayat", en: "Verse Tafsir", ar: "تفسير الآيات" },
+};
+
 function getCanonicalSubcategoryKey(categoryKey, subcategory = "") {
   const token = normalizeCategoryLabel(subcategory);
   if (!token) return null;
 
+  if (categoryKey === "ramadhan") {
+    if (token.includes("catatan") || token.includes("note") || token.includes("spiritual") || token.includes("reflection")) return "catatan-ramadhan";
+    if (token.includes("tadabbur") || token.includes("reflect")) return "tadabbur";
+    if (token.includes("sejarah") || token.includes("azhar") || token.includes("history")) return "sejarah-azhar";
+  }
+
   if (categoryKey === "hadis") {
-    if (token.includes("mustolah")) return "hadis-mustolah";
+    if (token.includes("mustolah") || token.includes("mustalah")) return "hadis-mustolah";
     if (token.includes("ulumul") || token.includes("ulum")) return "hadis-ulumul";
     if (token.includes("syamail") || token.includes("syama")) return "syamail";
   }
 
+  if (categoryKey === "tasawuf") {
+    if (token.includes("tarekat") || token.includes("tariqa") || token.includes("tarekat")) return "tasawuf-tarekat";
+    if (token.includes("akhlak") || token.includes("character") || token.includes("and character")) return "tasawuf-akhlak";
+  }
+
+  if (categoryKey === "politik") {
+    if (token.includes("politik") || token.includes("political") || token.includes("islam")) return "politik-islam";
+  }
+
   if (categoryKey === "pemikiran") {
     if (token.includes("klasik") || token.includes("classic")) return "pemikiran-klasik";
-    if (token.includes("modern")) return "pemikiran-modern";
+    if (token.includes("modern") || token.includes("social") || token.includes("islamic")) return "pemikiran-modern";
+  }
+
+  if (categoryKey === "keilmuan") {
+    if (token.includes("tradisi") || token.includes("scholarly") || token.includes("tradition")) return "tradisi-keilmuan";
+  }
+
+  if (categoryKey === "ilmusyariah") {
+    if (token === "fiqh" || token.includes("fiqh")) return "fiqh";
+    if (token.includes("ushul")) return "ushulfiqh";
+  }
+
+  if (categoryKey === "ibadah") {
+    if (token.includes("shalat") || token.includes("prayer")) return "ibadah-shalat";
+    if (token.includes("puasa") || token.includes("fasting")) return "ibadah-puasa";
+  }
+
+  if (categoryKey === "quran") {
+    if (token.includes("surah") || token.includes("surat")) return "quran-tafsir-surah";
+    if (token.includes("ayat") || token.includes("verse")) return "quran-tafsir-ayat";
   }
 
   if (categoryKey === "palestina") {
-    if (token.includes("sejarah") || token.includes("history") || token.includes("konflik") || token.includes("conflict")) {
-      return "palestina-sejarah";
-    }
-    if (token.includes("opini") || token.includes("opinion") || token.includes("analisis") || token.includes("analysis")) {
-      return "palestina-opini";
-    }
+    if (token.includes("sejarah") || token.includes("history") || token.includes("konflik") || token.includes("conflict")) return "palestina-sejarah";
+    if (token.includes("opini") || token.includes("opinion") || token.includes("analisis") || token.includes("analysis")) return "palestina-opini";
   }
 
   if (categoryKey === "fatwa") {
-    if (token.includes("ibadah") || token.includes("worship") || token.includes("ritual")) {
-      return "fatwa-ibadah";
-    }
-    if (token.includes("kontemporer") || token.includes("contemporary") || token.includes("modern")) {
-      return "fatwa-kontemporer";
-    }
+    if (token.includes("ibadah") || token.includes("worship") || token.includes("ritual")) return "fatwa-ibadah";
+    if (token.includes("kontemporer") || token.includes("contemporary") || token.includes("modern")) return "fatwa-kontemporer";
   }
 
   return null;
+}
+
+function getLocalizedSubcategory(subcategoryKey, categoryKey, lang = getSiteLang()) {
+  const key = normalizeSlugKey(subcategoryKey) || getCanonicalSubcategoryKey(categoryKey, subcategoryKey);
+  if (key && subcategoryMeta[key]) {
+    const meta = subcategoryMeta[key];
+    return meta[lang] || meta.id || subcategoryKey || "";
+  }
+  return repairMojibakeString(String(subcategoryKey || "")).trim() || subcategoryKey || "";
 }
 
 function getStableArticleMeta(id, rawArticle = null, viewArticle = null) {
@@ -1258,12 +1335,14 @@ function renderRelatedArticles(articleId, articleKeys, currentRaw, currentView) 
         || rawItem;
       if (!item) return "";
 
+      const itemStable = getStableArticleMeta(key, rawItem, item);
+      const itemCatLabel = getLocalizedCategory(itemStable.rawCategory || item.kategori, activeLang);
       return `
         <div class="related-card">
           <span class="lang-badge">${item.lang || "ID"}</span>
           <a href="${buildArticleHref(key, item.judul || key)}" class="related-link">
             <img src="${item.thumbnail || "assets/images/default.jpg"}" class="related-thumb" alt="${item.judul || "Artikel"}">
-            <span class="category">${item.kategori || ""}</span>
+            <span class="category">${itemCatLabel || ""}</span>
             <h4>${item.judul || ""}</h4>
             <span class="related-read">${uiText("read_short")}</span>
           </a>
@@ -1303,18 +1382,19 @@ function renderRecommendedArticles(articleId) {
 
   if (section) section.style.display = "";
 
-  const currentCategory = normalize(currentView?.kategori || currentRaw?.kategori || "");
-  const currentSubcategory = normalize(currentView?.subkategori || currentRaw?.subkategori || "");
+  const currentStableMeta = getStableArticleMeta(articleId, currentRaw, currentView);
+  const currentCategoryKey = currentStableMeta?.categoryKey || "";
+  const currentSubcategoryKey = currentStableMeta?.subcategoryKey || "";
   const currentTag = normalize(currentView?.tag || currentRaw?.tag || "");
 
   const reading = safeJsonParse("readingProgress", {});
   const userCategories = {};
 
   Object.keys(reading).forEach((id) => {
-    const article = getArticleView(id) || getArticleRawById(id);
-    const cat = normalize(article?.kategori || "");
-    if (!cat) return;
-    userCategories[cat] = (userCategories[cat] || 0) + 1;
+    const meta = getStableArticleMeta(id, getArticleRawById(id), getArticleView(id));
+    const catKey = meta?.categoryKey || "";
+    if (!catKey) return;
+    userCategories[catKey] = (userCategories[catKey] || 0) + 1;
   });
 
   const allKeys = getSortedGlobalArticleKeysByDate(true);
@@ -1326,15 +1406,16 @@ function renderRecommendedArticles(articleId) {
       const view = strictOnly ? getStrictLocalizedArticle(id) : (getStrictLocalizedArticle(id) || getArticleView(id) || rawArticle);
       if (!rawArticle || !view) return null;
 
-      const cat = normalize(view.kategori || rawArticle.kategori || "");
-      const sub = normalize(view.subkategori || rawArticle.subkategori || "");
+      const itemStableMeta = getStableArticleMeta(id, rawArticle, view);
+      const catKey = itemStableMeta?.categoryKey || "";
+      const subKey = itemStableMeta?.subcategoryKey || "";
       const tag = normalize(view.tag || rawArticle.tag || "");
 
       let score = 0;
-      if (cat && cat === currentCategory) score += 3;
-      if (sub && sub === currentSubcategory) score += 2;
+      if (catKey && catKey === currentCategoryKey) score += 3;
+      if (subKey && subKey === currentSubcategoryKey) score += 2;
       if (tag && tag === currentTag) score += 2;
-      if (userCategories[cat]) score += userCategories[cat] * 2;
+      if (userCategories[catKey]) score += userCategories[catKey] * 2;
       if (isFlagEnabled(rawArticle.popular)) score += 2;
       if (isFlagEnabled(rawArticle.featured)) score += 1;
 
@@ -1364,13 +1445,17 @@ function renderRecommendedArticles(articleId) {
   }
 
   container.innerHTML = scored
-    .map((item) => `
+    .map((item) => {
+      const recStable = getStableArticleMeta(item.id, item.rawArticle, item.view);
+      const recCatLabel = getLocalizedCategory(recStable.rawCategory || item.view.kategori, activeLang);
+      return `
       <a href="${buildArticleHref(item.id, item.view.judul || item.id)}" class="recommended-card">
-        <span class="rec-cat">${item.view.kategori || ""}</span>
+        <span class="rec-cat">${recCatLabel || ""}</span>
         <h4>${item.view.judul || ""}</h4>
-        <p>${formatArticleDate(item.view || item.rawArticle, getSiteLang())}</p>
+        <p>${formatArticleDate(item.view || item.rawArticle, activeLang)}</p>
       </a>
-    `)
+    `;
+    })
     .join("");
 }
 
@@ -1837,11 +1922,11 @@ document.querySelectorAll(".sidebar-toggle").forEach(btn => {
 /* =====================
    SEARCH ARTIKEL (ENHANCED)
 ===================== */
-var searchInput = document.getElementById("searchInput");
+var articleSearchInput = document.getElementById("searchInput");
 var emptyState = document.getElementById("empty-state");
 
 function runSearch() {
-  const keyword = searchInput.value.toLowerCase().trim();
+  const keyword = (articleSearchInput && articleSearchInput.value || "").toLowerCase().trim();
   let visibleCount = 0;
 
   cards.forEach(card => {
@@ -1860,17 +1945,17 @@ function runSearch() {
   return visibleCount;
 }
 
-if (searchInput) {
-  if (searchInput.dataset.searchBound !== "1") {
-    searchInput.dataset.searchBound = "1";
+if (articleSearchInput) {
+  if (articleSearchInput.dataset.searchBound !== "1") {
+    articleSearchInput.dataset.searchBound = "1";
 
     // realtime search
-    searchInput.addEventListener("input", () => {
+    articleSearchInput.addEventListener("input", () => {
       runSearch();
     });
 
     // tekan ENTER
-    searchInput.addEventListener("keydown", (e) => {
+    articleSearchInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
 
@@ -2579,7 +2664,11 @@ function renderHomeCategoryGrid() {
       ramadhan: "/assets/images/ramadhan.png",
       keilmuan: "/assets/images/kajian.png",
       palestina: "/assets/images/palestina.png",
-      fatwa: "/assets/images/dar-ifta.jpg"
+      fatwa: "/assets/images/dar-ifta.jpg",
+      kalam: "/assets/images/ilmu%20kalam.webp",
+      sirah: "/assets/images/sirah%20nabawiyah.webp",
+      psikologi: "/assets/images/psikologi.webp",
+      kontemporer: "/assets/images/tantanganzaman.webp"
     };
     return map[key] || fallback;
   };
@@ -2986,7 +3075,17 @@ if (penulisEl) penulisEl.textContent =
 if (tanggalEl) tanggalEl.textContent =
   `📅 ${formatArticleDate(rawData || data, getSiteLang())}`;
 
-if (kategoriEl) kategoriEl.textContent = data.kategori;
+const articleStableMeta = getStableArticleMeta(articleId, rawData || data, data);
+  const localizedCategory = getLocalizedCategory(articleStableMeta.rawCategory || data.kategori, getSiteLang());
+  const localizedSubcategory = articleStableMeta.subcategoryKey
+    ? getLocalizedSubcategory(articleStableMeta.subcategoryKey, articleStableMeta.categoryKey, getSiteLang())
+    : "";
+
+  if (kategoriEl) {
+    kategoriEl.textContent = localizedSubcategory
+      ? `${localizedCategory} › ${localizedSubcategory}`
+      : (localizedCategory || data.kategori || "");
+  }
   if (isiEl) isiEl.innerHTML = data.isi;
   wrapArticleReferenceSection(document.getElementById("isi-artikel"));
   formatArticleBlockquotes(document.getElementById("isi-artikel"));
@@ -2994,8 +3093,7 @@ if (kategoriEl) kategoriEl.textContent = data.kategori;
   applyArabicDirection(document.getElementById("isi-artikel"));
   applyRTL(getSiteLang());
 
-  const breadcrumbStableMeta = getStableArticleMeta(articleId, rawData || data, data);
-  const breadcrumbCategoryText = getLocalizedCategory(breadcrumbStableMeta.rawCategory || data.kategori, getSiteLang()) || data.kategori || "";
+  const breadcrumbCategoryText = localizedCategory || data.kategori || "";
   renderArticleBreadcrumb(breadcrumbCategoryText, data.judul || "");
 
   const index = articleKeys.indexOf(articleId);
@@ -4083,7 +4181,7 @@ function updateOnlineStatus() {
   if (!el) return;
 
   if (navigator.onLine) {
-    el.textContent = uiText("online_back");
+    el.textContent = uiText("online_status");
     el.classList.remove("offline");
   } else {
     el.textContent = uiText("offline_status");
@@ -4093,6 +4191,7 @@ function updateOnlineStatus() {
 
 window.addEventListener("online", updateOnlineStatus);
 window.addEventListener("offline", updateOnlineStatus);
+window.addEventListener("portal-language-change", updateOnlineStatus);
 
 updateOnlineStatus();
 // jalankan saat halaman dimuat
@@ -4111,6 +4210,11 @@ function showOfflineToast(message) {
   setTimeout(() => {
     toast.classList.remove("show");
   }, 4000);
+}
+
+// Expose for bookmark.js and offline.js grid category localization
+if (typeof window !== "undefined") {
+  window.getLocalizedCategory = getLocalizedCategory;
 }
 
 // cek status awal

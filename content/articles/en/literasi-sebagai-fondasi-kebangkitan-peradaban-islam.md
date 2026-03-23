@@ -5,7 +5,7 @@ date: 2 February 2026
 createdAt: '2026-02-02'
 popular: false
 category: keilmuan
-subcategory: scholarly-tradition
+subcategory: tradisi-keilmuan
 tag: ''
 language: en
 lang: EN

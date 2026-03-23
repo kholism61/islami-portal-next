@@ -460,12 +460,18 @@ function initBookmarkPage() {
     defaultOption.textContent = t("filter_all");
     filterSelect.appendChild(defaultOption);
 
-    Array.from(categories).sort((a, b) => a.localeCompare(b)).forEach((category) => {
-      const option = document.createElement("option");
-      option.value = category;
-      option.textContent = category;
-      filterSelect.appendChild(option);
-    });
+    const getCatLabel = (cat) =>
+      typeof window.getLocalizedCategory === "function"
+        ? window.getLocalizedCategory(cat, getSiteLang())
+        : cat;
+    Array.from(categories)
+      .sort((a, b) => (getCatLabel(a) || "").localeCompare(getCatLabel(b) || ""))
+      .forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = getCatLabel(category) || category;
+        filterSelect.appendChild(option);
+      });
 
     filterSelect.value = Array.from(filterSelect.options).some((opt) => opt.value === current)
       ? current
@@ -530,7 +536,7 @@ function initBookmarkPage() {
       item.innerHTML = `
         <img src="${thumb}" class="bookmark-thumb" alt="${article.judul || id}">
         <div class="bookmark-body">
-          <span class="bookmark-category">${article.kategori || ""}</span>
+          <span class="bookmark-category">${(typeof window.getLocalizedCategory === "function" ? window.getLocalizedCategory(article.kategori, getSiteLang()) : (article.kategori || ""))}</span>
           <h3>${article.judul || ""}</h3>
           <p>${preview}...</p>
           <div class="reading-bar">
@@ -758,7 +764,7 @@ function initBookmarkPage() {
 
       content += `
         <h2>${article.judul || id}</h2>
-        <p><strong>${t("meta_category")}:</strong> ${article.kategori || "-"}</p>
+        <p><strong>${t("meta_category")}:</strong> ${(typeof window.getLocalizedCategory === "function" ? window.getLocalizedCategory(article.kategori, getSiteLang()) : article.kategori) || "-"}</p>
         <p><strong>${t("meta_date")}:</strong> ${article.tanggal || "-"}</p>
         <hr>
         ${article.isi || ""}

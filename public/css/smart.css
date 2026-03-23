@@ -245,20 +245,36 @@ body.rtl-ui .lang-switch {
   }
 }
 
-/* Arabic/RTL: center title, desktop horizontal */
+/* Arabic/RTL: Portal (logo) di kanan, nav dari kanan */
 @media (min-width: 841px) {
-  body.rtl-ui .nav-container {
-    flex-direction: row-reverse;
+  body.rtl-ui .nav-container,
+  html.rtl-ui .nav-container,
+  html[dir="rtl"] .nav-container {
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 
-  body.rtl-ui .nav-menu {
+  body.rtl-ui .logo,
+  html.rtl-ui .logo,
+  html[dir="rtl"] .logo {
     flex-direction: row-reverse;
+    margin-inline-start: auto;
+  }
+
+  body.rtl-ui .nav-menu,
+  html.rtl-ui .nav-menu,
+  html[dir="rtl"] .nav-menu {
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 }
 
 @media (max-width: 840px) {
-  body.rtl-ui .nav-menu {
-    flex-direction: row-reverse;
+  body.rtl-ui .nav-menu,
+  html.rtl-ui .nav-menu,
+  html[dir="rtl"] .nav-menu {
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 }
 

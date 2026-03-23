@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   const STORAGE_KEYS = {
     users: "islamiPortalUsers",
     session: "islamiPortalSession",
@@ -530,7 +530,10 @@
   }
 
   function scheduleNavBrandIconify() {
-    window.requestAnimationFrame(() => iconifyNavBrand(document));
+    window.requestAnimationFrame(() => {
+      iconifyNavBrand(document);
+      window.dispatchEvent(new CustomEvent("portal-brand-ready"));
+    });
   }
 
   ensureSeedData();

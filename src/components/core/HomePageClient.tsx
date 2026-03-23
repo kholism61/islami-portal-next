@@ -47,6 +47,7 @@ export default function HomePageClient() {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       />
       <link rel="stylesheet" href="/css/style.css?v=20260321a" />
+      <link rel="stylesheet" href="/css/home-ads.css?v=20260323" />
 
       <div className="home-page">
         <section className="quick-menu">
@@ -210,6 +211,53 @@ export default function HomePageClient() {
               <span id="stat-offline">0</span>
               <small>Artikel Offline</small>
             </div>
+          </div>
+        </section>
+
+        <section className="home-ads" aria-label="Ruang iklan">
+          <div className="home-ads-banner">
+            <div className="home-ads-slide active">
+              <div className="home-ads-slide-placeholder">
+                <span className="home-ads-size">728 × 90 px</span>
+                <span className="home-ads-placeholder-text">Letakkan iklan Anda di sini</span>
+                <a href="/kontak" className="home-ads-contact-link">Hubungi kami</a>
+              </div>
+            </div>
+            <div className="home-ads-slide">
+              <div className="home-ads-slide-placeholder">
+                <span className="home-ads-size">728 × 90 px</span>
+                <span className="home-ads-placeholder-text">Letakkan iklan Anda di sini</span>
+                <a href="/kontak" className="home-ads-contact-link">Hubungi kami</a>
+              </div>
+            </div>
+            <div className="home-ads-slide">
+              <div className="home-ads-slide-placeholder">
+                <span className="home-ads-size">728 × 90 px</span>
+                <span className="home-ads-placeholder-text">Letakkan iklan Anda di sini</span>
+                <a href="/kontak" className="home-ads-contact-link">Hubungi kami</a>
+              </div>
+            </div>
+            <div className="home-ads-slide">
+              <div className="home-ads-slide-placeholder">
+                <span className="home-ads-size">728 × 90 px</span>
+                <span className="home-ads-placeholder-text">Letakkan iklan Anda di sini</span>
+                <a href="/kontak" className="home-ads-contact-link">Hubungi kami</a>
+              </div>
+            </div>
+            <div className="home-ads-slide">
+              <div className="home-ads-slide-placeholder">
+                <span className="home-ads-size">728 × 90 px</span>
+                <span className="home-ads-placeholder-text">Letakkan iklan Anda di sini</span>
+                <a href="/kontak" className="home-ads-contact-link">Hubungi kami</a>
+              </div>
+            </div>
+          </div>
+          <div className="home-ads-dots">
+            <button type="button" className="home-ads-dot active" aria-label="Iklan 1" data-ads-dot="0" />
+            <button type="button" className="home-ads-dot" aria-label="Iklan 2" data-ads-dot="1" />
+            <button type="button" className="home-ads-dot" aria-label="Iklan 3" data-ads-dot="2" />
+            <button type="button" className="home-ads-dot" aria-label="Iklan 4" data-ads-dot="3" />
+            <button type="button" className="home-ads-dot" aria-label="Iklan 5" data-ads-dot="4" />
           </div>
         </section>
 
@@ -1570,6 +1618,7 @@ export default function HomePageClient() {
       <Script src="/js/bookmark.js?v=20260321a" strategy="afterInteractive" type="module" />
       <Script src="/js/prayer.js?v=20260321a" strategy="afterInteractive" type="module" />
       <Script src="/js/i18n.js?v=20260321a" strategy="afterInteractive" />
+      <Script src="/js/home-ads.js?v=20260323" strategy="afterInteractive" />
 
     </>
   );

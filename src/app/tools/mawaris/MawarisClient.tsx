@@ -19,6 +19,7 @@ function getMawarisWindow() {
 export default function MawarisClient() {
   useEffect(() => {
     let active = true;
+    window.dispatchEvent(new CustomEvent("mw:page-ready"));
 
     void import("./mawaris-engine.js")
       .then(() => {
@@ -27,6 +28,7 @@ export default function MawarisClient() {
         }
 
         getMawarisWindow().initMawarisPage?.();
+        window.dispatchEvent(new CustomEvent("mw:page-ready"));
       })
       .catch((error) => {
         console.error("Failed to initialize mawaris engine.", error);

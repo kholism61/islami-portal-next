@@ -5,7 +5,7 @@ date: 10 February 2026
 createdAt: '2026-02-10'
 popular: true
 category: tasawuf
-subcategory: tasawuf-and-character
+subcategory: tasawuf-akhlak
 tag: ''
 language: en
 lang: EN

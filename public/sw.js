@@ -1,4 +1,4 @@
-const CACHE_NAME = "islami-portal-next-v9";
+const CACHE_NAME = "islami-portal-next-v10";
 const OFFLINE_URL = "/offline";
 
 const PRECACHE_URLS = [
@@ -40,6 +40,21 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+/* Terima SKIP_WAITING dari client agar SW baru aktif segera */
+self.addEventListener("message", (event) => {
+  if (event?.data?.type === "SKIP_WAITING") {
+    try {
+      self.skipWaiting();
+    } catch {}
+  }
+});
+
+/* Fetch opts: no-store untuk nav/html agar refresh biasa dapat konten terbaru */
+function fetchOpts(request, forceFresh) {
+  if (!forceFresh) return {};
+  return { cache: "no-store" };
+}
+
 self.addEventListener("fetch", (event) => {
   const request = event.request;
 
@@ -65,6 +80,9 @@ self.addEventListener("fetch", (event) => {
     || url.pathname.endsWith(".svg")
     || url.pathname.endsWith(".ico");
 
+  /* Nav & HTML: selalu fetch fresh (no-store) supaya 1x refresh = konten baru */
+  const forceFresh = isNavigation || isHtml;
+
   event.respondWith(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
@@ -85,7 +103,7 @@ self.addEventListener("fetch", (event) => {
       }
 
       try {
-        const networkResponse = await fetch(request);
+        const networkResponse = await fetch(request, fetchOpts(request, forceFresh));
         if (networkResponse && networkResponse.status === 200 && networkResponse.type === "basic") {
           cache.put(request, networkResponse.clone());
         }

@@ -115,6 +115,7 @@ body.kfi-scope .navbar nav {
 
 body.kfi-scope.rtl-ui .logo {
   flex-direction: row-reverse;
+  margin-inline-start: auto; /* icon di pinggir kanan paling ujung */
 }
 
 body.kfi-scope.rtl-ui .logo-text {
@@ -137,7 +138,7 @@ body.kfi-scope.rtl-ui .logo-text {
   }
 }
 
-/* Mobile: glass nav TETAP DI TENGAH - Kaffarah, Fidyah, Sumpah */
+/* Mobile: hanya logo (Islami Portal) punya glass, nav bawah polos */
 @media (max-width: 768px) {
   body.kfi-scope .navbar,
   body.kfi-scope header.navbar {
@@ -157,56 +158,57 @@ body.kfi-scope.rtl-ui .logo-text {
     justify-content: center !important;
     width: 100% !important;
     max-width: 420px !important;
-    padding: 0 16px !important;
-    gap: 12px !important;
+    padding: 0 !important;
+    gap: 10px !important;
     box-sizing: border-box !important;
   }
 
+  /* Nav menu: polos tanpa glass */
   body.kfi-scope .navbar .nav-menu,
   body.kfi-scope .navbar nav,
   body.kfi-scope header.navbar .nav-menu,
   body.kfi-scope header.navbar nav {
     flex: 0 0 auto !important;
-    width: 100% !important;
-    max-width: 420px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    align-self: stretch !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 10px !important;
-    padding: 10px 14px !important;
-    background: rgba(255, 255, 255, 0.12) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    border-radius: 16px !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   body.kfi-scope .navbar .logo,
   body.kfi-scope .navbar .kfi-lang-switch,
-  body.kfi-scope header.navbar .logo {
+  body.kfi-scope header.navbar .logo,
+  body.kfi-scope header.navbar .kfi-lang-switch {
     align-self: center !important;
   }
 
-  body.kfi-scope .navbar .nav-menu::-webkit-scrollbar,
-  body.kfi-scope header.navbar nav::-webkit-scrollbar {
-    height: 4px;
-  }
-  body.kfi-scope .navbar .nav-menu::-webkit-scrollbar-thumb,
-  body.kfi-scope header.navbar nav::-webkit-scrollbar-thumb {
-    background: rgba(125, 211, 252, 0.35);
-    border-radius: 999px;
+  body.kfi-scope .navbar .kfi-lang-switch,
+  body.kfi-scope header.navbar .kfi-lang-switch {
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
-  body.kfi-scope .navbar .nav-menu::-webkit-scrollbar {
-    height: 4px;
+  html[dir="rtl"] body.kfi-scope .navbar .nav-menu,
+  html[dir="rtl"] body.kfi-scope .navbar nav,
+  html[dir="rtl"] body.kfi-scope header.navbar .nav-menu,
+  html[dir="rtl"] body.kfi-scope header.navbar nav,
+  body.kfi-scope.rtl-ui .navbar .nav-menu,
+  body.kfi-scope.rtl-ui .navbar nav,
+  body.kfi-scope.rtl-ui header.navbar .nav-menu,
+  body.kfi-scope.rtl-ui header.navbar nav {
+    direction: rtl;
   }
 
-  body.kfi-scope .navbar .nav-menu::-webkit-scrollbar-thumb {
-    background: rgba(125, 211, 252, 0.35);
-    border-radius: 999px;
+  body.kfi-scope.rtl-ui .navbar .logo,
+  body.kfi-scope.rtl-ui header.navbar .logo {
+    justify-content: center;
+    margin-inline-start: 0 !important;
   }
 }
 
@@ -218,22 +220,14 @@ body.kfi-scope.rtl-ui {
   text-align: right;
 }
 
-/* Arabic/RTL mobile: glass nav tetap center, content dari kanan */
-@media (max-width: 768px) {
-  html[dir="rtl"] body.kfi-scope .navbar .nav-container,
-  html.rtl-ui body.kfi-scope .navbar .nav-container,
-  body.kfi-scope.rtl-ui .navbar .nav-container {
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-}
 
-/* Arabic/RTL: nav mulai dari kanan (desktop) - semua tools kaffarah */
+/* Arabic/RTL: Portal (logo) di kanan - kaffarah, fidyah, kaffarah-jima */
 @media (min-width: 641px) {
   html[dir="rtl"] body.kfi-scope .navbar .nav-container,
   html.rtl-ui body.kfi-scope .navbar .nav-container,
   body.kfi-scope.rtl-ui .navbar .nav-container {
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 
   html[dir="rtl"] body.kfi-scope .navbar .nav-menu,
@@ -242,19 +236,11 @@ body.kfi-scope.rtl-ui {
   html.rtl-ui body.kfi-scope .navbar nav,
   body.kfi-scope.rtl-ui .navbar .nav-menu,
   body.kfi-scope.rtl-ui .navbar nav {
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 }
 
-@media (max-width: 640px) {
-  body.kfi-scope.rtl-ui .navbar .logo {
-    justify-content: center;
-  }
-
-  body.kfi-scope.rtl-ui .navbar .nav-menu {
-    flex-direction: row-reverse;
-  }
-}
 
 body.kfi-scope .kfi-hero-shell {
   display: flex;

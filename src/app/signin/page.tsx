@@ -25,7 +25,7 @@ export default function SignInPage() {
             <span className="brand-badge" aria-hidden="true">
               <Image src="/favicon.ico" alt="" width={24} height={24} priority />
             </span>
-            <span>
+            <span className="brand-text">
               <strong>Portal Literasi Islam</strong>
               <small>Masuk ke portal literasi &amp; dashboard admin</small>
             </span>

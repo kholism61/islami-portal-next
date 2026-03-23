@@ -342,8 +342,12 @@ body.rtl-ui .smart-method-list {
   color: #dbeafe;
 }
 
+/* Arabic/RTL: seluruh halaman rata kanan */
+html[dir="rtl"],
+html.rtl-ui,
 body.rtl-ui {
   direction: rtl;
+  text-align: right;
 }
 
 body.rtl-ui .lang-switch {
@@ -355,7 +359,38 @@ body.rtl-ui .reset-wrap {
   justify-content: flex-start;
 }
 
+/* Arabic/RTL: Portal (logo) di kanan, icon di pinggir kanan paling ujung - Smart Fiqh Puasa */
+@media (min-width: 801px) {
+  body.rtl-ui .nav-container,
+  html.rtl-ui .nav-container,
+  html[dir="rtl"] .nav-container {
+    flex-direction: row !important;
+    direction: rtl !important;
+  }
+
+  body.rtl-ui .logo,
+  html.rtl-ui .logo,
+  html[dir="rtl"] .logo {
+    flex-direction: row-reverse;
+    margin-inline-start: auto;
+  }
+
+  body.rtl-ui .nav-menu,
+  html.rtl-ui .nav-menu,
+  html[dir="rtl"] .nav-menu {
+    flex-direction: row !important;
+    direction: rtl !important;
+  }
+}
+
 @media (max-width: 800px) {
+  body.rtl-ui .nav-menu,
+  html.rtl-ui .nav-menu,
+  html[dir="rtl"] .nav-menu {
+    flex-direction: row !important;
+    direction: rtl !important;
+  }
+
   .nav-container {
     align-items: center;
     flex-direction: column;

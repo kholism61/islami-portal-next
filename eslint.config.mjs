@@ -17,7 +17,7 @@ const eslintConfig = defineConfig([
     "tool/**",
     "tools/**",
     "smart-fiqh/**",
-    "sw.js",
+    "public/sw.js",
     "public/legacy/**",
   ]),
 

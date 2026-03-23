@@ -11,16 +11,16 @@ export default function ZakatInfoPage() {
   return (
     <div className="page-zakat-info">
       <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      <link rel="stylesheet" href="/css/zakat.css?v=20260323b" />
+      <link rel="stylesheet" href="/css/zakat.css?v=20260323d" />
 
       <nav className="main-navbar">
         <div className="nav-container">
-          <div className="logo">
-            <span className="logo-glass">
-              <img src="/favicon.ico" alt="" className="logo-icon" width={12} height={12} />
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="nav-logo-glass">
+              <img src="/favicon.ico" alt="" className="nav-logo-glass" width={12} height={12} />
             </span>
             <span className="logo-text">Portal Literasi Islam</span>
-          </div>
+          </Link>
           <div className="nav-links">
             <Link href="/">Beranda</Link>
             <Link href="/zakat">Kalkulator Zakat</Link>
@@ -1481,7 +1481,7 @@ export default function ZakatInfoPage() {
         </svg>
       </button>
 
-      <Script src="/js/zakat-pages-i18n.js?v=20260318b" strategy="afterInteractive" />
+      <Script src="/js/zakat-pages-i18n.js?v=20260323c" strategy="afterInteractive" />
       <Script src="/js/scroll-to-top.js?v=20260318b" strategy="afterInteractive" />
     </div>
   );

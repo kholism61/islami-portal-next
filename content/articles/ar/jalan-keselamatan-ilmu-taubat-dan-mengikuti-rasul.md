@@ -5,7 +5,7 @@ date: 10 فبراير 2026
 createdAt: '2026-02-10'
 popular: true
 category: tasawuf
-subcategory: ''
+subcategory: tasawuf-akhlak
 tag: ''
 language: ar
 lang: AR

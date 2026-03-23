@@ -577,7 +577,7 @@ body.rtl-ui .mawaris-page {
   text-align: right;
 }
 
-/* Arabic/RTL: nav mulai dari kanan (desktop) - Mawaris */
+/* Arabic/RTL: Portal (logo) di kanan, nav-links di kiri - ikut direction rtl */
 html[dir="rtl"] .mawaris-page .nav-container,
 html.rtl-ui .mawaris-page .nav-container,
 body.rtl-ui .mawaris-page .nav-container {
@@ -588,19 +588,23 @@ html[dir="rtl"] .mawaris-page .logo,
 html.rtl-ui .mawaris-page .logo,
 body.rtl-ui .mawaris-page .logo {
   flex-direction: row-reverse;
+  margin-inline-start: auto; /* icon di pinggir kanan paling ujung */
 }
 
 @media (min-width: 769px) {
+  /* row (bukan row-reverse) agar logo/Portal di kanan saat RTL */
   html[dir="rtl"] .mawaris-page .nav-container,
   html.rtl-ui .mawaris-page .nav-container,
   body.rtl-ui .mawaris-page .nav-container {
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 
   html[dir="rtl"] .mawaris-page .nav-links,
   html.rtl-ui .mawaris-page .nav-links,
   body.rtl-ui .mawaris-page .nav-links {
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 }
 
@@ -623,6 +627,7 @@ body.rtl-ui .mawaris-page .logo {
   html.rtl-ui .mawaris-page .logo,
   body.rtl-ui .mawaris-page .logo {
     justify-content: center;
+    margin-inline-start: 0; /* reset untuk layout column center */
   }
 }
 

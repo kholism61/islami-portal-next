@@ -434,21 +434,33 @@
 
 /* Arabic/RTL: fiqh-page (metodologi, tabel-fiqh) mulai dari kanan */
 html[dir="rtl"] .fiqh-page,
+html.rtl-ui .fiqh-page,
 body.rtl-ui .fiqh-page {
   direction: rtl;
   text-align: right;
 }
 
-/* Arabic/RTL: nav mulai dari kanan (desktop) */
+/* Arabic/RTL: Portal (logo) di kanan, icon di pinggir kanan paling ujung */
 @media (min-width: 769px) {
   html[dir="rtl"] .fiqh-page .nav-container,
+  html.rtl-ui .fiqh-page .nav-container,
   body.rtl-ui .fiqh-page .nav-container {
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    direction: rtl !important;
+  }
+
+  html[dir="rtl"] .fiqh-page .logo,
+  html.rtl-ui .fiqh-page .logo,
+  body.rtl-ui .fiqh-page .logo {
+    flex-direction: row-reverse;
+    margin-inline-start: auto;
   }
 
   html[dir="rtl"] .fiqh-page .nav-links,
+  html.rtl-ui .fiqh-page .nav-links,
   body.rtl-ui .fiqh-page .nav-links {
-    flex-direction: row-reverse !important;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 }
 

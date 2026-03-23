@@ -1,0 +1,121 @@
+/* =========================
+   HOME ADS - Kampanye Iklan
+   Rotasi max 5 slot
+========================= */
+.home-ads {
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.home-ads-banner {
+  position: relative;
+  max-width: 728px;
+  margin: 0 auto;
+  min-height: 90px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.75));
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.home-ads-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.home-ads-slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.home-ads-slide-placeholder {
+  text-align: center;
+  color: rgba(248, 250, 252, 0.7);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.home-ads-placeholder-text {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.home-ads-size {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "SF Mono", "Monaco", "Consolas", monospace;
+  color: #22c55e;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+.home-ads-slide-placeholder a {
+  color: #7dd3fc;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.home-ads-slide-placeholder a:hover {
+  text-decoration: underline;
+}
+
+.home-ads-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.home-ads-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.home-ads-dot:hover {
+  background: rgba(148, 163, 184, 0.6);
+}
+
+.home-ads-dot.active {
+  background: #22c55e;
+  transform: scale(1.15);
+}
+
+@media (max-width: 768px) {
+  .home-ads {
+    margin: 16px 0;
+    padding: 0 16px;
+  }
+
+  .home-ads-banner {
+    min-height: 80px;
+    border-radius: 12px;
+  }
+
+  .home-ads-slide-placeholder {
+    font-size: 13px;
+  }
+
+  .home-ads-slide-placeholder strong {
+    font-size: 11px;
+  }
+}

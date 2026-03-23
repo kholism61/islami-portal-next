@@ -5,7 +5,7 @@ date: 13 February 2026
 createdAt: '2026-02-13'
 popular: false
 category: ramadhan
-subcategory: spiritual-reflection
+subcategory: catatan-ramadhan
 tag: ramadhan
 language: en
 lang: EN

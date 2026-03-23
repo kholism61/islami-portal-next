@@ -9,16 +9,16 @@ export default function ZakatPage() {
     <>
       <link rel="canonical" href="https://islami-portal-next.vercel.app/zakat" />
       <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      <link rel="stylesheet" href="/css/zakat.css?v=20260323b" />
+      <link rel="stylesheet" href="/css/zakat.css?v=20260323d" />
 
       <nav className="main-navbar">
         <div className="nav-container">
-          <div className="logo">
-            <span className="logo-glass">
-              <img src="/favicon.ico" alt="" className="logo-icon" width={12} height={12} />
+          <Link href="/" className="logo" aria-label="Portal Literasi Islam">
+            <span className="nav-logo-glass">
+              <img src="/favicon.ico" alt="" className="nav-logo-glass" width={12} height={12} />
             </span>
             <span className="logo-text">Portal Literasi Islam</span>
-          </div>
+          </Link>
 
           <div className="nav-links">
             <Link href="/">Beranda</Link>
@@ -26,15 +26,16 @@ export default function ZakatPage() {
             <Link href="/bookmark">Bookmark</Link>
           </div>
 
-          <div className="lang-switch" aria-label="Bahasa">
-            <button type="button" data-lang="id">ID</button>
-            <button type="button" data-lang="en">EN</button>
-            <button type="button" data-lang="ar">AR</button>
+          <div className="nav-controls">
+            <div className="lang-switch" aria-label="Bahasa">
+              <button type="button" data-lang="id">ID</button>
+              <button type="button" data-lang="en">EN</button>
+              <button type="button" data-lang="ar">AR</button>
+            </div>
+            <button id="themeToggle" className="theme-btn">
+              🌙
+            </button>
           </div>
-
-          <button id="themeToggle" className="theme-btn">
-            🌙
-          </button>
         </div>
       </nav>
 
@@ -646,7 +647,7 @@ export default function ZakatPage() {
       />
 
       <Script src="/js/zakat.js?v=20260319a" strategy="afterInteractive" />
-      <Script src="/js/zakat-pages-i18n.js?v=20260318b" strategy="afterInteractive" />
+      <Script src="/js/zakat-pages-i18n.js?v=20260323c" strategy="afterInteractive" />
       <Script src="/js/auth.js?v=20260318b" strategy="afterInteractive" />
       <Script src="/js/access-guard.js?v=20260318b" strategy="afterInteractive" />
     </>

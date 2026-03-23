@@ -363,8 +363,12 @@ body.rtl-ui .smart-method-list {
   color: #dbeafe;
 }
 
+/* Arabic/RTL: seluruh halaman rata kanan */
+html[dir="rtl"],
+html.rtl-ui,
 body.rtl-ui {
   direction: rtl;
+  text-align: right;
 }
 
 body.rtl-ui .lang-switch {
@@ -415,25 +419,43 @@ body.rtl-ui .reset-wrap {
   }
 }
 
-/* Arabic/RTL: center title, desktop horizontal */
+/* Arabic/RTL: Portal (logo) di kanan, icon di pinggir kanan paling ujung */
 @media (min-width: 801px) {
-  body.rtl-ui .nav-container {
-    flex-direction: row-reverse;
+  body.rtl-ui .nav-container,
+  html.rtl-ui .nav-container,
+  html[dir="rtl"] .nav-container {
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 
-  body.rtl-ui .nav-menu {
+  body.rtl-ui .logo,
+  html.rtl-ui .logo,
+  html[dir="rtl"] .logo {
     flex-direction: row-reverse;
+    margin-inline-start: auto;
   }
 
-  body.rtl-ui .lang-switch {
+  body.rtl-ui .nav-menu,
+  html.rtl-ui .nav-menu,
+  html[dir="rtl"] .nav-menu {
+    flex-direction: row !important;
+    direction: rtl !important;
+  }
+
+  body.rtl-ui .lang-switch,
+  html.rtl-ui .lang-switch,
+  html[dir="rtl"] .lang-switch {
     margin-left: 0;
     margin-right: auto;
   }
 }
 
 @media (max-width: 800px) {
-  body.rtl-ui .nav-menu {
-    flex-direction: row-reverse;
+  body.rtl-ui .nav-menu,
+  html.rtl-ui .nav-menu,
+  html[dir="rtl"] .nav-menu {
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 }
 
@@ -537,7 +559,12 @@ body.rtl-ui .fiqh-insight-card,
 body.rtl-ui .engine-card,
 body.rtl-ui .result-box,
 body.rtl-ui .ai-card,
-body.rtl-ui .ai-source-box {
+body.rtl-ui .ai-source-box,
+html[dir="rtl"] .fiqh-insight-card,
+html[dir="rtl"] .engine-card,
+html[dir="rtl"] .result-box,
+html[dir="rtl"] .ai-card,
+html[dir="rtl"] .ai-source-box {
   text-align: right;
 }
 
@@ -605,7 +632,10 @@ body.rtl-ui .ai-panel-head {
   }
 }
 
-body.rtl-ui .question-title {
+body.rtl-ui .question-title,
+body.rtl-ui .question-box,
+html[dir="rtl"] .question-title,
+html[dir="rtl"] .question-box {
   text-align: right;
 }
 

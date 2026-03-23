@@ -29,7 +29,12 @@ export default function DisclaimerPage() {
         <a href="/" className="legal-back">
           ← Beranda
         </a>
-        <div className="legal-title">Portal Literasi Islam</div>
+        <div className="legal-title">
+          <span className="legal-logo-glass">
+            <img src="/favicon.ico" alt="" width={20} height={20} />
+          </span>
+          <span className="legal-title-text">Portal Literasi Islam</span>
+        </div>
       </header>
 
       <div className="page-container">

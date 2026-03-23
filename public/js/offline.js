@@ -319,7 +319,7 @@ if (!container || !sortSelect) {
       card.innerHTML = `
         ${(displayArticle.thumbnail || article.thumbnail) ? `<img src="${displayArticle.thumbnail || article.thumbnail}" class="offline-thumb" alt="${displayArticle.judul || article.judul || id}">` : ""}
         <h3>${displayArticle.judul || article.judul || ""}</h3>
-        <p>${displayArticle.kategori || article.kategori || ""}</p>
+        <p>${(typeof window.getLocalizedCategory === "function" ? window.getLocalizedCategory(displayArticle.kategori || article.kategori, getSiteLang()) : (displayArticle.kategori || article.kategori || ""))}</p>
         <div class="offline-progress-bar">
           <div class="offline-progress-fill" style="width:${progress}%"></div>
         </div>

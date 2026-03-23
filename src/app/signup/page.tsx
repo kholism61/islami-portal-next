@@ -25,7 +25,7 @@ export default function SignUpPage() {
             <span className="brand-badge" aria-hidden="true">
               <Image src="/favicon.ico" alt="" width={24} height={24} priority />
             </span>
-            <span>
+            <span className="brand-text">
               <strong>Portal Literasi Islam</strong>
               <small>Daftar akun portal untuk pembaca, editor, dan admin</small>
             </span>
@@ -205,6 +205,7 @@ export default function SignUpPage() {
 
       <Script src="/js/auth.js?v=20260317b" strategy="afterInteractive" />
       <Script src="/js/i18n.js?v=20260317b" strategy="afterInteractive" />
+      <Script src="/js/admin-pages-i18n.js?v=20260317b" strategy="afterInteractive" />
 
       <Script id="signup-inline-script" strategy="afterInteractive">
         {`

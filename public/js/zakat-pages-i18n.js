@@ -2897,6 +2897,12 @@
     if (node && value != null) node.textContent = value;
   }
 
+  function applyBrand(pack) {
+    const el = document.querySelector(".main-navbar .portal-brand-text") ||
+      document.querySelector(".main-navbar .logo .logo-text");
+    if (el && pack && pack.brand != null) el.textContent = pack.brand;
+  }
+
   function applyTexts(selector, values = []) {
     const nodes = document.querySelectorAll(selector);
     values.forEach((value, idx) => {
@@ -2960,7 +2966,7 @@
     const pack = text.zakat[lang] || text.zakat.id;
     document.title = pack.pageTitle;
 
-    applyText(".main-navbar .logo .logo-text", pack.brand);
+    applyBrand(pack);
     applyTexts(".main-navbar .nav-links a", pack.nav);
     applyText(".zakat-hero h1", pack.heroTitle);
     applyText(".zakat-hero .hero-text p", pack.heroBody);
@@ -3042,9 +3048,9 @@
     const pack = text.zakatInfo[lang] || text.zakatInfo.id;
 
     document.title = pack.pageTitle;
-    applyText(".main-navbar .logo .logo-text", pack.brand);
+    applyBrand(pack);
     applyTexts(".main-navbar .nav-links a", pack.nav);
-    applyText("body > h2", pack.heading);
+    applyText(".zakat-info-title", pack.heading);
     applyTexts(".zakat-table thead th", pack.tableHead);
     applyText(".fiqh-title", pack.fiqhTitle);
     applyText(".zakat-cta h2", pack.ctaTitle);

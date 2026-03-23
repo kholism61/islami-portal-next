@@ -3270,7 +3270,7 @@ function updateOnlineStatus() {
   if (!el) return;
 
   if (navigator.onLine) {
-    el.textContent = uiText("online_back");
+    el.textContent = uiText("online_status");
     el.classList.remove("offline");
   } else {
     el.textContent = uiText("offline_status");
@@ -3280,6 +3280,7 @@ function updateOnlineStatus() {
 
 window.addEventListener("online", updateOnlineStatus);
 window.addEventListener("offline", updateOnlineStatus);
+window.addEventListener("portal-language-change", updateOnlineStatus);
 
 updateOnlineStatus();
 // jalankan saat halaman dimuat

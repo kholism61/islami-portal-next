@@ -163,6 +163,12 @@ main {
   cursor: pointer;
 }
 
+.main-navbar .nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .main-navbar .lang-switch {
   display: flex;
   gap: 6px;
@@ -813,15 +819,21 @@ body.dark .zakat-history {
   gap: 8px;
   color: white;
   font-weight: bold;
+  text-decoration: none;
 }
 
-/* Icon kecil - 12px icon, 22px glass */
-.main-navbar .logo .logo-glass {
+.main-navbar .logo:hover {
+  color: white;
+  opacity: 0.95;
+}
+
+/* Icon kecil - 12px. Nav pakai nav-logo-glass (bukan logo-icon) */
+.main-navbar .logo .nav-logo-glass {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px !important;
-  height: 22px !important;
+  width: 12px !important;
+  height: 12px !important;
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 6px;
@@ -830,23 +842,35 @@ body.dark .zakat-history {
   flex-shrink: 0;
 }
 
-.main-navbar .logo .logo-icon {
+/* Semua img di navbar logo = 12px (nav pakai nav-logo-glass, jangan logo-icon) */
+.main-navbar .logo img,
+.main-navbar .logo img.nav-logo-glass {
+  width: 12px !important;
+  height: 12px !important;
+  max-width: 12px !important;
+  max-height: 12px !important;
+  object-fit: contain;
+  display: block;
+}
+
+.main-navbar .logo .nav-logo-icon {
   width: 12px !important;
   height: 12px !important;
   display: block;
   object-fit: contain;
 }
 
-/* zakat-info: sama ukuran */
-.page-zakat-info .main-navbar .logo .logo-glass {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
+/* zakat-info: pembungkus glass lebih terlihat (22px) di sekitar icon 12px */
+.page-zakat-info .main-navbar .logo .nav-logo-glass {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px;
+  min-height: 22px;
 }
 
-.page-zakat-info .main-navbar .logo .logo-icon {
-  width: 12px;
-  height: 12px;
+.page-zakat-info .main-navbar .logo img.nav-logo-glass {
+  width: 12px !important;
+  height: 12px !important;
 }
 
 .logo {
@@ -859,7 +883,8 @@ body.dark .zakat-history {
   font-weight: bold;
 }
 
-.logo img:not(.logo-icon) {
+/* Logo besar 230px: hanya img yang BUKAN nav-logo-glass maupun nav-logo-icon */
+.logo img:not(.nav-logo-icon):not(.nav-logo-glass) {
   width: 230px;
   height: auto;
   display: block;
@@ -1162,13 +1187,24 @@ body.rtl-ui .fiqh-section {
   text-align: right;
 }
 
-/* Arabic: nav mulai dari kanan (direction:rtl sudah bikin flow kanan→kiri, no row-reverse) */
+/* Arabic: 1 baris sejajar, rata kanan (mulai dari kanan) */
 @media (min-width: 769px) {
   html[dir="rtl"] .main-navbar .nav-container,
   html.rtl-ui .main-navbar .nav-container,
   body.rtl-ui .main-navbar .nav-container {
-    flex-direction: row !important;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-start;
     direction: rtl !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  html[dir="rtl"] .main-navbar .nav-container .logo,
+  html.rtl-ui .main-navbar .nav-container .logo,
+  body.rtl-ui .main-navbar .nav-container .logo {
+    flex-direction: row-reverse;
+    margin-inline-start: 0;
   }
 
   html[dir="rtl"] .main-navbar .nav-links,
@@ -1184,9 +1220,11 @@ body.rtl-ui .fiqh-section {
   html[dir="rtl"] .main-navbar .nav-container,
   html.rtl-ui .main-navbar .nav-container,
   body.rtl-ui .main-navbar .nav-container {
+    display: flex !important;
     flex-direction: column;
     align-items: center;
     direction: rtl !important;
+    max-width: 1100px;
   }
 
   html[dir="rtl"] .main-navbar .nav-links,
@@ -1203,6 +1241,304 @@ html.rtl-ui .scroll-to-top,
 body.rtl-ui .scroll-to-top {
   left: auto !important;
   right: calc(18px + env(safe-area-inset-right, 0px));
+}
+
+/* =========================
+   ARABIC: Rapikan jarak, jangan dempetan
+========================= */
+html[dir="rtl"] .nav-container,
+html.rtl-ui .nav-container,
+body.rtl-ui .nav-container {
+  padding: 14px 24px;
+  gap: 20px;
+}
+
+html[dir="rtl"] .nav-links,
+html.rtl-ui .nav-links,
+body.rtl-ui .nav-links {
+  gap: 20px;
+  padding: 12px 18px;
+}
+
+html[dir="rtl"] .lang-switch,
+html.rtl-ui .lang-switch,
+body.rtl-ui .lang-switch {
+  gap: 8px;
+}
+
+html[dir="rtl"] .lang-switch button,
+html.rtl-ui .lang-switch button,
+body.rtl-ui .lang-switch button {
+  padding: 8px 14px;
+  margin: 0 2px;
+}
+
+html[dir="rtl"] .zakat-hero .hero-content,
+html.rtl-ui .zakat-hero .hero-content,
+body.rtl-ui .zakat-hero .hero-content {
+  gap: 48px;
+  padding-inline: 28px;
+}
+
+html[dir="rtl"] .zakat-hero,
+html.rtl-ui .zakat-hero,
+body.rtl-ui .zakat-hero {
+  padding: 70px 24px 90px;
+}
+
+html[dir="rtl"] .hero-text h1,
+html.rtl-ui .hero-text h1,
+body.rtl-ui .hero-text h1 {
+  margin-bottom: 16px;
+}
+
+html[dir="rtl"] .hero-text p,
+html.rtl-ui .hero-text p,
+body.rtl-ui .hero-text p {
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+html[dir="rtl"] .hero-buttons,
+html.rtl-ui .hero-buttons,
+body.rtl-ui .hero-buttons {
+  gap: 14px;
+}
+
+html[dir="rtl"] .zakat-stats,
+html.rtl-ui .zakat-stats,
+body.rtl-ui .zakat-stats {
+  padding: 56px 28px;
+}
+
+html[dir="rtl"] .stats-container,
+html.rtl-ui .stats-container,
+body.rtl-ui .stats-container {
+  gap: 24px;
+}
+
+html[dir="rtl"] .stat-box,
+html.rtl-ui .stat-box,
+body.rtl-ui .stat-box {
+  padding: 28px 24px;
+}
+
+html[dir="rtl"] .zakat-box,
+html.rtl-ui .zakat-box,
+body.rtl-ui .zakat-box {
+  gap: 18px 24px;
+  padding: 36px 32px;
+}
+
+html[dir="rtl"] .zakat-mazhab,
+html.rtl-ui .zakat-mazhab,
+body.rtl-ui .zakat-mazhab {
+  padding: 38px 36px;
+  margin: 48px auto;
+}
+
+html[dir="rtl"] .zakat-box h2,
+html.rtl-ui .zakat-box h2,
+body.rtl-ui .zakat-box h2 {
+  margin-bottom: 20px;
+}
+
+html[dir="rtl"] .zakat-box label,
+html.rtl-ui .zakat-box label,
+body.rtl-ui .zakat-box label {
+  margin-bottom: 8px;
+}
+
+html[dir="rtl"] .zakat-box input,
+html[dir="rtl"] .zakat-box select,
+html.rtl-ui .zakat-box input,
+html.rtl-ui .zakat-box select,
+body.rtl-ui .zakat-box input,
+body.rtl-ui .zakat-box select {
+  padding: 12px 16px;
+}
+
+html[dir="rtl"] .zakat-result,
+html.rtl-ui .zakat-result,
+body.rtl-ui .zakat-result {
+  padding: 30px 28px;
+}
+
+html[dir="rtl"] .zakat-result h3,
+html.rtl-ui .zakat-result h3,
+body.rtl-ui .zakat-result h3 {
+  margin-bottom: 16px;
+}
+
+html[dir="rtl"] .zakat-result p,
+html.rtl-ui .zakat-result p,
+body.rtl-ui .zakat-result p {
+  margin: 10px 0;
+  line-height: 1.75;
+}
+
+html[dir="rtl"] .zakat-result hr,
+html.rtl-ui .zakat-result hr,
+body.rtl-ui .zakat-result hr {
+  margin: 18px 0;
+}
+
+html[dir="rtl"] .zakat-cta,
+html.rtl-ui .zakat-cta,
+body.rtl-ui .zakat-cta {
+  padding: 80px 28px;
+}
+
+html[dir="rtl"] .cta-box h2,
+html.rtl-ui .cta-box h2,
+body.rtl-ui .cta-box h2 {
+  margin-bottom: 16px;
+}
+
+html[dir="rtl"] .cta-box p,
+html.rtl-ui .cta-box p,
+body.rtl-ui .cta-box p {
+  margin-bottom: 28px;
+  line-height: 1.8;
+}
+
+html[dir="rtl"] .cta-buttons,
+html.rtl-ui .cta-buttons,
+body.rtl-ui .cta-buttons {
+  gap: 18px;
+}
+
+/* zakat-info: table & fiqh */
+html[dir="rtl"] .table-wrapper,
+html.rtl-ui .table-wrapper,
+body.rtl-ui .table-wrapper {
+  margin: 48px auto;
+  padding: 0 24px;
+}
+
+html[dir="rtl"] .zakat-info-title,
+html.rtl-ui .zakat-info-title,
+body.rtl-ui .zakat-info-title {
+  margin: 48px auto 28px;
+  padding: 0 24px;
+}
+
+html[dir="rtl"] .zakat-table th,
+html[dir="rtl"] .zakat-table td,
+html.rtl-ui .zakat-table th,
+html.rtl-ui .zakat-table td,
+body.rtl-ui .zakat-table th,
+body.rtl-ui .zakat-table td {
+  padding: 16px 18px;
+  text-align: right;
+}
+
+html[dir="rtl"] .zakat-table td:last-child,
+html.rtl-ui .zakat-table td:last-child,
+body.rtl-ui .zakat-table td:last-child {
+  text-align: right;
+  line-height: 1.85;
+}
+
+html[dir="rtl"] .zakat-info-cards,
+html.rtl-ui .zakat-info-cards,
+body.rtl-ui .zakat-info-cards {
+  gap: 24px;
+  padding: 0 24px;
+  margin: 56px auto;
+}
+
+html[dir="rtl"] .info-card,
+html.rtl-ui .info-card,
+body.rtl-ui .info-card {
+  padding: 26px;
+}
+
+html[dir="rtl"] .info-card h3,
+html.rtl-ui .info-card h3,
+body.rtl-ui .info-card h3 {
+  margin-bottom: 10px;
+}
+
+html[dir="rtl"] .info-card p,
+html.rtl-ui .info-card p,
+body.rtl-ui .info-card p {
+  line-height: 1.75;
+}
+
+html[dir="rtl"] .fiqh-section,
+html.rtl-ui .fiqh-section,
+body.rtl-ui .fiqh-section {
+  padding: 90px 28px;
+}
+
+html[dir="rtl"] .fiqh-container,
+html.rtl-ui .fiqh-container,
+body.rtl-ui .fiqh-container {
+  gap: 48px;
+}
+
+html[dir="rtl"] .fiqh-section h2,
+html.rtl-ui .fiqh-section h2,
+body.rtl-ui .fiqh-section h2 {
+  margin-bottom: 56px;
+}
+
+html[dir="rtl"] .site-footer,
+html.rtl-ui .site-footer,
+body.rtl-ui .site-footer {
+  padding: 30px 24px;
+}
+
+/* Arabic mobile: tetap berjarak */
+@media (max-width: 768px) {
+  html[dir="rtl"] .nav-container,
+  html.rtl-ui .nav-container,
+  body.rtl-ui .nav-container {
+    padding: 14px 16px;
+    gap: 14px;
+  }
+
+  html[dir="rtl"] .zakat-hero .hero-content,
+  html.rtl-ui .zakat-hero .hero-content,
+  body.rtl-ui .zakat-hero .hero-content {
+    gap: 32px;
+    padding-inline: 16px;
+  }
+
+  html[dir="rtl"] .zakat-hero,
+  html.rtl-ui .zakat-hero,
+  body.rtl-ui .zakat-hero {
+    padding: 50px 16px 70px;
+  }
+
+  html[dir="rtl"] .zakat-box,
+  html.rtl-ui .zakat-box,
+  body.rtl-ui .zakat-box {
+    padding: 28px 20px;
+  }
+
+  html[dir="rtl"] .table-wrapper,
+  html.rtl-ui .table-wrapper,
+  body.rtl-ui .table-wrapper {
+    padding: 0 16px;
+  }
+
+  html[dir="rtl"] .zakat-table th,
+  html[dir="rtl"] .zakat-table td,
+  html.rtl-ui .zakat-table th,
+  html.rtl-ui .zakat-table td,
+  body.rtl-ui .zakat-table th,
+  body.rtl-ui .zakat-table td {
+    padding: 14px 16px;
+  }
+
+  html[dir="rtl"] .zakat-info-cards,
+  html.rtl-ui .zakat-info-cards,
+  body.rtl-ui .zakat-info-cards {
+    padding: 0 16px;
+    gap: 20px;
+  }
 }
 
 .hero-content {

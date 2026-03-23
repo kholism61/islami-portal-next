@@ -484,8 +484,13 @@ select {
   font-size: 0.98rem;
 }
 
+/* Arabic/RTL: seluruh halaman rata kanan */
+html[lang="ar"],
 html[lang="ar"] body,
+html[dir="rtl"],
 body.rtl-mode {
+  direction: rtl;
+  text-align: right;
   font-family: "Inter", "Amiri", "Segoe UI", Arial, sans-serif;
 }
 
@@ -493,19 +498,35 @@ html[lang="ar"] .hero,
 html[lang="ar"] .engine-card,
 html[lang="ar"] .info-card,
 html[lang="ar"] .smart-footer,
+html[lang="ar"] .question-box,
+html[lang="ar"] .result-box,
 body.rtl-mode .hero,
 body.rtl-mode .engine-card,
 body.rtl-mode .info-card,
-body.rtl-mode .smart-footer {
+body.rtl-mode .smart-footer,
+body.rtl-mode .question-box,
+body.rtl-mode .result-box {
   direction: rtl;
+  text-align: right;
 }
 
+/* Arabic/RTL: Portal (logo) di kanan, icon di pinggir kanan paling ujung - Smart Fiqh Thaharah */
 html[lang="ar"] .nav-container,
+html[dir="rtl"] .nav-container,
 body.rtl-mode .nav-container {
-  direction: rtl;
+  flex-direction: row !important;
+  direction: rtl !important;
+}
+
+html[lang="ar"] .logo,
+html[dir="rtl"] .logo,
+body.rtl-mode .logo {
+  flex-direction: row-reverse;
+  margin-inline-start: auto;
 }
 
 html[lang="ar"] .nav-panel,
+html[dir="rtl"] .nav-panel,
 body.rtl-mode .nav-panel {
   margin-left: 0;
   margin-right: auto;

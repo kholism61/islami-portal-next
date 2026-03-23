@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   const LANGS = ["id", "en", "ar"];
   const rawPageName = (window.location.pathname.split("/").pop() || "").toLowerCase();
   const pageName = rawPageName.endsWith(".html") ? rawPageName : (rawPageName ? `${rawPageName}.html` : rawPageName);
@@ -232,7 +232,7 @@
     if (title) document.title = title;
 
     apply(".nav-brand span", text.site_name);
-    apply(".legal-title", text.site_name);
+    apply(".legal-title .legal-title-text", text.site_name);
 
     const navByHref = [
       ["index.html", "/", "nav_home"],

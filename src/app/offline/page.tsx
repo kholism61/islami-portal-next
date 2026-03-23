@@ -229,8 +229,8 @@ export default function OfflinePage() {
       </footer>
 
       <Script src="/js/article-store.js?v=20260323b" strategy="afterInteractive" />
-      <Script src="/js/offline.js?v=20260323b" strategy="afterInteractive" />
       <Script src="/js/article.js?v=20260323b" strategy="afterInteractive" />
+      <Script src="/js/offline.js?v=20260323b" strategy="afterInteractive" />
       <Script src="/js/bookmark.js?v=20260323b" strategy="afterInteractive" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
       <Script src="/js/access-guard.js" strategy="afterInteractive" />

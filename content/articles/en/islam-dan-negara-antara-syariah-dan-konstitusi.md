@@ -5,7 +5,7 @@ date: 15 January 2026
 createdAt: '2026-01-15'
 popular: true
 category: politik
-subcategory: political-thought
+subcategory: politik-islam
 tag: ''
 language: en
 lang: EN

@@ -5,7 +5,7 @@ date: 14 February 2026
 createdAt: '2026-02-14'
 popular: false
 category: tasawuf
-subcategory: tasawuf-and-tarekat
+subcategory: tasawuf-tarekat
 tag: ''
 language: en
 lang: EN

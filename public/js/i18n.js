@@ -15,7 +15,9 @@
         sign_up: "Sign Up",
         logout: "Log Out",
         role_admin: "admin",
-        role_member: "member"
+        role_member: "member",
+        online_status: "🌐 Online",
+        offline_status: "📴 Offline"
       },
       index: {
         page_title: "Portal Literasi Islam | Mimbar Ilmu untuk Umat",
@@ -30,6 +32,9 @@
         quick_ramadan_title: "Jadwal Imsakiyah",
         quick_ramadan_sub: "Imsak & Berbuka",
         online_status: "🌐 Online",
+        offline_status: "📴 Offline",
+        ads_placeholder: "Letakkan iklan Anda di sini",
+        ads_contact: "Hubungi kami",
         site_name: "Portal Literasi Islam",
         hero_title: "Portal Literasi Islam",
         hero_subtitle: "Ruang kajian Islam yang membahas fiqh, hadis, dan pemikiran keislaman dalam konteks zaman modern secara ilmiah dan mendalam.",
@@ -284,7 +289,9 @@
         sign_up: "Sign Up",
         logout: "Log Out",
         role_admin: "admin",
-        role_member: "member"
+        role_member: "member",
+        online_status: "🌐 Online",
+        offline_status: "📴 Offline"
       },
       index: {
         page_title: "Islamic Literacy Portal | A Knowledge Pulpit for the Ummah",
@@ -299,6 +306,9 @@
         quick_ramadan_title: "Ramadan Schedule",
         quick_ramadan_sub: "Imsak & Iftar",
         online_status: "🌐 Online",
+        offline_status: "📴 Offline",
+        ads_placeholder: "Place your ad here",
+        ads_contact: "Contact us",
         site_name: "Islamic Literacy Portal",
         hero_title: "Islamic Literacy Portal",
         hero_subtitle: "A space for Islamic studies covering fiqh, hadith, and Islamic thought in the context of the modern age with scholarly depth.",
@@ -553,7 +563,9 @@
         sign_up: "إنشاء حساب",
         logout: "تسجيل الخروج",
         role_admin: "مشرف",
-        role_member: "مستخدم"
+        role_member: "مستخدم",
+        online_status: "🌐 متصل",
+        offline_status: "📴 غير متصل"
       },
       index: {
         page_title: "بوابة الثقافة الإسلامية | منبر العلم للأمة",
@@ -568,6 +580,9 @@
         quick_ramadan_title: "جدول الإمساكية",
         quick_ramadan_sub: "الإمساك والإفطار",
         online_status: "🌐 متصل",
+        offline_status: "📴 غير متصل",
+        ads_placeholder: "ضع إعلانك هنا",
+        ads_contact: "تواصل معنا",
         site_name: "بوابة الثقافة الإسلامية",
         hero_title: "بوابة الثقافة الإسلامية",
         hero_subtitle: "مساحة للدراسات الإسلامية تناقش الفقه والحديث والفكر الإسلامي في سياق العصر بأسلوب علمي معمق.",
@@ -866,7 +881,7 @@
       { selector: ".quick-menu .quick-card:nth-child(4) small", key: "quick_contact_sub" },
       { selector: ".quick-menu .quick-card:nth-child(5) strong", key: "quick_ramadan_title" },
       { selector: ".quick-menu .quick-card:nth-child(5) small", key: "quick_ramadan_sub" },
-      { selector: "#offline-indicator", key: "online_status" },
+      /* #offline-indicator diurus oleh article.js updateOnlineStatus (online_status/offline_status) */
       { selector: ".logo", key: "site_name" },
       { selector: ".sidebar-menu > li.single-item:nth-child(1) .text", key: "sidebar_all" },
       { selector: ".sidebar-menu > li.has-children:nth-child(2) > .sidebar-toggle .text", key: "sidebar_sharia" },
@@ -951,6 +966,8 @@
       { selector: "#hero-featured-label", key: "hero_featured_label" },
       { selector: "#hero-featured-title", key: "loading" },
       { selector: ".home-stats .stat-card small", key: "offline_articles_stat" },
+      { selector: ".home-ads-placeholder-text", key: "ads_placeholder" },
+      { selector: ".home-ads-contact-link", key: "ads_contact" },
       { selector: ".welcome-title", key: "welcome_title", html: true },
       { selector: ".welcome-desc", key: "welcome_desc", html: true },
       { selector: ".welcome-topics span:nth-child(1)", key: "topic_1" },

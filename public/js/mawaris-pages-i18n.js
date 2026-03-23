@@ -820,9 +820,15 @@
     }
   }
 
+  function applyMawarisLogo(pack) {
+    const el = document.querySelector(".navbar .portal-brand-text") ||
+      document.querySelector(".navbar .logo-text");
+    if (el && pack?.logo != null) el.textContent = pack.logo;
+  }
+
   function applyMawaris(pack, lang) {
     document.title = pack.title;
-    text(document.querySelector(".navbar .logo-text"), pack.logo);
+    applyMawarisLogo(pack);
     texts(document.querySelectorAll(".nav-links a"), pack.nav);
     text(document.querySelector(".mawaris-container h1"), pack.h1);
     texts(document.querySelectorAll("#mode option"), pack.mode);
@@ -964,11 +970,11 @@
 
   function applyWhenReady(attempt = 0) {
     const applied = apply(getLang());
-    if (applied || attempt >= 12) return;
+    if (applied || attempt >= 25) return;
 
     window.setTimeout(() => {
       applyWhenReady(attempt + 1);
-    }, 150);
+    }, 200);
   }
 
   function notifyRouteChange() {
@@ -1052,6 +1058,12 @@
   window.addEventListener("storage", (e) => {
     if (e.key === "siteLang") applyWhenReady();
   });
+  window.addEventListener("mw:page-ready", () => applyWhenReady());
+  window.addEventListener("portal-language-change", () => applyWhenReady());
+  window.addEventListener("portal-brand-ready", () => applyWhenReady());
   window.addEventListener("mw:routechange", () => initScrollToTopButton());
+
+  setTimeout(() => applyWhenReady(), 350);
+  setTimeout(() => applyWhenReady(), 700);
   initScrollToTopButton();
 })();

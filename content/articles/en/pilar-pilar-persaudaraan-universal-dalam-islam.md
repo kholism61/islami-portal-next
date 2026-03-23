@@ -5,7 +5,7 @@ date: 13 February 2026
 createdAt: '2026-02-13'
 popular: true
 category: pemikiran
-subcategory: islamic-social-thought
+subcategory: pemikiran-modern
 tag: ''
 language: en
 lang: EN

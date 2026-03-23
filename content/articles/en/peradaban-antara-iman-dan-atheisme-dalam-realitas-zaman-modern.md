@@ -5,7 +5,7 @@ date: 12 February 2026
 createdAt: '2026-02-12'
 popular: false
 category: pemikiran
-subcategory: modern-thought
+subcategory: pemikiran-modern
 tag: ''
 language: en
 lang: EN

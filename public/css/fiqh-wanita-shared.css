@@ -89,6 +89,20 @@ body.rtl-ui {
   margin-left: 0 !important;
 }
 
+/* EN: kecilkan huruf nav agar satu baris (tidak 2 kolom) */
+body.lang-en .nav-links {
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 6px 10px;
+}
+body.lang-en .nav-links a {
+  font-size: 11px;
+  white-space: nowrap;
+}
+body.lang-en .nav-brand-text {
+  font-size: 13px;
+}
+
 .scroll-to-top {
   position: fixed;
   left: 18px;
@@ -143,6 +157,7 @@ body.rtl-ui {
   .nav-brand {
     width: 100%;
     justify-content: center;
+    margin-inline-start: 0 !important; /* reset di mobile */
   }
 
   .nav-brand-text {
@@ -156,26 +171,55 @@ body.rtl-ui {
     flex-direction: row;
     flex-wrap: wrap;
   }
+
+  /* EN mobile: glass tetap satu baris, huruf kecil, scroll horizontal jika perlu */
+  body.lang-en .navbar {
+    flex-wrap: wrap;
+  }
+  body.lang-en .nav-brand {
+    width: 100%;
+  }
+  body.lang-en .nav-brand-text {
+    font-size: 12px;
+  }
+  body.lang-en .nav-links {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding: 6px 10px;
+    justify-content: flex-start;
+  }
+  body.lang-en .nav-links a {
+    font-size: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 }
 
-/* Arabic/RTL: nav mulai dari kanan (desktop) - Haid, Nifas, Suci, Iddah, Istihadhah */
+/* Arabic/RTL: Portal (nav-brand) di kanan, icon di pinggir kanan paling ujung */
 body.rtl-ui .nav-brand,
 html.rtl-ui .nav-brand,
 html[dir="rtl"] .nav-brand {
   flex-direction: row-reverse;
+  margin-inline-start: auto;
 }
 
 body.rtl-ui .nav-links,
 html.rtl-ui .nav-links,
 html[dir="rtl"] .nav-links {
-  flex-direction: row-reverse;
+  flex-direction: row !important;
+  direction: rtl !important;
 }
 
 @media (min-width: 901px) {
   body.rtl-ui .navbar,
   html.rtl-ui .navbar,
   html[dir="rtl"] .navbar {
-    flex-direction: row-reverse !important;
-    direction: rtl;
+    flex-direction: row !important;
+    direction: rtl !important;
   }
 }

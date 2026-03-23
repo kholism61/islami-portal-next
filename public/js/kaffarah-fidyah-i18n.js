@@ -517,57 +517,14 @@
         margin-left: 0;
         margin-right: auto;
       }
-      body.kfi-scope .navbar {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-      }
-      body.kfi-scope .navbar .nav-container {
-        width: 100%;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-      @media (min-width: 769px) {
-        body.kfi-scope .navbar .nav-container {
-          max-width: 1200px;
-          padding-left: 18px !important;
-          padding-right: 18px !important;
-        }
-      }
       @media (max-width: 768px) {
-        body.kfi-scope .navbar .nav-container,
-        body.kfi-scope header.navbar .nav-container {
-          max-width: 420px !important;
-          padding-left: 16px !important;
-          padding-right: 16px !important;
+        body.kfi-scope .kfi-lang-switch,
+        body.kfi-scope.rtl-ui .kfi-lang-switch {
+          margin-left: auto !important;
+          margin-right: auto !important;
         }
       }
-      body.kfi-scope .navbar .logo {
-        display: inline-flex;
-        align-items: center;
-        margin-right: 12px;
-      }
-      body.kfi-scope.rtl-ui .navbar .logo {
-        margin-right: 0;
-        margin-left: 12px;
-      }
-      body.kfi-scope .navbar .nav-menu,
-      body.kfi-scope .navbar nav {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        flex-wrap: wrap;
-      }
-      body.kfi-scope.rtl-ui .nav-menu,
-      body.kfi-scope.rtl-ui nav {
-        direction: rtl;
-      }
-      body.kfi-scope.rtl-ui .nav-menu a,
-      body.kfi-scope.rtl-ui nav a {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-      }
+      /* NAV/LOGO/NAV-MENU: semua di kaffarah-shared.css, jangan override di sini */
       body.kfi-scope.rtl-ui .hasil-box,
       body.kfi-scope.rtl-ui .analisis-box,
       body.kfi-scope.rtl-ui .fiqh-box,
