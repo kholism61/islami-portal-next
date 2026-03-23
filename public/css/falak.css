@@ -1,0 +1,778 @@
+/**
+ * Belajar Ilmu Falak - Portal edukasi mini, selaras dengan style portal
+ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", "Plus Jakarta Sans", sans-serif;
+  background: linear-gradient(160deg, #0a1628 0%, #0f2744 30%, #12294e 60%, #0d1f38 100%);
+  background-attachment: fixed;
+  color: #e2e8f0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.falak-page {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== NAVBAR STICKY ===== */
+.falak-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 12px 20px;
+}
+
+.falak-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: rgba(10, 22, 40, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+.falak-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  flex-shrink: 0;
+}
+
+.falak-brand-text {
+  white-space: nowrap;
+}
+
+.falak-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.falak-nav-home {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.falak-brand-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.falak-nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.falak-nav-links a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.falak-nav-links a:hover,
+.falak-nav-home:hover {
+  color: #fff;
+}
+
+.falak-lang {
+  display: flex;
+  gap: 6px;
+}
+
+.falak-lang-btn {
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.falak-lang-btn:hover,
+.falak-lang-btn.active {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+/* ===== HERO ===== */
+.falak-hero {
+  padding: 60px 24px 50px;
+  text-align: center;
+}
+
+.falak-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.falak-hero-desc {
+  max-width: 600px;
+  margin: 0 auto;
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ===== MAIN CONTENT ===== */
+.falak-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+.falak-section {
+  margin-bottom: 48px;
+}
+
+.falak-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #93c5fd;
+  margin-bottom: 20px;
+}
+
+.falak-section-icon {
+  font-size: 1.5rem;
+}
+
+.falak-section-desc {
+  color: rgba(226, 232, 240, 0.8);
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+/* ===== INTRO CARD ===== */
+.falak-intro-card {
+  background: rgba(30, 58, 138, 0.25);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.falak-intro-p {
+  margin: 0 0 16px;
+  line-height: 1.7;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.falak-intro-p:last-of-type {
+  margin-bottom: 24px;
+}
+
+.falak-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.falak-intro-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  text-align: center;
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.95);
+}
+
+.falak-intro-icon {
+  font-size: 1.5rem;
+}
+
+/* ===== TOPIK CARDS (GRID MODERN) ===== */
+.falak-topik-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.falak-topik-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 24px;
+  background: rgba(30, 58, 138, 0.25);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: inherit;
+  font-family: inherit;
+}
+
+.falak-topik-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.falak-topik-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.falak-topik-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #93c5fd;
+}
+
+.falak-topik-card p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.5;
+}
+
+.falak-accordion-wrapper {
+  margin-top: 20px;
+}
+
+.falak-accordion-content {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 8px;
+  color: rgba(226, 232, 240, 0.9);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ===== TOOLS GRID (seperti index) ===== */
+.falak-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.falak-tool-card {
+  background: rgba(30, 58, 138, 0.25);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.falak-tool-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #93c5fd;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.falak-tool-desc {
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.8);
+  margin-bottom: 16px;
+}
+
+.falak-form-group {
+  margin-bottom: 18px;
+}
+
+.falak-form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.9);
+  margin-bottom: 6px;
+}
+
+.falak-form-group input,
+.falak-form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  font-size: 15px;
+}
+
+.falak-form-group input:focus,
+.falak-form-group select:focus {
+  outline: none;
+  border-color: #60a5fa;
+}
+
+.falak-form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.falak-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.falak-btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+}
+
+.falak-btn-primary:hover {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  transform: translateY(-1px);
+}
+
+.falak-result {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  font-size: 15px;
+  color: #93c5fd;
+  min-height: 48px;
+}
+
+.falak-result:empty {
+  display: none;
+}
+
+.falak-shalat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.falak-shalat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.falak-shalat-item:last-child {
+  border-bottom: none;
+}
+
+/* ===== GLOSSARY ===== */
+.falak-glossary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.falak-glossary-card {
+  background: rgba(30, 58, 138, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 18px;
+  transition: border-color 0.2s;
+}
+
+.falak-glossary-card:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.falak-glossary-term {
+  display: block;
+  font-weight: 700;
+  color: #93c5fd;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.falak-glossary-def {
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.5;
+}
+
+/* ===== LANGKAH BELAJAR ===== */
+.falak-disclaimer {
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 12px;
+  color: rgba(226, 232, 240, 0.95);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.falak-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.falak-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+  background: rgba(30, 58, 138, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 16px;
+}
+
+.falak-step > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.falak-step-num {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  border-radius: 50%;
+}
+
+.falak-step h4 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  color: #93c5fd;
+}
+
+.falak-step p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.5;
+}
+
+.falak-langkah-more {
+  margin-top: 28px;
+  padding: 24px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.falak-langkah-more p {
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: rgba(226, 232, 240, 0.9);
+  line-height: 1.6;
+}
+
+.falak-more-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.falak-more-btn:hover {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  transform: translateY(-1px);
+}
+
+/* ===== PREF OOTER & FOOTER ===== */
+.falak-prefooter {
+  background: rgba(10, 22, 40, 0.6);
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 48px 24px;
+}
+
+.falak-prefooter-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+}
+
+.falak-prefooter-col h4 {
+  font-size: 1rem;
+  color: #93c5fd;
+  margin-bottom: 12px;
+}
+
+.falak-prefooter-col p,
+.falak-prefooter-col ul {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.8);
+  line-height: 1.6;
+}
+
+.falak-prefooter-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.falak-prefooter-col li {
+  margin-bottom: 8px;
+}
+
+.falak-prefooter-col a {
+  color: rgba(226, 232, 240, 0.85);
+  text-decoration: none;
+}
+
+.falak-prefooter-col a:hover {
+  color: #93c5fd;
+}
+
+.falak-footer {
+  padding: 24px;
+  text-align: center;
+  border-top: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.falak-footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.falak-footer-links a {
+  color: rgba(226, 232, 240, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.falak-footer-links a:hover {
+  color: #93c5fd;
+}
+
+.falak-footer-copy {
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.6);
+}
+
+/* RTL support */
+[dir="rtl"] .falak-step {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .falak-form-row {
+  direction: rtl;
+}
+
+[dir="rtl"] .falak-more-btn {
+  flex-direction: row-reverse;
+}
+
+/* Desktop: brand | [Home+nav dalam glass] tengah | lang */
+@media (min-width: 641px) {
+  .falak-nav-inner > *:not(.falak-nav-center) {
+    flex: 0 0 auto;
+  }
+
+  .falak-nav-center {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 18px;
+    background: rgba(59, 130, 246, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    gap: 20px;
+  }
+
+  .falak-nav-center .falak-nav-links {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+/* Desktop RTL: content mulai dari kanan, Home tetap tengah */
+@media (min-width: 641px) {
+  body.rtl-ui .falak-nav-inner,
+  [dir="rtl"] .falak-nav-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    direction: rtl;
+  }
+
+  body.rtl-ui .falak-brand,
+  [dir="rtl"] .falak-brand {
+    flex-direction: row-reverse;
+  }
+
+  body.rtl-ui .falak-nav-center,
+  [dir="rtl"] .falak-nav-center {
+    flex-direction: row-reverse;
+  }
+
+  body.rtl-ui .falak-nav-links,
+  [dir="rtl"] .falak-nav-links {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Mobile RTL: stacked layout */
+@media (max-width: 640px) {
+  body.rtl-ui .falak-nav-inner,
+  [dir="rtl"] .falak-nav-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.rtl-ui .falak-brand,
+  [dir="rtl"] .falak-brand {
+    justify-content: center;
+    text-align: center;
+  }
+
+  body.rtl-ui .falak-nav-links,
+  [dir="rtl"] .falak-nav-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  body.rtl-ui .falak-lang,
+  [dir="rtl"] .falak-lang {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .falak-nav-inner {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .falak-nav-center {
+    flex: none;
+    width: 100%;
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: 12px;
+  }
+
+  .falak-brand {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    background: rgba(59, 130, 246, 0.2);
+    backdrop-filter: blur(12px);
+  }
+
+  .falak-nav-center {
+    order: 2;
+  }
+
+  .falak-nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .falak-lang {
+    order: 4;
+    width: 100%;
+    justify-content: center;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .falak-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .falak-topik-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .falak-tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .falak-step {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .falak-step-num {
+    align-self: flex-start;
+  }
+}

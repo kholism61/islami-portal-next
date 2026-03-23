@@ -1,0 +1,588 @@
+/**
+ * Muamalah Syariah - Dark mode, gradient biru tua, glass effect
+ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  background: linear-gradient(160deg, #0a1628 0%, #0f2744 30%, #12294e 60%, #0d1f38 100%);
+  background-attachment: fixed;
+  color: #e2e8f0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.muamalah-page {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== NAVBAR STICKY ===== */
+.muamalah-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 12px 20px;
+}
+
+.muamalah-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: rgba(10, 22, 40, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+.muamalah-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.muamalah-brand-glass {
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+}
+
+.muamalah-brand-text {
+  white-space: nowrap;
+}
+
+.muamalah-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.muamalah-nav-home {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.muamalah-brand-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.muamalah-nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.muamalah-nav-links a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.muamalah-nav-links a:hover,
+.muamalah-nav-home:hover {
+  color: #fff;
+}
+
+.muamalah-lang {
+  display: flex;
+  gap: 6px;
+}
+
+.muamalah-lang-btn {
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.muamalah-lang-btn:hover,
+.muamalah-lang-btn.active {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+/* ===== HERO ===== */
+.muamalah-hero {
+  padding: 60px 24px 50px;
+  text-align: center;
+}
+
+.muamalah-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.muamalah-hero p {
+  max-width: 560px;
+  margin: 0 auto;
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ===== SECTION CONTAINER ===== */
+.muamalah-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+.muamalah-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.muamalah-section {
+  margin-bottom: 0;
+}
+
+.muamalah-tool-card {
+  background: rgba(30, 58, 138, 0.25);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.muamalah-tool-card h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #93c5fd;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.muamalah-form-group {
+  margin-bottom: 18px;
+}
+
+.muamalah-form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.9);
+  margin-bottom: 6px;
+}
+
+.muamalah-form-group input,
+.muamalah-form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  font-size: 15px;
+}
+
+.muamalah-form-group input:focus,
+.muamalah-form-group select:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+.muamalah-form-group input::placeholder {
+  color: rgba(226, 232, 240, 0.5);
+}
+
+.muamalah-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.muamalah-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+}
+
+.muamalah-btn-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.muamalah-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+}
+
+.muamalah-btn-reset {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.muamalah-btn-reset:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== RESULT CARD ===== */
+.muamalah-result {
+  margin-top: 24px;
+  padding: 24px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 16px;
+  display: none;
+}
+
+.muamalah-result.visible {
+  display: block;
+}
+
+.muamalah-result h3 {
+  font-size: 1rem;
+  color: #86efac;
+  margin-bottom: 16px;
+}
+
+.muamalah-result-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.muamalah-result-row:last-child {
+  border-bottom: none;
+}
+
+.muamalah-result-value {
+  font-weight: 700;
+  color: #86efac;
+}
+
+.muamalah-result-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.8);
+  line-height: 1.6;
+}
+
+.muamalah-result.error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.muamalah-result.error h3,
+.muamalah-result.error .muamalah-result-value {
+  color: #fca5a5;
+}
+
+/* ===== AKAD CHECKER ===== */
+.muamalah-akad-content {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.muamalah-akad-content h4 {
+  color: #93c5fd;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.muamalah-akad-content ul {
+  margin: 0;
+  padding-left: 20px;
+  color: rgba(226, 232, 240, 0.9);
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.muamalah-akad-content p {
+  margin-top: 12px;
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.8);
+  line-height: 1.6;
+}
+
+/* ===== PREFOOTER & FOOTER ===== */
+.muamalah-prefooter {
+  margin-top: 48px;
+  padding: 40px 24px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(10, 22, 40, 0.9) 100%);
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.muamalah-prefooter-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+}
+
+.muamalah-prefooter-col h4 {
+  font-size: 15px;
+  color: #93c5fd;
+  margin-bottom: 12px;
+}
+
+.muamalah-prefooter-col p,
+.muamalah-prefooter-col li {
+  font-size: 14px;
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.6;
+}
+
+.muamalah-prefooter-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.muamalah-prefooter-col a {
+  color: rgba(226, 232, 240, 0.85);
+  text-decoration: none;
+}
+
+.muamalah-prefooter-col a:hover {
+  color: #93c5fd;
+}
+
+.muamalah-footer {
+  padding: 24px;
+  text-align: center;
+  background: rgba(10, 22, 40, 0.95);
+  border-top: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.muamalah-footer-links {
+  margin-bottom: 12px;
+}
+
+.muamalah-footer-links a {
+  color: rgba(203, 213, 225, 0.9);
+  text-decoration: none;
+  margin: 0 12px;
+  font-size: 13px;
+}
+
+.muamalah-footer-links a:hover {
+  color: #fff;
+}
+
+.muamalah-footer-copy {
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.7);
+}
+
+/* Desktop: brand | [Home+nav dalam glass] tengah | lang */
+@media (min-width: 601px) {
+  .muamalah-nav-inner > *:not(.muamalah-nav-center) {
+    flex: 0 0 auto;
+  }
+
+  .muamalah-nav-center {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 18px;
+    background: rgba(59, 130, 246, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    gap: 20px;
+  }
+
+  .muamalah-nav-center .muamalah-nav-links {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+/* Desktop RTL: content mulai dari kanan, Home tetap tengah */
+@media (min-width: 601px) {
+  body.rtl-ui .muamalah-nav-inner,
+  [dir="rtl"] .muamalah-nav-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    direction: rtl;
+  }
+
+  body.rtl-ui .muamalah-brand,
+  body.rtl-ui .muamalah-brand-glass,
+  [dir="rtl"] .muamalah-brand,
+  [dir="rtl"] .muamalah-brand-glass {
+    flex-direction: row-reverse;
+  }
+
+  body.rtl-ui .muamalah-nav-center,
+  [dir="rtl"] .muamalah-nav-center {
+    flex-direction: row-reverse;
+  }
+
+  body.rtl-ui .muamalah-nav-links,
+  [dir="rtl"] .muamalah-nav-links {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Mobile RTL: stacked layout */
+@media (max-width: 600px) {
+  body.rtl-ui .muamalah-nav-inner,
+  [dir="rtl"] .muamalah-nav-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.rtl-ui .muamalah-brand,
+  body.rtl-ui .muamalah-brand-glass,
+  [dir="rtl"] .muamalah-brand,
+  [dir="rtl"] .muamalah-brand-glass {
+    justify-content: center;
+    text-align: center;
+  }
+
+  body.rtl-ui .muamalah-nav-links,
+  [dir="rtl"] .muamalah-nav-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  body.rtl-ui .muamalah-lang,
+  [dir="rtl"] .muamalah-lang {
+    justify-content: center;
+  }
+}
+
+body.rtl-ui .muamalah-akad-content ul {
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+@media (max-width: 600px) {
+  .muamalah-nav-inner {
+    flex-direction: column;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .muamalah-nav-center {
+    flex: none;
+    width: 100%;
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: 12px;
+  }
+
+  .muamalah-brand,
+  .muamalah-brand-glass {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    background: rgba(59, 130, 246, 0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .muamalah-nav-center {
+    order: 2;
+  }
+
+  .muamalah-nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .muamalah-lang {
+    order: 4;
+    width: 100%;
+    justify-content: center;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .muamalah-hero {
+    padding: 40px 16px 36px;
+  }
+
+  .muamalah-main {
+    padding: 0 16px 36px;
+  }
+
+  .muamalah-tools-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .muamalah-tool-card {
+    padding: 20px;
+  }
+
+  .muamalah-section {
+    margin-bottom: 20px;
+  }
+
+  .muamalah-form-actions {
+    flex-direction: column;
+  }
+
+  .muamalah-btn {
+    width: 100%;
+  }
+}
