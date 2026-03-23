@@ -67,6 +67,12 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 8px 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .nav-links a {
@@ -135,14 +141,24 @@
 
   .nav-links {
     width: 100%;
+    max-width: 520px;
     justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 
+/* Arabic/RTL: center title, desktop horizontal */
 body.rtl-ui .nav-brand {
   flex-direction: row-reverse;
 }
 
 body.rtl-ui .nav-links {
   flex-direction: row-reverse;
+}
+
+@media (min-width: 901px) {
+  body.rtl-ui .navbar {
+    flex-direction: row-reverse;
+  }
 }

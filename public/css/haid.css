@@ -828,17 +828,14 @@ line-height:1.6;
 }
 
 .pf-box ul{
-
 list-style:none;
 padding:0;
-
+margin:0;
 }
 
 .pf-box ul li{
-
 margin-bottom:6px;
 color:#a6b7c7;
-
 }
 
 /* ===== MOBILE PRE FOOTER ===== */
@@ -962,23 +959,43 @@ text-align:left;
 }
 
 .pf-box ul{
-
-list-style:disc;
-
-padding-left:20px;
-
+list-style:none;
+padding:0;
 margin-top:10px;
-
 }
 
 .pf-box li{
-
 margin-bottom:8px;
-
 line-height:1.6;
+}
 
 }
 
+/* Arabic/RTL: pre-footer rata kanan pada mobile */
+@media (max-width: 768px) {
+body.rtl-ui .pre-footer,
+body.lang-ar .pre-footer,
+html[dir="rtl"] .pre-footer {
+  text-align: right;
+}
+
+body.rtl-ui .pre-footer-grid,
+body.lang-ar .pre-footer-grid,
+html[dir="rtl"] .pre-footer-grid {
+  text-align: right;
+}
+
+body.rtl-ui .pf-box,
+body.lang-ar .pf-box,
+html[dir="rtl"] .pf-box {
+  text-align: right;
+}
+
+body.rtl-ui .pf-box ul,
+body.lang-ar .pf-box ul,
+html[dir="rtl"] .pf-box ul {
+  padding-right: 0;
+}
 }
 
 /* ===== FIX MOBILE EN KHUSUS haid.html ===== */

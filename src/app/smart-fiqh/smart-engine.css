@@ -378,8 +378,28 @@ body.rtl-ui .reset-wrap {
 
 @media (max-width: 800px) {
   .nav-container {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
+    gap: 10px;
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  .nav-menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 14px;
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .lang-switch {
@@ -392,6 +412,28 @@ body.rtl-ui .reset-wrap {
 
   .fiqh-insight-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Arabic/RTL: center title, desktop horizontal */
+@media (min-width: 801px) {
+  body.rtl-ui .nav-container {
+    flex-direction: row-reverse;
+  }
+
+  body.rtl-ui .nav-menu {
+    flex-direction: row-reverse;
+  }
+
+  body.rtl-ui .lang-switch {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  body.rtl-ui .nav-menu {
+    flex-direction: row-reverse;
   }
 }
 
