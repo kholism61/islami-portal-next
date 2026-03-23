@@ -177,13 +177,12 @@ body.kfi-scope.rtl-ui .logo-text {
   body.kfi-scope .navbar nav,
   body.kfi-scope header.navbar .nav-menu,
   body.kfi-scope header.navbar nav {
-    flex: 0 0 auto;
-    width: min(100%, 420px);
+    flex: 0 0 auto !important;
+    width: min(100%, 420px) !important;
     max-width: 420px;
     margin-left: auto !important;
     margin-right: auto !important;
-    align-self: center;
-    justify-self: center;
+    align-self: center !important;
   }
 
   body.kfi-scope .navbar .nav-menu {
