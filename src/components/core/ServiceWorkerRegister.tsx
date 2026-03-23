@@ -9,7 +9,7 @@ export default function ServiceWorkerRegister() {
       let reloaded = false;
 
       navigator.serviceWorker
-        .register("/sw.js?v=20260320a")
+        .register("/sw.js?v=20260323a")
         .then((registration) => {
           try {
             registration.update();
