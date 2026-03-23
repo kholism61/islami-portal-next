@@ -195,9 +195,9 @@
 }
 
 .fiqh-page .logo-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -208,8 +208,8 @@
 }
 
 .fiqh-page .logo-icon {
-  width: 26px;
-  height: 26px;
+  width: 12px;
+  height: 12px;
   object-fit: contain;
   display: block;
 }

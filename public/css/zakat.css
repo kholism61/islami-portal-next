@@ -157,8 +157,8 @@ main {
   background: rgba(255, 255, 255, 0.15);
   border: none;
   color: white;
-  font-size: 18px;
-  padding: 6px 10px;
+  font-size: 14px;
+  padding: 5px 8px;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -807,29 +807,29 @@ body.dark .zakat-history {
   font-weight: bold;
 }
 
-/* Icon kecil kayak home - 14px icon, 26px glass */
+/* Icon kecil - 12px icon, 22px glass */
 .main-navbar .logo .logo-glass {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 8px;
+  border-radius: 6px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   flex-shrink: 0;
 }
 
 .main-navbar .logo .logo-icon {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   display: block;
   object-fit: contain;
 }
 
-/* zakat-info: lebih kecil lagi */
+/* zakat-info: sama ukuran */
 .page-zakat-info .main-navbar .logo .logo-glass {
   width: 22px;
   height: 22px;

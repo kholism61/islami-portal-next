@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import SmartFiqhScope from "@/components/smart-fiqh/SmartFiqhScope";
@@ -18,14 +17,7 @@ export default function SmartFiqhZakatPage() {
         <div className="nav-container">
           <Link href="/" className="logo" aria-label="Portal Literasi Islam">
             <span className="logo-mark" aria-hidden="true">
-              <Image
-                src="/assets/images/logo.png"
-                alt=""
-                className="logo-icon"
-                width={32}
-                height={32}
-                priority
-              />
+              <img src="/favicon.ico" alt="" className="logo-icon" width={12} height={12} />
             </span>
             <span className="logo-text" id="logoText">
               Portal Literasi Islam

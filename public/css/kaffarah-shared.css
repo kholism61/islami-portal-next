@@ -24,13 +24,13 @@ body.kfi-scope .logo {
 }
 
 body.kfi-scope .logo-mark {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  border-radius: 10px;
+  border-radius: 6px;
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(14, 165, 233, 0.2));
   border: 1px solid rgba(186, 230, 253, 0.28);
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
@@ -39,8 +39,8 @@ body.kfi-scope .logo-mark {
 }
 
 body.kfi-scope .logo-icon {
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
   object-fit: contain;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.24));
 }
@@ -123,13 +123,13 @@ body.kfi-scope.rtl-ui .logo-text {
 
 @media (max-width: 768px) {
   body.kfi-scope .logo-mark {
-    width: 30px;
-    height: 30px;
+    width: 22px;
+    height: 22px;
   }
 
   body.kfi-scope .logo-icon {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
   }
 
   body.kfi-scope .logo-text {

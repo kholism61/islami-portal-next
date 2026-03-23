@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 type Lang = "id" | "en" | "ar";
@@ -212,14 +211,7 @@ export default function SmartHubClient() {
         <div className="nav-container">
           <Link href="/" className="logo" aria-label="Portal Literasi Islam">
             <span className="logo-mark" aria-hidden="true">
-              <Image
-                src="/assets/images/logo.png"
-                alt=""
-                className="logo-icon"
-                width={32}
-                height={32}
-                priority
-              />
+              <img src="/favicon.ico" alt="" className="logo-icon" width={12} height={12} />
             </span>
             <span className="logo-text" id="logoText">
               {words.logoText}

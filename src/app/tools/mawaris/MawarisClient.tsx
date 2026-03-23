@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { useEffect } from "react";
@@ -44,14 +43,7 @@ export default function MawarisClient() {
         <div className="nav-container">
           <Link href="/" className="logo" aria-label="Portal Literasi Islam">
             <span className="logo-mark" aria-hidden="true">
-              <Image
-                src="/assets/images/logo.png"
-                alt=""
-                className="logo-icon"
-                width={26}
-                height={26}
-                loading="eager"
-              />
+              <img src="/favicon.ico" alt="" className="logo-icon" width={12} height={12} />
             </span>
             <span className="logo-text">Portal Literasi Islam</span>
           </Link>

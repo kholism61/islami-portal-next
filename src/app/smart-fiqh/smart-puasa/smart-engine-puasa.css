@@ -479,8 +479,8 @@ body.rtl-ui .reset-wrap {
 }
 
 .logo-mark {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -492,8 +492,8 @@ body.rtl-ui .reset-wrap {
 }
 
 .logo-icon {
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
   object-fit: contain;
 }
 
