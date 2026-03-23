@@ -432,6 +432,19 @@
   color: #111;
 }
 
+/* Arabic/RTL: nav mulai dari kanan (desktop) */
+@media (min-width: 769px) {
+  html[dir="rtl"] .fiqh-page .nav-container,
+  body.rtl-ui .fiqh-page .nav-container {
+    flex-direction: row-reverse;
+  }
+
+  html[dir="rtl"] .fiqh-page .nav-links,
+  body.rtl-ui .fiqh-page .nav-links {
+    flex-direction: row-reverse;
+  }
+}
+
 .fiqh-page .i18n-summary-card {
   margin-top: 26px;
   background: #f8fffd;

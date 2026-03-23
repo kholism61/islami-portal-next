@@ -1,3 +1,20 @@
+/* Kaffarah/Fidyah mobile: pastikan konten tengah */
+@media (max-width: 640px) {
+  body.kfi-scope {
+    overflow-x: hidden;
+  }
+
+  body.kfi-scope .container {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+  }
+}
+
 body.kfi-scope .logo {
   display: inline-flex;
   align-items: center;
@@ -160,15 +177,10 @@ body.kfi-scope.rtl-ui .logo-text {
   }
 }
 
-/* Arabic/RTL: center title, desktop horizontal */
+/* Arabic/RTL: nav mulai dari kanan (desktop) */
 @media (min-width: 641px) {
   body.kfi-scope.rtl-ui .navbar .nav-container {
-    flex-direction: row;
-  }
-
-  body.kfi-scope.rtl-ui .navbar .logo {
-    margin-right: auto;
-    margin-left: 0;
+    flex-direction: row-reverse;
   }
 
   body.kfi-scope.rtl-ui .navbar .nav-menu {
@@ -222,6 +234,15 @@ body.kfi-scope .kfi-hero-copy {
 @media (max-width: 768px) {
   body.kfi-scope .kfi-hero-shell {
     gap: 14px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  body.kfi-scope .kfi-hero-copy {
+    width: 100%;
+    text-align: center;
   }
 
   body.kfi-scope .kfi-hero-badge {

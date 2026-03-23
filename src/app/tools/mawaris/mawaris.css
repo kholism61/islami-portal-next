@@ -371,6 +371,12 @@
   display: flex;
   list-style: none;
   gap: 25px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .mawaris-page .nav-links a {
@@ -563,10 +569,11 @@
 
 }
 
-/* Arabic/RTL: center title, desktop horizontal */
+/* Arabic/RTL: nav mulai dari kanan (desktop & mobile) */
 html[dir="rtl"] .mawaris-page .nav-container,
 body.rtl-ui .mawaris-page .nav-container {
   direction: rtl;
+  flex-direction: row-reverse;
 }
 
 html[dir="rtl"] .mawaris-page .logo,
@@ -582,6 +589,11 @@ body.rtl-ui .mawaris-page .logo {
 }
 
 @media (max-width: 768px) {
+  html[dir="rtl"] .mawaris-page .nav-container,
+  body.rtl-ui .mawaris-page .nav-container {
+    flex-direction: column;
+  }
+
   html[dir="rtl"] .mawaris-page .nav-links,
   body.rtl-ui .mawaris-page .nav-links {
     flex-direction: row-reverse;

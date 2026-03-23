@@ -259,7 +259,19 @@ transition:0.2s;
 
   body.tool-kaffarah-sumpah .container{
     margin:36px auto;
-    padding:16px 14px;
+    padding:16px 16px;
+    width:100%;
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    box-sizing:border-box;
+  }
+
+  body.tool-kaffarah-sumpah .kfi-hero-shell{
+    width:100%;
+    max-width:100%;
+    padding:0 16px;
+    box-sizing:border-box;
   }
 
   body.tool-kaffarah-sumpah nav{
@@ -288,9 +300,20 @@ transition:0.2s;
 }
 
 body.tool-kaffarah-sumpah nav a:hover{
-
 color:#00d4ff;
+}
 
+/* Arabic/RTL: nav mulai dari kanan (desktop) */
+@media (min-width: 641px) {
+  html[dir="rtl"] body.tool-kaffarah-sumpah .nav-container,
+  body.rtl-ui.tool-kaffarah-sumpah .nav-container {
+    flex-direction: row-reverse;
+  }
+
+  html[dir="rtl"] body.tool-kaffarah-sumpah nav,
+  body.rtl-ui.tool-kaffarah-sumpah nav {
+    flex-direction: row-reverse;
+  }
 }
 
 body.tool-kaffarah-sumpah .hero{

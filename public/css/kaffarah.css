@@ -94,25 +94,38 @@ margin:0;
 
 @media (max-width: 640px){
   .container{
-    padding:24px 14px;
+    padding:24px 16px;
+    width:100%;
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    box-sizing:border-box;
   }
 
   .title{
     font-size:26px;
+    text-align:center;
   }
 
   .desc{
     margin-bottom:22px;
+    text-align:center;
   }
 
   .tool-grid{
     grid-template-columns:1fr;
     gap:14px;
+    width:100%;
+    max-width:100%;
+    margin:0 auto;
   }
 
   .tool-card{
     padding:18px;
     border-radius:14px;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
   }
 }
 
