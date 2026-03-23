@@ -1837,8 +1837,8 @@ document.querySelectorAll(".sidebar-toggle").forEach(btn => {
 /* =====================
    SEARCH ARTIKEL (ENHANCED)
 ===================== */
-const searchInput = document.getElementById("searchInput");
-const emptyState = document.getElementById("empty-state");
+var searchInput = document.getElementById("searchInput");
+var emptyState = document.getElementById("empty-state");
 
 function runSearch() {
   const keyword = searchInput.value.toLowerCase().trim();
@@ -1861,32 +1861,36 @@ function runSearch() {
 }
 
 if (searchInput) {
-  // realtime search
-  searchInput.addEventListener("input", () => {
-    runSearch();
-  });
+  if (searchInput.dataset.searchBound !== "1") {
+    searchInput.dataset.searchBound = "1";
 
-  // tekan ENTER
-  searchInput.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
+    // realtime search
+    searchInput.addEventListener("input", () => {
+      runSearch();
+    });
 
-      const resultCount = runSearch();
+    // tekan ENTER
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
 
-      if (resultCount > 0) {
-        // scroll ke hasil
-        document
-          .getElementById("articles-container")
-          ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      } else {
-        // scroll ke not found
-        emptyState?.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
+        const resultCount = runSearch();
+
+        if (resultCount > 0) {
+          // scroll ke hasil
+          document
+            .getElementById("articles-container")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          // scroll ke not found
+          emptyState?.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 
