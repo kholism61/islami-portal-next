@@ -1,12 +1,11 @@
 import type { PortalI18n } from "@/legacy/portalI18n";
 import type { PortalAuth } from "@/legacy/authRuntime";
+import type { PortalAdminI18n } from "@/legacy/adminI18nRuntime";
 
 declare global {
   interface Window {
     PortalI18n?: PortalI18n;
-    PortalAdminI18n?: {
-      t?: (key: string, params?: Record<string, unknown>) => string;
-    };
+    PortalAdminI18n?: PortalAdminI18n;
     PortalAuth?: PortalAuth;
     setLang?: (lang: "id" | "en" | "ar") => void;
     SITE_LANGS?: Array<"id" | "en" | "ar">;

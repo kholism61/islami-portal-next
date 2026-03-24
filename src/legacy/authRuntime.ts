@@ -14,6 +14,9 @@ export type PortalAuthUser = {
 
 export type PortalAuth = {
   getCurrentUser: () => PortalAuthUser | null;
+  getUsers: () => PortalAuthUser[];
+  getAuditLog: () => Array<{ type: string; message: string; email: string; timestamp: string }>;
+  formatDate: (value: string) => string;
   logout: () => void;
   clearSession: () => void;
   requireAuth: (options?: { adminOnly?: boolean; redirectTo?: string }) => PortalAuthUser | null;
