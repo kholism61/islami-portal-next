@@ -233,7 +233,7 @@ export default function KontakPage() {
         </div>
 
         <div className="footer-copy">
-          2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
+        © 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
         </div>
       </footer>
 

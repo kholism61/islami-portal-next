@@ -154,7 +154,7 @@ export default function KaffarahPage() {
             <Link href="/disclaimer">Disclaimer</Link>
           </div>
 
-          <p>&copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.</p>
+          <p>© 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.</p>
         </div>
       </footer>
 
