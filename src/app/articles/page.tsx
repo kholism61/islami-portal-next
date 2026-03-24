@@ -370,7 +370,7 @@ export default function ArticlePage() {
 
       <Script src="/js/article-store.js?v=20260321a" strategy="afterInteractive" />
       <Script src="/js/bookmark.js?v=20260321a" strategy="afterInteractive" type="module" />
-      <Script src="/js/article.js?v=20260321a" strategy="afterInteractive" type="module" />
+      <Script src="/js/article.js?v=20260324d" strategy="afterInteractive" type="module" />
       <Script src="/js/music.js" strategy="afterInteractive" type="module" />
       <Script src="/js/i18n.js?v=20260321a" strategy="afterInteractive" />
       <Script src="/js/auth.js" strategy="afterInteractive" />

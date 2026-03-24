@@ -446,21 +446,53 @@ body.rtl-ui .fiqh-page {
   html.rtl-ui .fiqh-page .nav-container,
   body.rtl-ui .fiqh-page .nav-container {
     flex-direction: row !important;
-    direction: rtl !important;
+    direction: ltr !important;
   }
 
   html[dir="rtl"] .fiqh-page .logo,
   html.rtl-ui .fiqh-page .logo,
   body.rtl-ui .fiqh-page .logo {
-    flex-direction: row-reverse;
-    margin-inline-start: auto;
+    flex-direction: row !important;
+    flex-shrink: 0;
+    margin-inline-start: 0;
+  }
+
+  html[dir="rtl"] .fiqh-page .logo-text,
+  html.rtl-ui .fiqh-page .logo-text,
+  body.rtl-ui .fiqh-page .logo-text {
+    order: 1;
+  }
+
+  html[dir="rtl"] .fiqh-page .logo-mark,
+  html.rtl-ui .fiqh-page .logo-mark,
+  body.rtl-ui .fiqh-page .logo-mark {
+    order: 2;
+  }
+
+  html[dir="rtl"] .fiqh-page #lang-switch-wrap,
+  html.rtl-ui .fiqh-page #lang-switch-wrap,
+  body.rtl-ui .fiqh-page #lang-switch-wrap {
+    order: 1;
+    flex-shrink: 0;
   }
 
   html[dir="rtl"] .fiqh-page .nav-links,
   html.rtl-ui .fiqh-page .nav-links,
   body.rtl-ui .fiqh-page .nav-links {
-    flex-direction: row !important;
+    order: 2;
+    flex-direction: row-reverse !important;
     direction: rtl !important;
+    width: fit-content;
+    max-width: 100%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  html[dir="rtl"] .fiqh-page .logo,
+  html.rtl-ui .fiqh-page .logo,
+  body.rtl-ui .fiqh-page .logo {
+    order: 3;
   }
 }
 

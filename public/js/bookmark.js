@@ -66,7 +66,16 @@ const bookmarkUiText = {
     footer_contact: "Kontak",
     footer_privacy: "Privacy Policy",
     footer_disclaimer: "Disclaimer",
-    footer_copy: "(c) 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi."
+    footer_copy: "(c) 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.",
+    related_section_title: "Artikel terkait",
+    related_section_blurb:
+      "Bagian ini memuat hingga tiga artikel dari katalog portal yang selaras dengan tema atau kategori yang paling sering Anda tandai di bookmark, guna memperluas bacaan pada jalur kajian yang sama. Apabila tidak tersedia, kami menampilkan entri terbaru yang belum ada di bookmark Anda.",
+    related_lead: "Selaras dengan minat Anda: {{cat}}.",
+    related_lead_general: "Artikel lain dari katalog portal.",
+    recommended_section_title: "Artikel direkomendasikan",
+    recommended_section_blurb:
+      "Rekomendasi dipilih dari katalog portal secara bergilir dengan urutan yang diacak berdasarkan tanggal hari ini, sehingga Anda menemui variasi topik di setiap kunjungan. Ditampilkan paling banyak enam artikel, tanpa mengulangi artikel yang tampil pada bagian terkait di atas.",
+    read_short: "Baca"
   },
   en: {
     page_title: "Saved Articles | Islamic Literacy Portal",
@@ -128,7 +137,16 @@ const bookmarkUiText = {
     footer_contact: "Contact",
     footer_privacy: "Privacy Policy",
     footer_disclaimer: "Disclaimer",
-    footer_copy: "(c) 2026 Islamic Literacy Portal - All rights reserved."
+    footer_copy: "(c) 2026 Islamic Literacy Portal - All rights reserved.",
+    related_section_title: "Related articles",
+    related_section_blurb:
+      "This section lists up to three catalogue articles that align with the theme or category most often represented in your bookmarks, to extend reading within the same line of study. If none are available, we show the latest entries not yet saved in your bookmarks.",
+    related_lead: "Aligned with your interests: {{cat}}.",
+    related_lead_general: "More articles from the portal catalog.",
+    recommended_section_title: "Recommended articles",
+    recommended_section_blurb:
+      "Recommendations are drawn from the portal catalogue in a daily rotation keyed to today’s date, so you encounter a variety of topics across visits. Up to six articles are shown, without repeating items already listed in the related section above.",
+    read_short: "Read"
   },
   ar: {
     page_title: "المقالات المحفوظة | بوابة الثقافة الإسلامية",
@@ -190,7 +208,16 @@ const bookmarkUiText = {
     footer_contact: "تواصل",
     footer_privacy: "سياسة الخصوصية",
     footer_disclaimer: "إخلاء المسؤولية",
-    footer_copy: "(c) 2026 بوابة الثقافة الإسلامية - جميع الحقوق محفوظة."
+    footer_copy: "(c) 2026 بوابة الثقافة الإسلامية - جميع الحقوق محفوظة.",
+    related_section_title: "مقالات ذات صلة",
+    related_section_blurb:
+      "يعرض هذا القسم حتى ثلاثة مقالات من أرشيف البوابة متوافقة مع الموضوع أو التصنيف الأكثر تكرارًا في محفوظاتك، لتوسيع المطالعة في نفس المسار العلمي. إذا تعذر ذلك، تُعرض أحدث المقالات غير المحفوظة في مرجعيتك.",
+    related_lead: "بما يتوافق مع اهتماماتك: {{cat}}.",
+    related_lead_general: "مقالات أخرى من أرشيف البوابة.",
+    recommended_section_title: "مقالات مقترحة",
+    recommended_section_blurb:
+      "تُستقى المقترحات من أرشيف البوابة بترتيب يعتمد على تاريخ اليوم، لتتنوع المواضيع في كل زيارة. يُعرض إلى ست مقالات دون تكرار ما يظهر في قسم ذات الصلة أعلاه.",
+    read_short: "اقرأ"
   }
 };
 
@@ -279,6 +306,169 @@ function stripHtml(html = "") {
   return temp.textContent || "";
 }
 
+function escapeHtml(s) {
+  return String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function hashString(str) {
+  let h = 1779033703;
+  for (let i = 0; i < str.length; i++) {
+    h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+    h = (h << 13) | (h >>> 19);
+  }
+  return h >>> 0;
+}
+
+function seededShuffle(arr, seed) {
+  const a = arr.slice();
+  let s = seed >>> 0;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = (Math.imul(s, 1103515245) + 12345) >>> 0;
+    const j = s % (i + 1);
+    const tmp = a[i];
+    a[i] = a[j];
+    a[j] = tmp;
+  }
+  return a;
+}
+
+function getAllArticleKeysSorted() {
+  const storeRoot = getLegacyArticleStore();
+  const keys = new Set();
+  SITE_LANGS.forEach((lang) => {
+    const s = storeRoot[lang];
+    if (s && typeof s === "object") {
+      Object.keys(s).forEach((k) => keys.add(k));
+    }
+  });
+  return Array.from(keys).sort((a, b) => {
+    const A = getArticleById(a);
+    const B = getArticleById(b);
+    const aDate = new Date(A?.createdAt || A?.tanggal || 0).getTime();
+    const bDate = new Date(B?.createdAt || B?.tanggal || 0).getTime();
+    return bDate - aDate;
+  });
+}
+
+function bookmarkCatLabel(cat) {
+  const lang = getSiteLang();
+  const raw = String(cat || "").trim();
+  const fb = bookmarkCategoryLabelFallback(cat, lang);
+  if (typeof window.getLocalizedCategory === "function") {
+    try {
+      const primary = window.getLocalizedCategory(cat, lang);
+      if (fb && (raw === primary || normalizeBookmarkCatSlug(raw) === normalizeBookmarkCatSlug(primary))) {
+        return fb;
+      }
+      return primary || fb || raw;
+    } catch {
+      return fb || raw;
+    }
+  }
+  return fb || raw;
+}
+
+/** Gambar fallback per kategori (selaras home / article.js) */
+const BOOKMARK_CATEGORY_THUMB = {
+  ilmusyariah: "/assets/images/fiqh.png",
+  hadis: "/assets/images/hadis.jpg",
+  ibadah: "/assets/images/kaaba.png",
+  quran: "/assets/images/quran.png",
+  tasawuf: "/assets/images/tasawuf.png",
+  pemikiran: "/assets/images/pemikiran.png",
+  politik: "/assets/images/politik.jpg",
+  ramadhan: "/assets/images/ramadhan.png",
+  keilmuan: "/assets/images/kajian.png",
+  palestina: "/assets/images/palestina.png",
+  fatwa: "/assets/images/dar-ifta.jpg",
+  kalam: "/assets/images/ilmu%20kalam.webp",
+  sirah: "/assets/images/sirah%20nabawiyah.webp",
+  psikologi: "/assets/images/psikologi.webp",
+  kontemporer: "/assets/images/tantanganzaman.webp"
+};
+
+const BOOKMARK_CAT_THUMB_ALIAS = {
+  fiqh: "ilmusyariah",
+  "ilmu-syariah": "ilmusyariah",
+  hadith: "hadis",
+  "catatan-ramadhan": "ramadhan",
+  syamail: "hadis",
+  "al-quran": "quran",
+  "al-quran-tafsir": "quran"
+};
+
+/** Label tampilan per bahasa (sinkron categoryMeta di article.js) — dipakai jika article.js belum mengekspor getLocalizedCategory atau slug tidak ter-resolve */
+const BOOKMARK_CATEGORY_LABELS = {
+  ilmusyariah: { id: "Ilmu Syariah", en: "Islamic Law", ar: "الفقه الإسلامي" },
+  hadis: { id: "Hadis", en: "Hadith", ar: "الحديث" },
+  ibadah: { id: "Ibadah", en: "Worship", ar: "العبادة" },
+  quran: { id: "Quran", en: "Qur'an", ar: "القرآن" },
+  tasawuf: { id: "Tasawuf", en: "Tasawuf", ar: "التصوف" },
+  pemikiran: { id: "Pemikiran", en: "Thought", ar: "الفكر" },
+  politik: { id: "Politik Islam", en: "Islamic Politics", ar: "السياسة الإسلامية" },
+  ramadhan: { id: "Ramadhan", en: "Ramadan", ar: "رمضان" },
+  keilmuan: { id: "Keilmuan", en: "Knowledge", ar: "المعرفة" },
+  palestina: { id: "Palestina & Perjuangan", en: "Palestine & Resistance", ar: "\u0641\u0644\u0633\u0637\u064A\u0646 \u0648\u0627\u0644\u0645\u0642\u0627\u0648\u0645\u0629" },
+  fatwa: { id: "Fatwa Dar al-Ifta", en: "Dar al-Ifta Fatwas", ar: "\u0641\u062A\u0627\u0648\u0649 \u062F\u0627\u0631 \u0627\u0644\u0625\u0641\u062A\u0627\u0621" },
+  kalam: { id: "Ilmu Kalam", en: "Islamic Theology", ar: "علم الكلام" },
+  sirah: { id: "Sirah Nabawiyah", en: "Prophetic Biography", ar: "السيرة النبوية" },
+  psikologi: { id: "Psikologi", en: "Psychology", ar: "علم النفس" },
+  kontemporer: { id: "Tantangan Zaman", en: "Contemporary Challenges", ar: "التحديات المعاصرة" }
+};
+
+function resolveBookmarkCategoryLabelKey(rawCat) {
+  const slug = normalizeBookmarkCatSlug(rawCat);
+  if (!slug) return "";
+  if (BOOKMARK_CATEGORY_LABELS[slug]) return slug;
+  const viaAlias = BOOKMARK_CAT_THUMB_ALIAS[slug];
+  if (viaAlias && BOOKMARK_CATEGORY_LABELS[viaAlias]) return viaAlias;
+  const head = slug.split("-")[0];
+  if (head && BOOKMARK_CATEGORY_LABELS[head]) return head;
+  return "";
+}
+
+function bookmarkCategoryLabelFallback(cat, lang) {
+  const key = resolveBookmarkCategoryLabelKey(cat);
+  const labels = key && BOOKMARK_CATEGORY_LABELS[key];
+  if (!labels) return "";
+  return labels[lang] || labels.id || "";
+}
+
+function normalizeBookmarkCatSlug(raw) {
+  return String(raw || "")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function thumbUrlForCategory(rawCat) {
+  const slug = normalizeBookmarkCatSlug(rawCat);
+  if (slug && BOOKMARK_CATEGORY_THUMB[slug]) return BOOKMARK_CATEGORY_THUMB[slug];
+  const viaAlias = slug && BOOKMARK_CAT_THUMB_ALIAS[slug];
+  if (viaAlias && BOOKMARK_CATEGORY_THUMB[viaAlias]) {
+    return BOOKMARK_CATEGORY_THUMB[viaAlias];
+  }
+  const head = slug.split("-")[0];
+  if (head && BOOKMARK_CATEGORY_THUMB[head]) return BOOKMARK_CATEGORY_THUMB[head];
+  return "/assets/images/default.jpg";
+}
+
+function resolveArticleThumb(article) {
+  const raw = String(article?.thumbnail || "").trim();
+  if (raw) {
+    if (/^https?:\/\//i.test(raw) || raw.startsWith("data:")) return raw;
+    if (raw.startsWith("/")) return raw;
+    return `/${raw.replace(/^\/+/, "")}`;
+  }
+  return thumbUrlForCategory(article?.kategori);
+}
+
 function initBookmarkPage() {
   const listEl = document.getElementById("bookmark-list");
   const emptyEl = document.getElementById("bookmark-empty");
@@ -300,6 +490,151 @@ function initBookmarkPage() {
       return Array.isArray(parsed) ? parsed : [];
     } catch {
       return [];
+    }
+  }
+
+  function renderDiscoverySections() {
+    const relatedSection = document.getElementById("bookmark-related-section");
+    const relatedGrid = document.getElementById("bookmark-related-grid");
+    const relatedLead = document.getElementById("bookmark-related-lead");
+    const recSection = document.getElementById("bookmark-recommended-section");
+    const recRow1 = document.getElementById("bookmark-rec-row-1");
+    const recRow2 = document.getElementById("bookmark-rec-row-2");
+
+    if (!relatedSection || !relatedGrid || !recSection || !recRow1 || !recRow2) return;
+
+    const bookmarks = getBookmarks();
+    const bookmarkSet = new Set(bookmarks);
+    const allKeys = getAllArticleKeysSorted();
+
+    if (allKeys.length === 0) {
+      relatedSection.style.display = "none";
+      recSection.style.display = "none";
+      relatedGrid.innerHTML = "";
+      recRow1.innerHTML = "";
+      recRow2.innerHTML = "";
+      if (relatedLead) {
+        relatedLead.style.display = "none";
+        relatedLead.textContent = "";
+      }
+      return;
+    }
+
+    const catCounts = {};
+    bookmarks.forEach((id) => {
+      const a = getArticleById(id);
+      const c = a?.kategori;
+      if (c) catCounts[c] = (catCounts[c] || 0) + 1;
+    });
+    let dominantCat = "";
+    let best = 0;
+    Object.keys(catCounts).forEach((c) => {
+      if (catCounts[c] > best) {
+        dominantCat = c;
+        best = catCounts[c];
+      }
+    });
+
+    let relatedIds = [];
+    if (dominantCat) {
+      relatedIds = allKeys
+        .filter((id) => !bookmarkSet.has(id))
+        .filter((id) => (getArticleById(id)?.kategori || "") === dominantCat)
+        .slice(0, 3);
+    }
+    if (relatedIds.length === 0) {
+      relatedIds = allKeys.filter((id) => !bookmarkSet.has(id)).slice(0, 3);
+    }
+
+    const fromSameCategory =
+      dominantCat &&
+      relatedIds.length > 0 &&
+      relatedIds.every((id) => (getArticleById(id)?.kategori || "") === dominantCat);
+
+    if (relatedIds.length === 0) {
+      relatedSection.style.display = "none";
+      relatedGrid.innerHTML = "";
+      if (relatedLead) {
+        relatedLead.style.display = "none";
+        relatedLead.textContent = "";
+      }
+    } else {
+      relatedSection.style.display = "block";
+      if (relatedLead) {
+        relatedLead.style.display = "block";
+        relatedLead.textContent = fromSameCategory
+          ? t("related_lead", { cat: bookmarkCatLabel(dominantCat) })
+          : t("related_lead_general");
+      }
+
+      relatedGrid.innerHTML = relatedIds
+        .map((id) => {
+          const article = getArticleById(id);
+          if (!article) return "";
+          const thumb = resolveArticleThumb(article);
+          const href = `/article?id=${encodeURIComponent(id)}&slug=${slugify(article.judul || id)}`;
+          const cat = bookmarkCatLabel(article.kategori);
+          const langBadge = article.lang || article.bahasa || "ID";
+          return `
+        <div class="related-card">
+          <span class="lang-badge">${escapeHtml(langBadge)}</span>
+          <a href="${href}" class="related-link">
+            <img src="${thumb}" class="related-thumb" alt="${escapeHtml(article.judul || id)}" onerror="this.onerror=null;this.src='/assets/images/default.jpg'">
+            <span class="category">${escapeHtml(cat)}</span>
+            <h4>${escapeHtml(article.judul || id)}</h4>
+            <span class="related-read">${escapeHtml(t("read_short"))}</span>
+          </a>
+        </div>`;
+        })
+        .join("");
+    }
+
+    let recPool = allKeys.filter(
+      (id) => !bookmarkSet.has(id) && !relatedIds.includes(id)
+    );
+    if (recPool.length < 6) {
+      recPool = allKeys.filter((id) => !bookmarkSet.has(id));
+    }
+
+    const dayKey = new Date().toLocaleDateString("sv-SE");
+    const seed = hashString(`portal-bookmark-rec-${dayKey}`);
+    const shuffled = seededShuffle(recPool, seed);
+    let recIds = shuffled.slice(0, 6);
+
+    if (recIds.length === 0) {
+      recSection.style.display = "none";
+      recRow1.innerHTML = "";
+      recRow2.innerHTML = "";
+    } else {
+      recSection.style.display = "block";
+      const row1 = recIds.slice(0, 3);
+      const row2 = recIds.slice(3, 6);
+
+      function fillRecRow(ids, container) {
+        container.innerHTML = ids
+          .map((id) => {
+            const article = getArticleById(id);
+            if (!article) return "";
+            const href = `/article?id=${encodeURIComponent(id)}&slug=${slugify(article.judul || id)}`;
+            const c = bookmarkCatLabel(article.kategori);
+            const dateLine = article.tanggal || article.createdAt || "";
+            const thumb = resolveArticleThumb(article);
+            return `
+        <a href="${href}" class="recommended-card bookmark-rec-card">
+          <img class="bookmark-rec-thumb" src="${thumb}" alt="${escapeHtml(article.judul || id)}" onerror="this.onerror=null;this.src='/assets/images/default.jpg'">
+          <div class="bookmark-rec-card-body">
+            <span class="rec-cat">${escapeHtml(c)}</span>
+            <h4>${escapeHtml(article.judul || id)}</h4>
+            <p>${escapeHtml(dateLine)}</p>
+          </div>
+        </a>`;
+          })
+          .join("");
+        container.style.display = ids.length ? "grid" : "none";
+      }
+
+      fillRecRow(row1, recRow1);
+      fillRecRow(row2, recRow2);
     }
   }
 
@@ -460,10 +795,7 @@ function initBookmarkPage() {
     defaultOption.textContent = t("filter_all");
     filterSelect.appendChild(defaultOption);
 
-    const getCatLabel = (cat) =>
-      typeof window.getLocalizedCategory === "function"
-        ? window.getLocalizedCategory(cat, getSiteLang())
-        : cat;
+    const getCatLabel = (cat) => bookmarkCatLabel(cat);
     Array.from(categories)
       .sort((a, b) => (getCatLabel(a) || "").localeCompare(getCatLabel(b) || ""))
       .forEach((category) => {
@@ -536,7 +868,7 @@ function initBookmarkPage() {
       item.innerHTML = `
         <img src="${thumb}" class="bookmark-thumb" alt="${article.judul || id}">
         <div class="bookmark-body">
-          <span class="bookmark-category">${(typeof window.getLocalizedCategory === "function" ? window.getLocalizedCategory(article.kategori, getSiteLang()) : (article.kategori || ""))}</span>
+          <span class="bookmark-category">${escapeHtml(bookmarkCatLabel(article.kategori))}</span>
           <h3>${article.judul || ""}</h3>
           <p>${preview}...</p>
           <div class="reading-bar">
@@ -597,6 +929,15 @@ function initBookmarkPage() {
     if (achievementPrefix) achievementPrefix.textContent = t("achievement_prefix");
     if (headerTitle) headerTitle.textContent = t("header_title");
     if (headerSub) headerSub.textContent = t("header_sub");
+
+    const relatedHeading = document.getElementById("bookmark-related-heading");
+    if (relatedHeading) relatedHeading.textContent = t("related_section_title");
+    const recHeading = document.getElementById("bookmark-recommended-heading");
+    if (recHeading) recHeading.textContent = t("recommended_section_title");
+    const relatedDescEl = document.getElementById("bookmark-related-desc");
+    if (relatedDescEl) relatedDescEl.textContent = t("related_section_blurb");
+    const recDescEl = document.getElementById("bookmark-recommended-desc");
+    if (recDescEl) recDescEl.textContent = t("recommended_section_blurb");
     if (exportPdfBtn) exportPdfBtn.textContent = t("export_pdf");
     if (exportWordBtn) exportWordBtn.textContent = t("export_word");
     if (clearBtn) clearBtn.textContent = t("clear_all");
@@ -657,6 +998,7 @@ function initBookmarkPage() {
     populateCategories();
     renderBookmarks();
     renderContinueReading();
+    renderDiscoverySections();
   });
 
   searchInput?.addEventListener("input", runSearch);
@@ -764,7 +1106,7 @@ function initBookmarkPage() {
 
       content += `
         <h2>${article.judul || id}</h2>
-        <p><strong>${t("meta_category")}:</strong> ${(typeof window.getLocalizedCategory === "function" ? window.getLocalizedCategory(article.kategori, getSiteLang()) : article.kategori) || "-"}</p>
+        <p><strong>${t("meta_category")}:</strong> ${escapeHtml(bookmarkCatLabel(article.kategori)) || "-"}</p>
         <p><strong>${t("meta_date")}:</strong> ${article.tanggal || "-"}</p>
         <hr>
         ${article.isi || ""}
@@ -799,6 +1141,7 @@ function initBookmarkPage() {
     populateCategories();
     renderBookmarks();
     renderContinueReading();
+    renderDiscoverySections();
     updateStats();
   }
 
@@ -820,11 +1163,18 @@ function initBookmarkPage() {
   window.addEventListener("focus", () => {
     renderBookmarks();
     renderContinueReading();
+    renderDiscoverySections();
     updateStats();
   });
 
   window.addEventListener("storage", (event) => {
-    if (event.key === "readingProgress" || event.key === "bookmarks" || event.key === "siteLang") {
+    if (
+      event.key === "readingProgress" ||
+      event.key === "readingHistory" ||
+      event.key === "totalArticlesRead" ||
+      event.key === "bookmarks" ||
+      event.key === "siteLang"
+    ) {
       rerenderAll();
     }
   });

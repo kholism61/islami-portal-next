@@ -128,7 +128,7 @@ body::before {
   font-weight: 800;
   letter-spacing: 0.01em;
   color: #f8fbff; /* fallback */
-  background: linear-gradient(96deg, #ffffff 0%, #dbeafe 28%, #7dd3fc 58%, #86efac 100%);
+  background: linear-gradient(96deg, #ffffff 0%, #dbeafe 28%, #7dd3fc 58%, #60a5fa 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1514,6 +1514,17 @@ body.dark .featured-card {
     #111827
   );
   color: #f9fafb;
+  box-shadow:
+    0 16px 44px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(52, 211, 153, 0.2),
+    0 0 52px rgba(16, 185, 129, 0.16);
+}
+
+body.dark .featured-card:hover {
+  box-shadow:
+    0 28px 56px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(52, 211, 153, 0.28),
+    0 0 64px rgba(16, 185, 129, 0.22);
 }
 
 body.dark .featured-content p {
@@ -2526,8 +2537,11 @@ body.dark .value-item h3::before {
 }
 
 .author-preview {
-  margin-top: 70px;
-  margin-bottom: 90px;
+  /* Selaras lebar kiri–kanan dengan #featured-article (artikel pilihan) */
+  max-width: 1100px;
+  margin: 70px auto 90px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .author-preview-card {
@@ -2574,8 +2588,11 @@ body.dark .author-preview-card {
     #0f172a
   );
 
-  border-left: 4px solid #fde047;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  border-left: 4px solid #34d399;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(52, 211, 153, 0.18),
+    0 0 44px rgba(16, 185, 129, 0.14);
 }
 
 body.dark .author-name {
@@ -5121,19 +5138,33 @@ body.dark .offline-stat span {
   margin-top: 4px;
 }
 
-/* DARK MODE */
+/* DARK MODE — statistik membaca */
 body.dark .reader-stats {
-  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  background: linear-gradient(135deg, #020617 0%, #0f172a 48%, #1e1b4b 100%);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.5),
+    0 0 22px rgba(34, 211, 238, 0.08);
   color: #e2e8f0;
 }
 
+body.dark .reader-stats h3 {
+  color: #f1f5f9;
+}
+
 body.dark .stat-box {
-  background: rgba(15, 23, 42, 0.9);
+  background: linear-gradient(165deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.88));
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
   color: #e2e8f0;
 }
 
 body.dark .stat-box span {
   color: #93c5fd;
+}
+
+body.dark .stat-box p {
+  color: #94a3b8;
 }
 
 /* pastikan card last reading bisa diklik */
@@ -5166,12 +5197,6 @@ body.dark .stat-box span {
   color: white;
   overflow: hidden;
   transition: all 0.4s ease;
-
-  /* GLOW BIRU ELEGAN */
-  box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.35),
-    0 0 18px rgba(59, 130, 246, 0.25),
-    0 0 40px rgba(59, 130, 246, 0.15);
 }
 
 /* efek kilap bergerak */
@@ -5347,13 +5372,13 @@ body.dark .stat-box span {
   font-weight: 600;
 }
 
-/* progress bar saat berbuka */
-.ramadhan-mode .prayer-box.prayer-maghrib .prayer-progress-fill {
+/* progress bar saat berbuka — nuansa ramadhan hijau hanya di dark mode */
+body.dark.ramadhan-mode .prayer-box.prayer-maghrib .prayer-progress-fill {
   background: linear-gradient(90deg, #ff9f1c, #ff6b35);
   box-shadow: 0 0 12px rgba(255, 159, 28, 0.7);
 }
 
-.ramadhan-mode::before {
+body.dark.ramadhan-mode::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -5398,18 +5423,18 @@ body.dark .stat-box span {
 }
 
 /* =========================
-   RAMADHAN VISUAL UPGRADE
+   RAMADHAN VISUAL UPGRADE (hijau — dark mode saja; mode terang pakai biru default .prayer-box)
 ========================= */
-.ramadhan-mode .prayer-box {
+body.dark.ramadhan-mode .prayer-box {
   background: linear-gradient(135deg, #0f2e25, #1b3f35);
 }
 
-.ramadhan-mode .prayer-card {
+body.dark.ramadhan-mode .prayer-card {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 215, 100, 0.15);
 }
 
-.ramadhan-mode .prayer-progress-fill {
+body.dark.ramadhan-mode .prayer-progress-fill {
   background: linear-gradient(90deg, #ffd166, #ff9f1c);
   box-shadow: 0 0 12px rgba(255, 200, 80, 0.6);
 }
@@ -7080,12 +7105,16 @@ width:60px;
 
 height:3px;
 
-background:linear-gradient(90deg,#3b82f6,#22c55e);
+background:linear-gradient(90deg,#3b82f6,#38bdf8);
 
 margin-top:14px;
 
 border-radius:4px;
 
+}
+
+body.dark .section-header::after {
+  background: linear-gradient(90deg, #3b82f6, #22c55e);
 }
 
 .section-icon{
@@ -7686,6 +7715,165 @@ body.home-page::after {
   pointer-events: none;
 }
 
+/*
+ * Home: efek menyala — featured (grid artikel pilihan). Prayer box tanpa hijau.
+ */
+body.home-page #featured-link.featured-card {
+  animation: homeFeaturedCornerGlow 2.8s ease-in-out infinite;
+}
+
+body.home-page #featured-link.featured-card:hover {
+  animation: none;
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 0 3px rgba(16, 185, 129, 0.65),
+    0 0 40px rgba(52, 211, 153, 0.45),
+    0 20px 50px rgba(0, 0, 0, 0.22);
+}
+
+@keyframes homeFeaturedCornerGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgba(52, 211, 153, 0.55),
+      0 0 28px rgba(34, 197, 94, 0.38),
+      0 0 48px rgba(16, 185, 129, 0.2),
+      0 12px 32px rgba(0, 0, 0, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px rgba(16, 185, 129, 0.78),
+      0 0 44px rgba(52, 211, 153, 0.48),
+      0 0 72px rgba(34, 197, 94, 0.28),
+      0 14px 36px rgba(0, 0, 0, 0.28);
+  }
+}
+
+body.dark.home-page #articles-container .card,
+body.dark.home-page #popular-container .card,
+body.dark.home-page .tools-grid .tool-card,
+body.dark.home-page #category-grid .category-card {
+  animation: homeCardCornerGlow 3.4s ease-in-out infinite;
+}
+
+@keyframes homeCardCornerGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.26),
+      0 0 18px rgba(34, 197, 94, 0.1),
+      0 8px 22px rgba(0, 0, 0, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(16, 185, 129, 0.38),
+      0 0 28px rgba(52, 211, 153, 0.18),
+      0 10px 26px rgba(0, 0, 0, 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home-page #featured-link.featured-card {
+    animation: none;
+    box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.45);
+  }
+
+  body.dark.home-page #articles-container .card,
+  body.dark.home-page #popular-container .card,
+  body.dark.home-page .tools-grid .tool-card,
+  body.dark.home-page #category-grid .category-card {
+    animation: none;
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.28);
+  }
+
+  body.home-page .home-prayer-widget .widget-card {
+    animation: none;
+    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.35);
+  }
+}
+
+/* Kotak hitung artikel offline (di bawah hero) — lebih gelap & kontras */
+body.dark .home-stats .stat-card {
+  background: linear-gradient(145deg, #020617 0%, #0f172a 45%, #1e293b 100%);
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(59, 130, 246, 0.12);
+}
+
+body.dark .home-stats .stat-info span {
+  color: #7dd3fc;
+}
+
+body.dark .home-stats .stat-info small {
+  color: rgba(226, 232, 240, 0.88);
+}
+
+/* Home dark: baris Artikel Offline — tanpa kotak pembungkus hijau; hanya header + link */
+body.dark.home-page .offline-section {
+  margin: 36px 0 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body.dark.home-page .offline-section .section-header {
+  margin-bottom: 0;
+}
+
+body.dark.home-page #offline-section .section-header h2 {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  color: #f1f5f9;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+body.dark.home-page .offline-section .see-all {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+}
+
+body.dark.home-page .offline-section .see-all:hover {
+  background: linear-gradient(135deg, #334155, #475569);
+  color: #f8fafc;
+}
+
+/* Prayer widget: home = aksen biru (tanpa hijau); halaman lain bayangan biru */
+body.dark .home-prayer-widget .widget-card {
+  background: linear-gradient(135deg, #020617 0%, #172554 55%, #0c4a6e 100%);
+}
+
+body.dark .home-prayer-widget .widget-card h3 {
+  color: #e0f2fe;
+}
+
+body.dark:not(.home-page) .home-prayer-widget .widget-card {
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.45),
+    0 0 22px rgba(59, 130, 246, 0.12);
+}
+
+/* Strip Imsak / Subuh / Maghrib — biru, selaras tema home */
+body.home-page .home-prayer-widget .widget-card {
+  border: 1px solid rgba(125, 211, 252, 0.35);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.22),
+    0 0 24px rgba(59, 130, 246, 0.12);
+}
+
+body.home-page .home-prayer-widget .widget-card:hover {
+  border-color: rgba(56, 189, 248, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(59, 130, 246, 0.22),
+    0 0 28px rgba(59, 130, 246, 0.18),
+    0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
 body.home-page main,
 body.home-page .welcome-desc,
 body.home-page .section-subtitle,
@@ -7741,7 +7929,7 @@ body.home-page .welcome-title span {
 body.home-page .logo {
   color: #f8fbff;
   font-weight: 800;
-  background: linear-gradient(96deg, #ffffff 0%, #dbeafe 32%, #7dd3fc 64%, #86efac 100%);
+  background: linear-gradient(96deg, #ffffff 0%, #dbeafe 32%, #7dd3fc 64%, #60a5fa 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -7750,7 +7938,7 @@ body.home-page .logo {
 
 body.home-page .author-name {
   color: #0f172a;
-  background: linear-gradient(120deg, #1d4ed8 0%, #2563eb 26%, #0ea5e9 58%, #10b981 100%);
+  background: linear-gradient(120deg, #1d4ed8 0%, #2563eb 26%, #0ea5e9 58%, #38bdf8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -7922,6 +8110,30 @@ body.home-page.dark .value-item {
 
 body.rtl-ui.home-page.dark .value-item {
   border-right-color: #60a5fa;
+}
+
+/* Landasan Keilmuan — aksen hijau + glow (home dark saja; kartu pertama) */
+body.home-page.dark .intro-values .value-item:first-child {
+  border-left-color: #34d399;
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(52, 211, 153, 0.12),
+    0 0 40px rgba(16, 185, 129, 0.18);
+}
+
+body.home-page.dark .intro-values .value-item:first-child::after {
+  background: linear-gradient(170deg, #6ee7b7, #34d399, #059669);
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.35);
+}
+
+body.home-page.dark .intro-values .value-item:first-child h3::before {
+  background: linear-gradient(165deg, #a7f3d0, #34d399, #059669);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.32);
+}
+
+body.rtl-ui.home-page.dark .intro-values .value-item:first-child {
+  border-left: 0;
+  border-right: 7px solid #34d399;
 }
 
 /* DARK MODE BODY */

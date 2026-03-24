@@ -12,7 +12,7 @@ export type ArticleRuntime = {
 export async function ensureArticleRuntime(): Promise<ArticleRuntime> {
   await loadPublicScript("/js/article-store.js?v=20260321a");
   await loadPublicScript("/js/i18n.js?v=20260321a");
-  await loadPublicScript("/js/article.js?v=20260321a");
+  await loadPublicScript("/js/article.js?v=20260324d");
 
   return {
     syncArticleChrome: window.syncArticleChrome,

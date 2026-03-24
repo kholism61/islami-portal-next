@@ -47,7 +47,7 @@ export default function HomePageClient() {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       />
-      <link rel="stylesheet" href="/css/style.css?v=20260321a" />
+      <link rel="stylesheet" href="/css/style.css?v=20260324h" />
       <link rel="stylesheet" href="/css/home-ads.css?v=20260323" />
 
       <div className="home-page">
@@ -1625,7 +1625,7 @@ export default function HomePageClient() {
       </Script>
 
       <Script src="/js/article-store.js?v=20260321a" strategy="afterInteractive" />
-      <Script src="/js/article.js?v=20260321a" strategy="afterInteractive" type="module" />
+      <Script src="/js/article.js?v=20260324d" strategy="afterInteractive" type="module" />
       <Script src="/js/bookmark.js?v=20260321a" strategy="afterInteractive" type="module" />
       <Script src="/js/prayer.js?v=20260321a" strategy="afterInteractive" type="module" />
       <Script src="/js/i18n.js?v=20260321a" strategy="afterInteractive" />

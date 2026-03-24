@@ -98,8 +98,11 @@ select {
   min-height: 78px;
   margin: 0 auto;
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 18px;
+  flex-wrap: nowrap;
+  direction: ltr;
 }
 
 .logo {
@@ -108,6 +111,7 @@ select {
   font-weight: 800;
   letter-spacing: 0.01em;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-toggle {
@@ -123,12 +127,13 @@ select {
 }
 
 .nav-panel {
-  margin-left: auto;
+  margin-inline-start: auto;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
+  min-width: 0;
 }
 
 .nav-menu {
@@ -137,8 +142,17 @@ select {
   gap: 4px;
   list-style: none;
   margin: 0;
-  padding: 0;
-  flex-wrap: wrap;
+  padding: 8px 14px;
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
+  flex-wrap: nowrap;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .nav-menu a {
@@ -168,6 +182,7 @@ select {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  flex-shrink: 0;
 }
 
 .lang-switch button {
@@ -510,26 +525,31 @@ body.rtl-mode .result-box {
   text-align: right;
 }
 
-/* Arabic/RTL: Portal (logo) di kanan, icon di pinggir kanan paling ujung - Smart Fiqh Thaharah */
-html[lang="ar"] .nav-container,
-html[dir="rtl"] .nav-container,
-body.rtl-mode .nav-container {
-  flex-direction: row !important;
-  direction: rtl !important;
-}
+/* AR: bahasa ujung kiri, portal ujung kanan (row-reverse: panel kiri, logo kanan) */
+@media (min-width: 861px) {
+  html[dir="rtl"] .nav-container,
+  html[lang="ar"] .nav-container,
+  body.rtl-ui .nav-container,
+  body.rtl-mode .nav-container {
+    flex-direction: row-reverse;
+    direction: ltr;
+  }
 
-html[lang="ar"] .logo,
-html[dir="rtl"] .logo,
-body.rtl-mode .logo {
-  flex-direction: row-reverse;
-  margin-inline-start: auto;
-}
+  html[dir="rtl"] .nav-panel,
+  html[lang="ar"] .nav-panel,
+  body.rtl-ui .nav-panel,
+  body.rtl-mode .nav-panel {
+    flex-direction: row-reverse;
+    margin-inline: 0;
+  }
 
-html[lang="ar"] .nav-panel,
-html[dir="rtl"] .nav-panel,
-body.rtl-mode .nav-panel {
-  margin-left: 0;
-  margin-right: auto;
+  html[dir="rtl"] .nav-menu,
+  html[lang="ar"] .nav-menu,
+  body.rtl-ui .nav-menu,
+  body.rtl-mode .nav-menu {
+    flex-direction: row-reverse;
+    direction: rtl;
+  }
 }
 
 html[lang="ar"] .result-line,
@@ -565,44 +585,69 @@ body.rtl-mode .smart-method-list {
 
 @media (max-width: 860px) {
   .nav-toggle {
-    display: inline-flex;
+    display: none;
+  }
+
+  .nav-container {
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
+    flex-wrap: nowrap;
   }
 
   .nav-panel {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 18px;
-    left: 18px;
-    display: none;
+    position: static;
+    display: flex !important;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     justify-content: flex-start;
-    padding: 14px;
-    border-radius: 20px;
-    background: rgba(5, 18, 37, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: var(--shadow);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 10px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  html[dir="rtl"] .nav-panel,
+  html[lang="ar"] .nav-panel,
+  body.rtl-ui .nav-panel,
+  body.rtl-mode .nav-panel {
+    flex-direction: column;
   }
 
   .nav-panel.open {
-    display: flex;
+    display: flex !important;
   }
 
   .nav-menu {
-    flex-direction: column;
-    align-items: stretch;
+    flex: none;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 10px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
   }
 
   .nav-menu a {
-    justify-content: flex-start;
-    padding: 0 14px;
-    border-radius: 14px;
+    justify-content: center;
+    padding: 0 10px;
+    min-height: 38px;
+    border-radius: 999px;
   }
 
   .lang-switch {
-    align-self: flex-start;
+    align-self: center;
   }
 
   .hero-full {

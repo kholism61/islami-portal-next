@@ -118,6 +118,43 @@ export default function BookmarkPage() {
 
         <div id="bookmark-list" className="bookmark-list"></div>
 
+        <section
+          id="bookmark-related-section"
+          className="bookmark-discovery bookmark-related-section"
+          style={{ display: "none" }}
+          aria-labelledby="bookmark-related-heading"
+        >
+          <div className="bookmark-discovery-stack">
+            <h2 id="bookmark-related-heading" className="bookmark-discovery-title">
+              Artikel terkait
+            </h2>
+            <p id="bookmark-related-desc" className="bookmark-discovery-desc" />
+            <p className="bookmark-discovery-context" id="bookmark-related-lead" />
+            <div
+              id="bookmark-related-grid"
+              className="bookmark-discovery-grid bookmark-related-grid related-list"
+            />
+          </div>
+        </section>
+
+        <section
+          id="bookmark-recommended-section"
+          className="bookmark-discovery bookmark-recommended-section"
+          style={{ display: "none" }}
+          aria-labelledby="bookmark-recommended-heading"
+        >
+          <div className="bookmark-discovery-stack">
+            <h2 id="bookmark-recommended-heading" className="bookmark-discovery-title">
+              Artikel direkomendasikan
+            </h2>
+            <p id="bookmark-recommended-desc" className="bookmark-discovery-desc" />
+            <div className="bookmark-recommended-rows">
+              <div id="bookmark-rec-row-1" className="bookmark-rec-grid recommended-list" />
+              <div id="bookmark-rec-row-2" className="bookmark-rec-grid recommended-list" />
+            </div>
+          </div>
+        </section>
+
         <p id="bookmark-empty" className="bookmark-empty" style={{ display: "none" }}>
           ⭐ Belum ada artikel yang disimpan
         </p>
@@ -224,8 +261,8 @@ export default function BookmarkPage() {
         strategy="afterInteractive"
       />
       <Script src="/js/article-store.js?v=20260321a" strategy="afterInteractive" />
-      <Script src="/js/article.js?v=20260321a" strategy="afterInteractive" type="module" />
-      <Script src="/js/bookmark.js?v=20260321a" strategy="afterInteractive" type="module" />
+      <Script src="/js/article.js?v=20260324f" strategy="afterInteractive" type="module" />
+      <Script src="/js/bookmark.js?v=20260324f" strategy="afterInteractive" type="module" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
       <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>

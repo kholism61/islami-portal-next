@@ -95,6 +95,10 @@ body.kfi-scope .navbar .nav-menu {
   padding: 10px 16px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body.kfi-scope .navbar .nav-menu a {
@@ -227,7 +231,14 @@ body.kfi-scope.rtl-ui {
   html.rtl-ui body.kfi-scope .navbar .nav-container,
   body.kfi-scope.rtl-ui .navbar .nav-container {
     flex-direction: row !important;
-    direction: rtl !important;
+    direction: ltr !important;
+  }
+
+  html[dir="rtl"] body.kfi-scope .navbar .kfi-lang-switch,
+  html.rtl-ui body.kfi-scope .navbar .kfi-lang-switch,
+  body.kfi-scope.rtl-ui .navbar .kfi-lang-switch {
+    order: 1;
+    flex-shrink: 0;
   }
 
   html[dir="rtl"] body.kfi-scope .navbar .nav-menu,
@@ -236,8 +247,19 @@ body.kfi-scope.rtl-ui {
   html.rtl-ui body.kfi-scope .navbar nav,
   body.kfi-scope.rtl-ui .navbar .nav-menu,
   body.kfi-scope.rtl-ui .navbar nav {
-    flex-direction: row !important;
+    order: 2;
+    flex-direction: row-reverse !important;
     direction: rtl !important;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  html[dir="rtl"] body.kfi-scope .navbar .logo,
+  html.rtl-ui body.kfi-scope .navbar .logo,
+  body.kfi-scope.rtl-ui .navbar .logo {
+    order: 3;
+    flex-shrink: 0;
   }
 }
 

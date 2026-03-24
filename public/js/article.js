@@ -610,7 +610,19 @@ const categoryMeta = {
   ramadhan: {
     labels: { id: "Ramadhan", en: "Ramadan", ar: "رمضان" },
     icon: "🌙",
-    aliases: ["ramadhan", "ramadan", "ramadan at al-azhar", "رمضان", "رمضان في الأزهر"],
+    aliases: [
+      "ramadhan",
+      "ramadan",
+      "ramadan at al-azhar",
+      "catatan-ramadhan",
+      "catatan ramadhan",
+      "catatan ramadan",
+      "catatan-ramadan",
+      "notes ramadan",
+      "notes ramadhan",
+      "رمضان",
+      "رمضان في الأزهر",
+    ],
   },
   keilmuan: {
     labels: { id: "Keilmuan", en: "Knowledge", ar: "المعرفة" },
@@ -3840,13 +3852,8 @@ window.addEventListener("scroll", () => {
     reading[id + "_done"] = true;
     localStorage.setItem("readingProgress", JSON.stringify(reading));
 
-    try {
-      window.dispatchEvent(new CustomEvent("reading-progress-updated", {
-        detail: { id, percent: next, done: true }
-      }));
-    } catch {}
-
-    const today = new Date().toISOString().slice(0, 10);
+    // Tanggal harian sama dengan bookmark.js: locale sv-SE → YYYY-MM-DD (bukan UTC).
+    const today = new Date().toLocaleDateString("sv-SE");
 
     let history =
       safeJsonParse("readingHistory", {});
@@ -3858,12 +3865,18 @@ window.addEventListener("scroll", () => {
     );
 
     let total =
-      parseInt(localStorage.getItem("totalArticlesRead")) || 0;
+      parseInt(localStorage.getItem("totalArticlesRead"), 10) || 0;
 
     localStorage.setItem(
       "totalArticlesRead",
-      total + 1
+      String(total + 1)
     );
+
+    try {
+      window.dispatchEvent(new CustomEvent("reading-progress-updated", {
+        detail: { id, percent: next, done: true }
+      }));
+    } catch {}
   }
 });
 

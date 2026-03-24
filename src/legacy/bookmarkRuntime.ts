@@ -10,7 +10,7 @@ export type BookmarkRuntime = {
 export async function ensureBookmarkRuntime(): Promise<BookmarkRuntime> {
   await loadPublicScript("/js/article-store.js?v=20260321a");
   await loadPublicScript("/js/i18n.js?v=20260321a");
-  await loadPublicScript("/js/article.js?v=20260321a");
+  await loadPublicScript("/js/article.js?v=20260324d");
   await loadPublicScript("/js/bookmark.js?v=20260321a");
 
   return {

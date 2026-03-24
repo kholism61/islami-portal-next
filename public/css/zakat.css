@@ -129,6 +129,10 @@ main {
   justify-content: space-between;
 }
 
+.rtl-ui .main-navbar .nav-container {
+  flex-direction: row-reverse;
+}
+
 .nav-links {
   display: flex;
   gap: 22px;
@@ -139,6 +143,11 @@ main {
   padding: 10px 14px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  width: fit-content;
+  max-width: 100%;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .nav-links a {
@@ -167,6 +176,10 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.rtl-ui .main-navbar .nav-controls {
+  flex-direction: row-reverse;
 }
 
 .main-navbar .lang-switch {
@@ -822,6 +835,18 @@ body.dark .zakat-history {
   text-decoration: none;
 }
 
+.rtl-ui .main-navbar .logo {
+  flex-direction: row !important;
+}
+
+.rtl-ui .main-navbar .logo .logo-text {
+  order: 1;
+}
+
+.rtl-ui .main-navbar .logo .nav-logo-glass {
+  order: 2;
+}
+
 .main-navbar .logo:hover {
   color: white;
   opacity: 0.95;
@@ -1194,24 +1219,33 @@ body.rtl-ui .fiqh-section {
   body.rtl-ui .main-navbar .nav-container {
     display: flex !important;
     flex-direction: row;
-    justify-content: flex-start;
-    direction: rtl !important;
+    justify-content: space-between;
+    direction: ltr !important;
     width: 100%;
     max-width: 100%;
   }
 
-  html[dir="rtl"] .main-navbar .nav-container .logo,
-  html.rtl-ui .main-navbar .nav-container .logo,
-  body.rtl-ui .main-navbar .nav-container .logo {
-    flex-direction: row-reverse;
-    margin-inline-start: 0;
+  html[dir="rtl"] .main-navbar .nav-controls,
+  html.rtl-ui .main-navbar .nav-controls,
+  body.rtl-ui .main-navbar .nav-controls {
+    order: 1;
   }
 
   html[dir="rtl"] .main-navbar .nav-links,
   html.rtl-ui .main-navbar .nav-links,
   body.rtl-ui .main-navbar .nav-links {
-    flex-direction: row !important;
+    flex-direction: row-reverse !important;
     direction: rtl !important;
+    order: 2;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  html[dir="rtl"] .main-navbar .nav-container .logo,
+  html.rtl-ui .main-navbar .nav-container .logo,
+  body.rtl-ui .main-navbar .nav-container .logo {
+    order: 3;
   }
 }
 

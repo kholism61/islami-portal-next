@@ -742,14 +742,10 @@ body.dark .reading-bar {
    DARK MODE BOOKMARK PAGE
 ========================= */
 body.dark {
-  background: linear-gradient(
-    155deg,
-    #064e3b 0%,
-    #0f766e 25%,
-    #0c4a6e 55%,
-    #1e3a8a 85%,
-    #0f172a 100%
-  ) !important;
+  background:
+    radial-gradient(ellipse 120% 70% at 50% -15%, rgba(34, 197, 94, 0.14), transparent 52%),
+    radial-gradient(ellipse 90% 60% at 100% 100%, rgba(16, 185, 129, 0.08), transparent 50%),
+    linear-gradient(165deg, #0a0f1a 0%, #0f172a 42%, #020617 100%) !important;
   background-attachment: fixed !important;
   color: #e5e7eb;
 }
@@ -759,11 +755,62 @@ body.dark .navbar {
   background: linear-gradient(135deg, #020617, #0f172a);
 }
 
-/* stat box */
+/* stat box (umum — halaman lain bisa memakai .stat-box) */
 body.dark .stat-box {
   background: linear-gradient(135deg, #020617, #0f172a);
   color: #e5e7eb;
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* 3 grid stat bookmark: gelap + glow hijau berdenyut */
+@keyframes bookmarkStatGreenGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.26),
+      0 0 18px rgba(34, 197, 94, 0.1),
+      0 10px 26px rgba(0, 0, 0, 0.42);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(16, 185, 129, 0.4),
+      0 0 30px rgba(52, 211, 153, 0.2),
+      0 12px 32px rgba(0, 0, 0, 0.52);
+  }
+}
+
+body.dark .bookmark-stats-modern > .stat-box {
+  background: linear-gradient(160deg, #020617 0%, #0f172a 55%, #052e16 100%);
+  color: #e5e7eb;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  animation: bookmarkStatGreenGlow 3.2s ease-in-out infinite;
+}
+
+body.dark .bookmark-stats-modern > .stat-box b {
+  color: #ecfdf5;
+}
+
+body.dark .bookmark-stats-modern > .stat-box:hover {
+  animation: none;
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.78),
+    0 0 24px rgba(34, 197, 94, 0.3);
+  transform: translateY(-3px);
+}
+
+body.dark .bookmark-stats-modern > .stat-box span {
+  color: rgba(226, 232, 240, 0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.dark .bookmark-stats-modern > .stat-box {
+    animation: none;
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.28),
+      0 0 16px rgba(34, 197, 94, 0.12),
+      0 10px 26px rgba(0, 0, 0, 0.45);
+  }
 }
 
 /* header banner */
@@ -877,6 +924,53 @@ body.dark .not-found {
   margin-bottom: 30px;
 }
 
+/* Dark: achievement gelap + glow hijau (selaras kartu bookmark) */
+@keyframes bookmarkAchievementGreenGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.28),
+      0 0 20px rgba(34, 197, 94, 0.12),
+      0 10px 28px rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(16, 185, 129, 0.42),
+      0 0 32px rgba(52, 211, 153, 0.22),
+      0 12px 34px rgba(0, 0, 0, 0.55);
+  }
+}
+
+body.dark .reading-achievement {
+  background: linear-gradient(145deg, #020617 0%, #0f172a 48%, #052e16 100%);
+  color: #ecfdf5;
+  border: 1px solid rgba(34, 197, 94, 0.22);
+  animation: bookmarkAchievementGreenGlow 3.5s ease-in-out infinite;
+}
+
+body.dark .reading-achievement span,
+body.dark .reading-achievement strong {
+  color: inherit;
+}
+
+body.dark .reading-achievement:hover {
+  animation: none;
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.75),
+    0 0 24px rgba(34, 197, 94, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.dark .reading-achievement {
+    animation: none;
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.3),
+      0 0 18px rgba(34, 197, 94, 0.12),
+      0 10px 28px rgba(0, 0, 0, 0.5);
+  }
+}
+
 /* AUTO RTL SAAT GOOGLE SET ARAB */
 html[lang="ar"] body {
   direction: rtl;
@@ -891,39 +985,54 @@ html[lang="ar"] .article-content {
 }
 
 /* =========================
-   BOOKMARK DARK MODE
+   BOOKMARK DARK MODE — grid hijau (selaras home)
 ========================= */
 
-body.dark .bookmark-card{
-
-background:linear-gradient(180deg,#0f172a,#020617);
-
-border-radius:16px;
-
-border:1px solid rgba(56,189,248,0.25);
-
-box-shadow:
-0 10px 30px rgba(0,0,0,0.7),
-0 0 10px rgba(56,189,248,0.15);
-
-color:#e5e7eb;
-
-transition:all .35s ease;
-
+@keyframes bookmarkGridGreenGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.26),
+      0 0 18px rgba(34, 197, 94, 0.1),
+      0 10px 28px rgba(0, 0, 0, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(16, 185, 129, 0.38),
+      0 0 28px rgba(52, 211, 153, 0.2),
+      0 12px 32px rgba(0, 0, 0, 0.62);
+  }
 }
 
-/* hover */
+body.dark .bookmark-card {
+  background: linear-gradient(180deg, #0f172a, #020617);
+  border-radius: 16px;
+  border: 1px solid rgba(34, 197, 94, 0.22);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.7),
+    0 0 10px rgba(34, 197, 94, 0.12);
+  color: #e5e7eb;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  animation: bookmarkGridGreenGlow 3.4s ease-in-out infinite;
+}
 
-body.dark .bookmark-card:hover{
+body.dark .bookmark-card:hover {
+  animation: none;
+  transform: translateY(-5px);
+  border-color: rgba(52, 211, 153, 0.55);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.85),
+    0 0 22px rgba(34, 197, 94, 0.32);
+}
 
-transform:translateY(-5px);
-
-border-color:rgba(56,189,248,0.6);
-
-box-shadow:
-0 18px 40px rgba(0,0,0,0.8),
-0 0 18px rgba(56,189,248,0.35);
-
+@media (prefers-reduced-motion: reduce) {
+  body.dark .bookmark-card {
+    animation: none;
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.28),
+      0 0 16px rgba(34, 197, 94, 0.12),
+      0 10px 28px rgba(0, 0, 0, 0.55);
+  }
 }
 
 /* judul */
@@ -1122,4 +1231,184 @@ padding:24px;
 /* klik */
 .scroll-to-top:active{
   transform: scale(0.95);
+}
+
+/* =========================
+   DISCOVERY: terkait + rekomendasi
+========================= */
+
+.bookmark-discovery {
+  max-width: 1100px;
+  margin: 2.5rem auto 0;
+  padding: 0 20px;
+}
+
+.bookmark-discovery-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0;
+  color: #0f172a;
+}
+
+/* Stack judul + penjelasan + grid dalam satu kolom */
+.bookmark-discovery-stack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.bookmark-discovery-desc {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #475569;
+  margin: 0;
+  max-width: 52rem;
+}
+
+.bookmark-discovery-context {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0 0 0.35rem;
+  font-weight: 500;
+}
+
+.bookmark-related-section .bookmark-discovery-grid,
+.bookmark-rec-grid {
+  width: 100%;
+}
+
+/* —— Artikel terkait: 3 kolom sejajar, kartu sama tinggi & lebar —— */
+.bookmark-related-section .related-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.bookmark-related-section .related-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.bookmark-related-section .related-link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.bookmark-related-section .related-thumb {
+  width: 100%;
+  height: 168px;
+  min-height: 168px;
+  max-height: 168px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.bookmark-related-section .related-card h4 {
+  flex: 1 1 auto;
+  min-height: 2.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bookmark-recommended-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.bookmark-rec-grid.recommended-list {
+  margin-bottom: 0;
+}
+
+/* —— Rekomendasi: 3 + 3, gambar sesuai kategori, ukuran seragam —— */
+.bookmark-rec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.bookmark-discovery .bookmark-rec-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  height: 100%;
+  min-height: 0;
+}
+
+.bookmark-discovery .bookmark-rec-card::after {
+  display: none;
+}
+
+.bookmark-rec-thumb {
+  width: 100%;
+  height: 168px;
+  min-height: 168px;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 18px 18px 0 0;
+}
+
+.bookmark-rec-card-body {
+  position: relative;
+  z-index: 1;
+  padding: 16px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.bookmark-discovery .bookmark-rec-card h4 {
+  flex: 1 1 auto;
+  min-height: 2.6em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.bookmark-discovery .bookmark-rec-card p {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .bookmark-related-section .related-list,
+  .bookmark-rec-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .bookmark-discovery {
+    padding: 0 16px;
+  }
+
+  .bookmark-discovery-title {
+    font-size: 1.2rem;
+  }
+}
+
+body.dark .bookmark-discovery-title {
+  color: #f1f5f9;
+}
+
+body.dark .bookmark-discovery-desc {
+  color: #cbd5e1;
+}
+
+body.dark .bookmark-discovery-context {
+  color: #94a3b8;
 }
