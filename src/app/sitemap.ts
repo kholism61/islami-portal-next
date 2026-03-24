@@ -28,15 +28,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/" ? 1 : 0.7,
   }));
 
-  const articleEntries: MetadataRoute.Sitemap = listArticles("id").map((article) => {
-    const lastModified = article.createdAt ? new Date(article.createdAt) : now;
-    return {
-      url: `${baseUrl}/article/${encodeURIComponent(article.slug)}`,
-      lastModified: Number.isNaN(lastModified.getTime()) ? now : lastModified,
+  const articleBySlug = new Map<string, Date>();
+  ["id", "en", "ar"].forEach((lang) => {
+    listArticles(lang).forEach((article) => {
+      const slug = String(article.slug || "").trim();
+      if (!slug) return;
+
+      const candidate = article.createdAt ? new Date(article.createdAt) : now;
+      const lastModified = Number.isNaN(candidate.getTime()) ? now : candidate;
+      const prev = articleBySlug.get(slug);
+
+      if (!prev || lastModified > prev) {
+        articleBySlug.set(slug, lastModified);
+      }
+    });
+  });
+
+  const articleEntries: MetadataRoute.Sitemap = Array.from(articleBySlug.entries()).map(
+    ([slug, lastModified]) => ({
+      url: `${baseUrl}/article/${encodeURIComponent(slug)}`,
+      lastModified,
       changeFrequency: "weekly",
       priority: 0.8,
-    };
-  });
+    })
+  );
 
   return [...staticEntries, ...articleEntries];
 }
