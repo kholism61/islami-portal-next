@@ -15,6 +15,11 @@ function normalizeHtmlPath(pathname: string) {
 }
 
 export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname || "";
+  if (pathname.toLowerCase().startsWith("/google") && pathname.toLowerCase().endsWith(".html")) {
+    return NextResponse.next();
+  }
+
   const nextPath = normalizeHtmlPath(request.nextUrl.pathname);
   if (!nextPath) return NextResponse.next();
 
