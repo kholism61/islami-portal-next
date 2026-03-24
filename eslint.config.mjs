@@ -20,16 +20,6 @@ const eslintConfig = defineConfig([
     "public/sw.js",
     "public/legacy/**",
   ]),
-
-  {
-    files: [
-      "src/components/core/LegacyHomeStyle.tsx",
-    ],
-    rules: {
-      "@next/next/no-page-custom-font": "off",
-      "@next/next/no-css-tags": "off",
-    },
-  },
   {
     files: [
       "src/components/core/HomeClient.tsx",
