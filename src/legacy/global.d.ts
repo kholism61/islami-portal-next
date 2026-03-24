@@ -14,6 +14,9 @@ declare global {
 
     L?: unknown;
 
+    Chart?: unknown;
+    __zakatLangSwitchBound?: boolean;
+
     syncArticleChrome?: () => void;
     updateBookmarkBadge?: () => void;
     getLocalizedCategory?: (category: string, lang?: string) => string;
