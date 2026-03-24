@@ -1,4 +1,5 @@
 import Script from "next/script";
+import FaqRuntimeLoader from "@/components/runtime/FaqRuntimeLoader";
 
 export const metadata = {
   title: "FAQ | Portal Literasi Islam",
@@ -235,12 +236,11 @@ export default function FAQPage() {
         </div>
 
         <div className="footer-copy">
-          © 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
+          &copy; 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
         </div>
       </footer>
 
-      <Script src="/js/faq.js" strategy="afterInteractive" />
-      <Script src="/js/nav-active.js" strategy="afterInteractive" />
+      <FaqRuntimeLoader />
       <Script src="/js/common-brand-i18n.js" strategy="afterInteractive" />
       <Script src="/js/static-pages-i18n.js" strategy="afterInteractive" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
