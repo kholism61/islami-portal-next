@@ -1,4 +1,5 @@
 import Script from "next/script";
+import KontakRuntimeLoader from "@/components/runtime/KontakRuntimeLoader";
 
 export const metadata = {
   title: "Kontak | Portal Literasi Islam",
@@ -235,8 +236,7 @@ export default function KontakPage() {
         </div>
       </footer>
 
-      <Script src="/js/nav-active.js" strategy="afterInteractive" />
-      <Script src="/js/kontak.js" strategy="afterInteractive" />
+      <KontakRuntimeLoader />
       <Script src="/js/common-brand-i18n.js" strategy="afterInteractive" />
       <Script src="/js/static-pages-i18n.js" strategy="afterInteractive" />
       <Script src="/js/auth.js" strategy="afterInteractive" />
