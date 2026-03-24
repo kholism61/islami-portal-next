@@ -499,22 +499,12 @@ export default function HomePageClient() {
 
               <a href="/muamalah" className="tool-card">
                 <span className="icon">🤝</span>
-                <h3>Fiqh Muamalah</h3>
+                <h3>Muamalah Syariah</h3>
               </a>
 
               <a href="/falak" className="tool-card">
                 <span className="icon">🧭</span>
-                <h3>Ilmu Falak</h3>
-              </a>
-
-              <a href="/haid" className="tool-card">
-                <span className="icon">👩</span>
-                <h3>Fiqh Wanita</h3>
-              </a>
-
-              <a href="/kaffarah" className="tool-card">
-                <span className="icon">🎁</span>
-                <h3>Kaffarah &amp; Fidyah</h3>
+                <h3>Belajar Falak</h3>
               </a>
 
               <a href="/smart" className="tool-card">
