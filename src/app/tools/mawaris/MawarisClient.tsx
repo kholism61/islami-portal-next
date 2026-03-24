@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Script from "next/script";
 import { useEffect } from "react";
+import MawarisPagesRuntimeLoader from "@/components/runtime/MawarisPagesRuntimeLoader";
 
 type MawarisWindow = Window &
   typeof globalThis & {
@@ -400,9 +401,7 @@ export default function MawarisClient() {
         src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
         strategy="afterInteractive"
       />
-      <Script src="/js/mawaris-pages-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <MawarisPagesRuntimeLoader />
     </div>
   );
 }

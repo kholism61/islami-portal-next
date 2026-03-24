@@ -1,5 +1,6 @@
 import Script from "next/script";
 import Image from "next/image";
+import StaticPagesRuntimeLoader from "@/components/runtime/StaticPagesRuntimeLoader";
 
 export const metadata = {
   title: "Donasi | Portal Literasi Islam",
@@ -275,12 +276,8 @@ export default function DonasiPage() {
         </svg>
       </button>
 
-      <Script src="/js/nav-active.js?v=20260317b" strategy="afterInteractive" />
       <Script src="/js/donation.js?v=20260317b" strategy="afterInteractive" />
-      <Script src="/js/common-brand-i18n.js?v=20260317b" strategy="afterInteractive" />
-      <Script src="/js/static-pages-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <StaticPagesRuntimeLoader />
     </>
   );
 }

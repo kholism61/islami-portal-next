@@ -1,4 +1,5 @@
 import Script from "next/script";
+import StaticPagesRuntimeLoader from "@/components/runtime/StaticPagesRuntimeLoader";
 
 export const metadata = {
   title: "Privacy Policy - Portal Literasi Islam",
@@ -73,7 +74,7 @@ export default function PrivacyPage() {
         </div>
 
         <div className="footer-copy">
-          © 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
+          2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
         </div>
       </footer>
 
@@ -90,10 +91,7 @@ export default function PrivacyPage() {
         </svg>
       </button>
 
-      <Script src="/js/common-brand-i18n.js?v=20260318a" strategy="afterInteractive" />
-      <Script src="/js/static-pages-i18n.js?v=20260318a" strategy="afterInteractive" />
-      <Script src="/js/auth.js?v=20260318a" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js?v=20260318a" strategy="afterInteractive" />
+      <StaticPagesRuntimeLoader />
     </>
   );
 }

@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import HomeAdsRuntimeLoader from "@/components/runtime/HomeAdsRuntimeLoader";
 
 export default function HomePageClient() {
   const [bookmarkCount, setBookmarkCount] = useState(0);
@@ -1628,7 +1629,7 @@ export default function HomePageClient() {
       <Script src="/js/bookmark.js?v=20260321a" strategy="afterInteractive" type="module" />
       <Script src="/js/prayer.js?v=20260321a" strategy="afterInteractive" type="module" />
       <Script src="/js/i18n.js?v=20260321a" strategy="afterInteractive" />
-      <Script src="/js/home-ads.js?v=20260323" strategy="afterInteractive" />
+      <HomeAdsRuntimeLoader />
 
     </>
   );

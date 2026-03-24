@@ -1,5 +1,6 @@
 import Script from "next/script";
 import Image from "next/image";
+import StaticPagesRuntimeLoader from "@/components/runtime/StaticPagesRuntimeLoader";
 
 export const metadata = {
   title: "Tentang | Portal Literasi Islam",
@@ -280,11 +281,7 @@ export default function AboutPage() {
         <div className="footer-copy">© 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.</div>
       </footer>
 
-      <Script src="/js/nav-active.js" strategy="afterInteractive" />
-      <Script src="/js/common-brand-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/static-pages-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <StaticPagesRuntimeLoader />
     </>
   );
 }

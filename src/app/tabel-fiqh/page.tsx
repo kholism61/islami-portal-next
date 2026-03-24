@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script";
+import MawarisPagesRuntimeLoader from "@/components/runtime/MawarisPagesRuntimeLoader";
 
 import "../fiqh-pages.css";
 
@@ -300,9 +300,7 @@ export default function TabelFiqhPage() {
         </svg>
       </button>
 
-      <Script src="/js/mawaris-pages-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <MawarisPagesRuntimeLoader />
     </div>
   );
 }

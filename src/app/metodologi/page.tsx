@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
+import MawarisPagesRuntimeLoader from "@/components/runtime/MawarisPagesRuntimeLoader";
 
 import "../fiqh-pages.css";
 
@@ -132,7 +133,7 @@ export default function MetodologiPage() {
       </section>
 
       <footer className="simple-footer">
-        &copy; 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.
+       © 2026 Portal Literasi Islam - Seluruh hak cipta dilindungi.
       </footer>
 
       <button
@@ -158,9 +159,7 @@ export default function MetodologiPage() {
         </svg>
       </button>
 
-      <Script src="/js/mawaris-pages-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <MawarisPagesRuntimeLoader />
     </div>
   );
 }

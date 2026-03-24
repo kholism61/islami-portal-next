@@ -1,4 +1,5 @@
 import Script from "next/script";
+import StaticPagesRuntimeLoader from "@/components/runtime/StaticPagesRuntimeLoader";
 
 export const metadata = {
   title: "Jadwal Imsakiyah",
@@ -166,7 +167,7 @@ export default function RamadhanPage() {
         </div>
 
         <div className="footer-copy">
-          © 2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
+          2026 Portal Literasi Islam – Seluruh hak cipta dilindungi.
         </div>
       </footer>
 
@@ -190,10 +191,7 @@ export default function RamadhanPage() {
       ></audio>
 
       <Script src="/js/ramadhan.js" strategy="afterInteractive" />
-      <Script src="/js/common-brand-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/static-pages-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <StaticPagesRuntimeLoader />
     </>
   );
 }

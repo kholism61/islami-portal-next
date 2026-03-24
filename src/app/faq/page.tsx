@@ -1,5 +1,6 @@
 import Script from "next/script";
 import FaqRuntimeLoader from "@/components/runtime/FaqRuntimeLoader";
+import StaticPagesRuntimeLoader from "@/components/runtime/StaticPagesRuntimeLoader";
 
 export const metadata = {
   title: "FAQ | Portal Literasi Islam",
@@ -241,10 +242,7 @@ export default function FAQPage() {
       </footer>
 
       <FaqRuntimeLoader />
-      <Script src="/js/common-brand-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/static-pages-i18n.js" strategy="afterInteractive" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
+      <StaticPagesRuntimeLoader includeNavActive={false} />
     </>
   );
 }
