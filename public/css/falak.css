@@ -293,6 +293,62 @@ body::before {
   font-size: 15px;
 }
 
+/* ===== APOD + MAP ===== */
+.falak-api-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.falak-apod-card,
+.falak-map-card {
+  background: rgba(30, 58, 138, 0.25);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.falak-apod-card h4,
+.falak-map-card h4 {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #93c5fd;
+}
+
+#falak-apod-wrap {
+  display: grid;
+  gap: 12px;
+}
+
+.falak-apod-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: rgba(15, 23, 42, 0.6);
+  object-fit: cover;
+}
+
+.falak-apod-caption {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.falak-map-container {
+  width: 100%;
+  height: 340px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: rgba(15, 23, 42, 0.6);
+}
+
 /* ===== TOOLS GRID (seperti index) ===== */
 .falak-tools-grid {
   display: grid;
@@ -358,6 +414,60 @@ body::before {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+}
+
+.falak-tool-card input,
+.falak-tool-card select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(15, 23, 42, 0.6);
+  color: #e2e8f0;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.falak-tool-card input:focus,
+.falak-tool-card select:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+}
+
+.falak-tool-card button.falak-btn {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 14px;
+  letter-spacing: 0.2px;
+}
+
+.falak-btn-primary {
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+}
+
+.falak-btn-primary:active {
+  transform: translateY(0px);
+  filter: brightness(0.98);
+}
+
+#qibla-result,
+#hijri-result,
+#shalat-result {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  font-size: 15px;
+  color: #93c5fd;
+  min-height: 44px;
+}
+
+#qibla-result:empty,
+#hijri-result:empty,
+#shalat-result:empty {
+  display: none;
 }
 
 .falak-btn {
@@ -766,6 +876,19 @@ body::before {
     grid-template-columns: 1fr;
   }
 
+  .falak-api-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .falak-apod-card,
+  .falak-map-card {
+    padding: 18px;
+  }
+
+  .falak-map-container {
+    height: 240px;
+  }
+
   .falak-step {
     flex-direction: column;
     align-items: flex-start;
@@ -774,5 +897,17 @@ body::before {
 
   .falak-step-num {
     align-self: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .falak-map-container {
+    height: 210px;
+  }
+
+  .falak-tool-card input,
+  .falak-tool-card select {
+    padding: 11px 14px;
+    font-size: 14px;
   }
 }
