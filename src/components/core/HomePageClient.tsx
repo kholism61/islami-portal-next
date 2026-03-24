@@ -497,6 +497,16 @@ export default function HomePageClient() {
                 <h3>Kalkulator Mawaris</h3>
               </a>
 
+              <a href="/muamalah" className="tool-card">
+                <span className="icon">🤝</span>
+                <h3>Fiqh Muamalah</h3>
+              </a>
+
+              <a href="/falak" className="tool-card">
+                <span className="icon">🧭</span>
+                <h3>Ilmu Falak</h3>
+              </a>
+
               <a href="/haid" className="tool-card">
                 <span className="icon">👩</span>
                 <h3>Fiqh Wanita</h3>
