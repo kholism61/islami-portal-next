@@ -8,6 +8,8 @@ declare global {
     __PORTAL_ARTICLE_STORE_CACHE__?: Map<string, unknown>;
     __PORTAL_ARTICLE_STORE__?: unknown;
 
+    L?: unknown;
+
     syncArticleChrome?: () => void;
     updateBookmarkBadge?: () => void;
     getLocalizedCategory?: (category: string, lang?: string) => string;
