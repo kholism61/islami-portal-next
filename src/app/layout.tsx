@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description: "Portal kajian Islam berbasis literatur ilmiah.",
   applicationName: "Portal Literasi Islam",
   verification: {
-    google: "EdcBGBpZFgqzqzRUKfbgKGY42Zi_Bae9YI_tqSlgDNs",
+    google: "G8XjepLO3jvcL40iNPmKnv3i41Air33EGmHNuWbLa_M",
   },
   manifest: "/manifest.webmanifest",
   icons: {
