@@ -2422,10 +2422,11 @@ body.dark .welcome-desc {
 
 body.dark .value-item {
   background: #020617;
-  border-left-color: #60a5fa;
+  border-left-color: #34d399;
   box-shadow:
     0 14px 32px rgba(0,0,0,0.45),
-    inset 0 0 0 1px rgba(255,255,255,0.04);
+    inset 0 0 0 1px rgba(52, 211, 153, 0.14),
+    0 0 44px rgba(16, 185, 129, 0.12);
 }
 
 body.dark .value-item h3 {
@@ -2476,7 +2477,7 @@ body.dark .value-item p {
 }
 
 body.dark .value-item h3::before {
-  color: #60a5fa;
+  color: #34d399;
 }
 
 .value-item h3 {
@@ -2495,7 +2496,7 @@ body.dark .value-item h3::before {
 }
 
 body.dark .value-item h3::before {
-  color: #60a5fa;
+  color: #34d399;
 }
 
 .intro-values h3,
@@ -2593,6 +2594,13 @@ body.dark .author-preview-card {
     0 10px 30px rgba(0, 0, 0, 0.45),
     0 0 0 1px rgba(52, 211, 153, 0.18),
     0 0 44px rgba(16, 185, 129, 0.14);
+}
+
+body.dark .featured-card {
+  box-shadow:
+    0 18px 46px rgba(0,0,0,0.42),
+    0 0 0 1px rgba(52, 211, 153, 0.22),
+    0 0 52px rgba(16, 185, 129, 0.14);
 }
 
 body.dark .author-name {
@@ -4242,7 +4250,11 @@ body.dark .prayer-wrapper {
 body.dark .prayer-box {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   color: #e5e7eb;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+  border: 1px solid rgba(52, 211, 153, 0.22);
+  box-shadow:
+    0 10px 35px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(52, 211, 153, 0.12),
+    0 0 44px rgba(16, 185, 129, 0.12);
 }
 
 /* Judul */
