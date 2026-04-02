@@ -17,7 +17,7 @@ export default function SignInPage() {
         href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
         rel="stylesheet"
       />
-      <link rel="stylesheet" href="/css/auth.css" />
+      <link rel="stylesheet" href="/css/auth.css?v=20260402a" />
 
       <main className="auth-page">
         <header className="auth-topbar">
