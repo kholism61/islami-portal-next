@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "md:update": "node scripts/generate-article-store.mjs",
+    "postinstall": "prisma generate",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@prisma/client": "^7.6.0",
+    "@prisma/client": "^6.16.1",
     "bcryptjs": "^3.0.3",
     "chart.js": "^4.5.1",
     "gray-matter": "^4.0.3",
@@ -30,7 +31,7 @@
     "dotenv": "^17.4.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
-    "prisma": "^7.6.0",
+    "prisma": "^6.16.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
