@@ -29,7 +29,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ pat
     status: 200,
     headers: {
       "content-type": type,
-      "cache-control": "public, max-age=31536000, immutable",
+      "cache-control": "public, max-age=0, must-revalidate",
     },
   });
 }
