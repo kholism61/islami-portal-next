@@ -7,6 +7,8 @@ import {
   hashSessionToken,
 } from "@/lib/auth/session";
 
+export const runtime = "nodejs";
+
 export async function POST(req: Request) {
   const token = getSessionTokenFromCookieHeader(req.headers.get("cookie"));
 

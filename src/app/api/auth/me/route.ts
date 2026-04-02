@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getSessionTokenFromCookieHeader, hashSessionToken } from "@/lib/auth/session";
 
+export const runtime = "nodejs";
+
 export async function GET(req: Request) {
   const token = getSessionTokenFromCookieHeader(req.headers.get("cookie"));
 

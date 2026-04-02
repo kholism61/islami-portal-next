@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { generateSessionToken, hashSessionToken, setSessionCookie } from "@/lib/auth/session";
 import { getClientIp, rateLimitOrThrow } from "@/lib/auth/rateLimit";
 
+export const runtime = "nodejs";
+
 const SigninSchema = z.object({
   email: z.string().trim().email(),
   password: z.string().min(1),

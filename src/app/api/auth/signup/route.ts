@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { generateSessionToken, hashSessionToken, setSessionCookie } from "@/lib/auth/session";
 import { getClientIp, rateLimitOrThrow } from "@/lib/auth/rateLimit";
 
+export const runtime = "nodejs";
+
 const ADMIN_EMAILS = ["nurcholism51@gmail.com"];
 
 const SignupSchema = z
