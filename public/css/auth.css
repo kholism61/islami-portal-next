@@ -103,7 +103,6 @@ body::after {
   gap: 16px;
   flex-wrap: nowrap;
   justify-content: center;
-  flex: 1 1 auto;
   min-width: 0;
   padding: 10px 20px;
   border-radius: 16px;
@@ -111,6 +110,27 @@ body::after {
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+@media (min-width: 641px) {
+  .auth-topbar {
+    position: relative;
+  }
+
+  .auth-topbar .brand-link {
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .auth-topbar .auth-topbar-actions {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: fit-content;
+    max-width: calc(100% - 360px);
+  }
 }
 
 .auth-topbar .brand-link {
@@ -637,6 +657,14 @@ body::after {
   html[dir="rtl"] .auth-topbar .brand-link,
   body.rtl-ui .auth-topbar .brand-link {
     flex-direction: row-reverse;
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  html[dir="rtl"] .auth-topbar .auth-topbar-actions,
+  body.rtl-ui .auth-topbar .auth-topbar-actions {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
