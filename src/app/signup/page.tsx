@@ -204,116 +204,117 @@ export default function SignUpPage() {
       </main>
 
       <Script src="/js/auth.js?v=20260317b" strategy="afterInteractive" />
-      <Script src="/js/i18n.js?v=20260317b" strategy="afterInteractive" />
-      <Script src="/js/admin-pages-i18n.js?v=20260317b" strategy="afterInteractive" />
 
-      <Script id="signup-inline-script" strategy="afterInteractive">
-        {`
-          (function () {
-            function waitForAuth(ready, attemptsLeft) {
-              if (
-                window.PortalAuth &&
-                typeof window.PortalAuth.getCurrentUser === "function" &&
-                window.PortalI18n &&
-                typeof window.PortalI18n.t === "function"
-              ) {
-                ready();
-                return;
+    <Script id="signup-inline-script" strategy="afterInteractive">
+      {`
+        (function () {
+          let didInit = false;
+
+          function waitForAuth(ready, attemptsLeft) {
+            if (
+              window.PortalAuth &&
+              typeof window.PortalAuth.getCurrentUser === "function" &&
+              window.PortalI18n &&
+              typeof window.PortalI18n.t === "function"
+            ) {
+              ready();
+              return;
+            }
+            if ((attemptsLeft || 0) <= 0) return;
+            window.setTimeout(() => waitForAuth(ready, (attemptsLeft || 0) - 1), 60);
+          }
+
+          function applySignupLocale() {
+            const i18n = window.PortalI18n;
+            if (!i18n || typeof i18n.t !== "function") return;
+
+            const lang =
+              (window.PortalAdminI18n && typeof window.PortalAdminI18n.getLang === "function"
+                ? window.PortalAdminI18n.getLang()
+                : typeof i18n.getLang === "function"
+                  ? i18n.getLang()
+                  : window.localStorage.getItem("siteLang")) || "id";
+
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+            const link = document.getElementById("signupExistingAccountLink");
+            if (link) link.textContent = i18n.t("footer_link");
+          }
+
+          function init() {
+            if (didInit) return;
+            didInit = true;
+
+            const form = document.getElementById("signupForm");
+            const message = document.getElementById("signupMessage");
+            if (!form || !message) return;
+
+            const params = new URLSearchParams(window.location.search);
+            const next = params.get("next") || "";
+            const signinLinks = document.querySelectorAll('a[href="/signin"]');
+            const existingUser = window.PortalAuth.getCurrentUser();
+
+            signinLinks.forEach((link) => {
+              if (next) {
+                link.href = "/signin?next=" + encodeURIComponent(next);
               }
-              if ((attemptsLeft || 0) <= 0) return;
-              window.setTimeout(() => waitForAuth(ready, (attemptsLeft || 0) - 1), 60);
-            }
-
-            function applySignupLocale() {
-              const i18n = window.PortalI18n;
-              if (!i18n || typeof i18n.t !== "function") return;
-
-              const lang =
-                (window.PortalAdminI18n && typeof window.PortalAdminI18n.getLang === "function"
-                  ? window.PortalAdminI18n.getLang()
-                  : typeof i18n.getLang === "function"
-                    ? i18n.getLang()
-                    : window.localStorage.getItem("siteLang")) || "id";
-
-              document.documentElement.lang = lang;
-              document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-
-              const link = document.getElementById("signupExistingAccountLink");
-              if (link) link.textContent = i18n.t("footer_link");
-            }
-
-            function init() {
-              const form = document.getElementById("signupForm");
-              const message = document.getElementById("signupMessage");
-              if (!form || !message) return;
-
-              const params = new URLSearchParams(window.location.search);
-              const next = params.get("next") || "";
-              const signinLinks = document.querySelectorAll('a[href="/signin"]');
-              const existingUser = window.PortalAuth.getCurrentUser();
-
-              signinLinks.forEach((link) => {
-                if (next) {
-                  link.href = "/signin?next=" + encodeURIComponent(next);
-                }
-              });
-
-              function setMessage(text, type) {
-                message.textContent = text;
-                message.className = ("auth-message " + (type || "")).trim();
-              }
-
-              if (existingUser) {
-                setMessage(window.PortalI18n.t("session_active", { email: existingUser.email }), "success");
-              }
-
-              applySignupLocale();
-
-              form.addEventListener("submit", (event) => {
-                event.preventDefault();
-                const formData = new FormData(form);
-
-                (async () => {
-                  try {
-                    const result = await window.PortalAuth.signup({
-                      name: formData.get("name"),
-                      email: formData.get("email"),
-                      password: formData.get("password"),
-                      confirmPassword: formData.get("confirmPassword"),
-                      next
-                    });
-
-                    const roleLabel =
-                      result.user.role === "admin"
-                        ? window.PortalI18n.t("role_admin")
-                        : window.PortalI18n.t("role_member");
-
-                    setMessage(window.PortalI18n.t("signup_success", { role: roleLabel }), "success");
-                    window.setTimeout(() => {
-                      window.location.href = result.redirectTo;
-                    }, 350);
-                  } catch (error) {
-                    setMessage(window.PortalI18n.translateAuthError(error.message), "error");
-                  }
-                })();
-              });
-            }
-
-            if (document.readyState === "loading") {
-              document.addEventListener("DOMContentLoaded", () => waitForAuth(init, 60));
-            } else {
-              waitForAuth(init, 60);
-            }
-
-            window.addEventListener("portal-language-change", applySignupLocale);
-            window.addEventListener("storage", (event) => {
-              if (event.key === "siteLang") applySignupLocale();
             });
 
-            waitForAuth(init, 200);
-          })();
-        `}
-      </Script>
-    </>
-  );
+            function setMessage(text, type) {
+              message.textContent = text;
+              message.className = ("auth-message " + (type || "")).trim();
+            }
+
+            if (existingUser) {
+              setMessage(window.PortalI18n.t("session_active", { email: existingUser.email }), "success");
+            }
+
+            applySignupLocale();
+
+            form.addEventListener("submit", (event) => {
+              event.preventDefault();
+              const formData = new FormData(form);
+
+              (async () => {
+                try {
+                  const result = await window.PortalAuth.signup({
+                    name: formData.get("name"),
+                    email: formData.get("email"),
+                    password: formData.get("password"),
+                    confirmPassword: formData.get("confirmPassword"),
+                    next
+                  });
+
+                  const roleLabel =
+                    result.user.role === "admin"
+                      ? window.PortalI18n.t("role_admin")
+                      : window.PortalI18n.t("role_member");
+
+                  setMessage(window.PortalI18n.t("signup_success", { role: roleLabel }), "success");
+                  window.setTimeout(() => {
+                    window.location.href = result.redirectTo;
+                  }, 350);
+                } catch (error) {
+                  setMessage(window.PortalI18n.translateAuthError(error.message), "error");
+                }
+              })();
+            });
+          }
+
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", () => waitForAuth(init, 60));
+          } else {
+            waitForAuth(init, 60);
+          }
+
+          window.addEventListener("portal-language-change", applySignupLocale);
+          window.addEventListener("storage", (event) => {
+            if (event.key === "siteLang") applySignupLocale();
+          });
+        })();
+      `}
+    </Script>
+  </>
+);
 }

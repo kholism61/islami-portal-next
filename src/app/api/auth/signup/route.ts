@@ -25,66 +25,81 @@ function normalizeEmail(email: string) {
 }
 
 export async function POST(req: Request) {
-  const ip = getClientIp(req);
+  try {
+    const ip = getClientIp(req);
 
-  const json = await req.json().catch(() => null);
-  const parsed = SignupSchema.safeParse(json);
+    const json = await req.json().catch(() => null);
+    const parsed = SignupSchema.safeParse(json);
 
-  if (!parsed.success) {
+    if (!parsed.success) {
+      return NextResponse.json(
+        { ok: false, error: "Invalid input", issues: parsed.error.issues },
+        { status: 400 }
+      );
+    }
+
+    const { name, password } = parsed.data;
+    const email = normalizeEmail(parsed.data.email);
+    const role = ADMIN_EMAILS.includes(email) ? "admin" : "member";
+
+    rateLimitOrThrow(`signup:ip:${ip}`, { limit: 8, windowMs: 60_000 });
+    rateLimitOrThrow(`signup:email:${email}`, { limit: 5, windowMs: 60_000 });
+
+    const existing = await prisma.user.findUnique({ where: { email } });
+    if (existing) {
+      return NextResponse.json(
+        { ok: false, error: "Email already registered" },
+        { status: 409 }
+      );
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        passwordHash,
+        role,
+        picture: "",
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        picture: true,
+        createdAt: true,
+      },
+    });
+
+    const token = generateSessionToken();
+    const tokenHash = hashSessionToken(token);
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 14);
+
+    await prisma.session.create({
+      data: {
+        tokenHash,
+        userId: user.id,
+        expiresAt,
+      },
+    });
+
+    await setSessionCookie(token);
+
+    return NextResponse.json({ ok: true, user });
+  } catch (err) {
+    const status = typeof (err as any)?.status === "number" ? (err as any).status : 500;
+    const retryAfterSeconds = (err as any)?.retryAfterSeconds;
     return NextResponse.json(
-      { ok: false, error: "Invalid input", issues: parsed.error.issues },
-      { status: 400 }
+      { ok: false, error: (err as Error)?.message || "Internal Server Error" },
+      {
+        status,
+        headers:
+          status === 429 && retryAfterSeconds
+            ? { "retry-after": String(retryAfterSeconds) }
+            : undefined,
+      }
     );
   }
-
-  const { name, password } = parsed.data;
-  const email = normalizeEmail(parsed.data.email);
-  const role = ADMIN_EMAILS.includes(email) ? "admin" : "member";
-
-  rateLimitOrThrow(`signup:ip:${ip}`, { limit: 8, windowMs: 60_000 });
-  rateLimitOrThrow(`signup:email:${email}`, { limit: 5, windowMs: 60_000 });
-
-  const existing = await prisma.user.findUnique({ where: { email } });
-  if (existing) {
-    return NextResponse.json(
-      { ok: false, error: "Email already registered" },
-      { status: 409 }
-    );
-  }
-
-  const passwordHash = await bcrypt.hash(password, 12);
-
-  const user = await prisma.user.create({
-    data: {
-      name,
-      email,
-      passwordHash,
-      role,
-      picture: "",
-    },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      picture: true,
-      createdAt: true,
-    },
-  });
-
-  const token = generateSessionToken();
-  const tokenHash = hashSessionToken(token);
-  const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 14);
-
-  await prisma.session.create({
-    data: {
-      tokenHash,
-      userId: user.id,
-      expiresAt,
-    },
-  });
-
-  await setSessionCookie(token);
-
-  return NextResponse.json({ ok: true, user });
 }
