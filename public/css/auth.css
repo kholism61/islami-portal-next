@@ -572,8 +572,8 @@ body::after {
   display: flex;
   align-items: center;
   gap: 16px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .auth-lang-dropdown {

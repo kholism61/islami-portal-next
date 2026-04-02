@@ -17,7 +17,7 @@ export default function SignUpPage() {
         href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
         rel="stylesheet"
       />
-      <link rel="stylesheet" href="/css/auth.css?v=20260402b" />
+      <link rel="stylesheet" href="/css/auth.css?v=20260402d" />
 
       <main className="auth-page">
         <header className="auth-topbar">
@@ -227,6 +227,17 @@ export default function SignUpPage() {
             function applySignupLocale() {
               const i18n = window.PortalI18n;
               if (!i18n || typeof i18n.t !== "function") return;
+
+              const lang =
+                (window.PortalAdminI18n && typeof window.PortalAdminI18n.getLang === "function"
+                  ? window.PortalAdminI18n.getLang()
+                  : typeof i18n.getLang === "function"
+                    ? i18n.getLang()
+                    : window.localStorage.getItem("siteLang")) || "id";
+
+              document.documentElement.lang = lang;
+              document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
               const link = document.getElementById("signupExistingAccountLink");
               if (link) link.textContent = i18n.t("footer_link");
             }
