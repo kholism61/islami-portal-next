@@ -184,8 +184,6 @@ export default function AdminPage() {
       <Script src="/js/admin-pages-i18n.js?v=20260318a" strategy="afterInteractive" />
       <Script src="/js/zakat.js?v=20260319a" strategy="afterInteractive" />
       <Script src="/js/admin.js?v=20260319a" strategy="afterInteractive" />
-      <Script src="/js/auth.js?v=20260318a" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js?v=20260318a" strategy="afterInteractive" />
     </>
   );
 }

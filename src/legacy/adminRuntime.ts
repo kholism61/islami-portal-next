@@ -13,9 +13,6 @@ export async function ensureAdminRuntime(options?: { i18nSrc?: string; src?: str
     await loadPublicScript("/js/admin-pages-i18n.js");
   }
 
-  await loadPublicScript("/js/auth.js");
-  await loadPublicScript("/js/access-guard.js");
-
   const src = options?.src || "/js/admin.js";
   await loadPublicScript(src);
 

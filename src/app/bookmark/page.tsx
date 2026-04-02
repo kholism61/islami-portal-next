@@ -263,8 +263,6 @@ export default function BookmarkPage() {
       <Script src="/js/article-store.js?v=20260321a" strategy="afterInteractive" />
       <Script src="/js/article.js?v=20260324f" strategy="afterInteractive" type="module" />
       <Script src="/js/bookmark.js?v=20260324f" strategy="afterInteractive" type="module" />
-      <Script src="/js/auth.js" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js" strategy="afterInteractive" />
     </>
   );
 }

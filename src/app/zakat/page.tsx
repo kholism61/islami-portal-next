@@ -648,8 +648,6 @@ export default function ZakatPage() {
 
       <Script src="/js/zakat.js?v=20260319a" strategy="afterInteractive" />
       <Script src="/js/zakat-pages-i18n.js?v=20260323c" strategy="afterInteractive" />
-      <Script src="/js/auth.js?v=20260318b" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js?v=20260318b" strategy="afterInteractive" />
     </>
   );
 }

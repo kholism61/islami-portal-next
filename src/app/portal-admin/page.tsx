@@ -35,7 +35,6 @@ export default function AdminPage() {
             <a href="/">Beranda</a>
             <a href="/smart">Smart Fiqh</a>
             <a href="/zakat">Kalkulator Zakat</a>
-            <a href="/signin">Sign In</a>
           </nav>
 
           <div className="topbar-actions">
@@ -62,9 +61,6 @@ export default function AdminPage() {
               </p>
 
               <div className="hero-actions">
-                <a href="/signup" className="primary-btn">
-                  Tambah akun tim
-                </a>
                 <a href="/" className="secondary-btn">
                   Kembali ke portal
                 </a>
@@ -223,10 +219,8 @@ export default function AdminPage() {
         </main>
       </div>
 
-      <Script src="/js/auth.js?v=20260317b" strategy="afterInteractive" />
       <Script src="/js/admin-pages-i18n.js?v=20260317b" strategy="afterInteractive" />
       <Script src="/js/portal-admin.js?v=20260317b" strategy="afterInteractive" />
-      <Script src="/js/access-guard.js?v=20260317b" strategy="afterInteractive" />
     </>
   );
 }

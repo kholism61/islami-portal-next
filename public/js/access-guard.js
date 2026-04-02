@@ -1,4 +1,5 @@
 (function () {
+  return;
   const pathname = window.location.pathname || "/index.html";
   const currentPath = pathname === "/" ? "index.html" : pathname.replace(/^\//, "");
   const pageName = currentPath.split("/").pop() || "index.html";

@@ -1,7 +1,5 @@
 "use client";
 
-import { loadPublicScript } from "@/legacy/loadPublicScript";
-
 export type PortalAuthUser = {
   id: string;
   name: string;
@@ -23,16 +21,10 @@ export type PortalAuth = {
 };
 
 export async function ensureAuthRuntime(options?: { src?: string }): Promise<PortalAuth> {
-  const src = options?.src || "/js/auth.js";
-  await loadPublicScript(src);
-
-  if (!window.PortalAuth) {
-    throw new Error(`PortalAuth is not available after loading ${src}`);
-  }
-
-  return window.PortalAuth;
+  void options;
+  throw new Error("Auth disabled");
 }
 
 export function getPortalAuthSafe(): PortalAuth | null {
-  return window.PortalAuth ?? null;
+  return null;
 }
