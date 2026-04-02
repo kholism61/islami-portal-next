@@ -71,7 +71,7 @@ export default function SmartFiqhPuasaPage() {
         <p id="heroDesc">
           Panduan fiqh puasa Ramadhan, qadha, nadzar, dan puasa sunnah dengan
           pertanyaan yang lebih panjang, dalil ringkas, serta analisis fiqh
-          modern berbasis mazhab Syafi'i.
+          modern berbasis mazhab Syafi&apos;i.
         </p>
       </section>
 
@@ -230,7 +230,7 @@ export default function SmartFiqhPuasaPage() {
 
               <li id="smartMethodPoint2">
                 2) Takyif Fiqhi: petakan status mukallaf, haid/nifas, niat, uzur
-                syar'i, serta pembatal yang disengaja atau tidak disengaja.
+                syar&apos;i, serta pembatal yang disengaja atau tidak disengaja.
               </li>
 
               <li id="smartMethodPoint3">

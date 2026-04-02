@@ -1,6 +1,5 @@
 (function () {
   const STORAGE_KEYS = {
-    users: "islamiPortalUsers",
     session: "islamiPortalSession",
     audit: "islamiPortalAudit",
     legacyUser: "user",
@@ -11,17 +10,12 @@
     "nurcholism51@gmail.com"
   ];
 
-  const SEED_USERS = [
-    {
-      id: "seed-admin",
-      name: "Nurcholism Admin",
-      email: "nurcholism51@gmail.com",
-      password: "Admin123!",
-      role: "admin",
-      picture: "",
-      createdAt: "2026-03-10T09:00:00.000Z"
-    }
-  ];
+  const API = {
+    signup: "/api/auth/signup",
+    signin: "/api/auth/signin",
+    signout: "/api/auth/signout",
+    me: "/api/auth/me"
+  };
 
   function rt(key, params = {}) {
     return window.PortalAdminI18n?.t?.(`runtime.${key}`, params) || params.fallback || key;
@@ -115,46 +109,25 @@
     return ADMIN_EMAILS.includes(normalizeEmail(email)) ? "admin" : "member";
   }
 
-  function normalizeUser(user) {
-    const email = normalizeEmail(user.email);
+  function normalizeSessionUser(user) {
+    const email = normalizeEmail(user && user.email);
     return {
-      id: user.id || `user-${Date.now()}`,
-      name: user.name || defaultUserLabel(),
+      id: String((user && user.id) || ""),
+      name: String((user && user.name) || defaultUserLabel()),
       email,
-      password: user.password || "",
-      role: inferRole(email),
-      picture: user.picture || "",
-      createdAt: user.createdAt || new Date().toISOString()
+      role: (user && user.role) === "admin" ? "admin" : inferRole(email),
+      picture: String((user && user.picture) || ""),
+      createdAt: (user && user.createdAt) || new Date().toISOString(),
+      lastLoginAt: new Date().toISOString()
     };
   }
 
-  function ensureSeedData() {
-    const users = safeParse(localStorage.getItem(STORAGE_KEYS.users), []);
-
-    if (!Array.isArray(users) || users.length === 0) {
-      localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(SEED_USERS));
-      return;
-    }
-
-    const normalizedUsers = users.map(normalizeUser);
-    localStorage.setItem(STORAGE_KEYS.users, JSON.stringify(normalizedUsers));
-  }
-
   function getUsers() {
-    ensureSeedData();
-    const users = safeParse(localStorage.getItem(STORAGE_KEYS.users), []);
-    return Array.isArray(users) ? users.map(normalizeUser) : [];
-  }
-
-  function saveUsers(users) {
-    localStorage.setItem(
-      STORAGE_KEYS.users,
-      JSON.stringify(users.map(normalizeUser))
-    );
+    return [];
   }
 
   function buildSessionUser(user) {
-    const normalizedUser = normalizeUser(user);
+    const normalizedUser = normalizeSessionUser(user);
     return {
       id: normalizedUser.id,
       name: normalizedUser.name,
@@ -195,26 +168,6 @@
     localStorage.setItem(STORAGE_KEYS.audit, JSON.stringify(nextAudit.slice(0, 12)));
   }
 
-  function upsertUser(user) {
-    const users = getUsers();
-    const nextUser = normalizeUser(user);
-    const existingIndex = users.findIndex((item) => normalizeEmail(item.email) === nextUser.email);
-
-    if (existingIndex >= 0) {
-      users[existingIndex] = {
-        ...users[existingIndex],
-        ...nextUser,
-        password: users[existingIndex].password || nextUser.password,
-        role: inferRole(nextUser.email)
-      };
-    } else {
-      users.unshift(nextUser);
-    }
-
-    saveUsers(users);
-    return normalizeUser(existingIndex >= 0 ? users[existingIndex] : nextUser);
-  }
-
   function persistSession(user) {
     const sessionUser = buildSessionUser(user);
     localStorage.setItem(STORAGE_KEYS.session, JSON.stringify(sessionUser));
@@ -231,30 +184,31 @@
     const normalizedSession = buildSessionUser(existingSession);
     localStorage.setItem(STORAGE_KEYS.session, JSON.stringify(normalizedSession));
     syncLegacyShape(normalizedSession);
-    upsertUser(normalizedSession);
     return normalizedSession;
   }
 
-  function syncLegacyAccount() {
-    const legacyUser = safeParse(localStorage.getItem(STORAGE_KEYS.legacyUser), null);
-    if (!legacyUser || !legacyUser.email) {
-      return null;
-    }
-
-    return upsertUser({
-      id: legacyUser.id || `legacy-${Date.now()}`,
-      name: legacyUser.name || defaultUserLabel(),
-      email: legacyUser.email,
-      password: "",
-      picture: legacyUser.picture || "",
-      createdAt: legacyUser.createdAt || new Date().toISOString()
-    });
+  function getCurrentUser() {
+    return getSession();
   }
 
-  function getCurrentUser() {
-    ensureSeedData();
-    syncLegacyAccount();
-    return getSession();
+  async function hydrateSessionFromServer() {
+    try {
+      const res = await fetch(API.me, { credentials: "include", cache: "no-store" });
+      const data = await res.json().catch(() => null);
+      if (!data || !data.ok) return null;
+      if (!data.user) {
+        localStorage.removeItem(STORAGE_KEYS.session);
+        localStorage.removeItem(STORAGE_KEYS.legacyUser);
+        return null;
+      }
+
+      const sessionUser = buildSessionUser(data.user);
+      localStorage.setItem(STORAGE_KEYS.session, JSON.stringify(sessionUser));
+      syncLegacyShape(sessionUser);
+      return sessionUser;
+    } catch {
+      return null;
+    }
   }
 
   function getAuditLog() {
@@ -304,7 +258,7 @@
     return toPageHref("index.html");
   }
 
-  function signup(payload) {
+  async function signup(payload) {
     const name = String(payload.name || "").trim();
     const email = normalizeEmail(payload.email);
     const password = String(payload.password || "");
@@ -326,21 +280,19 @@
       throw new Error(rt("errorPasswordMismatch", { fallback: "Password confirmation does not match." }));
     }
 
-    const users = getUsers();
-    if (users.some((user) => normalizeEmail(user.email) === email)) {
-      throw new Error(rt("errorEmailExists", { fallback: "Email is already registered. Please sign in." }));
-    }
-
-    const newUser = upsertUser({
-      id: `user-${Date.now()}`,
-      name,
-      email,
-      password,
-      createdAt: new Date().toISOString(),
-      picture: ""
+    const response = await fetch(API.signup, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ name, email, password, confirmPassword })
     });
 
-    const sessionUser = persistSession(newUser);
+    const data = await response.json().catch(() => null);
+    if (!response.ok || !data || !data.ok) {
+      throw new Error((data && data.error) || rt("errorSignup", { fallback: "Sign up failed." }));
+    }
+
+    const sessionUser = persistSession(data.user);
     pushAudit("signup", `${name} ${auditActionText("signup")}`, email);
 
     return {
@@ -349,7 +301,7 @@
     };
   }
 
-  function login(payload) {
+  async function login(payload) {
     const email = normalizeEmail(payload.email);
     const password = String(payload.password || "");
 
@@ -359,25 +311,22 @@
 
     ensureNotLocked(email);
 
-    const users = getUsers();
-    const user = users.find((item) => normalizeEmail(item.email) === email);
+    const response = await fetch(API.signin, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password })
+    });
 
-    if (!user) {
-      throw new Error(rt("errorAccountNotFound", { fallback: "Account not found. Please sign up first." }));
-    }
-
-    if (!user.password) {
-      throw new Error(rt("errorNoPassword", { fallback: "This older account has no password yet. Please sign up again with this email." }));
-    }
-
-    if (user.password !== password) {
+    const data = await response.json().catch(() => null);
+    if (!response.ok || !data || !data.ok) {
       registerFailedAttempt(email);
-      throw new Error(rt("errorWrongPassword", { fallback: "Incorrect password." }));
+      throw new Error((data && data.error) || rt("errorWrongPassword", { fallback: "Incorrect password." }));
     }
 
     clearAttemptState(email);
 
-    const sessionUser = persistSession(user);
+    const sessionUser = persistSession(data.user);
     pushAudit("signin", `${sessionUser.name} ${auditActionText("signin")}`, email);
 
     return {
@@ -386,11 +335,15 @@
     };
   }
 
-  function logout() {
+  async function logout() {
     const currentUser = getCurrentUser();
     if (currentUser) {
       pushAudit("signout", `${currentUser.name} ${auditActionText("signout")}`, currentUser.email);
     }
+
+    try {
+      await fetch(API.signout, { method: "POST", credentials: "include" });
+    } catch {}
 
     localStorage.removeItem(STORAGE_KEYS.session);
     localStorage.removeItem(STORAGE_KEYS.legacyUser);
@@ -431,18 +384,18 @@
     ADMIN_EMAILS,
     STORAGE_KEYS,
     clearSession,
-    ensureSeedData,
     formatDate,
     getAuditLog,
     getCurrentUser,
     getPostLoginRedirect,
     getUsers,
+    hydrateSessionFromServer,
     login,
     logout,
     pushAudit,
     requireAuth,
     signup,
-    upsertUser
+    upsertUser: function () { return null; }
   };
 
   const BRAND_LABELS = new Set(["Portal Literasi Islam", "Islamic Literacy Portal", "بوابة الثقافة الإسلامية"]);
@@ -536,8 +489,7 @@
     });
   }
 
-  ensureSeedData();
-  syncLegacyAccount();
+  hydrateSessionFromServer();
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", scheduleNavBrandIconify, { once: true });

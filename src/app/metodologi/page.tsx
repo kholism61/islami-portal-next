@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
 import MawarisPagesRuntimeLoader from "@/components/runtime/MawarisPagesRuntimeLoader";
 
 import "../fiqh-pages.css";
@@ -16,7 +16,7 @@ export default function MetodologiPage() {
         <div className="nav-container">
           <Link href="/" className="logo" aria-label="Portal Literasi Islam">
             <span className="logo-mark" aria-hidden="true">
-              <img src="/favicon.ico" alt="" className="logo-icon" width={12} height={12} />
+              <Image src="/favicon.ico" alt="" className="logo-icon" width={12} height={12} />
             </span>
             <span className="logo-text">Portal Literasi Islam</span>
           </Link>

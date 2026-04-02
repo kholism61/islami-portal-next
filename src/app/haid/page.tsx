@@ -3,6 +3,9 @@ import FiqhWanitaNav from "@/components/fiqh/FiqhWanitaNav";
 import ScrollToTopButton from "@/components/fiqh/ScrollToTopButton";
 import FiqhPageRuntime from "@/components/fiqh/FiqhPageRuntime";
 
+import "./haid.css";
+import "./fiqh-wanita-shared.css";
+
 export const metadata = {
   title: "Kalkulator Haid Syafi'i",
 };
@@ -10,8 +13,6 @@ export const metadata = {
 export default function HaidPage() {
   return (
     <>
-      <link rel="stylesheet" href="/css/haid.css" />
-      <link rel="stylesheet" href="/css/fiqh-wanita-shared.css" />
       <FiqhWanitaNav currentPath="/haid" />
 
       <section className="hero">

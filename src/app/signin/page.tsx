@@ -296,20 +296,22 @@ export default function SignInPage() {
                 event.preventDefault();
                 const formData = new FormData(form);
 
-                try {
-                  const result = window.PortalAuth.login({
-                    email: formData.get("email"),
-                    password: formData.get("password"),
-                    next
-                  });
+                (async () => {
+                  try {
+                    const result = await window.PortalAuth.login({
+                      email: formData.get("email"),
+                      password: formData.get("password"),
+                      next
+                    });
 
-                  setMessage(window.PortalI18n.t("signin_success"), "success");
-                  window.setTimeout(() => {
-                    window.location.href = result.redirectTo;
-                  }, 350);
-                } catch (error) {
-                  setMessage(window.PortalI18n.translateAuthError(error.message), "error");
-                }
+                    setMessage(window.PortalI18n.t("signin_success"), "success");
+                    window.setTimeout(() => {
+                      window.location.href = result.redirectTo;
+                    }, 350);
+                  } catch (error) {
+                    setMessage(window.PortalI18n.translateAuthError(error.message), "error");
+                  }
+                })();
               });
             }
 

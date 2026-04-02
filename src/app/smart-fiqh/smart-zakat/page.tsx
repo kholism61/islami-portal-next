@@ -78,7 +78,7 @@ export default function SmartFiqhZakatPage() {
             Analisis zakat fitrah dan zakat mal yang jauh lebih lengkap:
             emas-perak, uang, perdagangan, ternak, pertanian, rikaz, tambang,
             saham, sukuk, penghasilan terakumulasi, dan investasi syariah dengan
-            alur Ya/Tidak yang modern serta tetap berpijak pada fiqh Syafi'i,
+            alur Ya/Tidak yang modern serta tetap berpijak pada fiqh Syafi&apos;i,
             nisab, haul, dan audit nilai bersih.
           </p>
         </div>

@@ -262,27 +262,29 @@ export default function SignUpPage() {
                 event.preventDefault();
                 const formData = new FormData(form);
 
-                try {
-                  const result = window.PortalAuth.signup({
-                    name: formData.get("name"),
-                    email: formData.get("email"),
-                    password: formData.get("password"),
-                    confirmPassword: formData.get("confirmPassword"),
-                    next
-                  });
+                (async () => {
+                  try {
+                    const result = await window.PortalAuth.signup({
+                      name: formData.get("name"),
+                      email: formData.get("email"),
+                      password: formData.get("password"),
+                      confirmPassword: formData.get("confirmPassword"),
+                      next
+                    });
 
-                  const roleLabel =
-                    result.user.role === "admin"
-                      ? window.PortalI18n.t("role_admin")
-                      : window.PortalI18n.t("role_member");
+                    const roleLabel =
+                      result.user.role === "admin"
+                        ? window.PortalI18n.t("role_admin")
+                        : window.PortalI18n.t("role_member");
 
-                  setMessage(window.PortalI18n.t("signup_success", { role: roleLabel }), "success");
-                  window.setTimeout(() => {
-                    window.location.href = result.redirectTo;
-                  }, 350);
-                } catch (error) {
-                  setMessage(window.PortalI18n.translateAuthError(error.message), "error");
-                }
+                    setMessage(window.PortalI18n.t("signup_success", { role: roleLabel }), "success");
+                    window.setTimeout(() => {
+                      window.location.href = result.redirectTo;
+                    }, 350);
+                  } catch (error) {
+                    setMessage(window.PortalI18n.translateAuthError(error.message), "error");
+                  }
+                })();
               });
             }
 
